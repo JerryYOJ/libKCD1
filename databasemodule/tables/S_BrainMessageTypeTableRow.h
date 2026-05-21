@@ -1,0 +1,18 @@
+#pragma once
+#include "../database_types.h"
+
+namespace wh::databasemodule {
+
+// Table: "brain_message_type"  row_size: 24
+// Registration: 0x1801d3e90
+#pragma pack(push, 1)
+struct S_BrainMessageTypeTableRow {
+    uint8_t _rowbase[4];  // 0x000
+    int32_t brain_message_type_id;  // 0x004  // PK
+    uint8_t _pad_0x008[8];
+    uint64_t brain_interpreter_id;  // 0x010  // PK
+};
+#pragma pack(pop)
+static_assert(sizeof(S_BrainMessageTypeTableRow) == 24, "Size mismatch for S_BrainMessageTypeTableRow");
+
+}  // namespace wh::databasemodule
