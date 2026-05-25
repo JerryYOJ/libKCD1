@@ -81,4 +81,6 @@ struct SSystemGlobalEnvironment {
     void*                       _unk1A8;                // +0x1A8 no xrefs
     void*                       _unk1B0;                // +0x1B0 no xrefs
     void*                       _unk1B8;                // +0x1B8 no xrefs
+
+    static SSystemGlobalEnvironment* GetInstance();      // Offsets.cpp
 };

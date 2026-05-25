@@ -11,7 +11,8 @@ namespace wh::databasemodule {
 // Each table has an array of these describing its columns.
 //
 // Layout derived from vtable getters at 0x1822bff00
-struct C_ColumnDescriptorBase : I_ColumnDescriptor {
+class C_ColumnDescriptorBase : public I_ColumnDescriptor {
+public:
     // +0x00: vtable*
     uint32_t m_typeId;          // +0x08  column type enum
     uint32_t m_offset;          // +0x0C  byte offset in row struct
@@ -30,19 +31,19 @@ static_assert(sizeof(C_ColumnDescriptorBase) == 0x38, "C_ColumnDescriptorBase mu
 
 // C_ColumnDescriptor — non-PK column. IsPrimaryKey() returns false.
 // vtable @ 0x1822bfdd8
-struct C_ColumnDescriptor : C_ColumnDescriptorBase {};
+class C_ColumnDescriptor : public C_ColumnDescriptorBase {};
 
 // C_PKColumnDescriptor — primary key column. IsPrimaryKey() returns true.
 // vtable @ 0x1822bfd50
-struct C_PKColumnDescriptor : C_ColumnDescriptorBase {};
+class C_PKColumnDescriptor : public C_ColumnDescriptorBase {};
 
 // C_NotPatchedColumnDescriptor — column that skips string pointer patching.
 // vtable @ 0x1822c6a68
-struct C_NotPatchedColumnDescriptor : C_ColumnDescriptorBase {};
+class C_NotPatchedColumnDescriptor : public C_ColumnDescriptorBase {};
 
 // C_RenamedColumnDescriptor — column with a different name mapping.
 // vtable @ 0x1826a4a60
-struct C_RenamedColumnDescriptor : C_ColumnDescriptorBase {};
+class C_RenamedColumnDescriptor : public C_ColumnDescriptorBase {};
 
 // Helper function that creates a C_ColumnDescriptor with int32 type and default value.
 // sub_180713848(descriptor_ptr, row_offset, "column_name", &default_value)

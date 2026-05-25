@@ -2,7 +2,7 @@
 
 namespace wh::databasemodule {
 
-struct C_ObjectDatabaseBase;
+class C_ObjectDatabaseBase;
 
 // I_TableSerializer — interface for XML/TBL file loaders.
 //
@@ -18,7 +18,8 @@ struct C_ObjectDatabaseBase;
 //   [5] Deserialize(C_ObjectDatabaseBase* db) -> bool (pure — loads file into db)
 //   [6] CanSerialize() -> bool (returns false by default)
 //   [7] Serialize(db) -> bool (returns false by default)
-struct I_TableSerializer {
+class I_TableSerializer {
+public:
     virtual ~I_TableSerializer() = 0;
     virtual const char* GetFormatName() const = 0;
     virtual const char* GetFileExtension() const = 0;
@@ -50,7 +51,8 @@ struct I_TableSerializer {
 //   +0x10: void* m_unk10            (set to 0, patched later)
 //   +0x18: void* m_columnState      (= module->m_tableDataHolder, the 0x50-byte context object)
 //   +0x20: bool m_validateLayout    (set to 0)
-struct C_XMLTableSerializer : I_TableSerializer {
+class C_XMLTableSerializer : public I_TableSerializer {
+public:
     // +0x00: vtable*
     bool m_modified;                // +0x08
     uint8_t _pad09[7];             // +0x09
@@ -80,7 +82,8 @@ static_assert(sizeof(C_XMLTableSerializer) == 0x28, "C_XMLTableSerializer must b
 //   +0x08: bool m_modified
 //   +0x10: void* m_unk10
 //   +0x18: bool m_validateLayout   (= module+0x154 byte, skips stale file check if false)
-struct C_TBLTableSerializer : I_TableSerializer {
+class C_TBLTableSerializer : public I_TableSerializer {
+public:
     // +0x00: vtable*
     bool m_modified;                // +0x08
     uint8_t _pad09[7];             // +0x09

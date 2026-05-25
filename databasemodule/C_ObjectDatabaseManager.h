@@ -22,7 +22,8 @@ namespace wh::databasemodule {
 //   +0x20: I_ObjectDatabase** m_databases_begin
 //   +0x28: I_ObjectDatabase** m_databases_end
 //   +0x30: I_ObjectDatabase** m_databases_capacity
-struct C_ObjectDatabaseManager : I_ObjectDatabase {
+class C_ObjectDatabaseManager : public I_ObjectDatabase {
+public:
     // Inherited from I_ObjectDatabase:
     // +0x00: vtable*
 
@@ -50,7 +51,8 @@ struct S_EnumEntry {
     C_DatabaseDynamicEnum* enumDef;         // value
 };
 
-struct C_DynamicEnumManager : I_DatabaseListener {
+class C_DynamicEnumManager : public I_DatabaseListener {
+public:
     // +0x00: vtable (inherited from I_DatabaseListener)
     S_EnumEntry* m_entries;                 // +0x08  flat array of (key, enum) pairs
     int64_t m_entryCount;                   // +0x10  number of entries
@@ -81,7 +83,8 @@ static_assert(sizeof(C_DynamicEnumManager) == 0x40, "C_DynamicEnumManager must b
 // vtable[7]  unk_07()
 // vtable[8]  GetSelf2() -> returns this
 // vtable[9..14] = 0 (pure virtual — not implemented, enum is read-only)
-struct C_DatabaseDynamicEnum {
+class C_DatabaseDynamicEnum {
+public:
     virtual int GetRowCount() const = 0;                    // [0]
     virtual const void* GetRowByIndex(int idx) const = 0;   // [1]
     virtual const void* GetRowData(int idx) const = 0;      // [2]

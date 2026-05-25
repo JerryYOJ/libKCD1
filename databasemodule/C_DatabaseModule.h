@@ -10,7 +10,8 @@ namespace wh::framework {
 // I_ModuleMessageListener — interface for receiving module lifecycle messages.
 // vtable @ 0x1822c1d98
 // Size as sub-object: 0x10 bytes (vtable + padding)
-struct I_ModuleMessageListener {
+class I_ModuleMessageListener {
+public:
     virtual ~I_ModuleMessageListener() = default;   // [0]
     virtual void OnModuleMessage() = 0;             // [1] pure
     virtual void unk_02() = 0;                      // [2]
@@ -23,7 +24,8 @@ struct I_ModuleMessageListener {
 // Size: 0x78 bytes (from C_DatabaseModule constructor: base occupies +0x00 to +0x77)
 // vtable @ 0x1829ecbd0
 // Constructor: 0x180F364AC (called first in C_DatabaseModule ctor)
-struct C_BaseModule {
+class C_BaseModule {
+public:
     virtual ~C_BaseModule() = default;
     // 0x78 bytes total — lifecycle management, module name, framework registration
     // Full member layout requires RE of sub_180F364AC
@@ -66,7 +68,8 @@ struct C_ScriptBindDatabase;
 //
 // Size: 0x160 bytes
 
-struct C_DatabaseModule {
+class C_DatabaseModule {
+public:
     // +0x00: first base class
     wh::framework::C_BaseModule m_baseModule;                   // +0x00  (0x78 bytes)
 

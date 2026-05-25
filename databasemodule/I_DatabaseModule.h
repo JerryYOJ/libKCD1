@@ -4,14 +4,15 @@
 
 namespace wh::databasemodule {
 
-struct I_ObjectDatabase;
-struct C_ObjectDatabaseManager;
+class I_ObjectDatabase;
+class C_ObjectDatabaseManager;
 
 // I_DatabaseModule — interface for the database module singleton.
 // Provides access to all loaded databases and the dynamic enum system.
 //
 // vtable @ 0x1822c1e10 (all pure virtual)
-struct I_DatabaseModule {
+class I_DatabaseModule {
+public:
     virtual ~I_DatabaseModule() = 0;                                    // [0]
     virtual bool Initialize() = 0;                                      // [1]
     virtual void Shutdown() = 0;                                        // [2]
@@ -31,7 +32,8 @@ struct I_DatabaseModule {
 
 // I_DatabaseListener — callback interface for database change notifications.
 // vtable @ 0x1822c1e00
-struct I_DatabaseListener {
+class I_DatabaseListener {
+public:
     virtual ~I_DatabaseListener() = 0;          // [0]
     virtual void OnDatabaseLoaded() = 0;        // [1]
     virtual void OnDatabaseUnloaded() = 0;      // [2]

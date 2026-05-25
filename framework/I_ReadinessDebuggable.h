@@ -9,7 +9,8 @@
 
 namespace wh {
 
-struct I_ReadinessDebuggable {
+class I_ReadinessDebuggable {
+public:
     virtual void _vf0() = 0;   // [0] 0x00
     virtual void _vf1() = 0;   // [1] 0x08
     virtual void _vf2() = 0;   // [2] 0x10

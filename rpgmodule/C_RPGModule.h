@@ -33,7 +33,8 @@ namespace wh::rpgmodule {
 
 class C_SoulList;
 
-struct C_RPGModule {
+class C_RPGModule {
+public:
     // +0x00..+0x77: primary vtable + module base fields
     char            _pad00[0x78];
     // +0x78: secondary vtable (C_RPGModule _0)
@@ -62,8 +63,9 @@ struct C_RPGModule {
     uint64_t        m_unk5D8;                   // +0x5D8  (zeroed)
     uint64_t        m_unk5E0;                   // +0x5E0  (zeroed)
     uint64_t        m_unk5E8;                   // +0x5E8  (zeroed)
+
+    static C_RPGModule* GetInstance();              // Offsets.cpp
 };
 static_assert(sizeof(C_RPGModule) == 0x5F0);
-// Singleton access: *(C_RPGModule**)0x1835AC728
 
 }  // namespace wh::rpgmodule

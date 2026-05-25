@@ -47,10 +47,11 @@ class CUIGameEvents;
 class C_UISaveLoad;
 class C_UIMap;
 
-struct CUIManager
+class CUIManager
     : public Offsets::ISystemEventListener       // +0x00
     , public Offsets::IGameFrameworkListener      // +0x08
 {
+public:
     virtual void _ownVf0() {}                               // [3] 0x18  CUIManager's own virtual (empty stub)
 
     CUIInput*               m_pInput;                       // +0x10  (0x58 bytes, sub_181124858)
@@ -73,6 +74,8 @@ struct CUIManager
     }
 
     C_UIMap* GetUIMap() { return FindEventSystemAs<C_UIMap>("UIMap"); }
+
+    static CUIManager* GetInstance();               // Offsets.cpp
 };
 static_assert(sizeof(CUIManager) == 0x50);
 

@@ -4,7 +4,7 @@
 
 namespace wh::databasemodule {
 
-struct I_ColumnDescriptor;
+class I_ColumnDescriptor;
 
 // Column metadata container — holds the descriptor array and row stride.
 // Pointed to by C_ObjectDatabaseBase+0x40 and similar.
@@ -23,7 +23,8 @@ struct S_ColumnMetadata {
 // Owns the row data array, provides indexed access.
 //
 // vtable @ 0x1822c1db0
-struct I_ObjectDatabase {
+class I_ObjectDatabase {
+public:
     virtual ~I_ObjectDatabase() = 0;                        // [0]
     virtual int GetVersion() const = 0;                     // [1]  returns 1
     virtual bool Load() = 0;                                // [2]  pure — triggers XML/TBL loading

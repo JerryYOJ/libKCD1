@@ -9,7 +9,8 @@ namespace wh::databasemodule {
 // the column's name, type, offset within the row struct, and size.
 //
 // vtable @ 0x1822bfe78 (all pure virtual except dtor)
-struct I_ColumnDescriptor {
+class I_ColumnDescriptor {
+public:
     virtual ~I_ColumnDescriptor() = 0;                  // [0]
     virtual uint32_t GetTypeId() const = 0;             // [1]  0=int32/enum, 1=int64, 2=float, 3=guid, 4=bool, 5=string
     virtual uint32_t GetOffset() const = 0;             // [2]  byte offset into the row struct

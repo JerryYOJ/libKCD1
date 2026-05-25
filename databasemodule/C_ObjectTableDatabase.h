@@ -40,7 +40,8 @@ namespace wh::databasemodule {
 //   fully-wrapped template chain). Game code calls methods on TData wrappers,
 //   never touches TRow directly.
 template<typename TData, typename TRow>
-struct C_ObjectTableDatabase : C_ObjectDatabaseBase {
+class C_ObjectTableDatabase : public C_ObjectDatabaseBase {
+public:
     // No additional members beyond C_ObjectDatabaseBase.
     // Template provides typed access:
 
@@ -56,19 +57,19 @@ struct C_ObjectTableDatabase : C_ObjectDatabaseBase {
 // Each table's registration function (the ones we extracted) is the
 // static initializer for this template instantiation's descriptor array.
 template<typename TBase>
-struct C_ObjectDatabaseGenerated : TBase {};
+class C_ObjectDatabaseGenerated : public TBase {};
 
 // C_ObjectDatabaseSortedIdIndexed<TBase, TKey> — adds sorted array index
 // for fast binary-search lookup by primary key.
 template<typename TBase, typename TKey = int32_t>
-struct C_ObjectDatabaseSortedIdIndexed : TBase {};
+class C_ObjectDatabaseSortedIdIndexed : public TBase {};
 
 // C_ObjectDatabaseIdIndexed<TBase> — adds hash-based lookup by int32 ID.
 template<typename TBase>
-struct C_ObjectDatabaseIdIndexed : TBase {};
+class C_ObjectDatabaseIdIndexed : public TBase {};
 
 // C_ObjectDatabaseKeyIndexed<TBase> — adds key-based lookup (string or compound key).
 template<typename TBase>
-struct C_ObjectDatabaseKeyIndexed : TBase {};
+class C_ObjectDatabaseKeyIndexed : public TBase {};
 
 }  // namespace wh::databasemodule

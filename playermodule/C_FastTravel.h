@@ -23,6 +23,7 @@
 //     +0xA8 bit 0 → FT blocked flag
 
 namespace wh::guimodule { class C_UIMap; }
+namespace wh::entitymodule { class C_Player; }
 
 namespace wh::playermodule {
 
@@ -42,7 +43,7 @@ public:
     uint64_t    m_unkA0;                        // +0xA0
     uint8_t     m_nFlags;                       // +0xA8  bit 0 = FT blocked
     char        _padA9[0x7];                    // +0xA9
-    uint64_t    m_unkB0;                        // +0xB0
+    entitymodule::C_Player* m_pPlayer;           // +0xB0  player entity (soul at +0x650, flags at +0xA30, trespass at +0xA70)
     uint64_t    m_unkB8;                        // +0xB8
     uint64_t    m_unkC0;                        // +0xC0
     uint32_t    m_unkC8;                        // +0xC8

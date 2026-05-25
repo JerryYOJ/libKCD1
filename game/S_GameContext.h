@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include "../Offsets/vtables/IActorSystem.h"
 
 // -----------------------------------------------
 // S_GameContext — Warhorse game module registry singleton
@@ -14,6 +15,7 @@
 // A flat POD struct with no RTTI. Holds pointers to all Warhorse game modules.
 // Module creation and registration verified via sub_18215EB90 decompilation.
 
+namespace wh::combatmodule { class C_CombatModule; }
 namespace wh::rpgmodule { class C_RPGModule; }
 namespace wh::playermodule { class C_PlayerModule; }
 namespace wh::questmodule { class C_QuestModule; }
@@ -28,7 +30,7 @@ struct S_GameContext {
     void*                   m_pModuleB0;                    // +0xB0  (0x188 bytes, sub_18103F5B0)
     void*                   m_pModuleB8;                    // +0xB8  (0x110 bytes, sub_181101EBC)
     void*                   m_pModuleC0;                    // +0xC0  (0x2F0 bytes, sub_180FAD8E0)
-    void*                   m_pModuleC8;                    // +0xC8  (0xC8 bytes, sub_180F6C660)
+    combatmodule::C_CombatModule* m_pCombatModule;           // +0xC8  (0xC8 bytes, sub_180F6C660) VERIFIED
     void*                   m_pModuleD0;                    // +0xD0  (0x98 bytes, sub_1812CA658)
     void*                   m_pModuleD8;                    // +0xD8  (0xE0 bytes, sub_1812A510C)
     questmodule::C_QuestModule* m_pQuestModule;             // +0xE0  (0x90 bytes)
@@ -39,7 +41,11 @@ struct S_GameContext {
     void*                   m_pModule108;                   // +0x108 (0x160 bytes, sub_180F36658)
     void*                   m_pModule110;                   // +0x110 (0xA8 bytes, sub_180FDEBA8)
     void*                   m_pModule118;                   // +0x118 (0x680 bytes, sub_181606174)
-    char                    _pad120[0x50];                  // +0x120
+    char                    _pad120[0x08];                  // +0x120
+    Offsets::IActorSystem*  m_pActorSystem;                 // +0x128  CActorSystem (CryEngine, vtable @ 0x182733108)
+    char                    _pad130[0x40];                  // +0x130
+
+    static S_GameContext* GetInstance();                     // Offsets.cpp
 };
 static_assert(sizeof(S_GameContext) == 0x170);
 

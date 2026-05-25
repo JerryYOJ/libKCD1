@@ -61,7 +61,8 @@ namespace wh::databasemodule {
 //   row_ptr = *(void**)(db+0x00) + index * columnMeta->m_rowStride
 //   field   = *(FieldType*)((char*)row_ptr + descriptor->GetOffset())
 
-struct C_ObjectDatabaseBase : I_ObjectDatabase {
+class C_ObjectDatabaseBase : public I_ObjectDatabase {
+public:
     // --- Init phase fields (overwritten after loading) ---
     // +0x00: vtable* OR void* m_rowData (post-load)
     // +0x08: int32_t m_type OR int32_t m_rowCount (post-load)
@@ -91,29 +92,31 @@ struct C_ObjectDatabaseBase : I_ObjectDatabase {
     //
     // Modeled as raw bytes to avoid sizeof issues with the C_Signal change.
     // Access data-phase fields via reinterpret_cast or S_LoadedTableView.
-    union {
-        struct {  // INIT PHASE view
-            wh::shared::C_Signal<>      m_onChanged;    // +0x30  (0x30 bytes)
-            wh::shared::C_Signal<bool>  m_onLoaded;     // +0x60  (0x30 bytes)
-        };
-        struct {  // DATA PHASE view (fields overlap signal internals)
-            uint64_t _sig1_vtable;              // +0x30  (dead signal vtable)
-            uint64_t _sig1_bypass;              // +0x38
-            S_ColumnMetadata* m_columnMeta;     // +0x40  column descriptors
-            uint64_t _sig1_connData;            // +0x48
-            uint32_t m_flags;                   // +0x50  bit flags (bit 3 = needs refresh)
-            bool     m_isLoaded;                // +0x54  set to 1 after data fill
-            uint8_t  _pad55[3];                 // +0x55
-            int32_t  m_totalRowCount;           // +0x58
-            int32_t  _sentinel5C;              // +0x5C  = -1 (signal sentinel, still valid)
-            uint64_t _sig2_vtable;              // +0x60  (dead signal vtable)
-            uint64_t _sig2_bypass;              // +0x68
-            uint64_t _sig2_connList;            // +0x70
-            uint64_t _sig2_connData;            // +0x78
-            uint64_t _sig2_emitData;            // +0x80
-            int32_t  _sentinel88;              // +0x88  = -1
-            int32_t  _sentinel8C;              // +0x8C  = -1
-        };
+    //
+    // INIT PHASE: two C_Signal objects occupy +0x30..+0x8F
+    //   C_Signal<>     m_onChanged at +0x30 (0x30 bytes)
+    //   C_Signal<bool> m_onLoaded  at +0x60 (0x30 bytes)
+    //
+    // DATA PHASE: signals are dead, same memory repurposed as below.
+    // Both phases represented as a single POD struct to avoid union-with-
+    // non-trivial-destructor issues in the C++ type system.
+    struct {  // DATA PHASE view (fields overlap signal internals)
+        uint64_t _sig1_vtable;              // +0x30  (dead signal vtable)
+        uint64_t _sig1_bypass;              // +0x38
+        S_ColumnMetadata* m_columnMeta;     // +0x40  column descriptors
+        uint64_t _sig1_connData;            // +0x48
+        uint32_t m_flags;                   // +0x50  bit flags (bit 3 = needs refresh)
+        bool     m_isLoaded;                // +0x54  set to 1 after data fill
+        uint8_t  _pad55[3];                 // +0x55
+        int32_t  m_totalRowCount;           // +0x58
+        int32_t  _sentinel5C;              // +0x5C  = -1 (signal sentinel, still valid)
+        uint64_t _sig2_vtable;              // +0x60  (dead signal vtable)
+        uint64_t _sig2_bypass;              // +0x68
+        uint64_t _sig2_connList;            // +0x70
+        uint64_t _sig2_connData;            // +0x78
+        uint64_t _sig2_emitData;            // +0x80
+        int32_t  _sentinel88;              // +0x88  = -1
+        int32_t  _sentinel8C;              // +0x8C  = -1
     };
     // Total base: 0x90 bytes
 };

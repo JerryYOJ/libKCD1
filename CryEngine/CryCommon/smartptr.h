@@ -379,6 +379,51 @@ protected:
 	Counter m_nRefCounter;
 };
 
+// multithread-safe version of _i_reference_target
+// RTTI: .?AV?$_i_multithread_reference_target@H@@
+// Uses CryInterlockedIncrement/Decrement for thread-safe refcounting.
+// Used as base for combat actions and other MT-safe ref-counted interfaces.
+template <typename Counter> class _i_multithread_reference_target
+{
+public:
+	_i_multithread_reference_target():
+		m_nRefCounter (0)
+	{
+	}
+
+	virtual ~_i_multithread_reference_target()
+	{
+	}
+
+	virtual void AddRef()
+	{
+		CryInterlockedIncrement(&m_nRefCounter);
+	}
+
+	virtual void Release()
+	{
+		const int nCount = CryInterlockedDecrement(&m_nRefCounter);
+		if (nCount == 0)
+		{
+			delete this;
+		}
+		else if (nCount < 0)
+		{
+			assert(0);
+			CryFatalError( "Deleting Reference Counted Object Twice" );
+		}
+	}
+
+	Counter NumRefs() const
+	{
+		return m_nRefCounter;
+	}
+protected:
+	volatile Counter m_nRefCounter;
+};
+
+typedef _i_multithread_reference_target<int> _i_multithread_reference_target_t;
+
 class CMultiThreadRefCount
 {
 public:

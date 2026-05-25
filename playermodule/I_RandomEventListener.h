@@ -9,7 +9,8 @@
 
 namespace wh::playermodule {
 
-struct I_RandomEventListener {
+class I_RandomEventListener {
+public:
     virtual void _vf0() {}    // [0]
     virtual void _vf1() {}    // [1]
     virtual void _vf2() {}    // [2]
