@@ -8,6 +8,8 @@ namespace wh::entitymodule { enum E_HandSlot : int32_t; }
 
 namespace wh::combatmodule {
 
+enum class E_CombatZoneId : int32_t;
+
 class I_CombatActor;
 class I_CombatTarget;
 class C_CombatActor;
@@ -182,12 +184,12 @@ struct S_CombatActorState {
     int32_t         m_combatMode;           // +0xBDC  combat mode ID
     int32_t         m_combatStateCategory;  // +0xBE0  state category (compared against dword_18359BEA0 in sub_1804605D0)
     int32_t         m_guardTypeId;          // +0xBE4  current guard type
-    int32_t         m_attackZoneId;         // +0xBE8  current attack zone
+    E_CombatZoneId  m_attackZoneId;         // +0xBE8  current attack zone
     int32_t         m_actionTypeId;         // +0xBEC  current action type ID (read by sub_1804605D0)
     int32_t         m_weaponClassId;        // +0xBF0  weapon class
     uint32_t        _padBF4;                // +0xBF4
     int32_t         m_weaponGroupId;        // +0xBF8  weapon group
-    uint32_t        _padBFC;                // +0xBFC
+    E_CombatZoneId  m_defenseZoneId;        // +0xBFC  VERIFIED: used as zone param for PB/block dispatch
     int32_t         m_inputClassId;         // +0xC00  input class
     uint8_t         _padC04[0x10];          // +0xC04
 
@@ -212,7 +214,8 @@ struct S_CombatActorState {
     uint64_t        m_pendingActionPtr;     // +0xC48  pending action
     int32_t         m_transitionData;       // +0xC50
     int32_t         m_pbTriggerCount;       // +0xC54  active PB triggers (>0 = PB window open)
-    uint64_t        m_unknown_C58;          // +0xC58
+    int32_t         m_syncDodgeTriggerCount; // +0xC58  active SyncDodge triggers (>0 = dodge window open)
+    int32_t         m_syncRiposteTriggerCount; // +0xC5C  active SyncRiposte triggers (>0 = riposte window open)
     uint64_t        m_unknown_C60;          // +0xC60
     bool            m_riposteTriggerActive; // +0xC68  C_CombatTriggerRiposte flag (true = riposte window open)
     bool            m_comboTriggerActive;   // +0xC69  C_CombatTriggerCombo flag (true = combo slot open)

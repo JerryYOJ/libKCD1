@@ -9,6 +9,7 @@
 #include "C_CombatModule.h"
 #include "I_CombatActor.h"
 #include "C_CombatActorObject.h"
+#include "I_CombatActorAction.h"
 #include "C_CombatComboManager.h"
 #include "S_CombatActorState.h"
 #include "I_CombatTarget.h"
@@ -35,7 +36,43 @@ struct S_MeleeHitDetails;
 // in binary. Only RTTI template parameter names confirm its existence.
 // Forward-declared; define values when a converter function is located.
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// E_CombatZoneId -- directional combat zones.
+//
+// VERIFIED: from combat_zone.xml in Tables.pak.
+// Each zone corresponds to a guard/attack direction in the star combat system.
+// Zone 2 (upper_right) is the default zone (default_zone="True").
+// ---------------------------------------------------------------------------
+enum class E_CombatZoneId : int32_t {
+    Undefined  = -1,
+    Head       = 0,   // "head"        — top stab
+    UpperLeft  = 1,   // "upper_left"  — angles 135°-205°
+    UpperRight = 2,   // "upper_right" — angles 325°-45° (DEFAULT)
+    LowerLeft  = 3,   // "lower_left"  — angles 205°-270°
+    LowerRight = 4,   // "lower_right" — angles 270°-325°
+    Center     = 5,   // "center"      — radius 0 (thrust/stab)
+};
+
 enum class E_CombatActorStateId : int32_t;
+
+// ---------------------------------------------------------------------------
+// E_CounterActionType -- event types for DispatchCounterAction (sub_18069536C).
+//
+// Used as a3 in sub_1805633D0. Internally mapped to a "trigger type" v14
+// which selects the factory path and action type.
+// VERIFIED: switch chain in sub_1805633D0. Values 1 and 2 are invalid
+// (fall through all checks, return null).
+// ---------------------------------------------------------------------------
+enum class E_CounterActionType : int32_t {
+    PerfectBlock     = 0,   // v14=4  → PerfectBlockFactory, g_actionType_perfectBlock
+    // 1 — invalid (unused)
+    // 2 — invalid (unused)
+    SyncDodge        = 3,   // v14=6  → PerfectBlockFactory, g_actionType_syncDodge
+    SyncRiposte      = 4,   // v14=8  → PerfectBlockFactory, g_actionType_syncRiposte
+    SyncBlock        = 5,   // v14=2  → AttackFactory, g_actionType_block (via sub_1804E10A4)
+    PerfectBlockDodge = 6,  // v14=0xA → PerfectBlockFactory, g_actionType_perfectBlockDodge
+    SyncPerfectBlock = 7,   // v14=0xC → PerfectBlockFactory, g_actionType_syncPerfectBlock
+};
 
 // ---------------------------------------------------------------------------
 // E_SignalSource::Type -- combat signal source type.
@@ -145,7 +182,8 @@ class C_CombatActor : public I_CombatActor,
                       public IEntityEventListener
 {
 public:
-    // ---- I_CombatActor overrides (interfuscator-shuffled) ----
+    // ---- I_CombatActor overrides [0]-[15] ----
+    // Warhorse classes are NOT interfuscator-shuffled — slot indices are stable.
     ~C_CombatActor() override = default;                                    // [0]
     void unk_1() override {}                                                // [1] sub_180564390
     void unk_2() override {}                                                // [2] sub_1804550E0
@@ -162,6 +200,94 @@ public:
     uint32_t unk_13() const override { return 0; }                          // [13] sub_1804936C0
     uint32_t unk_14() const override { return 0; }                          // [14] sub_180493B80
     void unk_15() override {}                                               // [15] sub_1804317F0
+
+    // ---- C_CombatActor virtual methods [16]-[82] ----
+    // New methods added by C_CombatActor beyond I_CombatActor's 16-slot interface.
+    // vtable @ 0x182228BE8, slot indices stable (not interfuscator-shuffled).
+    virtual void unk_vf16() {}      // [16]
+    virtual void unk_vf17() {}      // [17]
+    virtual void unk_vf18() {}      // [18]
+    virtual void unk_vf19() {}      // [19]
+    virtual void unk_vf20() {}      // [20]
+    virtual void unk_vf21() {}      // [21]
+    virtual void unk_vf22() {}      // [22]
+    virtual void unk_vf23() {}      // [23]
+    virtual void unk_vf24() {}      // [24]
+    virtual void unk_vf25() {}      // [25]
+    virtual void unk_vf26() {}      // [26]
+    virtual void unk_vf27() {}      // [27]
+    virtual void unk_vf28() {}      // [28]
+    virtual void unk_vf29() {}      // [29]
+    virtual void unk_vf30() {}      // [30]
+    virtual void unk_vf31() {}      // [31]
+    virtual void unk_vf32() {}      // [32]
+    virtual void unk_vf33() {}      // [33]
+    virtual void unk_vf34() {}      // [34]
+    virtual void unk_vf35() {}      // [35]
+    virtual void unk_vf36() {}      // [36]
+    virtual void unk_vf37() {}      // [37]
+    virtual void unk_vf38() {}      // [38]
+    virtual void unk_vf39() {}      // [39]
+    virtual void unk_vf40() {}      // [40]
+    virtual void unk_vf41() {}      // [41]
+    virtual void unk_vf42() {}      // [42]
+    virtual void unk_vf43() {}      // [43]
+    virtual void unk_vf44() {}      // [44]
+    virtual void unk_vf45() {}      // [45]
+    virtual void unk_vf46() {}      // [46]
+    virtual void unk_vf47() {}      // [47]
+    virtual void unk_vf48() {}      // [48]
+    virtual void unk_vf49() {}      // [49]
+    virtual void unk_vf50() {}      // [50]
+    virtual void unk_vf51() {}      // [51]
+    virtual void unk_vf52() {}      // [52]
+    virtual void unk_vf53() {}      // [53]
+    virtual void unk_vf54() {}      // [54]
+    virtual void unk_vf55() {}      // [55]
+    virtual void unk_vf56() {}      // [56]
+    virtual void unk_vf57() {}      // [57]
+    virtual void unk_vf58() {}      // [58]
+    virtual void unk_vf59() {}      // [59]
+    virtual void unk_vf60() {}      // [60]
+    virtual void unk_vf61() {}      // [61]
+    virtual void unk_vf62() {}      // [62]
+    virtual void unk_vf63() {}      // [63]
+    virtual void unk_vf64() {}      // [64]
+    virtual void unk_vf65() {}      // [65]
+    virtual void unk_vf66() {}      // [66]
+    virtual void unk_vf67() {}      // [67]
+    virtual void unk_vf68() {}      // [68]
+    virtual void unk_vf69() {}      // [69]
+    virtual void unk_vf70() {}      // [70]
+    virtual void unk_vf71() {}      // [71]
+    virtual void unk_vf72() {}      // [72]
+    virtual void unk_vf73() {}      // [73]
+    virtual void unk_vf74() {}      // [74]
+    virtual void unk_vf75() {}      // [75]
+    virtual void unk_vf76() {}      // [76]
+    virtual void unk_vf77() {}      // [77]
+    virtual void unk_vf78() {}      // [78]
+    virtual void unk_vf79() {}      // [79]
+    virtual void unk_vf80() {}      // [80]
+    virtual void unk_vf81() {}      // [81]
+
+    // [82] SetAction — dispatches an action through the slot manager at +0x4A8.
+    // Validates replacement policy, stops the current action in the target slot,
+    // installs the new action, and emits transition signals.
+    // ppAction: pointer to smart_ptr holding the action (ownership transferred).
+    // Returns true if the action was accepted, false if rejected by slot policy.
+    // sub_1804619CC, vtable offset 0x290
+    virtual bool SetAction(I_CombatActorActionPtr* pAction) { return false; }   // [82]
+
+    // ---- Non-virtual methods (direct function calls) ----
+
+    // sub_18069536C → sub_1805633D0
+    // Dispatches a counter action through the appropriate factory.
+    // Creates the action AND calls SetAction internally.
+    // scopeIndex: animation scope index (use 0 for default/primary scope).
+    //   NOT a combat zone ID — it's passed to the director subsystem's slot lookup.
+    // ppOutAction receives the created action (caller must Release).
+    void DispatchCounterAction(I_CombatActorActionPtr* pOutAction, E_CounterActionType type, uint32_t scopeIndex = 0);
 
     // ---- I_ItemAttachmentListener overrides ----
     void OnItemAttached(uint64_t entityId, unsigned int handSlot) override {}  // sub_18054A9F4
@@ -219,22 +345,22 @@ public:
     wh::shared::C_Signal<I_CombatActor&, bool>
         m_signal_198;                                                       // +0x198
 
-    // +0x1C8: Signal<I_CombatActor&, int const&, _smart_ptr<I_CombatActorAction> const&, _smart_ptr<I_CombatActorAction> const&>
+    // +0x1C8: Signal<I_CombatActor&, int const&, I_CombatActorActionPtr const&, I_CombatActorActionPtr const&>
     // OnActionBase (self action changed, old+new action pair)
-    wh::shared::C_Signal<I_CombatActor&, const int&, const _smart_ptr<I_CombatActorAction>&, const _smart_ptr<I_CombatActorAction>&>
+    wh::shared::C_Signal<I_CombatActor&, const int&, const I_CombatActorActionPtr&, const I_CombatActorActionPtr&>
         m_onActionBase;                                                     // +0x1C8
 
 
-    // +0x1F8: Signal<I_CombatActor&, int const&, _smart_ptr<I_CombatActorAction> const&, _smart_ptr<I_CombatActorAction> const&>
-    wh::shared::C_Signal<I_CombatActor&, const int&, const _smart_ptr<I_CombatActorAction>&, const _smart_ptr<I_CombatActorAction>&>
+    // +0x1F8: Signal<I_CombatActor&, int const&, I_CombatActorActionPtr const&, I_CombatActorActionPtr const&>
+    wh::shared::C_Signal<I_CombatActor&, const int&, const I_CombatActorActionPtr&, const I_CombatActorActionPtr&>
         m_signal_1F8;                                                       // +0x1F8
 
-    // +0x228: Signal<I_CombatActor&, I_CombatActor&, int const&, _smart_ptr<I_CombatActorAction> const&, _smart_ptr<I_CombatActorAction> const&>
-    wh::shared::C_Signal<I_CombatActor&, I_CombatActor&, const int&, const _smart_ptr<I_CombatActorAction>&, const _smart_ptr<I_CombatActorAction>&>
+    // +0x228: Signal<I_CombatActor&, I_CombatActor&, int const&, I_CombatActorActionPtr const&, I_CombatActorActionPtr const&>
+    wh::shared::C_Signal<I_CombatActor&, I_CombatActor&, const int&, const I_CombatActorActionPtr&, const I_CombatActorActionPtr&>
         m_signal_228;                                                       // +0x228
 
-    // +0x258: Signal<I_CombatActor&, I_CombatActor&, int const&, _smart_ptr<I_CombatActorAction> const&, _smart_ptr<I_CombatActorAction> const&>
-    wh::shared::C_Signal<I_CombatActor&, I_CombatActor&, const int&, const _smart_ptr<I_CombatActorAction>&, const _smart_ptr<I_CombatActorAction>&>
+    // +0x258: Signal<I_CombatActor&, I_CombatActor&, int const&, I_CombatActorActionPtr const&, I_CombatActorActionPtr const&>
+    wh::shared::C_Signal<I_CombatActor&, I_CombatActor&, const int&, const I_CombatActorActionPtr&, const I_CombatActorActionPtr&>
         m_onOpponentActionChanged;                                           // +0x258  relayed from opponent via LinkTarget
 
     // +0x288: Signal<> (no arguments)

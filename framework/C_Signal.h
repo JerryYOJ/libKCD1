@@ -1,88 +1,95 @@
 #pragma once
 
 #include <cstdint>
+#include <vector>
 
 namespace wh::shared {
 
-// -----------------------------------------------
-// S_ConnectionNode — intrusive linked-list node for signal connections
-// -----------------------------------------------
-// Heap-allocated by Connect, freed by Disconnect.
-// Created in sub_1802AD1E0 and variants, walked in sub_180448CC8.
-// Nodes are sorted by priority within each category list.
-struct S_ConnectionNode {
-    uint64_t    m_callbackFunc;         // +0x00  function pointer / std::function storage
-    uint64_t    m_callbackCtx;          // +0x08  captured context for the callback
-    int32_t     m_type;                 // +0x10  connection type (determines which list)
-    uint8_t     m_flags;                // +0x13  (e.g. active flag, set from source+0x18)
-    // gap at +0x14
-    int32_t     m_extraData;            // +0x14  additional data from connection source
-    S_ConnectionNode* m_next;           // +0x18  next node in pending/staging list
-    S_ConnectionNode* m_nextSorted;     // +0x20  next node in sorted active list
-    int32_t     m_category;             // +0x28  category (used for list routing in Emit)
-    int32_t     m_priority;             // +0x2C  sort key for insertion ordering
-};
-
-// -----------------------------------------------
-// C_Signal<Args...> — observer/delegate for event notifications
-// -----------------------------------------------
-// Inheritance chain (from RTTI):
-//   C_Signal<Args...>
-//     C_EmitingSignal<S_SignalTraits<Args...>, C_BypassedConnections<...>, Args...>
-//       C_SignalBase<S_SignalTraits<Args...>, C_BypassedConnections<...>>
-//
-// C_BypassedConnections is a policy template parameter to C_SignalBase, not a base class.
-// It controls how connections can be temporarily suppressed ("bypassed") without
-// being fully disconnected — useful for muting UI updates during bulk operations
-// or preventing re-entrant signal firing.
-//
-// Size: 0x30 bytes (single vtable, single inheritance chain)
-//
-// C_Signal<I_Soul&> vtable:     0x182208ce8
-// C_SignalBase<I_Soul&> vtable: 0x182208d20 (intermediate, set during construction)
-//
-// Construction order (from C_Soul/C_CombatSoul constructors):
-//   1. vtable = C_SignalBase vtable  (base ctor)
-//   2. Zero members, set slot sentinels to -1
-//   3. vtable = C_Signal vtable      (derived ctor overwrites)
-//
-// Two internal regions:
-//   +0x08: C_BypassedConnections data (0x18 bytes) — manages bypass/active lists
-//          vtable[2-3] (Connect/Disconnect) forward to this+0x08
-//   +0x20: emit state (0x10 bytes) — tracks currently-firing state
-//          vtable[4-5] (ConnectDirect/DisconnectDirect) forward to this+0x20
-//
-// C_Signal vtable (at 0x182208ce8 for <I_Soul&>):
-//   [0]  = destructor
-//   [1]  = Emit — walks active connection lists, invokes each callback with Args...
-//   [2]  = Connect — adds a S_ConnectionNode via BypassedConnections at this+0x08
-//   [3]  = Disconnect — removes from BypassedConnections at this+0x08
-//   [4]  = ConnectDirect — adds directly to emit list at this+0x20
-//   [5]  = DisconnectDirect — removes from emit list at this+0x20
-//   [6]  = Reset — clears all connections
-//   [7-15] = C_SignalBase methods (flush pending→active, iterate, etc.)
+template<typename... Args>
+struct S_SignalTraits {};
 
 template<typename... Args>
-class C_Signal {
+struct S_Delegate {
+    using FnType = void(*)(void*, Args...);
+
+    FnType  m_pInvoke;      // +0x00
+    void*   m_pInstance;    // +0x08
+
+    void operator()(Args... args) const {
+        m_pInvoke(m_pInstance, args...);
+    }
+
+    bool operator==(const S_Delegate& o) const {
+        return m_pInvoke == o.m_pInvoke && m_pInstance == o.m_pInstance;
+    }
+    bool operator!=(const S_Delegate& o) const { return !(*this == o); }
+};
+static_assert(sizeof(S_Delegate<>) == 0x10);
+
+template<typename... Args>
+struct S_SortedConnectionEntry {
+    int32_t             m_nSlot;        // +0x00
+    int32_t             _pad04;         // +0x04
+    S_Delegate<Args...> m_callback;     // +0x08
+};
+static_assert(sizeof(S_SortedConnectionEntry<>) == 0x18);
+
+
+// Layout matches CryEngine FastDynArray<T, int64_t>: {T* m_aElems, I m_nCount, I m_nCapacity}
+template<typename Traits>
+class C_BypassedConnections;
+
+template<typename... Args>
+class C_BypassedConnections<S_SignalTraits<Args...>> {
 public:
-    virtual ~C_Signal() = default;                          // [0]
-    virtual void Emit(Args...) {}                           // [1]
-    virtual void Connect(int slot, void* callback) {}       // [2]
-    virtual void Disconnect(void* callback) {}              // [3]
-    virtual void ConnectDirect(void* callback) {}           // [4]
-    virtual void DisconnectDirect(void* callback) {}        // [5]
-    virtual void Reset() {}                                 // [6]
+    using Entry = S_SortedConnectionEntry<Args...>;
 
-    // C_BypassedConnections storage — manages subscription lists
-    // Connections here can be temporarily bypassed (suppressed) without disconnecting.
-    S_ConnectionNode*   m_pBypassedHead;    // +0x08  head of bypassed connection list (set by bypass logic)
-    S_ConnectionNode*   m_pActiveHead;      // +0x10  head of active connection list (init 0)
-    S_ConnectionNode*   m_pPendingHead;     // +0x18  head of pending-connect list (init 0, flushed to active on Emit)
+    Entry*      m_aElems;       // +0x00
+    int64_t     m_nCount;       // +0x08
+    int64_t     m_nCapacity;    // +0x10
 
-    // Emit state — tracks direct connections and re-entrancy
-    S_ConnectionNode*   m_pDirectHead;      // +0x20  head of direct (non-bypassable) connections (init 0)
-    int32_t             m_currentSlot;      // +0x28  slot index currently emitting, -1 = idle
-    int32_t             m_reentrancyGuard;  // +0x2C  re-entrancy depth sentinel, -1 = not firing
+    Entry* begin()              { return m_aElems; }
+    Entry* end()                { return m_aElems + m_nCount; }
+    int64_t size() const        { return m_nCount; }
+    int64_t capacity() const    { return m_nCapacity; }
+    bool empty() const          { return m_nCount == 0; }
+};
+static_assert(sizeof(C_BypassedConnections<S_SignalTraits<>>) == 0x18);
+
+template<typename Traits, typename BypassedConnPolicy, typename... Args>
+class C_SignalBase {
+public:
+    using Delegate = S_Delegate<Args...>;
+
+    void*                   m_pField08;         // +0x08  dead; never read/written/freed in binary
+    std::vector<Delegate>   m_connections;      // +0x10  {begin, end, cap_end} — freed in dtor
+    int32_t                 m_nEmitSlot;        // +0x28  -1 = idle
+    int32_t                 m_nReentrancyDepth; // +0x2C  -1 = not firing
+};
+
+template<typename Traits, typename BypassedConnPolicy, typename... Args>
+class C_EmitingSignal : public C_SignalBase<Traits, BypassedConnPolicy, Args...> {
+public:
+    using Delegate = S_Delegate<Args...>;
+
+    void Emit(Args... args) {
+        for (auto& conn : this->m_connections) {
+            conn(args...);
+        }
+    }
+};
+
+// vtable: 1 entry [0] dtor — verified via RTTI COL at 0x182208ce8
+template<typename... Args>
+class C_Signal : public C_EmitingSignal<
+    S_SignalTraits<Args...>,
+    C_BypassedConnections<S_SignalTraits<Args...>>,
+    Args...>
+{
+public:
+    using Delegate = S_Delegate<Args...>;
+
+    virtual ~C_Signal() = default;  // [0]
 };
 static_assert(sizeof(C_Signal<>) == 0x30);
 

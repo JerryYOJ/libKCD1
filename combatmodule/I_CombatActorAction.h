@@ -22,7 +22,7 @@
 // The full concrete action chain extends further:
 //   C_Action → C_ParamAction → C_CombatActorAction → C_CombatActorAnimatedAction → leaf
 //
-// NOTE: vtable is interfuscator-shuffled. Slot indices are NOT stable.
+// Warhorse classes are NOT interfuscator-shuffled — slot indices are stable.
 // ---------------------------------------------------------------------------
 
 namespace wh::combatmodule {
@@ -74,83 +74,6 @@ public:
     // If C_Action adds more primary vtable slots, they would go here.
 };
 
-// ---------------------------------------------------------------------------
-// C_Action<I_CombatActorActionPrivate> — concrete action base with data.
-//
-// RTTI: .?AV?$C_Action@VI_CombatActorActionPrivate@combatmodule@wh@@@framework@wh@@
-// Primary vtable:   0x1821aab38 (20 slots, I_CombatActorActionPrivate chain)
-// Secondary vtable: 0x1821aaaf0 (8 slots, I_ActionImpl at +0x10)
-// Constructor: sub_180430230
-// Destructor:  sub_180430138
-// Size: 0xD0 bytes
-//
-// Layout:
-//   +0x00: primary vtable (I_CombatActorActionPrivate chain)
-//   +0x08: m_nRefCounter (from _i_multithread_reference_target)
-//   +0x0C: pad
-//   +0x10: I_ActionImpl vtable (MI secondary)
-//   +0x18: m_onActionChanged1 (C_Signal, 0x30 bytes)
-//   +0x48: m_onActionChanged2 (C_Signal, 0x30 bytes)
-//   +0x78: m_onActionCompleted (C_Signal, 0x30 bytes)
-//   +0xA8: m_isStarted, m_isRunning, m_isCompleted (bools)
-//   +0xB0: m_pActionParams (void*)
-//   +0xB8: m_priority, m_actionSequenceId (int32)
-//   +0xC0: m_pOwnerSubsystem (void*)
-//   +0xC8: m_contextPriority (int32)
-// ---------------------------------------------------------------------------
-class C_CombatActorAction : public I_CombatActorActionPrivate,
-                            public wh::framework::I_ActionImpl {
-public:
-    // ---- I_CombatActorAction overrides ----
-    ~C_CombatActorAction() override = default;
-    bool IsStarted() const override { return m_isStarted; }
-    bool IsRunning() const override { return m_isRunning; }
-    bool IsCompleted() const override { return m_isCompleted; }
-    bool CanInterrupt(const _smart_ptr<wh::framework::I_Action>&) const override { return false; }
-    int32_t GetActionTypeId() const override { return -1; }
-    int32_t GetPriority() const override { return m_priority; }
-    int32_t GetActionSequenceId() const override { return m_actionSequenceId; }
-    int32_t GetContextPriority() const override { return m_contextPriority; }
-    const char* GetActionName() const override { return ""; }
-    void unk_12() override {}
-    void unk_13() override {}
-    void ConnectOnChanged(void*) override {}
-    void DisconnectOnChanged(void*) override {}
-    void unk_16() override {}
-    void unk_17() override {}
-    void* GetLock() override { return nullptr; }
-    int32_t unk_19() const override { return -1; }
-
-    // ---- I_ActionImpl overrides ----
-    void Start() override {}
-    void Stop() override {}
-    void Update(float) override {}
-    void Tick() override {}
-    void Complete() override {}
-    // IsStarted() already declared above (primary chain)
-    void GetParams(void*) const override {}
-
-    // ---- Data members (C_Action own fields) ----
-    wh::shared::C_Signal<wh::framework::I_Action&, _smart_ptr<wh::framework::I_Action>&>
-        m_onActionChanged1;                                         // +0x18
-
-    wh::shared::C_Signal<wh::framework::I_Action&, _smart_ptr<wh::framework::I_Action>&>
-        m_onActionChanged2;                                         // +0x48
-
-    wh::shared::C_Signal<wh::framework::I_Action&>
-        m_onActionCompleted;                                        // +0x78
-
-    bool                m_isStarted;        // +0xA8
-    bool                m_isRunning;        // +0xA9
-    bool                m_isCompleted;      // +0xAA
-    uint8_t             _padAB[5];          // +0xAB
-    void*               m_pActionParams;    // +0xB0
-    int32_t             m_priority;         // +0xB8  (init -1)
-    int32_t             m_actionSequenceId; // +0xBC  (init -1)
-    void*               m_pOwnerSubsystem;  // +0xC0
-    int32_t             m_contextPriority;  // +0xC8  (init 0)
-    uint32_t            _padCC;             // +0xCC
-};
-static_assert(sizeof(C_CombatActorAction) == 0xD0, "C_CombatActorAction must be 0xD0 bytes");
+typedef _smart_ptr<I_CombatActorAction> I_CombatActorActionPtr;
 
 }  // namespace wh::combatmodule

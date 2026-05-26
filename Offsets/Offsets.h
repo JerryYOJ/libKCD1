@@ -26,6 +26,8 @@ inline static constexpr uintptr_t kGameContextOffset        = 0x4FFD10;
 inline static constexpr uintptr_t kCombatSettingsOffset     = 0x36DD8A0;
 inline static constexpr uintptr_t kRPGParamsOffset          = 0x35004A0;
 inline static constexpr uintptr_t kActionTypeDbOffset       = 0x359B1E0;
+inline static constexpr uintptr_t kCreateAndDispatchOffset  = 0x460934;
+inline static constexpr uintptr_t kDispatchCounterActionOffset = 0x69536C;
 
 // CryAction has no RE'd header — getter stays here
 IGameFramework* GetCCryAction();
@@ -80,6 +82,23 @@ struct ActionTypeId {
     static int32_t SyncTransitionSlave();       // 0x359B3D0
     static int32_t HuntAttackMaster();          // 0x359B3D4
     static int32_t HuntAttackSlave();           // 0x359B3D8
+};
+
+// -----------------------------------------------
+// Combat input class IDs (runtime-assigned globals)
+// -----------------------------------------------
+// Registered in C_CombatInputClassDatabase::Init (sub_18071EA94).
+// Each ID is assigned at startup via BST insertion.
+// VERIFIED: names from StringHash calls in the init function.
+struct InputClassId {
+    static int32_t AttackLight();               // 0x359C2F0  "attack_light"
+    static int32_t AttackHeavy();               // 0x359C2F4  "attack_heavy"
+    static int32_t AttackSpecial();             // 0x359C2F8  "attack_special"
+    static int32_t MoveLeft();                  // 0x359C2FC  "move_left"
+    static int32_t MoveRight();                 // 0x359C300  "move_right"
+    static int32_t MoveBack();                  // 0x359C304  "move_back"
+    static int32_t MoveForward();               // 0x359C308  "move_forward"
+    static int32_t Block();                     // 0x359C30C  "block"
 };
 
 }  // namespace Offsets

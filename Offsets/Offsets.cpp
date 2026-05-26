@@ -7,6 +7,8 @@
 #include "combatmodule/C_CombatModule.h"
 #include "combatmodule/C_CombatScene.h"
 #include "combatmodule/S_CombatSettings.h"
+#include "combatmodule/C_CombatActionFactory.h"
+#include "combatmodule/C_CombatActor.h"
 
 static uintptr_t GetBase() {
     static uintptr_t base = reinterpret_cast<uintptr_t>(GetModuleHandleA("WHGame.DLL"));
@@ -109,3 +111,39 @@ ACTION_TYPE_GETTER(HuntAttackMaster,             0x359B3D4)
 ACTION_TYPE_GETTER(HuntAttackSlave,              0x359B3D8)
 
 #undef ACTION_TYPE_GETTER
+
+// ---- Input class IDs ----
+
+#define INPUT_CLASS_GETTER(Name, Offset) \
+    int32_t Offsets::InputClassId::Name() { \
+        return *reinterpret_cast<int32_t*>(GetBase() + Offset); \
+    }
+
+INPUT_CLASS_GETTER(AttackLight,     0x359C2F0)
+INPUT_CLASS_GETTER(AttackHeavy,     0x359C2F4)
+INPUT_CLASS_GETTER(AttackSpecial,   0x359C2F8)
+INPUT_CLASS_GETTER(MoveLeft,        0x359C2FC)
+INPUT_CLASS_GETTER(MoveRight,       0x359C300)
+INPUT_CLASS_GETTER(MoveBack,        0x359C304)
+INPUT_CLASS_GETTER(MoveForward,     0x359C308)
+INPUT_CLASS_GETTER(Block,           0x359C30C)
+
+#undef INPUT_CLASS_GETTER
+
+// ---- Combat factory methods ----
+
+void* wh::combatmodule::C_CombatActionAttackFactory::CreateAndDispatch(
+    void** ppOut, uint32_t inputClassId, int flags)
+{
+    using Fn = void*(__fastcall*)(C_CombatActionAttackFactory*, void**, uint32_t, int);
+    auto fn = reinterpret_cast<Fn>(GetBase() + Offsets::kCreateAndDispatchOffset);
+    return fn(this, ppOut, inputClassId, flags);
+}
+
+void wh::combatmodule::C_CombatActor::DispatchCounterAction(
+    I_CombatActorActionPtr* pOutAction, E_CounterActionType type, uint32_t scopeIndex)
+{
+    using Fn = void*(__fastcall*)(C_CombatActor*, I_CombatActorActionPtr*, int, uint32_t);
+    auto fn = reinterpret_cast<Fn>(GetBase() + Offsets::kDispatchCounterActionOffset);
+    fn(this, pOutAction, static_cast<int>(type), scopeIndex);
+}

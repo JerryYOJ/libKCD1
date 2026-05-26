@@ -16,10 +16,7 @@ namespace wh::combatmodule {
 //
 // Implemented by C_CombatActor and C_CombatPlayer.
 //
-// NOTE: vtable order is interfuscator-shuffled in release builds.
-// Slot indices shown are from C_CombatActor's implementation vtable
-// at 0x182228be8 and must NOT be relied upon for virtual calls.
-// Use addresses for hooking.
+// Warhorse classes are NOT interfuscator-shuffled — slot indices are stable.
 // ---------------------------------------------------------------------------
 class I_CombatActor {
 public:

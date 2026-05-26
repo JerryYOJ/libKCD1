@@ -66,6 +66,14 @@ class C_CombatActionAttackFactory : public C_CombatActionFactoryBase {
 public:
     ~C_CombatActionAttackFactory() override = default;
     // CreateAction override at vtable[6] = sub_182447370 region
+
+    // Non-virtual: sub_180460934
+    // Creates an action from the given input class and dispatches it.
+    // ppOut: receives the created action smart_ptr (caller must Release after use).
+    // inputClassId: combat input class (e.g. Offsets::InputClassId::Block()).
+    // flags: action creation flags (usually 0).
+    // Returns ppOut.
+    void* CreateAndDispatch(void** ppOut, uint32_t inputClassId, int flags);
 };
 static_assert(sizeof(C_CombatActionAttackFactory) == 0x10);
 
