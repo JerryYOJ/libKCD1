@@ -30,13 +30,4 @@ public:
     virtual void* GetDynamicEnum(const char* name) const = 0;           // [14]
 };
 
-// I_DatabaseListener — callback interface for database change notifications.
-// vtable @ 0x1822c1e00
-class I_DatabaseListener {
-public:
-    virtual ~I_DatabaseListener() = 0;          // [0]
-    virtual void OnDatabaseLoaded() = 0;        // [1]
-    virtual void OnDatabaseUnloaded() = 0;      // [2]
-};
-
 }  // namespace wh::databasemodule

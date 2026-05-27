@@ -9,6 +9,7 @@
 #include "combatmodule/S_CombatSettings.h"
 #include "combatmodule/C_CombatActionFactory.h"
 #include "combatmodule/C_CombatActor.h"
+#include "rpgmodule/buff/C_BuffManager.h"
 
 static uintptr_t GetBase() {
     static uintptr_t base = reinterpret_cast<uintptr_t>(GetModuleHandleA("WHGame.DLL"));
@@ -35,6 +36,10 @@ wh::game::S_GameContext* wh::game::S_GameContext::GetInstance() {
 
 wh::rpgmodule::C_RPGModule* wh::rpgmodule::C_RPGModule::GetInstance() {
     return *reinterpret_cast<C_RPGModule**>(GetBase() + Offsets::kRPGModuleOffset);
+}
+
+wh::rpgmodule::C_BuffManager* wh::rpgmodule::C_BuffManager::GetInstance() {
+    return *reinterpret_cast<C_BuffManager**>(GetBase() + Offsets::kBuffManagerOffset);
 }
 
 // ---- guimodule ----

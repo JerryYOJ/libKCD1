@@ -26,6 +26,21 @@ struct IEntity;
 struct IActorSystem;
 typedef unsigned int EntityId;
 
+// Action event dispatched to IGameFrameworkListeners via OnActionEvent.
+// Types observed from CCryAction::SaveGame (sub_181893C1C) and LoadGame (sub_181886648).
+struct SActionEvent {
+    int         m_event;        // +0x00  event type
+    uint32_t    m_value;        // +0x04  context-dependent (e.g. save reason)
+    const char* m_description;  // +0x08  optional string (e.g. checkpoint name)
+
+    enum : int {
+        eAE_PreSave  = 0xA,    // before save is written
+        eAE_PostSave = 0xB,    // after save is written
+        eAE_PreLoad  = 0xC,    // before save is loaded
+        eAE_PostLoad = 0xD,    // after save is loaded
+    };
+};
+
 namespace Offsets {
 
 struct IGameFramework {
@@ -108,6 +123,51 @@ struct IGameFramework {
     virtual void _vf76() = 0;                                           // [76] 0x260
     virtual void* GetClientChannelById(int channelId) const = 0;         // [77] 0x268  returns *(NetworkChannel+0x8)
     virtual void _vf78() = 0;                                           // [78] 0x270  NOT GetGameObject(EntityId) — ignores this+id, gets client game object via gEnv.pEntitySystem
+    virtual void _vf79() = 0;                                           // [79]  0x278
+    virtual void _vf80() = 0;                                           // [80]  0x280
+    virtual void _vf81() = 0;                                           // [81]  0x288
+    virtual void _vf82() = 0;                                           // [82]  0x290
+    virtual void _vf83() = 0;                                           // [83]  0x298
+    virtual void _vf84() = 0;                                           // [84]  0x2A0
+    virtual void _vf85() = 0;                                           // [85]  0x2A8
+    virtual void _vf86() = 0;                                           // [86]  0x2B0
+    virtual void _vf87() = 0;                                           // [87]  0x2B8
+    virtual void _vf88() = 0;                                           // [88]  0x2C0
+    virtual void _vf89() = 0;                                           // [89]  0x2C8
+    virtual void _vf90() = 0;                                           // [90]  0x2D0
+    virtual void _vf91() = 0;                                           // [91]  0x2D8
+    virtual void _vf92() = 0;                                           // [92]  0x2E0
+    virtual void _vf93() = 0;                                           // [93]  0x2E8
+    virtual void _vf94() = 0;                                           // [94]  0x2F0
+    virtual void _vf95() = 0;                                           // [95]  0x2F8
+    virtual void _vf96() = 0;                                           // [96]  0x300
+    virtual void _vf97() = 0;                                           // [97]  0x308
+    virtual void _vf98() = 0;                                           // [98]  0x310
+    virtual void _vf99() = 0;                                           // [99]  0x318
+    virtual void _vf100() = 0;                                          // [100] 0x320
+    virtual void _vf101() = 0;                                          // [101] 0x328
+    virtual void _vf102() = 0;                                          // [102] 0x330
+    virtual void _vf103() = 0;                                          // [103] 0x338
+    virtual void _vf104() = 0;                                          // [104] 0x340
+    virtual void _vf105() = 0;                                          // [105] 0x348
+    virtual void _vf106() = 0;                                          // [106] 0x350
+    virtual void _vf107() = 0;                                          // [107] 0x358
+    virtual void _vf108() = 0;                                          // [108] 0x360
+    virtual void _vf109() = 0;                                          // [109] 0x368
+    virtual void _vf110() = 0;                                          // [110] 0x370
+    virtual void _vf111() = 0;                                          // [111] 0x378
+    virtual void _vf112() = 0;                                          // [112] 0x380
+    virtual void _vf113() = 0;                                          // [113] 0x388
+    virtual void _vf114() = 0;                                          // [114] 0x390
+    virtual void _vf115() = 0;                                          // [115] 0x398
+    virtual void _vf116() = 0;                                          // [116] 0x3A0
+    virtual void _vf117() = 0;                                          // [117] 0x3A8
+    virtual void _vf118() = 0;                                          // [118] 0x3B0
+    virtual void _vf119() = 0;                                          // [119] 0x3B8
+    virtual void _vf120() = 0;                                          // [120] 0x3C0
+    virtual void _vf121() = 0;                                          // [121] 0x3C8
+    virtual void _vf122() = 0;                                          // [122] 0x3D0
+    virtual void OnActionEvent(SActionEvent* pEvent) = 0;               // [123] 0x3D8  sub_1803E8584 — dispatches to IGameFrameworkListeners
 };
 
 }  // namespace Offsets
