@@ -1,0 +1,6 @@
+[submodule "Projects/KCSE"]
+	path = Projects/KCSE
+	url = git@github.com:JerryYOJ/KCSE.git
+[submodule "Projects/CombatAssist"]
+	path = Projects/CombatAssist
+	url = git@github.com:JerryYOJ/CombatAssist-KCSE.git

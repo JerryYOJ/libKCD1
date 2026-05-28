@@ -13,9 +13,10 @@ set(RE_BUILDENV "${CMAKE_CURRENT_SOURCE_DIR}")
 find_package(spdlog CONFIG REQUIRED)
 
 # ---- kcd_re static library ----
-file(GLOB_RECURSE RE_HEADERS "${RE_ROOT}/*.h")
+file(GLOB_RECURSE RE_HEADERS "${RE_ROOT}/include/*.h")
+file(GLOB_RECURSE RE_SOURCES "${RE_ROOT}/src/*.cpp")
 
-add_library(kcd_re STATIC check_sizes.cpp CrySDKStubs.cpp "${RE_ROOT}/Offsets/Offsets.cpp" ${RE_HEADERS})
+add_library(kcd_re STATIC check_sizes.cpp CrySDKStubs.cpp ${RE_SOURCES} ${RE_HEADERS})
 
 target_precompile_headers(kcd_re PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/PCH.h")
 
@@ -25,10 +26,10 @@ target_compile_definitions(kcd_re PRIVATE
 target_compile_options(kcd_re PRIVATE /utf-8 /W4 /wd4819 /wd4100)
 
 target_include_directories(kcd_re PRIVATE
-    ${RE_ROOT} ${RE_ROOT}/CryEngine/CryCommon)
+    ${RE_ROOT}/include ${RE_ROOT}/include/CryEngine/CryCommon)
 
 # ---- Auto-discover subprojects under src/*/.buildenv ----
-file(GLOB PLUGIN_DIRS "${RE_ROOT}/src/*")
+file(GLOB PLUGIN_DIRS "${RE_ROOT}/Projects/*")
 foreach(PLUGIN_DIR ${PLUGIN_DIRS})
     if(EXISTS "${PLUGIN_DIR}/.buildenv/CMakeLists.txt")
         get_filename_component(PLUGIN_NAME ${PLUGIN_DIR} NAME)
