@@ -10,6 +10,7 @@
 #include "combatmodule/C_CombatActionFactory.h"
 #include "combatmodule/C_CombatActor.h"
 #include "rpgmodule/buff/C_BuffManager.h"
+#include "framework/S_TypeFactoryEntry.h"
 
 static uintptr_t GetBase() {
     static uintptr_t base = reinterpret_cast<uintptr_t>(GetModuleHandleA("WHGame.DLL"));
@@ -40,6 +41,16 @@ wh::rpgmodule::C_RPGModule* wh::rpgmodule::C_RPGModule::GetInstance() {
 
 wh::rpgmodule::C_BuffManager* wh::rpgmodule::C_BuffManager::GetInstance() {
     return *reinterpret_cast<C_BuffManager**>(GetBase() + Offsets::kBuffManagerOffset);
+}
+
+// ---- framework ----
+
+void wh::shared::S_TypeFactoryEntry::Init(
+    const char* pKey, S_TypeFactoryEntry** pParents, TypeCastFn fnCast, TypeCreatorFn fnCreator)
+{
+    using Fn = void(__fastcall*)(S_TypeFactoryEntry*, const char*, S_TypeFactoryEntry**, TypeCastFn, TypeCreatorFn);
+    auto fn = reinterpret_cast<Fn>(GetBase() + 0x712B68);
+    fn(this, pKey, pParents, fnCast, fnCreator);
 }
 
 // ---- guimodule ----

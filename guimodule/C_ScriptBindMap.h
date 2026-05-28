@@ -1,43 +1,26 @@
 #pragma once
 
-#include <cstdint>
-#include "Offsets/vtables/IScriptTable.h"
+#include "../crysystem/CScriptableBase.h"
 
 // -----------------------------------------------
-// C_ScriptBindMap — Lua "UIMap" table provider
+// C_ScriptBindMap — Lua "UIMap" table
 // -----------------------------------------------
-// RTTI: .?AVC_ScriptBindMap@guimodule@wh@@  (inferred from vtable symbol)
+// RTTI: .?AVC_ScriptBindMap@guimodule@wh@@
+// vtable: 0x1822e6ba8
 // Constructor: sub_18110CD28
-// Binary vtable at 0x1822e6ba8 (10 slots)
+// Registration: inline via sub_18110B038 + sub_18110AF94
 // Size: 0x70
-//
-// Lua methods:
-//   UIMap.SetPlaceDiscovered(name, visited, show)  — sub_18110FB9C
-//   UIMap.GoToCheckpointMark()                     — sub_18110DC88
 
 namespace wh::guimodule {
 
-class C_ScriptBindMap {
+class C_ScriptBindMap : public CScriptableBase {
 public:
-    virtual void _vf0() {};   // [0] 0x00
-    virtual void _vf1() {};   // [1] 0x08
-    virtual void _vf2() {};   // [2] 0x10
-    virtual void _vf3() {};   // [3] 0x18
-    virtual void _vf4() {};   // [4] 0x20
-    virtual void _vf5() {};   // [5] 0x28
-    virtual void _vf6() {};   // [6] 0x30
-    virtual void _vf7() {};   // [7] 0x38
-    virtual void _vf8() {};   // [8] 0x40
-    virtual void _vf9() {};   // [9] 0x48
+    void*                   m_pGameFramework;   // +0x60
+    Offsets::IScriptSystem* m_pScriptSystem;    // +0x68
 
-    uint8_t     m_bInitialized;     // +0x08
-    char        _pad09[0x7];        // +0x09
-    char        _data10[0x40];      // +0x10  script system internals
-    Offsets::IScriptTable* m_pScriptTable; // +0x50
-    uint64_t    m_unk58;            // +0x58
-    void*       m_pMapSystem;       // +0x60  back-ptr to POI/map subsystem
-    void*       m_pEventDispatcher; // +0x68
+    int SetPlaceDiscovered(IFunctionHandler* pH, const char* name, bool visited, bool show); // 0x18110D9D0
+    int GoToCheckpointMark(IFunctionHandler* pH);                                            // 0x1806A71FC
 };
 static_assert(sizeof(C_ScriptBindMap) == 0x70);
 
-}  // namespace wh::guimodule
+} // namespace wh::guimodule

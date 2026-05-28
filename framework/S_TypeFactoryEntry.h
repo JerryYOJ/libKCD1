@@ -10,9 +10,8 @@
 //   "wh.entitymodule.C_ItemSlot"       (entity module)
 //   "NULL"                             (root entry)
 //
-// Each entry is a persistent global (.bss) populated at static init time via
-// RegisterType (sub_180712B68). Entries form a tree: each entry lists its parent
-// entries and gets appended as a child of those parents via sub_180DA84C8.
+// Each entry is a persistent global (.bss) populated via Init(), which
+// sets up fields, builds parent-child links, and inserts into the global C_HashMap.
 //
 // FNV-1a hash: sub_180449CD4 (basis=0xCBF29CE484222325, prime=0x100000001B3)
 //
@@ -26,9 +25,11 @@
 
 namespace wh::shared {
 
-// Allocates and constructs a typed object. Receives the registration data pointer.
+struct S_TypeFactoryEntry;
+
+// Allocates and constructs a typed object. Receives the entry being looked up.
 // Returns the new instance pointer (or nullptr on failure).
-using TypeCreatorFn = void* (__fastcall*)(void* pRegistrationData);
+using TypeCreatorFn = void* (__fastcall*)(S_TypeFactoryEntry* pEntry);
 
 // Adjusts the returned pointer for the matched inheritance level.
 // Default (sub_18044B450): identity, returns pInstance unchanged.
@@ -36,6 +37,16 @@ using TypeCreatorFn = void* (__fastcall*)(void* pRegistrationData);
 using TypeCastFn = void* (__fastcall*)(int32_t nMatchIndex, void* pInstance);
 
 struct S_TypeFactoryEntry {
+    // Populates this entry and registers it in the global type factory.
+    // Must only be called once. Entry must be a persistent global.
+    // sub_180712B68  RVA: 0x712B68
+    void Init(
+        const char*             pKey,       // "wh.rpgmodule.buff.MyBuff"
+        S_TypeFactoryEntry**    pParents,   // null-terminated parent array ({nullptr} if none)
+        TypeCastFn              fnCast,     // identity (sub_18044B450) for most cases
+        TypeCreatorFn           fnCreator   // allocates + constructs the object
+    );
+
     std::string             m_key;              // +0x00  key like "wh.rpgmodule.buff.Constant"
     uint64_t                m_hash;             // +0x20  FNV-1a hash of key string
     S_TypeFactoryEntry**    m_pParents;         // +0x28  null-terminated array of parent entries
@@ -47,31 +58,5 @@ struct S_TypeFactoryEntry {
     TypeCastFn              m_cast;             // +0x48  default: identity (sub_18044B450)
 };
 static_assert(sizeof(S_TypeFactoryEntry) == 0x50);
-
-// -----------------------------------------------
-// RegisterType — registers an entry in the global type factory
-// -----------------------------------------------
-// sub_180712B68
-// Called during static init to register a creatable type.
-// Populates pEntry, builds parent-child links, inserts into the global C_HashMap.
-//
-// pEntry:     persistent storage (must be a global — lifetime must exceed the factory)
-// pKey:       fully qualified key (e.g., "wh.rpgmodule.buff.Constant")
-// pParents:   null-terminated array of parent entries (pass {nullptr} if none)
-// fnCast:     pointer adjustment function (pass identity sub_18044B450 for most cases)
-// fnCreator:  allocates + constructs the typed object
-//
-// RVA: 0x712B68
-using RegisterTypeFn = void (__fastcall*)(
-    S_TypeFactoryEntry*     pEntry,
-    const char*             pKey,
-    S_TypeFactoryEntry**    pParents,
-    TypeCastFn              fnCast,
-    TypeCreatorFn           fnCreator
-);
-
-// Identity cast function — returns pInstance unchanged.
-// RVA: 0x44B450
-inline constexpr uintptr_t kIdentityCastRVA = 0x44B450;
 
 }  // namespace wh::shared
