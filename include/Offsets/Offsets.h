@@ -36,6 +36,9 @@ inline static constexpr uintptr_t kDispatchCounterActionOffset = 0x69536C;
 inline static constexpr uintptr_t kTypeFactoryEntryInitOffset  = 0x712B68;
 inline static constexpr uintptr_t kActionTypeIdBase         = 0x359B330;
 inline static constexpr uintptr_t kInputClassIdBase         = 0x359C2F0;
+inline static constexpr uintptr_t kExecuteSaveOffset        = 0xF095F0; // C_PlayerProfileWHManager::ExecuteSave
+inline static constexpr uintptr_t kSaveGameToSlotOffset     = 0xF12D64; // C_SaveGameManager::SaveGameToSlot
+inline static constexpr uintptr_t kWriteSaveFileOffset      = 0xF0F088; // C_SaveGameManager::WriteSaveFile
 
 // CryAction has no RE'd header — getter stays here
 IGameFramework* GetCCryAction();

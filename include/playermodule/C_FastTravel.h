@@ -13,8 +13,8 @@
 // Constructor: sub_18121BF58
 // Init:        sub_18121C03C (registers CVars, hooks signals on parent)
 // Inherits:
-//   [+0x00] I_RandomEventListener (wh::playermodule)  12 slots
-//   [+0x08] I_ReadinessDebuggable (wh)                7 slots
+//   [+0x00] I_RandomEventListener (wh::playermodule)  primary vtable 0x1826dd700
+//   [+0x08] I_ReadinessDebuggable (wh)                2 slots (vtable 0x1826dd728)
 //
 // Accessed from wh_pl_FastTravelTo via:
 //   *(S_GameContext+0xE8)+0xB0 → C_FastTravel*   (C_PlayerModule+0xB0 VERIFIED via ctor)
@@ -28,8 +28,8 @@ namespace wh::entitymodule { class C_Player; }
 namespace wh::playermodule {
 
 class C_FastTravel
-    : public I_RandomEventListener      // +0x00  (12 slots)
-    , public I_ReadinessDebuggable      // +0x08  (7 slots)
+    : public I_RandomEventListener      // +0x00
+    , public I_ReadinessDebuggable      // +0x08  (2 slots)
 {
 public:
     guimodule::SUIEventSenderBlock m_signalStarted;  // +0x10  FT started signal

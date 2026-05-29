@@ -1,23 +1,28 @@
 #pragma once
 #include <cstdint>
 
+namespace wh {
+
 // -----------------------------------------------
-// I_ReadinessDebuggable — Warhorse debug interface
+// I_ReadinessDebuggable — root of the Warhorse readiness interface chain
 // -----------------------------------------------
 // RTTI: .?AVI_ReadinessDebuggable@wh@@
-// Binary vtable for C_FastTravel at 0x1826dd728 (7 slots)
-
-namespace wh {
+//
+// 2 virtual slots, NO virtual destructor (verified): the secondary vtable of
+// C_FastTravel (??_7C_FastTravel@playermodule@wh@@6B@_0 @ 0x1826dd728) holds
+// exactly two entries before the next COL (0x1824EE8E8), both
+// _guard_check_icall_nop — i.e. the debug hooks are compiled out in retail.
+// The same two stubbed slots lead the vtables of every deriver
+// (C_PlayerProfileWHManager 0x1826a2318, C_SaveGameManager 0x1826a31e8); the
+// destructor is introduced later by the concrete class, never here.
+//
+// (The previous "7 slots / virtual dtor" note was a miscount — it ran past the
+//  COL into an adjacent vtable. See feedback_vtable_validation.)
 
 class I_ReadinessDebuggable {
 public:
-    virtual void _vf0() = 0;   // [0] 0x00
-    virtual void _vf1() = 0;   // [1] 0x08
-    virtual void _vf2() = 0;   // [2] 0x10
-    virtual void _vf3() = 0;   // [3] 0x18
-    virtual void _vf4() = 0;   // [4] 0x20
-    virtual void _vf5() = 0;   // [5] 0x28
-    virtual void _vf6() = 0;   // [6] 0x30
+    virtual void DebugReadiness0() = 0;   // [0] 0x00  debug hook (name unverified, stubbed in retail)
+    virtual void DebugReadiness1() = 0;   // [1] 0x08  debug hook (name unverified, stubbed in retail)
 };
 
 }  // namespace wh
