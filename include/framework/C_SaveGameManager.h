@@ -93,7 +93,7 @@ public:
 
     // Core save routine (sub_180F12D64): serializes all modules into a save buffer,
     // writes the .whs file via WriteSaveFile, updates the slot's descriptor list.
-    bool SaveGameToSlot(E_SaveType type, int32_t saveId = -1, const char* saveName);
+    bool SaveGameToSlot(E_SaveType type, int32_t saveId, const char* saveName = nullptr);
 
     // Bottom of the save chain (sub_180F0F088): builds the .whs filename, asks
     // CryEngine for an ISaveGame, writes the buffer, and completes it.

@@ -25,6 +25,33 @@ class I_DebugNode;
 // Replaces CryEngine's BehaviorTree::INode.
 // All concrete nodes instantiated via C_NodeWrapper<TNode, TBase, TContext>.
 //
+// ---------------------------------------------------------------------------
+// SLOT-MAP AUDIT (2026-05, against the COL-CERTIFIED node vtable
+// C_NodeWrapper<C_AddBuff,..> @ 0x182211490: get_qword(vt-8) is a COL with sig==1
+// whose type descriptor name = that wrapper, and no slot is a ??_R4/non-function —
+// i.e. clean, no buff-cluster contamination. Slot order is consistent across nodes:
+// 55/60 slots are byte-identical between two unrelated C_Node leaves (AddBuff vs
+// GetItemType), so a shared slot maps to the same method in every node.
+//   VERIFIED EXACT (function read from the clean vtable, decompile matches):
+//     [7]  GetNodeId   = sub_1806F99E0 : `return *(u32*)(this+0x18);`   (m_nodeId@+0x18)
+//     [8]  SetNodeId   = sub_1807053B0 : `*(u32*)(this+0x18) = a2;`
+//     [34] SetNodeData = sub_1806F8710 : `*(void**)(this+0x10) = a2;`   (m_pNodeData@+0x10)
+//   These three independently CONFIRM the object layout below (m_pNodeData@0x10,
+//   m_nodeId@0x18) — consistent with the AddBuff ctor sub_1806E38B0.
+//   [UNAUDITED] [39] "Tick": on the clean vtable slot 39 = sub_181538D2C, which
+//     does a StringHash then calls vfunc[+0x130]; that does not obviously match a
+//     top-level tick entry, so the [39]=Tick label is NOT confirmed — do not rely
+//     on it. All slot labels below other than [7]/[8]/[34] are the original RE
+//     pass's and are NOT individually audited yet.
+//   CONTAMINATION WARNING (how the wrong addrs above were originally produced): the
+//     rpgmodule buff-instance vtables cluster around 0x1821cdxxx are NOT BT nodes; a
+//     loose "dword==td_rva -> COL -> vtable" search hits a FALSE POSITIVE there
+//     (e.g. 0x1821cd728: get_qword(vt-8) is a function not a COL, and slots 16/44
+//     are buff ??_R4 COLs). ALWAYS certify a candidate node vtable: COL sig==1 AND
+//     the COL type-descriptor name matches the expected class AND no slot is a
+//     ??_R4 / non-function.  (A bare 60-slot read can over-run a short vtable into
+//     the next COL at slot ~40+, which is harmless over-read, not contamination.)
+//
 // Object layout (0x28 bytes):
 //   +0x00: I_Node vtable (60 slots)
 //   +0x08: I_DebugNode vtable (6 slots)
@@ -45,8 +72,8 @@ public:
 
     // ---- Node type & child management [6]-[9] ----
     virtual const char* GetNodeCategory() const = 0;            // [6]  "Decorator"/"Composite"/"Gate" — purecall in leaf
-    virtual uint32_t GetNodeId() const = 0;                     // [7]  returns m_nodeId
-    virtual void SetNodeId(uint32_t id) = 0;                    // [8]  writes m_nodeId
+    virtual uint32_t GetNodeId() const = 0;                     // [7]  AUDITED sub_1806F99E0: return m_nodeId(+0x18)
+    virtual void SetNodeId(uint32_t id) = 0;                    // [8]  AUDITED sub_1807053B0: m_nodeId(+0x18)=id
     virtual int32_t GetChildCount() const = 0;                  // [9]  purecall in leaf
 
     // ---- Node properties [10]-[11] ----
@@ -92,7 +119,7 @@ public:
 
     // ---- Events [33]-[34] ----
     virtual void SendEvent(void* evtCtx, void* event) = 0;     // [33]
-    virtual void SetNodeData(void* data) = 0;                   // [34] writes m_pNodeData (+0x10)
+    virtual void SetNodeData(void* data) = 0;                   // [34] AUDITED sub_1806F8710: m_pNodeData(+0x10)=data
 
     // ---- Attributes [35]-[36] ----
     virtual void* GetNodeAttributes() const = 0;                // [35] lazy-load, cached at +0x20
@@ -101,7 +128,7 @@ public:
     // ---- Event handling [37]-[39] ----
     virtual void HandleEvent(void* ctx, void* event) = 0;       // [37]
     virtual void unk_38() = 0;                                  // [38]
-    virtual E_NodeStatus Tick(void* updateCtx) = 0;             // [39] main entry point
+    virtual E_NodeStatus Tick(void* updateCtx) = 0;             // [39] [UNAUDITED] clean-vt slot = sub_181538D2C (StringHash + vfunc[+0x130]); "Tick" label NOT confirmed
 
     // ---- Additional queries [40]-[46] ----
     virtual void unk_40() = 0;                                  // [40] differs per base

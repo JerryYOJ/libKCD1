@@ -16,6 +16,8 @@
 //   wh::combatmodule::C_CombatScene::GetInstance()   — combatmodule/C_CombatScene.h
 //   wh::combatmodule::S_CombatSettings::GetInstance() — combatmodule/S_CombatSettings.h
 //   wh::rpgmodule::C_BuffManager::GetInstance()        — rpgmodule/buff/C_BuffManager.h
+//   wh::rpgmodule::S_RpgParamValues::Get()             — rpgmodule/S_RpgParams.h
+//   wh::rpgmodule::S_RpgParamDefs::Get()               — rpgmodule/S_RpgParams.h
 
 namespace Offsets {
 
@@ -29,6 +31,7 @@ inline static constexpr uintptr_t kCUIManagerOffset         = 0x2F77888;
 inline static constexpr uintptr_t kGameContextOffset        = 0x4FFD10;
 inline static constexpr uintptr_t kCombatSettingsOffset     = 0x36DD8A0;
 inline static constexpr uintptr_t kRPGParamsOffset          = 0x35004A0;
+inline static constexpr uintptr_t kRPGParamDefsOffset       = 0x29C95D0;
 inline static constexpr uintptr_t kActionTypeDbOffset       = 0x359B1E0;
 inline static constexpr uintptr_t kBuffManagerOffset        = 0x3500F10;
 inline static constexpr uintptr_t kCreateAndDispatchOffset  = 0x460934;

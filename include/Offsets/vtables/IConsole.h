@@ -82,7 +82,7 @@ struct IConsole {
     virtual void _vf6() = 0;                                                                           // [6]  0x30
     virtual ICVar* RegisterCVarStr(const char* name, const char** src, const char* defaultValue, int nFlags = 0, const char* help = "", ConsoleVarFunc pChangeFunc = nullptr, bool allowModify = true) = 0; // [7]  0x38
     virtual ICVar* RegisterCVarInt(const char* name, int* src, int defaultValue, int nFlags = 0, const char* help = "", ConsoleVarFunc pChangeFunc = nullptr, bool allowModify = true) = 0;                // [8]  0x40
-    virtual void _vf9() = 0;                                                                           // [9]  0x48
+    virtual ICVar* RegisterCVarFloat(const char* name, float* src, float defaultValue, int nFlags = 0, const char* help = "", ConsoleVarFunc pChangeFunc = nullptr, bool allowModify = true) = 0; // [9]  0x48  sub_180ED364C, creates CXConsoleVariableFloatRef
     virtual void UnregisterVariable(const char* name, bool bDelete = false) = 0;                        // [10] 0x50
     virtual void _vf11() = 0;                                                                          // [11] 0x58
     virtual void AddOutputPrintSink(IOutputPrintSink* sink) = 0;                                        // [12] 0x60

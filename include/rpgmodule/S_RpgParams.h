@@ -41,7 +41,7 @@ struct S_RpgParamValues {
         float   asFloat[640];
         int32_t asInt[640];
     };
-    static S_RpgParamValues* Get() { return (S_RpgParamValues*)0x1835004A0; }
+    static S_RpgParamValues* Get();  // Offsets::GetBase() + kRPGParamsOffset
 };
 static_assert(sizeof(S_RpgParamValues) == 0xA00);
 
@@ -67,6 +67,12 @@ static_assert(sizeof(S_RPGParamDef) == 0x28);
 // 640 named S_RPGParamDef members extracted from binary .data section.
 
 struct S_RpgParamDefs {
+    static S_RpgParamDefs* Get();  // Offsets::GetBase() + kRPGParamDefsOffset
+
+    static constexpr int kParamCount = 640;
+    S_RPGParamDef* begin() { return &AttackStamModMin; }
+    S_RPGParamDef* end()   { return &AttackStamModMin + kParamCount; }
+
     S_RPGParamDef AttackStamModMin;
     S_RPGParamDef AttackRequiredStamRatio;
     S_RPGParamDef BaseAttackStaminaCost;

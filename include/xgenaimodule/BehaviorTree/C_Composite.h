@@ -4,11 +4,14 @@
 #include <vector>
 #include "C_Node.h"
 #include "C_NodeWrapper.h"
+#include "C_NodeContext.h"   // S_BaseNodeContext (canonical definition)
 
 namespace wh::xgenaimodule::BehaviorTree {
 
-struct S_BaseNodeContext {};
-struct S_SwitchBaseContext {};
+// NOTE: S_BaseNodeContext is defined canonically in C_NodeContext.h (the
+// runtime-data layer). It was previously RE-defined here, which is an ODR
+// violation when both headers are co-included. Removed; use the include above.
+struct S_SwitchBaseContext {};   // canonical home (switch-base runtime ctx)
 
 // ---------------------------------------------------------------------------
 // C_Composite — native multi-child base (directly inherits C_Node).
