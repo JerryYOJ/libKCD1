@@ -1,6 +1,8 @@
 #pragma once
 #include <cstdint>
 
+typedef unsigned int EntityId;
+
 // -----------------------------------------------
 // IGameFramework — Binary vtable order (interfuscated)
 // -----------------------------------------------
@@ -24,7 +26,6 @@
 struct IActor;
 struct IEntity;
 struct IActorSystem;
-typedef unsigned int EntityId;
 
 // Action event dispatched to IGameFrameworkListeners via OnActionEvent.
 // Types observed from CCryAction::SaveGame (sub_181893C1C) and LoadGame (sub_181886648).

@@ -54,6 +54,11 @@ class C_Actor : public Offsets::IActor,                    // +0x00  (0x40 bytes
                 public Offsets::IGameObjectProfileManager   // +0x48  (0x08 bytes)
 {
 public:
+    // ---- Non-virtual methods ----
+
+    // sub_1803A107C: returns m_pCombatActor, creating it if null (lazy init).
+    wh::combatmodule::C_CombatActor* GetOrCreateCombatActor();
+
     // ===================================================================
     // Data members (+0x50 onwards, after MI base classes)
     // Base class data at +0x08..+0x3F (IActor: weak_ptr, distributer,

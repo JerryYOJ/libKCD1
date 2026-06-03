@@ -23,13 +23,7 @@ struct S_SwitchBaseContext {};   // canonical home (switch-base runtime ctx)
 class C_Composite : public C_Node {
 public:
     const char* GetNodeCategory() const override { return "Composite"; } // [6]
-
-    void TerminateChildren() override;          // [53]
-    void unk_55() override;                     // [55]
-    void unk_56() override;                     // [56]
-    void OnSuspend() override;                  // [57]
-    void OnResume() override;                   // [58]
-    void OnAbort() override;                    // [59]
+    bool        IsComposite()     const override { return true; }        // [10] manages N children
 
     std::vector<I_Node*> m_children;            // +0x28  child node array (0x18)
 };

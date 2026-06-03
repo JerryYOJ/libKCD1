@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include "E_DerivedStat.h"
 
 // -----------------------------------------------
 // I_Soul -- Soul interface (pure virtual)
@@ -79,8 +80,8 @@ public:
     virtual float GetRpgParamByState(int state) { return 0.0f; } // [45] 0x180229e78 — returns rpg_params by state index
     virtual void vf46() {}                            // [46] 0x180284368
     virtual float GetModifiedStatValue(int id) { return 0.0f; } // [47] 0x180229880 — walks buff list, applies modifiers
-    virtual float GetDerivedStat(int index) { return 0.0f; } // [48] 0x180339650 — simple derived stat
-    virtual float GetDerivedStatFull(int index) { return 0.0f; } // [49] 0x180339980 — full computation (big switch)
+    virtual float GetDerivedStat(E_DerivedStat index) { return 0.0f; } // [48] 0x180339650 — simple derived stat
+    virtual float GetDerivedStatFull(E_DerivedStat index) { return 0.0f; } // [49] 0x180339980 — full computation (big switch over E_DerivedStat)
     virtual void vf50() {}                            // [50] 0x1811f60ac
     virtual void vf51() {}                            // [51] 0x1811f6b5c
     virtual void vf52() {}                            // [52] 0x180228a54

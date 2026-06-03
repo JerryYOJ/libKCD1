@@ -28,7 +28,7 @@ inline static constexpr uintptr_t kGEnvOffset              = 0x29D16B8;
 inline static constexpr uintptr_t kCCryActionOffset         = 0x3785D88;
 inline static constexpr uintptr_t kRPGModuleOffset          = 0x35AC728;
 inline static constexpr uintptr_t kCUIManagerOffset         = 0x2F77888;
-inline static constexpr uintptr_t kGameContextOffset        = 0x4FFD10;
+inline static constexpr uintptr_t kGameContextOffset        = 0x34FFD10;
 inline static constexpr uintptr_t kCombatSettingsOffset     = 0x36DD8A0;
 inline static constexpr uintptr_t kRPGParamsOffset          = 0x35004A0;
 inline static constexpr uintptr_t kRPGParamDefsOffset       = 0x29C95D0;
@@ -42,6 +42,9 @@ inline static constexpr uintptr_t kInputClassIdBase         = 0x359C2F0;
 inline static constexpr uintptr_t kExecuteSaveOffset        = 0xF095F0; // C_PlayerProfileWHManager::ExecuteSave
 inline static constexpr uintptr_t kSaveGameToSlotOffset     = 0xF12D64; // C_SaveGameManager::SaveGameToSlot
 inline static constexpr uintptr_t kWriteSaveFileOffset      = 0xF0F088; // C_SaveGameManager::WriteSaveFile
+inline static constexpr uintptr_t kGetOrCreateCombatActorOffset = 0x3A107C; // C_Actor::GetOrCreateCombatActor
+inline static constexpr uintptr_t kItemGetRuntimeDataOffset  = 0x6B2D8C; // C_Item::GetRuntimeData  (get-or-create the +0x40 primary ExtraProperties)
+inline static constexpr uintptr_t kItemSetRuntimeDataOffset  = 0x4544CC; // C_Item::SetRuntimeData  (+0xC0 keyed table; runs the record Clone/Release)
 
 // CryAction has no RE'd header — getter stays here
 IGameFramework* GetCCryAction();

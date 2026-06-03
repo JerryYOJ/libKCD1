@@ -68,6 +68,25 @@
 //   no standalone code, no data members. The cast is fully inlined at every node
 //   Update/OnInitialize call site (runtimeData passed as void* and used directly
 //   as TContext*).
+//
+//  ── EXECUTION-STATE / STATUS model (core-engine RE 2026-06, see I_Node.h) ────
+//   A node's per-instance EXECUTION STATUS is a single E_NodeStatus byte read by
+//   I_Node::GetStatus (slot16) from runtimeData+0x08, where
+//       runtimeData = GetCreator()->[+0x48][m_nodeId]
+//   i.e. the creator/tree-instance owns an array of per-node runtime records at
+//   +0x48 (begin) .. +0x50 (end), indexed by m_nodeId; I_Node::AcquireRuntimeData
+//   (slot12) allocates a record from an FNV-1a-keyed global pool on node enter and
+//   ReleaseRuntimeData (slot13) frees it on leave. GetTree (slot4) returns
+//   creator->[+0x78] (the tree-instance/blackboard root).
+//   [OPEN/UNVERIFIED] reconciliation: it is NOT yet proven whether this creator
+//   +0x48 runtime-record array is the SAME storage as a node's
+//   C_NodeContextPool::m_pContexts (the TContext gameplay-state pool below) or a
+//   SEPARATE engine-managed status array. Evidence pulls both ways: some TContext
+//   types (e.g. S_AddBuffContext) carry a status byte at +0x08 matching the
+//   runtime record, yet C_NodeContextPool<S_BaseNodeContext> has stride 1 (no room
+//   for a status byte). Treat "TContext" (gameplay state, pooled here) and
+//   "runtime record" (status@+0x08, creator+0x48) as possibly-distinct until the
+//   GetContextSize→pool wiring vs the slot12 FNV pool are traced to a common base.
 // ============================================================================
 #pragma once
 #include <cstdint>

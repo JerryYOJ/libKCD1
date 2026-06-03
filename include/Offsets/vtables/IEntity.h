@@ -1,5 +1,7 @@
 #pragma once
 #include <cstdint>
+
+typedef unsigned int EntityId;
 #include "IScriptTable.h"
 
 // -----------------------------------------------
@@ -22,7 +24,6 @@ struct IEntityProxy;
 struct Matrix34;
 struct Vec3;
 struct Quat;
-typedef unsigned int EntityId;
 
 namespace Offsets {
 

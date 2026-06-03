@@ -1,6 +1,8 @@
 #pragma once
 #include <cstdint>
 
+typedef unsigned int EntityId;
+
 // -----------------------------------------------
 // IActorSystem -- Binary vtable order (interfuscated)
 // -----------------------------------------------
@@ -30,7 +32,6 @@ struct IActor;
 struct IActorIterator;
 struct IItemParamsNode;
 struct IEntityClass;
-typedef unsigned int EntityId;
 
 namespace Offsets {
 

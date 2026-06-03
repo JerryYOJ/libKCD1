@@ -20,6 +20,7 @@ namespace wh::framework {
     class C_ModulesManager;
 }
 namespace wh::combatmodule { class C_CombatModule; }
+namespace wh::entitymodule { class C_Actor; }
 namespace wh::rpgmodule { class C_RPGModule; }
 namespace wh::playermodule { class C_PlayerModule; }
 namespace wh::questmodule { class C_QuestModule; }
@@ -73,6 +74,11 @@ struct S_GameContext {
     char                                    _pad130[0x40];              // +0x130
 
     static S_GameContext* GetInstance();
+
+    // Convenience: look up an actor by EntityId and cast to C_Actor.
+    // Uses m_pActorSystem->GetActor() + reinterpret_cast.
+    // Returns nullptr if the actor doesn't exist.
+    wh::entitymodule::C_Actor* GetActorById(EntityId entityId);
 };
 static_assert(sizeof(S_GameContext) == 0x170);
 

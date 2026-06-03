@@ -12,8 +12,14 @@
 // AddStatXP:   S_PerkSubsystem::AddStatXP_18118F5F0
 // Size: 0x260 per instance
 //
-// Stat instance at:  soul + 0x4A8
-// Skill instance at: soul + 0x750
+// Two instances are embedded in S_PerkManagement (same type):
+//   soul + 0x4A8 = m_activePerks — LIVE/runtime; holds BOTH stat AND skill levels + the
+//                                  live perk-point counter (queried, XP'd, learned, saved).
+//   soul + 0x750 = m_basePerks   — archetype-derived BASELINE; rebuilt from base stats +
+//                                  perk/skill tables, then committed wholesale into
+//                                  m_activePerks at create/reset/clone. See S_PerkManagement.h.
+// NOTE: m_statLevels and m_skillLevels below BOTH live in EACH instance — a single
+//       S_PerkSubsystem carries both arrays; the split is by array, not by instance.
 
 namespace wh::rpgmodule {
 
@@ -24,7 +30,7 @@ struct S_PerkSubsystem {
     uint8_t         m_bInitialized;         // +0x008  flag (=1)
     char            _pad009[3];             // +0x009
     // Stat level/XP pairs — indexed by stat_id (0=STR,1=AGI,2=VIT,3=SPC, 4-9 unused)
-    // Access pattern: soul->m_perkMgmt.m_statPerks.m_statLevels[stat_id].level
+    // Access pattern: soul->m_perkMgmt.m_activePerks.m_statLevels[stat_id].level
     //   Confirmed in C_StatXPEffect::Apply reading *(soul + 8*stat_id + 0x4B4)
     struct S_StatEntry {
         uint32_t    level;      // current stat level

@@ -15,18 +15,10 @@ namespace wh::xgenaimodule::BehaviorTree {
 class C_Decorator : public C_Node {
 public:
     const char* GetNodeCategory() const override { return "Decorator"; } // [6]
-    int32_t GetChildCount() const override { return 1; }                 // [9]
+    int32_t     GetChildCount()   const override { return 1; }           // [9]  single child
+    bool        IsComposite()     const override { return true; }        // [10] has a managed child
 
-    void OnChildInitialized() override;         // [47]
-    void OnUpdate(void*) override;              // [49]
-    void TerminateChildren() override;          // [53]
-    void unk_55() override;                     // [55]
-    void unk_56() override;                     // [56]
-    void OnSuspend() override;                  // [57]
-    void OnResume() override;                   // [58]
-    void OnAbort() override;                    // [59]
-
-    I_Node*     m_pChild;       // +0x28  single child node
+    I_Node*     m_pChild;       // +0x28  single child node (driven via StartChild [49])
 };
 static_assert(sizeof(C_Decorator) == 0x30);
 

@@ -13,6 +13,7 @@
 #include "C_CombatComboManager.h"
 #include "S_CombatActorState.h"
 #include "I_CombatTarget.h"
+#include "C_CombatActorHuntAttack.h"
 
 namespace wh::entitymodule {
 enum E_HandSlot : int32_t;
@@ -24,6 +25,9 @@ namespace wh::combatmodule {
 class C_CombatScene;
 class I_CombatActorAction;
 class C_CombatActorActionManager;
+class C_CombatActorHorsePullDown;
+class C_CombatActorMercyKill;
+class C_CombatActorHuntAttack;
 struct S_HitInfo;
 struct S_MeleeHitDetails;
 
@@ -191,7 +195,7 @@ public:
     void unk_4() override {}                                                // [4] sub_1805637FC
     void unk_5() override {}                                                // [5] sub_180563F10
     Offsets::IEntity* GetEntity() const override { return m_pEntity; }       // [6] sub_18045E1C0
-    uint32_t GetEntityId() const override { return 0; }                     // [7] sub_180695320
+    EntityId GetEntityId() const override { return 0; }                     // [7] sub_180695320
     void unk_8() override {}                                                // [8] sub_1804576A8
     void unk_9() override {}                                                // [9] sub_18045883C
     void unk_10() override {}                                               // [10] sub_180F49204
@@ -421,10 +425,11 @@ public:
     // +0x4A0: entity pointer (ctor arg2)
     Offsets::IEntity*       m_pEntity;              // +0x4A0
 
-    // +0x4A8: Combat actor state subsystem (0xD8 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FD214, alloc 0xD8.
+    // +0x4A8: C_CombatActorDirector (0xD8 bytes)
+    // VERIFIED RTTI: sub_1805FD214 writes C_CombatActorDirector vftable at +0x00
+    //   AND at +0xB0 (MI — C_CombatActorObject embedded at +0xB0).
     // Used by action system: C_Action constructor stores this as owner ptr.
-    void*                   m_pStateSubsystem;      // +0x4A8  (sub_1805FD214, 0xD8 bytes)
+    void*                   m_pDirector;            // +0x4A8  C_CombatActorDirector
 
     // +0x4B0: C_CombatScene pointer (ctor arg3)
     C_CombatScene*          m_pCombatScene;         // +0x4B0
@@ -433,48 +438,48 @@ public:
     // See S_CombatActorState.h for full layout (0xD08 bytes).
     S_CombatActorState*     m_pState;               // +0x4B8
 
-    // +0x4C0: Combat model/director subsystem (0x2B8 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FCC30.
-    void*                   m_pModelDirector;       // +0x4C0  (sub_1805FCC30, 0x2B8 bytes)
+    // +0x4C0: C_CombatActorCollisions (0x2B8 bytes)
+    // VERIFIED RTTI: sub_1805FCC30 writes C_CombatActorCollisions vftable.
+    void*                   m_pCollisions;          // +0x4C0  C_CombatActorCollisions
 
-    // +0x4C8: Combat trigger subsystem (0x50 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FCE60.
-    void*                   m_pTriggerSubsystem;    // +0x4C8  (sub_1805FCE60, 0x50 bytes)
+    // +0x4C8: C_CombatActorAnimCollisions (0x50 bytes)
+    // VERIFIED RTTI: sub_1805FCE60 writes C_CombatActorAnimCollisions vftable.
+    void*                   m_pAnimCollisions;      // +0x4C8  C_CombatActorAnimCollisions
 
     // +0x4D0: Per-actor data block (0x30 bytes, back-ptr + 5 zeroed qwords)
     // VERIFIED: inline alloc in sub_1805FDC88.
     void*                   m_pCombatData4D0;       // +0x4D0
 
-    // +0x4D8: Combat alignment subsystem (0x20 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FD4A8.
-    void*                   m_pAlignmentSubsystem;  // +0x4D8  (sub_1805FD4A8, 0x20 bytes)
+    // +0x4D8: C_CombatEffects (0x20 bytes)
+    // VERIFIED RTTI: sub_1805FD4A8 writes C_CombatEffects vftable.
+    void*                   m_pEffects;             // +0x4D8  C_CombatEffects
 
-    // +0x4E0: Combat controller subsystem (0x50 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FD578.
-    void*                   m_pControllerSubsystem; // +0x4E0  (sub_1805FD578, 0x50 bytes)
+    // +0x4E0: C_CombatActorRestriction (0x50 bytes)
+    // VERIFIED RTTI: sub_1805FD578 writes C_CombatActorRestriction vftable.
+    void*                   m_pRestriction;         // +0x4E0  C_CombatActorRestriction
 
-    // +0x4E8: Combat mechanic subsystem (0x70 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FD5F4.
-    void*                   m_pMechanicSubsystem;   // +0x4E8  (sub_1805FD5F4, 0x70 bytes)
+    // +0x4E8: C_CombatEnvironmentManager (0x70 bytes)
+    // VERIFIED RTTI: sub_1805FD5F4 writes C_CombatEnvironmentManager vftable.
+    void*                   m_pEnvironmentManager;  // +0x4E8  C_CombatEnvironmentManager
 
     // +0x4F0: (UNVERIFIED purpose, zeroed in constructor)
     uint64_t                m_unknown4F0;           // +0x4F0
 
-    // +0x4F8: Combat restriction subsystem (0x10 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FD2B4.
-    void*                   m_pRestrictionSubsystem;// +0x4F8  (sub_1805FD2B4, 0x10 bytes)
+    // +0x4F8: C_CombatAlignmentManager (0x10 bytes)
+    // VERIFIED RTTI: sub_1805FD2B4 writes C_CombatAlignmentManager vftable.
+    void*                   m_pAlignmentManager;    // +0x4F8  C_CombatAlignmentManager
 
-    // +0x500: Combat debug subsystem (0x28 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FD954.
-    void*                   m_pDebugSubsystem;      // +0x500  (sub_1805FD954, 0x28 bytes)
+    // +0x500: C_CombatActorVirtualWeapon (0x28 bytes)
+    // VERIFIED RTTI: sub_1805FD954 writes C_CombatActorVirtualWeapon vftable.
+    void*                   m_pVirtualWeapon;       // +0x500  C_CombatActorVirtualWeapon
 
-    // +0x508: Combat collision subsystem (0x20 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FD2FC.
-    void*                   m_pCollisionSubsystem;  // +0x508  (sub_1805FD2FC, 0x20 bytes)
+    // +0x508: C_CombatModifierAim (0x20 bytes)
+    // VERIFIED RTTI: sub_1805FD2FC writes C_CombatModifierAim vftable.
+    void*                   m_pModifierAim;         // +0x508  C_CombatModifierAim
 
-    // +0x510: Combat time manager subsystem (0x20 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FD34C.
-    void*                   m_pTimeManagerSubsystem;// +0x510  (sub_1805FD34C, 0x20 bytes)
+    // +0x510: C_CombatModifierLookEnemy (0x20 bytes)
+    // VERIFIED RTTI: sub_1805FD34C writes C_CombatModifierLookEnemy vftable.
+    void*                   m_pModifierLookEnemy;   // +0x510  C_CombatModifierLookEnemy
 
     // +0x518: state/flag region
     uint16_t                m_stateFlags518;        // +0x518  (init 0)
@@ -557,10 +562,11 @@ public:
     int32_t                 m_targetSlotCounter;    // +0x6F8  (init 0)
     uint8_t                 _pad6FC[4];             // +0x6FC
 
-    // +0x700: Combat action subsystem (0x60 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FCF10, alloc 0x60.
-    // This is the C_CombatActorUpdatedObject for main combat action management.
-    void*                   m_pActionSubsystem;     // +0x700  (sub_1805FCF10, 0x60 bytes)
+    // +0x700: C_CombatRPG (0x60 bytes)
+    // VERIFIED RTTI: sub_1805FCF10 writes C_CombatRPG vftable.
+    // Holds RPG tuning curve (skill levels 2/3/4 -> 0.0/0.5/1.0) used by
+    // hunt-attack / action probability checks.
+    void*                   m_pCombatRPG;           // +0x700  C_CombatRPG
 
     // +0x708: Action distance check data (0x10 bytes)
     // VERIFIED: alloc 0x10 in sub_1805FDC88, stores {actor_ptr, float 0.3f}
@@ -571,9 +577,10 @@ public:
     // VERIFIED: alloc 0x18 in sub_1805FDC88, vtable = C_CombatHumanPhysics.
     void*                   m_pHumanPhysics;        // +0x710  C_CombatHumanPhysics
 
-    // +0x718: Unknown subsystem (0x20 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FCEBC, alloc 0x20.
-    void*                   m_pSubsystem718;        // +0x718  (sub_1805FCEBC, 0x20 bytes)
+    // +0x718: Combat state-signal listener (0x20 bytes, NON-polymorphic)
+    // VERIFIED: sub_1805FCEBC writes NO vtable — stores {actor, sub-object, 0}
+    // and connects callback sub_18054C73C to state signal (state+0x4B8).
+    void*                   m_pStateListener718;    // +0x718  (sub_1805FCEBC, 0x20 bytes)
 
     // +0x720: C_CombatActorActionManager (0x60 bytes)
     // VERIFIED: created in sub_1805FDC88 via sub_1805FD39C.
@@ -591,38 +598,42 @@ public:
     // Subsystem ID: COMBAT_SUB_COMBO_MANAGER (0x10)
     C_CombatComboManager*   m_pComboManager;        // +0x728  (0x230 bytes)
 
-    // +0x730: Combat environment/collision manager (0x40 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FD660, alloc 0x40.
-    void*                   m_pEnvManager;          // +0x730  (sub_1805FD660, 0x40 bytes)
+    // +0x730: C_CombatActorOpponentManager (0x40 bytes)
+    // VERIFIED RTTI: sub_1805FD660 writes C_CombatActorOpponentManager vftable.
+    void*                   m_pOpponentManager;     // +0x730  C_CombatActorOpponentManager
 
-    // +0x738: Combat weapon solver (0x78 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FD6D4, alloc 0x78.
-    void*                   m_pWeaponSolver;        // +0x738  (sub_1805FD6D4, 0x78 bytes)
+    // +0x738: C_CombatActorTimeCop (0x78 bytes)
+    // VERIFIED RTTI: sub_1805FD6D4 writes C_CombatActorTimeCop vftable.
+    void*                   m_pTimeCop;             // +0x738  C_CombatActorTimeCop
 
-    // +0x740: Combat effects subsystem (0x40 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FD784, alloc 0x40.
-    void*                   m_pEffectsSubsystem;    // +0x740  (sub_1805FD784, 0x40 bytes)
+    // +0x740: C_CombatActorTimewarp (0x40 bytes)
+    // VERIFIED RTTI: sub_1805FD784 writes C_CombatActorTimewarp vftable.
+    void*                   m_pTimewarp;            // +0x740  C_CombatActorTimewarp
 
-    // +0x748: Combat look/aim subsystem (0x20 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FD9C8, alloc 0x20.
-    void*                   m_pLookSubsystem;       // +0x748  (sub_1805FD9C8, 0x20 bytes)
+    // +0x748: C_CombatActorNextGuardSelector (0x20 bytes)
+    // VERIFIED RTTI: sub_1805FD9C8 writes C_CombatActorNextGuardSelector vftable.
+    void*                   m_pNextGuardSelector;   // +0x748  C_CombatActorNextGuardSelector
 
-    // +0x750: Combat opponent manager (0x80 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FD7C8, alloc 0x80.
-    void*                   m_pOpponentManager;     // +0x750  (sub_1805FD7C8, 0x80 bytes)
+    // +0x750: C_CombatActorStealth (0x80 bytes)
+    // VERIFIED RTTI: sub_1805FD7C8 writes C_CombatActorStealth vftable.
+    void*                   m_pStealth;             // +0x750  C_CombatActorStealth
 
-    // +0x758: Combat stealth subsystem (0x20 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FD884, alloc 0x20.
-    void*                   m_pStealthSubsystem;    // +0x758  (sub_1805FD884, 0x20 bytes)
+    // +0x758: C_CombatActorHorsePullDown (0x20 bytes, subsystem 0x1B "HORSE_PULLDOWN")
+    // VERIFIED RTTI: sub_1805FD884 writes C_CombatActorHorsePullDown vftable
+    //   (primary 0x1821CB328, secondary I_CombatActorHorsePullDown 0x1821CB360).
+    C_CombatActorHorsePullDown* m_pHorsePullDown;   // +0x758
 
-    // +0x760: Combat horse pulldown subsystem (0x20 bytes)
-    // VERIFIED: created in sub_1805FDC88 via sub_1805FD8B8, alloc 0x20.
-    void*                   m_pHorsePulldown;       // +0x760  (sub_1805FD8B8, 0x20 bytes)
+    // +0x760: C_CombatActorMercyKill (0x20 bytes, subsystem 0x1D "MERCY_KILL")
+    // VERIFIED RTTI: sub_1805FD8B8 writes C_CombatActorMercyKill vftable.
+    //   primary 0x1821CB3D8, secondary 0x1821CB410 (I_CombatActorMercyKill):
+    //   [0] dtor [1] CanMercyKill [2] RequestMercyKill
+    C_CombatActorMercyKill*     m_pMercyKillSubsystem; // +0x760
 
-    // +0x768: Combat mercy kill subsystem (0x20 bytes)
+    // +0x768: Combat hunt attack subsystem (0x20 bytes)
     // VERIFIED: created in sub_1805FDC88 via sub_1805FD924, alloc 0x20.
-    // UNVERIFIED: exact subsystem identity; inferred from enum position.
-    void*                   m_pMercyKillSubsystem;  // +0x768  (sub_1805FD924, 0x20 bytes)
+    // VERIFIED vtable 0x1821CB3B8 (I_CombatActorHuntAttack):
+    //   [0] dtor  [1] TryHuntAttack (sub_180639804)  [2] Request (sub_18063A428)
+    C_CombatActorHuntAttack* m_pHuntAttackSubsystem; // +0x768  C_CombatActorHuntAttack
 
     uint16_t                m_flags770;             // +0x770  (init 0x101)
     uint8_t                 _pad772[2];             // +0x772

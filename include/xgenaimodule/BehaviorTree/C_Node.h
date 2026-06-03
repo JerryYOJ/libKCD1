@@ -12,44 +12,25 @@ namespace wh::xgenaimodule::BehaviorTree {
 // RTTI: .?AVC_Node@BehaviorTree@xgenaimodule@wh@@
 // Size: 0x28 bytes
 //
-// Leaf node — [6] GetNodeCategory and [9] GetChildCount are purecall.
-// Child lifecycle callbacks [47]-[52] are guard_nop (no children to manage).
-// Child control [53]-[56] are guard_nop.
+// C_Node is the concrete leaf base: in the binary it supplies the shared I_Node
+// implementations (status FSM, runtime-data acquire/release, node-data/creator
+// accessors — all documented per-slot in I_Node.h). A leaf has no children, so
+// [6] GetNodeCategory / [9] GetChildCount stay pure (concrete nodes provide
+// them), [10] IsComposite is false, and the child-management hooks ([49]
+// StartChild, [53] ResetChildren, …) are nops. We model only the VERIFIED data
+// layout + the verified IsComposite override here, rather than re-declaring every
+// shared slot with a guessed name (their per-slot identities are catalogued in
+// I_Node.h with confidence tags).
 // ---------------------------------------------------------------------------
 class C_Node : public I_Node, public I_DebugNode {
 public:
-    // ---- I_Node overrides ----
-    void Terminate() override {}                                    // [2]  nop
-    bool IsAction() const override { return false; }                // [10]
-    bool IsValid() const override { return true; }                  // [29]
-    bool IsLeaf() const override { return false; }                  // [31]
-    bool unk_44() const override { return false; }                  // [44]
+    bool IsComposite() const override { return false; }   // [10] VERIFIED base = false (leaf)
 
-    // [6]  GetNodeCategory — purecall (leaf has no category string)
-    // [9]  GetChildCount   — purecall (leaf has no children)
-
-    // Child lifecycle callbacks — nop in leaf (no children)
-    void OnChildInitialized() override {}                           // [47]
-    void OnFirstUpdate(void*) override {}                           // [48]
-    void OnUpdate(void*) override {}                                // [49]
-    void OnRunning(void*) override {}                               // [50]
-    void OnSuspended(void*) override {}                             // [51]
-    void OnCompleted() override {}                                  // [52]
-
-    // Child control — nop in leaf
-    void TerminateChildren() override {}                            // [53]
-    void unk_55() override {}                                       // [55]
-    void unk_56() override {}                                       // [56]
-
-    // Suspend/Abort callbacks — nop in leaf
-    void OnResume() override {}                                     // [58]
-    void OnAbort() override {}                                      // [59]
-
-    // ---- Data members ----
-    void*       m_pNodeData;    // +0x10  set by SetNodeData [34]
-    uint32_t    m_nodeId;       // +0x18  set by SetNodeId [8], read by GetNodeId [7]
+    // ---- Data members (VERIFIED from node ctors) ----
+    void*       m_pNodeData;    // +0x10  [32]/[33] GetNodeData, [34] SetNodeData
+    uint32_t    m_nodeId;       // +0x18  [7] GetNodeId, [8] SetNodeId
     uint32_t    _pad1C;         // +0x1C
-    void*       m_pCreator;     // +0x20  INodeCreator*, lazy-loaded by GetNodeAttributes [35]
+    void*       m_pCreator;     // +0x20  lazily-cached creator/owning-context ([35] GetCreator)
 };
 static_assert(sizeof(C_Node) == 0x28);
 

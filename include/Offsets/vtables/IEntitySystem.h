@@ -1,5 +1,7 @@
 #pragma once
 #include <cstdint>
+
+typedef unsigned int EntityId;
 #include "IEntity.h"
 
 // -----------------------------------------------
@@ -17,7 +19,6 @@
 struct SEntitySpawnParams;
 struct IEntityIt;
 struct ICrySizer;
-typedef unsigned int EntityId;
 typedef uint64_t EntityGUID;
 
 namespace Offsets {

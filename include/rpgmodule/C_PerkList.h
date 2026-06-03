@@ -11,8 +11,11 @@
 // Constructor: within S_PerkSubsystem::Ctor_1804A2090 (at subsystem + 0x1E8)
 // Destructor:  C_PerkList::Dtor_1804A2C3C  (NON-virtual)
 //
-// Stat instance lives at:  soul + 0x690
-// Skill instance lives at: soul + 0x938
+// Active instance lives at: soul + 0x690  (inside m_activePerks; the one GetActivePerkList returns,
+//                                          holding the live learned/candidate perks + the live counter)
+// Base instance lives at:   soul + 0x938  (inside m_basePerks — the archetype baseline; its perks are
+//                                          repopulated during the base->active recompute and copied into
+//                                          the active list via sub_18044A8F0, not allocated via the enable helper)
 //
 // Key methods (RTTI-verified):
 //   RecalcPerkPoints_1805D2C74  — vfunc[0], creates C_StatXPEffect + C_SkillXPEffect
