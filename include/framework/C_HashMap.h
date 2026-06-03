@@ -1,54 +1,152 @@
 #pragma once
 #include <cstdint>
+#include <cstring>
 
-// -----------------------------------------------
-// C_HashMap — Warhorse custom hash map
-// -----------------------------------------------
-// NOT std::unordered_map (field order differs: load factor is first, not last).
-// Same concept: chained bucket hash map with a linked list of all elements.
+// ===========================================================================
+// C_HashMap<K, V, Hash> — Warhorse custom chained hash map.
 //
-// Used by the engine-wide type registry, C_BuffManager, and likely other modules.
+// Reverse-engineered from WHGame.dll (KCD1 retail, imagebase 0x180000000).
+// Namespace wh::shared (inferred from usage — no RTTI on the map itself).
 //
-// Hash map init: sub_18071265C(map, bucket_count)
-// Node create:   sub_180DA8038(map, prev, next, {key, value})
-// Find:          sub_180209AE4(map, outRange, hashKey)
-// Insert:        sub_180DA821C(map, temp, {key, value})
+// STRUCTURE (0x40 bytes, verified from ctors sub_180F39820 / sub_180F993F0):
+//   Chained hash map with a circular doubly-linked sentinel node.
+//   Buckets are pairs of node pointers {pFirst, pBound} stored in a
+//   power-of-2-sized array. The sentinel serves as both end-of-list
+//   and empty-bucket marker.
+//
+// DEFAULT HASH: FNV-1a 64-bit (basis 0xCBF29CE484222325, prime 0x100000001B3),
+//   byte-by-byte over sizeof(K) raw bytes of the key.
+// COMPOSITE KEYS use boost::hash_combine to fold multiple field hashes
+//   (override via the Hash template param).
+// BUCKET SELECTION: Hash{}(key) & m_mask.
+// COLLISION RESOLUTION: chained via prev/next on each node; walk within the
+//   bucket until pBound, compare keys by operator==.
+//
+// VERIFIED FUNCTIONS:
+//   ctor (0x40 init):   sub_180F39820 / sub_180F993F0
+//   bucket array alloc: sub_18071265C(map, bucketCount)
+//   sentinel alloc:     sub_1807125EC (sizeof(Node)==0x20) /
+//                       sub_180731290 (sizeof(Node)==0x18)
+//   hash FNV-1a 64:     sub_1804BF50C(_, &key, sizeof(K))
+//   hash FNV-1  32:     sub_1802540B4(const char*)  (null-terminated string)
+//   hash_combine:       boost pattern: seed ^= value + 0x9E3779B9 + (seed<<6) + (seed>>2)
+//   find:               sub_180209AE4(map, outRange, &key)
+//   insert:             sub_180DA821C(map, outResult, &{key,value})
+//   node create:        sub_180DA8038(map, prev, next, &{key,value})
+//   bucket resolve:     sub_180207188(map, out, bucketIdx)
+//   insert+rebalance:   sub_180DA8094(map, out, &key, &node)
+//   rehash:             sub_180DA8840(map)
+// ===========================================================================
 
 namespace wh::shared {
 
-template<typename V>
-struct S_HashMapNode {
-    S_HashMapNode*  pPrev;          // +0x00
-    S_HashMapNode*  pNext;          // +0x08
-    uint64_t        key;            // +0x10  hash key (FNV-1a or similar)
-    V               value;          // +0x18
-};
-static_assert(sizeof(S_HashMapNode<void*>) == 0x20);
+// ---------------------------------------------------------------------------
+// Hash primitives (verified from binary)
+// ---------------------------------------------------------------------------
 
-template<typename V>
-struct S_HashMapBucket {
-    using Node = S_HashMapNode<V>;
-    Node*  pFirst;  // +0x00  first node in bucket (sentinel if empty)
-    Node*  pEnd;    // +0x08  past-the-end boundary for iteration
-};
-static_assert(sizeof(S_HashMapBucket<void*>) == 0x10);
+// FNV-1a 64-bit — the engine's default hash for typed keys.
+// Hashes sizeof(K) raw bytes. (sub_1804BF50C)
+inline uint64_t fnv1a(const void* data, size_t len) {
+    uint64_t h = 0xCBF29CE484222325ULL;
+    auto p = static_cast<const uint8_t*>(data);
+    for (size_t i = 0; i < len; ++i)
+        h = (h ^ p[i]) * 0x100000001B3ULL;
+    return h;
+}
 
-template<typename V>
+// FNV-1 32-bit — the engine's hash for null-terminated strings.
+// (sub_1802540B4)
+inline uint32_t fnv1_32(const char* str) {
+    uint32_t h = 0x811C9DC5u;
+    while (*str)
+        h = (h * 0x01000193u) ^ static_cast<uint8_t>(*str++);
+    return h;
+}
+
+// boost::hash_combine — used by the engine to fold multiple hashes into one.
+// Verified from disasm at 0x1815d4042-0x1815d406d.
+inline uint64_t hash_combine(uint64_t seed, uint64_t value) {
+    seed ^= value + 0x9E3779B9ULL + (seed << 6) + (seed >> 2);
+    return seed;
+}
+
+// ---------------------------------------------------------------------------
+// Default hash functor: FNV-1a over sizeof(K) raw bytes.
+// Specialize for composite key types that need hash_combine.
+// ---------------------------------------------------------------------------
+template<typename K>
+struct S_DefaultHash {
+    uint64_t operator()(const K& key) const {
+        return fnv1a(&key, sizeof(K));
+    }
+};
+
+// ---------------------------------------------------------------------------
+// S_HashNode<K, V>
+// ---------------------------------------------------------------------------
+template<typename K, typename V>
+struct S_HashNode {
+    S_HashNode* pPrev;     // +0x00
+    S_HashNode* pNext;     // +0x08
+    K           key;       // +0x10
+    V           value;     // +0x10 + sizeof(K) (aligned)
+};
+
+template<typename K>
+struct S_HashNode<K, void> {
+    S_HashNode* pPrev;     // +0x00
+    S_HashNode* pNext;     // +0x08
+    K           key;       // +0x10
+};
+
+// ---------------------------------------------------------------------------
+// S_HashBucket<K, V>
+// ---------------------------------------------------------------------------
+template<typename K, typename V>
+struct S_HashBucket {
+    using Node = S_HashNode<K, V>;
+    Node* pFirst;          // +0x00
+    Node* pBound;          // +0x08
+};
+
+// ---------------------------------------------------------------------------
+// C_HashMap<K, V, Hash>
+// ---------------------------------------------------------------------------
+template<typename K, typename V = void, typename Hash = S_DefaultHash<K>>
 class C_HashMap {
 public:
-    using Node   = S_HashMapNode<V>;
-    using Bucket = S_HashMapBucket<V>;
+    using Node   = S_HashNode<K, V>;
+    using Bucket = S_HashBucket<K, V>;
 
-    float           m_maxLoadFactor;    // +0x00  init 1.0f
-    uint32_t        _pad04;             // +0x04
-    Node*           m_pListHead;        // +0x08  sentinel node (circular doubly-linked list)
-    int64_t         m_nCount;           // +0x10  number of stored elements
-    Bucket*         m_pBuckets;         // +0x18  bucket array begin
-    Bucket*         m_pBucketsEnd;      // +0x20  bucket array end
-    Bucket*         m_pBucketsCap;      // +0x28  bucket array capacity
-    uint64_t        m_nMask;            // +0x30  bucket_count - 1 (for power-of-2 modulo)
-    uint64_t        m_nBucketCount;     // +0x38  number of buckets
+    float       m_maxLoadFactor;  // +0x00  init 1.0f
+    uint32_t    _pad04;           // +0x04
+    Node*       m_pSentinel;      // +0x08  circular list sentinel
+    int64_t     m_count;          // +0x10  number of stored entries
+    Bucket*     m_pBuckets;       // +0x18  bucket array begin
+    Bucket*     m_pBucketsEnd;    // +0x20
+    Bucket*     m_pBucketsCap;    // +0x28
+    uint64_t    m_mask;           // +0x30  bucketCount - 1
+    uint64_t    m_bucketCount;    // +0x38
+
+    uint64_t bucket_for(const K& key) const {
+        return Hash{}(key) & m_mask;
+    }
+
+    Node* find(const K& key) const {
+        uint64_t b = bucket_for(key);
+        Node* bound = m_pBuckets[b].pBound;
+        for (Node* n = m_pBuckets[b].pFirst; n != bound; n = n->pNext) {
+            if (n->key == key)
+                return n;
+        }
+        return m_pSentinel;
+    }
+
+    Node* begin() const { return m_pSentinel->pNext; }
+    Node* end()   const { return m_pSentinel; }
+    bool  empty() const { return m_count == 0; }
 };
-static_assert(sizeof(C_HashMap<void*>) == 0x40);
+static_assert(sizeof(C_HashMap<uint64_t, void*>) == 0x40);
+static_assert(sizeof(C_HashMap<uint32_t>)        == 0x40);
 
 }  // namespace wh::shared

@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include "Offsets/Offsets.h"
+#include "framework/WuidRegistries.h"
 
 uintptr_t Offsets::GetBase() {
     static uintptr_t base = reinterpret_cast<uintptr_t>(GetModuleHandleA("WHGame.DLL"));
@@ -9,6 +10,21 @@ uintptr_t Offsets::GetBase() {
 Offsets::IGameFramework* Offsets::GetCCryAction() {
     return *reinterpret_cast<IGameFramework**>(GetBase() + kCCryActionOffset);
 }
+
+// Central WUID->C_AIObject* map: the global qword_1837999E0 holds a pointer to the heap map.
+namespace wh { namespace framework {
+C_WuidObjectMap* GetWuidObjectMap() {
+    return *reinterpret_cast<C_WuidObjectMap**>(Offsets::GetBase() + Offsets::kWuidObjectMapOffset);
+}
+
+// container WUID -> its single C_Inventory (engine sub_1815F457C; its first arg is unused).
+entitymodule::C_Inventory* GetInventoryForWuid(WUID w) {
+    void* out = nullptr;
+    using Fn = void* (__fastcall*)(const void*, void**, const WUID*);
+    reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kGetInventoryForWuidOffset)(nullptr, &out, &w);
+    return reinterpret_cast<entitymodule::C_Inventory*>(out);
+}
+}}  // namespace wh::framework
 
 #define ACTION_TYPE_GETTER(Name, Index) \
     int32_t Offsets::ActionTypeId::Name() { \

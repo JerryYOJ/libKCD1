@@ -45,6 +45,12 @@ inline static constexpr uintptr_t kWriteSaveFileOffset      = 0xF0F088; // C_Sav
 inline static constexpr uintptr_t kGetOrCreateCombatActorOffset = 0x3A107C; // C_Actor::GetOrCreateCombatActor
 inline static constexpr uintptr_t kItemGetRuntimeDataOffset  = 0x6B2D8C; // C_Item::GetRuntimeData  (get-or-create the +0x40 primary ExtraProperties)
 inline static constexpr uintptr_t kItemSetRuntimeDataOffset  = 0x4544CC; // C_Item::SetRuntimeData  (+0xC0 keyed table; runs the record Clone/Release)
+inline static constexpr uintptr_t kInventoryLookupByWUIDOffset = 0x55E7D8; // C_InventoryManager::LookupByWUID  (sub_18055E7D8; arg = this+0x10 slot table)
+inline static constexpr uintptr_t kItemLookupByWUIDOffset      = 0x454638; // C_ItemManager::LookupByWUID       (sub_180454638; arg = this+0x18 slot table)
+inline static constexpr uintptr_t kWuidObjectMapOffset         = 0x37999E0; // central WUID->C_AIObject* map (qword_1837999E0; holds a POINTER to the heap std::unordered_map)
+inline static constexpr uintptr_t kLinkablesManagerOffset      = 0x37999D8; // C_LinkablesManager ptr (qword_1837999D8; WUID->C_LinkableObject map)
+inline static constexpr uintptr_t kFindLinkableObjectOffset    = 0x24D6E4;  // sub_18024D6E4 (linkables-map find: (manager, &wuid) -> C_LinkableObject*)
+inline static constexpr uintptr_t kGetInventoryForWuidOffset   = 0x15F457C; // sub_1815F457C (container WUID -> single C_Inventory; a1 unused)
 
 // CryAction has no RE'd header — getter stays here
 IGameFramework* GetCCryAction();

@@ -25,12 +25,39 @@
 
 namespace wh { namespace framework {
 
+// WUID type, encoded in the high byte (HIBYTE) of the handle. Verified from the
+// tag->name table sub_180E6FB3C (used by the WUIDToString helper sub_180E706FC, which
+// formats "[<TypeName>-<id>]"). Tags 0 and 6 are not assigned (-> "<invalid>").
+enum class E_WUIDType : uint8_t {
+    Invalid                = 0,
+    SoulBuffInstance       = 1,
+    Item                   = 2,
+    Inventory              = 3,
+    Shop                   = 4,
+    Soul                   = 5,
+    SmartArea              = 7,
+    SmartObject            = 8,
+    Situation              = 9,
+    DynamicLinkableObject  = 10,   // refined at runtime to TagPoint/ItemSlot/Stash/Shop via the
+                                   // provider's GetClassName (classifier sub_1802D0FCC)
+    Quest                  = 11,
+    PredefinedPath         = 12,
+    PerceptibleVolume      = 13,
+    StandaloneAIAnimAction = 14,
+    TriggerArea            = 15,
+    ParticleEffect         = 16,
+    Formation              = 17,
+    FormationAnchor        = 18,
+    FormationSpinePoint    = 19,
+};
+
 struct WUID {
     uint64_t value;                                 // +0x00  packed {tag:8, generation:39, slot:17}
 
-    constexpr uint32_t slot()       const { return (uint32_t)(value & 0x1FFFF); }
-    constexpr uint16_t generation() const { return (uint16_t)(value >> 0x11); }
-    constexpr uint8_t  tag()        const { return (uint8_t)(value >> 56); }
+    constexpr uint32_t  slot()       const { return (uint32_t)(value & 0x1FFFF); }
+    constexpr uint16_t  generation() const { return (uint16_t)(value >> 0x11); }
+    constexpr uint8_t   tag()        const { return (uint8_t)(value >> 56); }
+    constexpr E_WUIDType type()      const { return (E_WUIDType)(value >> 56); }
 
     constexpr bool operator==(const WUID& o) const { return value == o.value; }
     constexpr bool operator!=(const WUID& o) const { return value != o.value; }

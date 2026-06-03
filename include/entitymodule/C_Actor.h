@@ -30,7 +30,10 @@
 
 struct IScriptTable;
 struct IMovementController;
+#ifndef WH_VEC3_DEFINED
+#define WH_VEC3_DEFINED
 struct Vec3 { float x, y, z; };
+#endif
 
 namespace wh::animationmodule {
     class C_AnimatedCharacter;
