@@ -35,6 +35,13 @@ inline constexpr std::array<uintptr_t, 2> VTABLE_C_CombatActorHuntAttack{ 0x21CB
 //     [0] dtor  [1] CanMercyKill  [2] RequestMercyKill
 inline constexpr std::array<uintptr_t, 2> VTABLE_C_CombatActorMercyKill{ 0x21CB3D8, 0x21CB410 };
 
+// C_CombatActorDirector: C_ActionDirector + C_CombatActorObject
+//   [0] primary  (C_ActionDirector)      vtable @ WHGame+0x21EB718
+//     [0] dtor  [1] IsActive
+//   [1] secondary (C_CombatActorObject)  vtable @ WHGame+0x21EB6E0
+//     [1] Reset(no-op) [2] GetSubsystemId(2) [3] GetName("Director")
+inline constexpr std::array<uintptr_t, 2> VTABLE_C_CombatActorDirector{ 0x21EB718, 0x21EB6E0 };
+
 // C_CombatActorHorsePullDown: C_CombatActorObject + I_CombatActorHorsePullDown
 //   [0] primary  (C_CombatActorObject)          vtable @ WHGame+0x21CB328
 //     [0] dtor [1] Reset [2] GetSubsystemId(0x1B) [3] GetName [4] GetDebugLabel [5] GetDebugInfo

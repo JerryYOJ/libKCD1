@@ -94,11 +94,11 @@ struct S_CombatActorState {
     wh::shared::C_Signal<I_CombatActor&, float>
         m_signal_3F0;                                       // +0x3F0
     wh::shared::C_Signal<I_CombatActor&, bool>
-        m_signal_420;                                       // +0x420  → sub_180602C34
+        m_onAttackTargetIsOpponentChanged;                  // +0x420  fired by m_attackTargetIsCurrentOpponent (+0xC19); listener sub_180602C34
     wh::shared::C_Signal<I_CombatActor&, bool>
-        m_signal_450;                                       // +0x450
+        m_onOpponentInReachChanged;                         // +0x450  fired by m_isOpponentInReach (+0xC1A)
     wh::shared::C_Signal<I_CombatActor&, bool>
-        m_signal_480;                                       // +0x480
+        m_onOpponentInExtendedReachChanged;                 // +0x480  fired by m_isOpponentInExtendedReach (+0xC1B)
     wh::shared::C_Signal<I_CombatActor&, int>
         m_signal_4B0;                                       // +0x4B0
     wh::shared::C_Signal<I_CombatActor&, wh::entitymodule::E_HandSlot>
@@ -185,7 +185,7 @@ struct S_CombatActorState {
     int32_t         m_combatStateCategory;  // +0xBE0  state category (compared against dword_18359BEA0 in sub_1804605D0)
     int32_t         m_guardTypeId;          // +0xBE4  current guard type
     E_CombatZoneId  m_attackZoneId;         // +0xBE8  current attack zone
-    int32_t         m_actionTypeId;         // +0xBEC  current action type ID (read by sub_1804605D0)
+    int32_t         m_actionTypeId;         // +0xBEC  live current action type id (set on action init, signal @ +0xF0)
     int32_t         m_weaponClassId;        // +0xBF0  weapon class
     uint32_t        _padBF4;                // +0xBF4
     int32_t         m_weaponGroupId;        // +0xBF8  weapon group
@@ -197,18 +197,20 @@ struct S_CombatActorState {
     bool            m_isAttacking;          // +0xC15
     uint8_t         _padC16;                // +0xC16
     bool            m_isInCombo;            // +0xC17
-    uint8_t         _padC18[4];             // +0xC18
-    int32_t         m_comboStepIndex;       // +0xC1C
-    int32_t         m_riposteState;         // +0xC20
+    uint8_t         _padC18;                // +0xC18
+    bool            m_attackTargetIsCurrentOpponent; // +0xC19  edge flag: action target == m_pOpponent
+    bool            m_isOpponentInReach;    // +0xC1A  opponent in angle cone + weapon reach
+    bool            m_isOpponentInExtendedReach; // +0xC1B  reach + margin (looser band)
+    uint32_t        m_attackersInReachCount; // +0xC1C  # attackers with this actor in extended reach
+    int32_t         m_riposteState;         // +0xC20  (unverified)
     uint8_t         _padC24[0x10];          // +0xC24
 
     bool            m_isPerfectBlocking;    // +0xC34
     bool            m_isDodging;            // +0xC35
     uint8_t         _padC36[2];             // +0xC36
     uint32_t        m_dodgeState;           // +0xC38
-    uint8_t         _padC3C;                // +0xC3C
-    bool            m_isInHuntAttack;       // +0xC3D
-    uint8_t         _padC3E[2];             // +0xC3E
+    bool            m_isInPerfectBlockAction; // +0xC3C  set by PB action OnInitialize (distinct from +0xC34)
+    uint8_t         _padC3D[3];             // +0xC3D  (no hunt-attack bool exists)
 
     uint64_t        m_activeActionPtr;      // +0xC40  current action (_smart_ptr)
     uint64_t        m_pendingActionPtr;     // +0xC48  pending action

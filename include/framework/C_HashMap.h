@@ -149,4 +149,36 @@ public:
 static_assert(sizeof(C_HashMap<uint64_t, void*>) == 0x40);
 static_assert(sizeof(C_HashMap<uint32_t>)        == 0x40);
 
+// ---------------------------------------------------------------------------
+// C_Set<K, Hash> — the std::unordered_set sibling of C_HashMap.
+//
+// Identical 0x40 header, but its nodes are S_HashNode<K, void> (0x18: prev,
+// next, key — NO value slot). The set's sentinel/node allocator is the 0x18
+// variant (sub_180731290) vs the map's 0x20 (sub_1807125EC); both share the
+// bucket pool sub_18071265C and the 1.0f load factor.
+//
+// Intended for a "set of pointers" with a TRANSPARENT hash that reads through
+// the stored pointer (e.g. C_Set<S_InformationRecord*> hashed by the pointee's
+// {wuid, label}); provide such a Hash functor as the second template arg.
+// ---------------------------------------------------------------------------
+template<typename K, typename Hash = S_DefaultHash<K>>
+class C_Set {
+public:
+    using Node = S_HashNode<K, void>;   // 0x18
+
+    float       m_maxLoadFactor;  // +0x00  init 1.0f
+    uint32_t    _pad04;           // +0x04
+    Node*       m_pSentinel;      // +0x08  circular list sentinel (alloc sub_180731290, 0x18)
+    int64_t     m_count;          // +0x10
+    void*       m_pBuckets;       // +0x18  bucket array begin ({pFirst,pBound} pairs)
+    void*       m_pBucketsEnd;    // +0x20
+    void*       m_pBucketsCap;    // +0x28
+    uint64_t    m_mask;           // +0x30  bucketCount - 1
+    uint64_t    m_bucketCount;    // +0x38
+
+    bool empty() const { return m_count == 0; }
+};
+static_assert(sizeof(C_Set<void*>)               == 0x40);
+static_assert(sizeof(S_HashNode<void*, void>)    == 0x18);
+
 }  // namespace wh::shared

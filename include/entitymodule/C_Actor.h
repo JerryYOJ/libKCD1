@@ -155,7 +155,12 @@ public:
     float                   m_perceptionMinAngle;               // +0x568  (5°)
     float                   m_perceptionConeHalfAngle;          // +0x56C  (30°)
     float                   m_perceptionRangeScale;             // +0x570  (init 1.0)
-    uint8_t                 _pad574[0x50];                      // +0x574
+    // +0x574/+0x580: two adjacent Vec3s read by C_AIPuppet (xgenaimodule) slots 15/14
+    // (sub_18066DFF8 reads +0x574, sub_18023B290 reads +0x580). Names/semantics INFERRED
+    // from the puppet's use; the no-actor fallbacks query the physics proxy (GetStatus).
+    float                   m_physBodyPos[3];                   // +0x574  Vec3 [INFERRED] (C_AIPuppet GetPhysWorldPos; fallback 0,0,0)
+    float                   m_physVelocity[3];                  // +0x580  Vec3 [INFERRED] (C_AIPuppet GetVelocity; fallback phys GetStatus)
+    uint8_t                 _pad58C[0x38];                      // +0x58C  (remainder of the former _pad574[0x50] block)
 
     float                   m_moveSpeedModifier;                // +0x5C4  (init 1.0)
     uint8_t                 _pad5C8[8];                         // +0x5C8

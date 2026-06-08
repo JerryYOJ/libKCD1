@@ -39,7 +39,11 @@ public:
 //   +0x00: C_CombatActorObject vtable (primary, 6 slots)
 //   +0x08: C_CombatActorObject::m_pOwner (C_CombatActor*)
 //   +0x10: I_CombatActorHuntAttack vtable (secondary, 3 slots)
-//   +0x18: padding/data
+//   +0x18: m_victimEntityId — set by Request, cleared by Reset
+//
+// NOTE: hunt-in-progress is NOT flagged on the actor/state. The dispatched
+// action is a C_CombatActorActionSyncAttack with its +0xF9 hunt-master bool set
+// (sub_1806FA0C0); m_victimEntityId here is the attacker-side record.
 //
 // TryHuntAttack return values:
 //   0 = blocked (capability missing)
@@ -71,6 +75,7 @@ public:
     inline static constexpr auto VTABLE = Offsets::VTABLE_C_CombatActorHuntAttack;
 
     // C_CombatActorObject overrides (VERIFIED: GetSubsystemId=0x1C, GetName="HUNT_ATTACK")
+    void Reset() override;  // sub_1806FB900: m_victimEntityId = 0
     E_CombatSubsystem GetSubsystemId() const override { return COMBAT_SUB_HUNT_ATTACK; }
     const char* GetName() const override { return "HUNT_ATTACK"; }
 
@@ -79,8 +84,8 @@ public:
     // E_HuntAttackResult TryHuntAttack(EntityId victimEntityId) override;
     // E_HuntAttackResult Request(EntityId victimEntityId) override;
 
-    uint32_t m_state18;     // +0x18  (zeroed by Reset, slot [1])
-    uint32_t _pad1C;        // +0x1C
+    EntityId m_victimEntityId;  // +0x18  entity being hunt-attacked; set by Request, cleared by Reset (primary slot [1])
+    uint32_t _pad1C;            // +0x1C
 };
 static_assert(sizeof(C_CombatActorHuntAttack) == 0x20);
 

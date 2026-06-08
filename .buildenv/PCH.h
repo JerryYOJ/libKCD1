@@ -166,6 +166,8 @@ struct CStrLess {
 #include "rpgmodule/I_Soul.h"
 #include "rpgmodule/I_CombatSoul.h"
 #include "rpgmodule/E_DerivedStat.h"
+#include "rpgmodule/E_RPGStat.h"
+#include "rpgmodule/E_RPGSkill.h"
 #include "rpgmodule/S_SoulArchetype.h"
 #include "rpgmodule/C_SoulPropertyNotifier.h"
 #include "rpgmodule/C_SoulList.h"

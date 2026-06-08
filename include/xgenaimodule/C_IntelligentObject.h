@@ -4,6 +4,7 @@
 #include "C_MessageCapableObject.h"
 #include "../framework/C_HashMap.h"
 #include "../framework/WUID.h"
+#include "../Offsets/vtables/IScriptTable.h"   // Offsets::IScriptTable — m_scriptTable is a SmartScriptTable handle to it
 
 // ===========================================================================
 // wh::xgenaimodule::C_IntelligentObject : C_MessageCapableObject
@@ -37,13 +38,15 @@ public:
     virtual void  SetFlag170(char v);   // [23] +0xB8  m_flag170 = v
 
     // --- fields (ctor sub_180278388) ---
-    // m_pBrain: the AI brain/controller. Provides the Lua script table
-    // (vtbl[+0x30]) and the named brain-variable store
-    // (vtbl[+0x50]()->vtbl[+0x10](nameHash)) where crime data lives
-    // (b_informationData / b_informations / b_crimeSystemRole). NOT the soul.
-    // Concrete class UNVERIFIED.
-    void*   m_pBrain;          // +0x118  (set via SetBrain / vtable slot 18)
-    void*   m_scriptTable;     // +0x120  Lua script-table handle (sub_1803B97E4)
+    // m_pBrain: the AI brain/controller (the b_* brain-variable store where crime data lives:
+    // b_informationData / b_informations / b_crimeSystemRole). NOT the soul. Set via SetBrain (slot 18).
+    // Used through its vtable: +0x08 attach(this), +0x10 detach/release, +0x18 bool (mode select),
+    // +0x30 GetScriptTable, +0x50 GetVarContainer()->+0x10(nameHash) = variable-by-name, +0xB8 bool.
+    // CONCRETE CLASS UNVERIFIED (SetBrain's caller / brain ctor not yet traced) — kept void* until RE'd.
+    void*          m_pBrain;       // +0x118  (set via SetBrain / vtable slot 18)
+    Offsets::IScriptTable* m_scriptTable;  // +0x120  SmartScriptTable: refcounted Offsets::IScriptTable* handle. VERIFIED:
+                                   //         assign sub_1803B97E4 = AddRef new (IScriptTable[3] vtbl+0x18) /
+                                   //         Release old ([4] vtbl+0x20). Holds the entity's (or brain's, slot 17) Lua table.
     bool    m_recvInfoFlag;    // +0x128  init 1 ("bWH_ReceiveEmittedInformation" subscription)
     char    _pad129[7];        // +0x129
     wh::shared::C_HashMap<wh::framework::WUID, void*> m_knowledgeMap;  // +0x130 (0x40) brain-variable / knowledge map [key/value UNVERIFIED]

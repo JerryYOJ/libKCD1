@@ -22,7 +22,7 @@ class C_CombatActor;
 //
 // vtable layout (interfuscator-shuffled, 7 slots):
 //   [0] sub_1806E4F5C  scalar deleting destructor (frees 0x10)
-//   [1] purecall
+//   [1] Reset          subsystem state reset (HUNT_ATTACK impl zeroes m_victimEntityId)
 //   [2] sub_180F54EF4  GetSubsystemId -> returns E_CombatSubsystem
 //   [3] purecall       GetName -> returns const char*
 //   [4] sub_180F54A30  GetDebugLabel
@@ -34,7 +34,7 @@ class C_CombatActor;
 class C_CombatActorObject {
 public:
     virtual ~C_CombatActorObject() = default;                       // [0]
-    virtual void unk_1() = 0;                                       // [1] purecall
+    virtual void Reset() = 0;                                       // [1] subsystem reset
     virtual E_CombatSubsystem GetSubsystemId() const = 0;           // [2] VERIFIED via GetDebugLabel
     virtual const char* GetName() const = 0;                        // [3] VERIFIED via GetDebugLabel
     virtual void GetDebugLabel(void* outLabel) {}                   // [4] sub_180F54A30

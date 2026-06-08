@@ -18,8 +18,8 @@ struct S_PerkDefinition {
     CryGUID     metaperkId;             // +0x10  (parent perk GUID)
     CryGUID     conditionId;            // +0x20  (prerequisite/condition GUID)
     CryGUID     exclusiveGroupId;       // +0x30  (mutual exclusion group GUID)
-    uint32_t    statSelector;           // +0x40  (0-3 = STR/AGI/VIT/SPC, 0xA = none)
-    uint32_t    skillSelector;          // +0x44  (skill_id, 0x21 = none -> main level)
+    uint32_t    statSelector;           // +0x40  E_RPGStat (0..3 = STR/AGI/VIT/SPC; 0xA = none)
+    uint32_t    skillSelector;          // +0x44  E_RPGSkill (0..32; 0x21 = Count = none -> main level)
     uint32_t    levelRequirement;       // +0x48
     uint32_t    visibility;             // +0x4C  (0=normal, 2=stat/skill, 3=obsolete; checked as *(dword+0x13))
     CryGUID     effectId;               // +0x50  (buff/effect GUID — used for perk-to-effect lookup)

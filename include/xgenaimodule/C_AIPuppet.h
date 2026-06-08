@@ -57,20 +57,20 @@ public:
     const wh::framework::WUID* GetWUID() override;            // [4]  sub_1806F9160 -> &m_wuid
     const Vec3* GetWorldPos() override;                      // [5]  sub_18033C404 (cached world pos, +0x08)
     const Vec3* GetWorldDir() override;                      // [6]  sub_1802866A0 (cached forward dir, +0x14)
-    Vec3* vf07_GetClampedVec(Vec3* out) override;             // [7]  sub_18167E7A4
-    bool vf08() override;                                     // [8]  sub_18167E6C8
-    int64_t vf09() override;                                  // [9]  sub_1802CB2BC
-    int64_t vf10() override;                                  // [10] sub_18027AEA8
-    int64_t vf11() override;                                  // [11] sub_1802CFD2C
-    void* vf12(void* out) override;                           // [12] sub_18167EB38
-    void* vf13(void* out) override;                           // [13] sub_180245130
-    Vec3* vf14_GetBodyAnchorA(Vec3* out) override;            // [14] sub_18023B290 (actor +0x580)
-    Vec3* vf15_GetBodyAnchorB(Vec3* out) override;            // [15] sub_18066DFF8 (actor +0x574)
-    int64_t vf16() override;                                  // [16] sub_180244784 -> entity vtbl[+0x240]
-    void* vf17(void* out) override;                           // [17] sub_18042A62C
-    void* vf18(void* out) override;                           // [18] sub_1806BABC8
-    void* vf19(void* out) override;                           // [19] sub_18042CF64
-    int64_t vf20() override;                                  // [20] sub_18040594C (thunk)
+    Vec3* GetWorldBoundsSize(Vec3* out) override;             // [7]  sub_18167E7A4 (entity vtbl[+0x108] AABB; out=max-min)
+    bool vf08_TouchBounds() override;                         // [8]  sub_18167E6C8 (entity vtbl[+0x108]; returns true)
+    const char* GetEntityName() override;                     // [9]  sub_1802CB2BC (entity vtbl[+0x88])
+    const char* GetName() override;                           // [10] sub_18027AEA8 (cached display name; writes m_name)
+    const char* GetEntityClassName() override;                // [11] sub_1802CFD2C (GetEntity->GetClass->GetName)
+    Quat* GetWorldRotation(Quat* out) override;               // [12] sub_18167EB38
+    QuatT* GetWorldTransform(QuatT* out) override;            // [13] sub_180245130
+    Vec3* GetVelocity(Vec3* out) override;                    // [14] sub_18023B290 (m_pActor+0x580; fallback phys GetStatus)
+    Vec3* GetPhysWorldPos(Vec3* out) override;                // [15] sub_18066DFF8 (m_pActor+0x574)
+    IPhysicalEntity* GetPhysicalEntity() override;            // [16] sub_180244784 (entity vtbl[+0x240])
+    void* EnqueuePositionSpatialOp(const Vec3& pos) override;  // [17] sub_18042A62C
+    void* EnqueueDirectionSpatialOp(const Vec3& dir) override; // [18] sub_1806BABC8
+    void* EnqueueRotationSpatialOp(const Quat& rot) override;  // [19] sub_18042CF64
+    void* EnqueueTransformSpatialOp(const QuatT& tm) override; // [20] sub_18040594C (thunk -> sub_180405954)
     C_Actor* GetActor() override;                             // [21] sub_180705F70 -> m_pActor
     // [22] vf22_IsValid()  : inherited (I_AIPuppet default returns true)
     // [23] vf23_Hook()     : inherited (I_AIPuppet no-op)
