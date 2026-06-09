@@ -46,6 +46,7 @@ class C_UIInventoryActions;
 class CUIGameEvents;
 class C_UISaveLoad;
 class C_UIMap;
+class C_UIHUDElements;
 
 class CUIManager
     : public Offsets::ISystemEventListener       // +0x00
@@ -74,6 +75,7 @@ public:
     }
 
     C_UIMap* GetUIMap() { return FindEventSystemAs<C_UIMap>("UIMap"); }
+    C_UIHUDElements* GetHUDElements() { return FindEventSystemAs<C_UIHUDElements>("UIHelpBar"); }
 
     static CUIManager* GetInstance();               // Offsets.cpp
 };

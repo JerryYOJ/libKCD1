@@ -2,34 +2,33 @@
 
 #include <cstdint>
 #include <map>
+#include "C_CombatActionTypeData.h"
+#include "C_CombatAttackTypeData.h"
+#include "C_CombatInputClassData.h"
+#include "C_CombatSideData.h"
+#include "C_CombatWeaponGroupData.h"
+#include "C_CombatGuardTypeData.h"
+#include "C_CombatGuardStanceData.h"
+#include "C_CombatZoneData.h"
+#include "../entitymodule/S_WeaponClassDBData.h"
 
 namespace wh::combatmodule {
 
 // ---------------------------------------------------------------------------
 // C_CombatActionSyncHitData — runtime data row for sync-hit (victim) actions.
 //
-// NOT polymorphic (no vtable, no RTTI of its own).
-// Size: 0x180 (stride in the database vector, confirmed from sub_180F9218C).
+// NON-polymorphic. Size 0x180. Loader sub_180F8A0E0 (from
+// S_CombatActionSyncHitTableRow). Pointed to by action->m_params.m_pDataRow.
 //
-// Constructed by sub_180F8A0E0 (loader from S_CombatActionSyncHitTableRow).
-// Copy-move: sub_180F89DF8.
-//
-// Pointed to by action->m_params.m_pDataRow (+0xD8 in C_CombatActorActionSyncHit).
-// Contains the resolved table row from combat_action_sync_hit.xml, with
-// foreign-key columns resolved to pointers (0xA0..0x140 region).
-//
-// Field names derived from the loader's source→dest mapping against the
-// S_CombatActionSyncHitTableRow XML column order.
+// The +0xA0..+0x140 block holds the FK columns from combat_action_sync_hit.xml,
+// each resolved by the loader into a pointer to its lookup-table Data row
+// (see C_CombatLookupData.h). All FK types VERIFIED via the per-column resolver.
 // ---------------------------------------------------------------------------
 #pragma pack(push, 4)
 struct C_CombatActionSyncHitData {
-    // NOTE: action_type_id is NOT a raw field here. The loader (sub_180F8A0E0)
-    // FK-resolves it into an interned pointer at +0x110 (m_pActionType); read the
-    // id via GetActionTypeId() below. +0x00 is the actor-class hash, not the type.
-    int32_t     actor_class_hash;       // +0x00  (e.g. 1578932418) — hash lookup key
+    int32_t     actor_class_hash;       // +0x00
     int32_t     _field04;               // +0x04
-    std::map<int32_t, void*> m_oppActorClasses;  // +0x08  resolved opp_actor_classes (built by sub_180F72A70).
-                                                 //        {_Myhead, _Mysize} — the "2" you saw is _Mysize (element count).
+    std::map<int32_t, void*> m_oppActorClasses;  // +0x08  resolved opp_actor_classes
     bool        mounted;                // +0x18
     bool        opp_mounted;            // +0x19
     uint8_t     _pad1A[6];              // +0x1A
@@ -62,44 +61,42 @@ struct C_CombatActionSyncHitData {
     uint32_t    _field98;               // +0x98
     uint32_t    _field9C;               // +0x9C
 
-    // FK columns, in Row order, resolved by the loader (sub_180F8A0E0).
-    // Verified via the sync_hit binder (sub_1800CB290) + each resolver's table.
-    void*       m_pAttackZone;          // +0xA0  attack_zone_id
-    void*       m_pAttackType;          // +0xA8  attack_type_id
-    void*       m_pInputClass;          // +0xB0  input_class_id
-    void*       m_pSide;                // +0xB8  side_id
-    void*       m_pRWeaponClass;        // +0xC0  r_weapon_class_id
-    void*       m_pLWeaponClass;        // +0xC8  l_weapon_class_id
-    void*       m_pRWeaponGroup;        // +0xD0  r_weapon_group_id
-    void*       m_pLWeaponGroup;        // +0xD8  l_weapon_group_id
-    void*       m_pOppRWeaponClass;     // +0xE0  opp_r_weapon_class_id
-    void*       m_pOppLWeaponClass;     // +0xE8  opp_l_weapon_class_id
-    void*       m_pOppRWeaponGroup;     // +0xF0  opp_r_weapon_group_id
-    void*       m_pOppLWeaponGroup;     // +0xF8  opp_l_weapon_group_id
+    // FK columns, resolved by sub_180F8A0E0 (offsets/types VERIFIED).
+    C_CombatZoneData*        m_pAttackZone;       // +0xA0  attack_zone_id
+    C_CombatAttackTypeData*  m_pAttackType;       // +0xA8  attack_type_id
+    C_CombatInputClassData*  m_pInputClass;       // +0xB0  input_class_id
+    C_CombatSideData*        m_pSide;             // +0xB8  side_id
+    entitymodule::S_WeaponClassDBData* m_pRWeaponClass;     // +0xC0  r_weapon_class_id
+    entitymodule::S_WeaponClassDBData* m_pLWeaponClass;     // +0xC8  l_weapon_class_id
+    C_CombatWeaponGroupData* m_pRWeaponGroup;     // +0xD0  r_weapon_group_id
+    C_CombatWeaponGroupData* m_pLWeaponGroup;     // +0xD8  l_weapon_group_id
+    entitymodule::S_WeaponClassDBData* m_pOppRWeaponClass;  // +0xE0  opp_r_weapon_class_id
+    entitymodule::S_WeaponClassDBData* m_pOppLWeaponClass;  // +0xE8  opp_l_weapon_class_id
+    C_CombatWeaponGroupData* m_pOppRWeaponGroup;  // +0xF0  opp_r_weapon_group_id
+    C_CombatWeaponGroupData* m_pOppLWeaponGroup;  // +0xF8  opp_l_weapon_group_id
 
-    int32_t     blocking_hand;          // +0x100 (raw int)
+    int32_t     blocking_hand;          // +0x100
     bool        virtual_dagger;         // +0x104
     uint8_t     _pad105[3];             // +0x105
 
-    void*       m_pGuardType;           // +0x108 guard_type_id
-    const int*  m_pGuardStance;         // +0x110 guard_stance_id      (interned int*)
-    const int*  m_pOppGuardStance;      // +0x118 opp_guard_stance_id  (interned int*)
-    void*       m_pGuardZone;           // +0x120 guard_zone_id
-    const int*  m_pActionType;          // +0x128 action_type_id -> interned int (sub_180F51EC8).
-                                        //        *m_pActionType == action_type_id (52 = huntAttackSlave, -1 if unresolved)
-    void*       m_pEndGuardType;        // +0x130 end_guard_type_id
-    void*       m_pEndGuardZone;        // +0x138 end_guard_zone_id
-    const int*  m_pEndGuardStance;      // +0x140 end_guard_stance_id  (interned int*)
+    C_CombatGuardTypeData*   m_pGuardType;        // +0x108 guard_type_id
+    C_CombatGuardStanceData* m_pGuardStance;      // +0x110 guard_stance_id
+    C_CombatGuardStanceData* m_pOppGuardStance;   // +0x118 opp_guard_stance_id
+    C_CombatZoneData*        m_pGuardZone;        // +0x120 guard_zone_id
+    C_CombatActionTypeData*  m_pActionType;       // +0x128 action_type_id
+    C_CombatGuardTypeData*   m_pEndGuardType;     // +0x130 end_guard_type_id
+    C_CombatZoneData*        m_pEndGuardZone;     // +0x138 end_guard_zone_id
+    C_CombatGuardStanceData* m_pEndGuardStance;   // +0x140 end_guard_stance_id
 
-    int32_t     combat_class_id;        // +0x148 from actor_class_hash lookup
+    int32_t     combat_class_id;        // +0x148
     uint32_t    _pad14C;                // +0x14C
-    uint64_t    m_mnFragmentHash;       // +0x150 StringHash of mn_fragment_id
+    uint64_t    m_mnFragment;           // +0x150 CryStringT<char> (mn_fragment_id)
     int32_t     m_mnOptionIndex;        // +0x158
     uint32_t    _field15C;              // +0x15C
-    uint8_t     m_animScopeData[0x18];  // +0x160 anim scope/tag resolved block
-    uint64_t    m_mnTagsHash;           // +0x178
+    uint8_t     m_animScopeData[0x18];  // +0x160
+    uint64_t    m_mnTags;               // +0x178 CryStringT<char> (mn_tags)
 
-    int GetActionTypeId() const { return m_pActionType ? *m_pActionType : -1; }
+    int GetActionTypeId() const { return m_pActionType ? m_pActionType->combat_action_type_id : -1; }
 };
 #pragma pack(pop)
 static_assert(sizeof(C_CombatActionSyncHitData) == 0x180);
