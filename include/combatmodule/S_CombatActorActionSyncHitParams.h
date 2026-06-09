@@ -4,8 +4,10 @@
 
 namespace wh::combatmodule {
 
+struct C_CombatActionSyncHitData;
+
 struct S_CombatActorActionSyncHitParams {
-    uint64_t m_data;            // +0x00  (init 0)
+    C_CombatActionSyncHitData* m_pDataRow;  // +0x00  runtime data row (combat_action_sync_hit)
 };
 static_assert(sizeof(S_CombatActorActionSyncHitParams) == 0x08);
 

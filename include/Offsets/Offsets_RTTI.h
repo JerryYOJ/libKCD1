@@ -8,7 +8,7 @@
 // One entry per RE'd polymorphic class, matched to the binary by exact mangled name.
 // Consumed by Offsets/RTTI.h (kcd_cast) and the `static constexpr auto RTTI` member
 // on each class. Regenerate after harvesting analysis/rtti_map.json from IDA.
-// Count: 779 classes.
+// Count: 780 classes.
 
 namespace Offsets {
 
@@ -95,6 +95,7 @@ namespace Offsets {
     inline constexpr std::uintptr_t RTTI_C_CombatActionHelperAttack                           = 0x29F3340;  // .?AVC_CombatActionHelperAttack@combatmodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_CombatActionHelperBlock                            = 0x29F05B0;  // .?AVC_CombatActionHelperBlock@combatmodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_CombatActionPerfectBlockFactory                    = 0x29F07F0;  // .?AVC_CombatActionPerfectBlockFactory@combatmodule@wh@@
+    inline constexpr std::uintptr_t RTTI_C_CombatActionSyncAttackData                         = 0x2A108D0;  // .?AVC_CombatActionSyncAttackData@combatmodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_CombatActor                                        = 0x29F5218;  // .?AVC_CombatActor@combatmodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_CombatActorActionAttack                            = 0x29F2E20;  // .?AVC_CombatActorActionAttack@combatmodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_CombatActorActionBlock                             = 0x29F2DA0;  // .?AVC_CombatActorActionBlock@combatmodule@wh@@

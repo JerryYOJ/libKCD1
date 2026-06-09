@@ -25,6 +25,7 @@ namespace wh::combatmodule {
 class C_CombatScene;
 class I_CombatActorAction;
 class C_CombatActorActionManager;
+class C_CombatActorDirector;
 class C_CombatActorHorsePullDown;
 class C_CombatActorMercyKill;
 class C_CombatActorHuntAttack;
@@ -430,7 +431,7 @@ public:
     // VERIFIED RTTI: sub_1805FD214 writes C_CombatActorDirector vftable at +0x00
     //   AND at +0xB0 (MI — C_CombatActorObject embedded at +0xB0).
     // Used by action system: C_Action constructor stores this as owner ptr.
-    void*                   m_pDirector;            // +0x4A8  C_CombatActorDirector
+    C_CombatActorDirector*  m_pDirector;            // +0x4A8
 
     // +0x4B0: C_CombatScene pointer (ctor arg3)
     C_CombatScene*          m_pCombatScene;         // +0x4B0
