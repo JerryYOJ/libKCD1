@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_NPCStateCheckBaseContext;
 class C_HasActiveThreats : public C_NodeWrapper<C_HasActiveThreats, C_NPCStateCheckBase, S_NPCStateCheckBaseContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_HasActiveThreats;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_HasActiveThreats) == 0x68);

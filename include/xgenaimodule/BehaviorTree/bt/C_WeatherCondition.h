@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_WeatherConditionContext;
 class C_WeatherCondition : public C_NodeWrapper<C_WeatherCondition, C_IfCondition, S_WeatherConditionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_WeatherCondition;
     // no own data members (object == 0x48)
 };
 static_assert(sizeof(C_WeatherCondition) == 0x48);

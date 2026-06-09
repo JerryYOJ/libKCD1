@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetLevelTransferDataContext;
 class C_GetLevelTransferData : public C_NodeWrapper<C_GetLevelTransferData, C_Node, S_GetLevelTransferDataContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetLevelTransferData;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetLevelTransferData) == 0x28);

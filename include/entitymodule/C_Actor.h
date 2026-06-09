@@ -57,6 +57,7 @@ class C_Actor : public Offsets::IActor,                    // +0x00  (0x40 bytes
                 public Offsets::IGameObjectProfileManager   // +0x48  (0x08 bytes)
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Actor;
     // ---- Non-virtual methods ----
 
     // sub_1803A107C: returns m_pCombatActor, creating it if null (lazy init).

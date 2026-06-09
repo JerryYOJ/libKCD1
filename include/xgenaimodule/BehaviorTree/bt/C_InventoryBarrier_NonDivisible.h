@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_InventoryBarrier_NonDivisibleContext;
 class C_InventoryBarrier_NonDivisible : public C_NodeWrapper<C_InventoryBarrier_NonDivisible, C_DeferredExecution, S_InventoryBarrier_NonDivisibleContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_InventoryBarrier_NonDivisible;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_InventoryBarrier_NonDivisible) == 0x30);

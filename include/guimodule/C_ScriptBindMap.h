@@ -8,6 +8,7 @@
 namespace wh::guimodule {
 class C_ScriptBindMap : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindMap;
     void*                   m_pGameFramework;   // +0x60
     Offsets::IScriptSystem* m_pScriptSystem;    // +0x68
     // int SetPlaceDiscovered(IFunctionHandler* pH, const char* name, bool visited, bool show); // 0x18110D9D0

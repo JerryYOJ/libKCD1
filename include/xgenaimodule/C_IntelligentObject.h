@@ -27,6 +27,7 @@ namespace wh::xgenaimodule {
 
 class C_IntelligentObject : public C_MessageCapableObject {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_IntelligentObject;
     // --- primary-vtable additions (slots 17..23); slot 16 is overridden here ---
     int64_t  vf16_MessageHook() override;   // [16] +0x80  sub_1803A95C8: state update via m_pBrain
     virtual void* GetScriptTable();    // [17] +0x88  if m_pBrain -> brain->vtbl[+0x30](); else build @ m_scriptTable

@@ -126,6 +126,7 @@ namespace Expressions { class I_Expression; }   // fwd; see companion section
 // -------------------------------------------------------------------------------------
 struct S_ExpressionContext
 {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_ExpressionContext;
     // [UNVERIFIED] members — per-$var hashed-value slots at compile-assigned offsets.
     // Layout/size not enumerated. Placeholder; do not size-assert.
 };
@@ -142,6 +143,7 @@ struct S_ExpressionContext
 class C_Expression : public C_Node
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Expression;
     // ---- overridden virtual behavior (indices = primary I_Node vtable slots) ----
 
     // slot 0  (0x1807014a0) scalar deleting destructor.
@@ -187,6 +189,7 @@ namespace Expressions {
 class I_Expression
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_Expression;
     virtual ~I_Expression() = default;                                  // [UNVERIFIED slot]
     // [UNVERIFIED] virtual <result> Evaluate(S_ExpressionContext*, /*tick*/ void*) = 0;
 };
@@ -202,6 +205,8 @@ public:
 // -------------------------------------------------------------------------------------
 class C_CompiledExpressionWrapper : public I_Expression
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CompiledExpressionWrapper;
     // [UNVERIFIED] layout and wrapped-expression member.
 };
 

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ProceedTutorialContext;
 class C_ProceedTutorial : public C_NodeWrapper<C_ProceedTutorial, C_Node, S_ProceedTutorialContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ProceedTutorial;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_ProceedTutorial) == 0x28);

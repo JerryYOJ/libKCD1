@@ -129,14 +129,17 @@ namespace wh::xgenaimodule::BehaviorTree {
 //   .?AUS_NPCPassiveBarrierContext@BehaviorTree@xgenaimodule@wh@@
 // ---------------------------------------------------------------------------
 struct S_ExecutionBarrierContext {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_ExecutionBarrierContext;
     uint8_t m_gateOpen = 0;     // [UNVERIFIED]
 };
 
 struct S_PassiveBarrierContext {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_PassiveBarrierContext;
     uint8_t m_passive = 0;      // [UNVERIFIED]
 };
 
 struct S_NPCPassiveBarrierContext {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_NPCPassiveBarrierContext;
     uint8_t m_passive = 0;      // [UNVERIFIED]
 };
 
@@ -148,6 +151,8 @@ struct S_NPCPassiveBarrierContext {
 class C_ExecutionBarrier
     : public C_NodeWrapper<C_ExecutionBarrier, C_Decorator, S_ExecutionBarrierContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ExecutionBarrier;
     // No additional data members (per-tick gate state lives in the TContext).
 };
 static_assert(sizeof(C_ExecutionBarrier) == 0x30);
@@ -160,6 +165,8 @@ static_assert(sizeof(C_ExecutionBarrier) == 0x30);
 class C_PassiveBarrier
     : public C_NodeWrapper<C_PassiveBarrier, C_ExecutionBarrier, S_PassiveBarrierContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_PassiveBarrier;
     // No additional data members.
 };
 static_assert(sizeof(C_PassiveBarrier) == 0x30);
@@ -176,6 +183,8 @@ static_assert(sizeof(C_PassiveBarrier) == 0x30);
 class C_NPCPassiveBarrier
     : public C_NodeWrapper<C_NPCPassiveBarrier, C_PassiveBarrier, S_NPCPassiveBarrierContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_NPCPassiveBarrier;
     // No additional data members.
 };
 static_assert(sizeof(C_NPCPassiveBarrier) == 0x30);

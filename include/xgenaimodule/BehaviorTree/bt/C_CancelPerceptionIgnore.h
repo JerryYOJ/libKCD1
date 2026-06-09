@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_CancelPerceptionIgnoreContext;
 class C_CancelPerceptionIgnore : public C_NodeWrapper<C_CancelPerceptionIgnore, C_Node, S_CancelPerceptionIgnoreContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CancelPerceptionIgnore;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_CancelPerceptionIgnore) == 0x28);

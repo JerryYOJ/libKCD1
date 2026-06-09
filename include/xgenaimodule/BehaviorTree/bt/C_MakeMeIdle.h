@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_MakeMeIdleContext;
 class C_MakeMeIdle : public C_NodeWrapper<C_MakeMeIdle, C_MakeIdleBase, S_MakeMeIdleContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_MakeMeIdle;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_MakeMeIdle) == 0x28);

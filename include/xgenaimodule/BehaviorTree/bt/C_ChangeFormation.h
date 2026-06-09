@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ChangeFormationContext;
 class C_ChangeFormation : public C_NodeWrapper<C_ChangeFormation, C_Node, S_ChangeFormationContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ChangeFormation;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_ChangeFormation) == 0x28);

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SetAngrynessContext;
 class C_SetAngryness : public C_NodeWrapper<C_SetAngryness, C_AngrynessNodeBase, S_SetAngrynessContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SetAngryness;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SetAngryness) == 0x28);

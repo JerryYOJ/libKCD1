@@ -37,6 +37,7 @@ namespace wh { namespace entitymodule {
 
 class C_WeaponRuntimeData : public C_EquippableItemRuntimeData {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_WeaponRuntimeData;
     I_ItemRuntimeData* Clone() override;    // slot0 = sub_18062BB00 (alloc from pool + deep-copy)
 
     uint8_t              m_flagA8;          // +0xA8  save tag 0x1E4

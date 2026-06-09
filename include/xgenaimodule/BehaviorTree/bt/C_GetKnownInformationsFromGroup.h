@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetKnownInformationsFromGroupContext;
 class C_GetKnownInformationsFromGroup : public C_NodeWrapper<C_GetKnownInformationsFromGroup, C_Node, S_GetKnownInformationsFromGroupContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetKnownInformationsFromGroup;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetKnownInformationsFromGroup) == 0x28);

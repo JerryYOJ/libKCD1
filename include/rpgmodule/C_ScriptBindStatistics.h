@@ -9,6 +9,7 @@
 namespace wh::rpgmodule {
 class C_ScriptBindStatistics : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindStatistics;
     // int Increment(IFunctionHandler* pH, const char* statisticName, float value);  // 0x1811C483C
     // int Set(IFunctionHandler* pH, const char* statisticName, float value);        // 0x1811CEF74
     // int Reset(IFunctionHandler* pH, const char* statisticName);                   // 0x1811CE208

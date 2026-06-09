@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SetVisibilityContext;
 class C_SetVisibility : public C_NodeWrapper<C_SetVisibility, C_Node, S_SetVisibilityContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SetVisibility;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SetVisibility) == 0x28);

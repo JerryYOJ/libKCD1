@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ReviveContext;
 class C_Revive : public C_NodeWrapper<C_Revive, C_Node, S_ReviveContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Revive;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_Revive) == 0x28);

@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_LinkOperationBarrierContext;
 class C_LinkOperationBarrier : public C_NodeWrapper<C_LinkOperationBarrier, C_ForwardingData<C_DeferredExecution>, S_LinkOperationBarrierContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_LinkOperationBarrier;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_LinkOperationBarrier) == 0x30);

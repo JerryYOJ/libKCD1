@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_OnTargetChangeContext;
 class C_OnTargetChange : public C_NodeWrapper<C_OnTargetChange, C_CombatantHubExtended<C_PassiveBarrier>, S_OnTargetChangeContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_OnTargetChange;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_OnTargetChange) == 0x30);

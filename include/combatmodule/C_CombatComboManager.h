@@ -47,6 +47,7 @@ class I_CombatActor;
 // ---------------------------------------------------------------------------
 class C_CombatComboManager : public C_CombatActorUpdatedObject {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatComboManager;
     ~C_CombatComboManager() override = default;
     E_CombatSubsystem GetSubsystemId() const override { return COMBAT_SUB_COMBO_MANAGER; }
 

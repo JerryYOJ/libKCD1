@@ -38,6 +38,7 @@ namespace wh::playermodule {
 
 class C_PlayerModule {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_PlayerModule;
     char            _pad00[0x90];           // +0x00  base classes + early members
     void*           m_pFlags;               // +0x90  (0x2 bytes)
     void*           m_pUnk98;               // +0x98  (0x78 bytes, sub_18126EAFC)

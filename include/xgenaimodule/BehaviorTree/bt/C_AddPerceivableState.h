@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_AddPerceivableStateContext;
 class C_AddPerceivableState : public C_NodeWrapper<C_AddPerceivableState, C_WrapperDecorator, S_AddPerceivableStateContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AddPerceivableState;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_AddPerceivableState) == 0x30);

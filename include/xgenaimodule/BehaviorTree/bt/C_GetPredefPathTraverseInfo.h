@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetPredefPathTraverseInfoContext;
 class C_GetPredefPathTraverseInfo : public C_NodeWrapper<C_GetPredefPathTraverseInfo, C_Node, S_GetPredefPathTraverseInfoContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetPredefPathTraverseInfo;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetPredefPathTraverseInfo) == 0x28);

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_DisableLODContext;
 class C_DisableLOD : public C_NodeWrapper<C_DisableLOD, C_DeferredExecution, S_DisableLODContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_DisableLOD;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_DisableLOD) == 0x30);

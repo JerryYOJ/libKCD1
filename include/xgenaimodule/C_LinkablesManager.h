@@ -42,6 +42,7 @@ class C_LinkablesManager
     : public T_ObjectManagerBase<C_LinkableObject, C_LinkablesManager>   // @+0x00 (0x58)
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_LinkablesManager;
     static C_LinkablesManager* GetInstance();                      // *qword_1837999D8 (null before the AI module is up)
     C_LinkableObject*          Find(wh::framework::WUID w) const;  // engine map-find (sub_18024D6E4) -> object or null
 

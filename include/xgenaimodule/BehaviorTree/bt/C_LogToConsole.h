@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_LogToConsoleContext;
 class C_LogToConsole : public C_NodeWrapper<C_LogToConsole, C_Node, S_LogToConsoleContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_LogToConsole;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_LogToConsole) == 0x28);

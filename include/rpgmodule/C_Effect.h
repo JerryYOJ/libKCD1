@@ -17,6 +17,7 @@ namespace wh::rpgmodule {
 //   C_StatXPEffect (0x1821c7a48), C_LearnPerkEffect (0x1826d97b8)
 class C_Effect {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Effect;
     virtual ~C_Effect();                                // vfunc[0]
     virtual void Accept(void* visitor) = 0;             // vfunc[1] — visitor pattern, calls visitor->vtable[0xD8/8](visitor, this)
     virtual void AcceptConst(void* visitor) = 0;        // vfunc[2] — const overload of Accept
@@ -34,6 +35,8 @@ static_assert(sizeof(C_Effect) == 0x18);
 // RTTI: .?AVC_SoulEffect@rpgmodule@wh@@
 // Constructor: sub_18056AC84
 class C_SoulEffect : public C_Effect {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SoulEffect;
     // No additional members visible -- just type distinction
 };
 static_assert(sizeof(C_SoulEffect) == 0x18);
@@ -53,6 +56,7 @@ static_assert(sizeof(C_SoulEffect) == 0x18);
 
 class C_StatXPEffect : public C_SoulEffect {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_StatXPEffect;
     // Set at construction time:
     uint32_t    m_statId;               // +0x18  (E_SoulStat enum: 0=STR,1=AGI,2=VIT,3=SPC)
     int32_t     m_xpAmount;             // +0x1C  XP to add (or target XP delta)
@@ -83,6 +87,7 @@ static_assert(sizeof(C_StatXPEffect) == 0x38);
 
 class C_LearnPerkEffect : public C_SoulEffect {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_LearnPerkEffect;
     CryGUID     m_perkGuid;             // +0x18  perk to learn
     uint8_t     m_bResult;              // +0x28  set to 1 if successfully learned
     char        _pad29[7];              // +0x29

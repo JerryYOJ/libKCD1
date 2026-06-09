@@ -29,6 +29,7 @@ class I_CombatActor;
 // ---------------------------------------------------------------------------
 class I_CombatTarget {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_CombatTarget;
     virtual ~I_CombatTarget() = default;                // [0]
     virtual void* GetActor() const = 0;                 // [1] returns *(this+0x08)
     virtual uint32_t GetEntityId() const = 0;           // [2] calls wrapped->vtable[1]
@@ -51,6 +52,7 @@ public:
 // ---------------------------------------------------------------------------
 class C_CombatTarget : public I_CombatTarget {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatTarget;
     ~C_CombatTarget() override = default;
     void* GetActor() const override { return m_pActor; }
     uint32_t GetEntityId() const override { return 0; }

@@ -15,6 +15,7 @@ namespace wh::rpgmodule {
 
 class C_ItemHealthCheckingBuffInitParams : public I_BuffInitParams {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ItemHealthCheckingBuffInitParams;
     ~C_ItemHealthCheckingBuffInitParams() override;                                     // 0x1806ED33C
     float GetFloatParam(int nKey) override;                                             // 0x1811C0F58 key=0x103 -> m_healthParam
     int GetIntParam(int nKey) override;                                                 // 0x1803953E0 -> 0

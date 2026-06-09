@@ -38,6 +38,7 @@ class C_CombatActor;
 // ---------------------------------------------------------------------------
 class I_CombatActorAction : public wh::framework::I_Action {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_CombatActorAction;
     // Methods added by I_CombatActorAction (exact set unknown due to shuffling).
     // All are purecall in the interface vtable.
     // Known from C_Action implementations:
@@ -70,6 +71,7 @@ public:
 // ---------------------------------------------------------------------------
 class I_CombatActorActionPrivate : public I_CombatActorAction {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_CombatActorActionPrivate;
     // No additional methods identified beyond I_CombatActorAction.
     // If C_Action adds more primary vtable slots, they would go here.
 };

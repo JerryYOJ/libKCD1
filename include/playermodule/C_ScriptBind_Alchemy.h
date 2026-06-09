@@ -15,6 +15,7 @@ namespace wh::playermodule {
 
 class C_ScriptBind_Alchemy : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBind_Alchemy;
     void* m_pOwner;  // +0x60
 
     // -- Direct Lua methods --

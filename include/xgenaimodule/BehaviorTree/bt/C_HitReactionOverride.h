@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_HitReactionOverrideContext;
 class C_HitReactionOverride : public C_NodeWrapper<C_HitReactionOverride, C_WrapperDecorator, S_HitReactionOverrideContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_HitReactionOverride;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_HitReactionOverride) == 0x30);

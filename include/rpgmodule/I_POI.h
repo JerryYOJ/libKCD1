@@ -23,6 +23,7 @@ namespace wh::rpgmodule {
 
 class I_POI {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_POI;
     virtual void* GetInlineData() {}            // [0]  0x00
     virtual void _vf1() {}                      // [1]  0x08
     virtual void _vf2() {}                      // [2]  0x10

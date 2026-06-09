@@ -12,6 +12,7 @@ namespace wh::framework {
 // Size as sub-object: 0x10 bytes (vtable + padding)
 class I_ModuleMessageListener {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_ModuleMessageListener;
     virtual ~I_ModuleMessageListener() = default;   // [0]
     virtual void OnModuleMessage() = 0;             // [1] pure
     virtual void unk_02() = 0;                      // [2]
@@ -26,6 +27,7 @@ public:
 // Constructor: 0x180F364AC (called first in C_DatabaseModule ctor)
 class C_BaseModule {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_BaseModule;
     virtual ~C_BaseModule() = default;
     // 0x78 bytes total — lifecycle management, module name, framework registration
     // Full member layout requires RE of sub_180F364AC
@@ -70,6 +72,7 @@ struct C_ScriptBindDatabase;
 
 class C_DatabaseModule {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_DatabaseModule;
     // +0x00: first base class
     wh::framework::C_BaseModule m_baseModule;                   // +0x00  (0x78 bytes)
 

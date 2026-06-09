@@ -15,6 +15,7 @@ namespace wh::entitymodule {
 
 class C_ScriptBindItemManager : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindItemManager;
     void* m_pContext;  // +0x60
 
     // -- Direct Lua methods --

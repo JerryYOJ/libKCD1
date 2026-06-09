@@ -8,6 +8,7 @@
 namespace wh::framework {
 class C_ScriptBindVariables : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindVariables;
     void* m_pSystem;   // +0x60
     void* m_pContext;   // +0x68
     // int SetGlobal(IFunctionHandler* pH, const char* name, float value);        // 0x1805E3AC4

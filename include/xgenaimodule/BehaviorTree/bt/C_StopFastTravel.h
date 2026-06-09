@@ -111,6 +111,7 @@ namespace wh::xgenaimodule::BehaviorTree {
 // is flagged. The base sub-layout is inherited from S_BaseNodeContext.
 // ---------------------------------------------------------------------------
 struct S_StopFastTravelContext : public S_BaseNodeContext {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_StopFastTravelContext;
     // S_BaseNodeContext provides +0x00 vtable and +0x08..+0x20.
     // Node-specific S_VariableReference slots follow; their offsets are encoded
     // in the global tables (xmmword_1836F2BF0 / _C08 / _C20) rather than read as
@@ -128,6 +129,7 @@ struct S_StopFastTravelContext : public S_BaseNodeContext {
 // ---------------------------------------------------------------------------
 class C_StopFastTravel {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_StopFastTravel;
     // Fire-once on activation: stage the three static S_VariableReference tables
     // from the per-entity context into the AI variable system (commit via the
     // engine vfunc at object +0x218). Returns success.

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_CompanionModeGateContext;
 class C_CompanionModeGate : public C_NodeWrapper<C_CompanionModeGate, C_NPCPassiveBarrier, S_CompanionModeGateContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CompanionModeGate;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_CompanionModeGate) == 0x30);

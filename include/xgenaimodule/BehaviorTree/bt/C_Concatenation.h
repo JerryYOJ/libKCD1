@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ConcatenationContext;
 class C_Concatenation : public C_NodeWrapper<C_Concatenation, C_Node, S_ConcatenationContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Concatenation;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_Concatenation) == 0x28);

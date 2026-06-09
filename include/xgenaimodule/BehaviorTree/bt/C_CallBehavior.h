@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_CallBehaviorContext;
 class C_CallBehavior : public C_NodeWrapper<C_CallBehavior, C_SmartEntityBehaviorTag, S_CallBehaviorContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CallBehavior;
     uint8_t _ownState[0x10];   // [UNVERIFIED] own members above C_SmartEntityBehaviorTag (0x28)
 };
 static_assert(sizeof(C_CallBehavior) == 0x38);

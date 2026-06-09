@@ -22,6 +22,7 @@ class C_CombatActorActionAttack
       public I_CombatActionHelperAttackOwner
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorActionAttack;
     uint64_t                    m_unknown_110;      // (init 0)
     bool                        m_flag_118;         // (init 0)
     uint8_t                     _pad119[7];

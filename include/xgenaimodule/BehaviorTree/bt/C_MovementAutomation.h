@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_MovementAutomationContext;
 class C_MovementAutomation : public C_NodeWrapper<C_MovementAutomation, C_CombatAutomationBase<C_Node>, S_MovementAutomationContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_MovementAutomation;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_MovementAutomation) == 0x28);

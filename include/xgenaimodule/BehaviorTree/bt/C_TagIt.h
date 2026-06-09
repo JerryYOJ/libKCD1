@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_TagItContext;
 class C_TagIt : public C_NodeWrapper<C_TagIt, C_Decorator, S_TagItContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_TagIt;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_TagIt) == 0x30);

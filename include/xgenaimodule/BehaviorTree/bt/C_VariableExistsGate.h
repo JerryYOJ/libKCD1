@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_VariableExistsGateContext;
 class C_VariableExistsGate : public C_NodeWrapper<C_VariableExistsGate, C_Gate, S_VariableExistsGateContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_VariableExistsGate;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_VariableExistsGate) == 0x68);

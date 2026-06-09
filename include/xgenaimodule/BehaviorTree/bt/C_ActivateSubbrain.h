@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ActivateSubbrainContext;
 class C_ActivateSubbrain : public C_NodeWrapper<C_ActivateSubbrain, C_Node, S_ActivateSubbrainContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ActivateSubbrain;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_ActivateSubbrain) == 0x28);

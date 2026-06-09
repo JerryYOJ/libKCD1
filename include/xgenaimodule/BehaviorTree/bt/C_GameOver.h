@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GameOverContext;
 class C_GameOver : public C_NodeWrapper<C_GameOver, C_Node, S_GameOverContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GameOver;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GameOver) == 0x28);

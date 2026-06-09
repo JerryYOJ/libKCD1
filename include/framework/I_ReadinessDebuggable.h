@@ -21,6 +21,7 @@ namespace wh {
 
 class I_ReadinessDebuggable {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_ReadinessDebuggable;
     virtual void DebugReadiness0() = 0;   // [0] 0x00  debug hook (name unverified, stubbed in retail)
     virtual void DebugReadiness1() = 0;   // [1] 0x08  debug hook (name unverified, stubbed in retail)
 };

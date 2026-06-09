@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetRandomPosContext;
 class C_GetRandomPos : public C_NodeWrapper<C_GetRandomPos, C_Node, S_GetRandomPosContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetRandomPos;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetRandomPos) == 0x28);

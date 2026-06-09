@@ -35,6 +35,7 @@ struct S_PerkPointCounters;
 
 class C_PerkList {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_PerkList;
     // vfunc[0]: creates stat/skill XP visitor lambdas for perk point recalculation
     virtual void RecalcPerkPoints(void* pDispatcher);   // RecalcPerkPoints_1805D2C74
 

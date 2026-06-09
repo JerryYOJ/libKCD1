@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ProduceSoundContext;
 class C_ProduceSound : public C_NodeWrapper<C_ProduceSound, C_Node, S_ProduceSoundContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ProduceSound;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_ProduceSound) == 0x28);

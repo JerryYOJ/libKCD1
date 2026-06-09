@@ -11,6 +11,7 @@ class C_CombatActorActionFreeBlock
           C_CombatActorParamAction_Base<S_CombatActorActionFreeBlockParams, I_CombatActorActionPrivate>>
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorActionFreeBlock;
     // Primary vtable: 0x1822C4208 | Ctor: 0x180F442F4 | Size: 0x100
     // NO C_CombatActorAnimatedAction layer
     uint16_t                    m_stateFlags;       // (init 0)

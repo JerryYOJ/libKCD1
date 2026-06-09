@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_HorsePullDownActionContext;
 class C_HorsePullDownAction : public C_NodeWrapper<C_HorsePullDownAction, C_Node, S_HorsePullDownActionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_HorsePullDownAction;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_HorsePullDownAction) == 0x28);

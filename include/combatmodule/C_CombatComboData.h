@@ -36,6 +36,7 @@ struct C_CombatComboData;
 // ==========================================================================
 class I_CombatComboData {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_CombatComboData;
     virtual int32_t GetComboId() const = 0;                     // [0]
     virtual const void* GetComboStrid() const = 0;              // [1]
     virtual int32_t GetCurrentStep() const = 0;                 // [2]
@@ -55,6 +56,7 @@ public:
 // ==========================================================================
 class I_CombatComboStepData {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_CombatComboStepData;
     virtual int32_t GetCombatComboId() const = 0;               // [0]
     virtual int32_t GetStep() const = 0;                        // [1]
     virtual int32_t GetAtkCombatZoneId() const = 0;             // [2]
@@ -87,6 +89,7 @@ public:
 // ==========================================================================
 class C_CombatComboStepData : public I_CombatComboStepData {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatComboStepData;
     // --- Virtual method implementations ---
     int32_t GetCombatComboId() const override { return m_combatComboId; }
     int32_t GetStep() const override { return m_step; }
@@ -166,6 +169,7 @@ static_assert(sizeof(C_CombatComboData) == 0x48, "C_CombatComboData must be 0x48
 // ==========================================================================
 class S_ComboInstance : public I_CombatComboData {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_S_ComboInstance;
     int32_t GetComboId() const override { return m_comboData ? m_comboData->m_rowId : -1; }
     const void* GetComboStrid() const override { return m_comboData ? &m_comboData->m_comboStrid : nullptr; }
     int32_t GetCurrentStep() const override { return m_currentStep; }

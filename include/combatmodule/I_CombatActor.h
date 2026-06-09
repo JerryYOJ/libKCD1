@@ -20,6 +20,7 @@ namespace wh::combatmodule {
 // ---------------------------------------------------------------------------
 class I_CombatActor {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_CombatActor;
     virtual ~I_CombatActor() = default;                             // [0]
 
     // All slots below are purecall in I_CombatActor's own vtable.

@@ -89,6 +89,7 @@ class C_CombatActionPerfectBlockFactory;
 // ---------------------------------------------------------------------------
 class C_CombatActorActionManager : public C_CombatActorObject {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorActionManager;
     // ---- Virtual method overrides ----
     ~C_CombatActorActionManager() override = default;               // [0]
 

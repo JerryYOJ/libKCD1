@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_LODCheckContext;
 class C_LODCheck : public C_NodeWrapper<C_LODCheck, C_Gate, S_LODCheckContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_LODCheck;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_LODCheck) == 0x68);

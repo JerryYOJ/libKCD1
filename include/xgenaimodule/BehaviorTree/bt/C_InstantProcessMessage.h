@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_InstantProcessMessageContext;
 class C_InstantProcessMessage : public C_NodeWrapper<C_InstantProcessMessage, C_ReceiveMessageBase<C_ProcessMessageBase>, S_InstantProcessMessageContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_InstantProcessMessage;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_InstantProcessMessage) == 0x30);

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_IsPointOnNavMeshContext;
 class C_IsPointOnNavMesh : public C_NodeWrapper<C_IsPointOnNavMesh, C_Gate, S_IsPointOnNavMeshContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_IsPointOnNavMesh;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_IsPointOnNavMesh) == 0x68);

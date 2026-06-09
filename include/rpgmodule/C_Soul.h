@@ -73,6 +73,7 @@ enum class E_ModifierCategory : int32_t {
 class C_CombatSoul : public I_CombatSoul                 // +0x00 I_CombatSoul vtable (0x182229ac0)
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatSoul;
     wh::shared::C_Signal<bool>  m_signal0;               // +0x08  (connect/disconnect via I_CombatSoul slots 2/3)
     wh::shared::C_Signal<bool>  m_signal1;               // +0x38  (connect/disconnect via I_CombatSoul slots 0/1)
     C_Soul*                     m_owner;                 // +0x68  owning soul (ctor arg)
@@ -203,6 +204,7 @@ class C_Soul : public I_Soul,                              // +0x00 vtable
                public wh::entitymodule::I_InventoryListener // +0x18 vtable
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Soul;
     // ---------------------------------------------------------------- identity
     wh::framework::WUID     m_wuid;                  // +0x20  this soul's WUID (type tag 5); LookupByWUID key
     wh::framework::WUID     m_entityWuid;            // +0x28  owning entity's WUID; SearchByValue lookup key [LIKELY]

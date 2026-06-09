@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SleepQualitySorterContext;
 class C_SleepQualitySorter : public C_NodeWrapper<C_SleepQualitySorter, C_LinkSorterDataSource, S_SleepQualitySorterContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SleepQualitySorter;
     uint8_t _ownState[0x8];   // [UNVERIFIED] own members above C_LinkSorterDataSource (0x28)
 };
 static_assert(sizeof(C_SleepQualitySorter) == 0x30);

@@ -10,6 +10,7 @@ class C_CombatActorActionRiderMovement
     : public C_CombatActorAnimatedAction<S_CombatActorActionGuardMovementParams, 1, I_CombatActorActionPrivate>
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorActionRiderMovement;
     // Primary vtable: 0x1822C4030 | Ctor: 0x180F44354 | Size: 0x100
     // Shares S_CombatActorActionGuardMovementParams with GuardMovement
     bool        m_isRider;          // (init 1 — only field beyond GuardMovement)

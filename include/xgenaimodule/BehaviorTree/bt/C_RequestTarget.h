@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_RequestTargetContext;
 class C_RequestTarget : public C_NodeWrapper<C_RequestTarget, C_CombatNode<C_DefferedStateChange>, S_RequestTargetContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_RequestTarget;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_RequestTarget) == 0x28);

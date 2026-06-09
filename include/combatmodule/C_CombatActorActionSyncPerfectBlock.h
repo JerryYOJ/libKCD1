@@ -11,6 +11,7 @@ class C_CombatActorActionSyncPerfectBlock
     : public C_CombatActorActionPerfectBlockBase<S_CombatActorActionPerfectBlockParams, 1>
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorActionSyncPerfectBlock;
     // Primary vtable: 0x1822C3B18 (61 slots) | Ctor: 0x180F44528 | Size: 0x160
     // LARGEST action class
     bool                        m_syncFlag;         // (init 0)

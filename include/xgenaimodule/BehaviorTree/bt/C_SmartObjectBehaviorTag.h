@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SmartObjectBehaviorTagContext;
 class C_SmartObjectBehaviorTag : public C_NodeWrapper<C_SmartObjectBehaviorTag, C_SmartEntityBehaviorTag, S_SmartObjectBehaviorTagContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SmartObjectBehaviorTag;
     uint8_t _ownState[0x10];   // [UNVERIFIED] own members above C_SmartEntityBehaviorTag (0x28)
 };
 static_assert(sizeof(C_SmartObjectBehaviorTag) == 0x38);

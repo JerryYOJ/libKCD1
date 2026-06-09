@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SetPlayerHorseSpeedContext;
 class C_SetPlayerHorseSpeed : public C_NodeWrapper<C_SetPlayerHorseSpeed, C_Node, S_SetPlayerHorseSpeedContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SetPlayerHorseSpeed;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SetPlayerHorseSpeed) == 0x28);

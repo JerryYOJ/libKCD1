@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetLastNavmeshPositionContext;
 class C_GetLastNavmeshPosition : public C_NodeWrapper<C_GetLastNavmeshPosition, C_Node, S_GetLastNavmeshPositionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetLastNavmeshPosition;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetLastNavmeshPosition) == 0x28);

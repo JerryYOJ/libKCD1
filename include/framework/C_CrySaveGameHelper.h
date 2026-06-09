@@ -22,6 +22,7 @@ class C_CryOutputSerializer;
 
 class C_CrySaveGameHelper {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CrySaveGameHelper;
     virtual ~C_CrySaveGameHelper() = default;                                   // [0]
     virtual bool        SetSavePath(const char* path);                          // [1]  copies path into m_savePath
     virtual void        WriteChunkHeader(const char* chunkName, int32_t tag);   // [2]  writes name+tag to active stream (tag 0x20A8)

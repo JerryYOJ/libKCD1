@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_AssertConditionContext;
 class C_AssertCondition : public C_NodeWrapper<C_AssertCondition, C_Node, S_AssertConditionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AssertCondition;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_AssertCondition) == 0x28);

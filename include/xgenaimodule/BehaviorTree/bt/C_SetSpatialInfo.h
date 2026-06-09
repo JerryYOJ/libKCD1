@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SetSpatialInfoContext;
 class C_SetSpatialInfo : public C_NodeWrapper<C_SetSpatialInfo, C_Node, S_SetSpatialInfoContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SetSpatialInfo;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SetSpatialInfo) == 0x28);

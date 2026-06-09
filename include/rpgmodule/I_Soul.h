@@ -32,6 +32,7 @@ class C_PerkList;
 
 class I_Soul {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_Soul;
     virtual ~I_Soul() = default;                     // [0]  0x1806f8b20
     virtual void vf01() {}                            // [1]  0x1811f6168
     virtual void vf02() {}                            // [2]  0x1806ff680

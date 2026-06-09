@@ -75,6 +75,7 @@ class C_Player : public C_Human,
                  public Offsets::IGameFrameworkListener  // +0xA08
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Player;
     // ===================================================================
     // IActor overrides
     // ===================================================================

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_DismissSearchCandidateContext;
 class C_DismissSearchCandidate : public C_NodeWrapper<C_DismissSearchCandidate, C_Node, S_DismissSearchCandidateContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_DismissSearchCandidate;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_DismissSearchCandidate) == 0x28);

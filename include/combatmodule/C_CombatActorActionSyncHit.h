@@ -11,6 +11,7 @@ class C_CombatActorActionSyncHit
     : public C_CombatActorAnimatedAction<S_CombatActorActionSyncHitParams, 1, I_CombatActorActionPrivate>
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorActionSyncHit;
     // Primary vtable: 0x1821BDFF0 | Ctor: 0x180565844 | Size: 0x108
     uint32_t                    m_unknown;          // (init 0)
     uint16_t                    m_flags;            // (init 0x100)

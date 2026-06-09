@@ -14,6 +14,7 @@ namespace wh::xgenaimodule::BehaviorTree {
 // ---------------------------------------------------------------------------
 class C_Decorator : public C_Node {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Decorator;
     const char* GetNodeCategory() const override { return "Decorator"; } // [6]
     int32_t     GetChildCount()   const override { return 1; }           // [9]  single child
     bool        IsComposite()     const override { return true; }        // [10] has a managed child
@@ -27,6 +28,8 @@ static_assert(sizeof(C_Decorator) == 0x30);
 // RTTI: .?AVC_WrapperDecorator@BehaviorTree@xgenaimodule@wh@@
 // ---------------------------------------------------------------------------
 class C_WrapperDecorator : public C_Decorator {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_WrapperDecorator;
 };
 static_assert(sizeof(C_WrapperDecorator) == 0x30);
 

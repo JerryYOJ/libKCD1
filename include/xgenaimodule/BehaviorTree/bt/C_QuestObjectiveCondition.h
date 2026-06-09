@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_QuestObjectiveCondition;
 class C_QuestObjectiveCondition : public C_NodeWrapper<C_QuestObjectiveCondition, C_Gate, S_QuestObjectiveCondition>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_QuestObjectiveCondition;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_QuestObjectiveCondition) == 0x68);

@@ -20,6 +20,7 @@ namespace wh::rpgmodule {
 
 class C_ConstantSoulBuffInstance : public C_SoulBuffInstance {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ConstantSoulBuffInstance;
     // Buff never expires.
     bool Update() override { return true; }                                            // [1] 0x1806F82B0
 

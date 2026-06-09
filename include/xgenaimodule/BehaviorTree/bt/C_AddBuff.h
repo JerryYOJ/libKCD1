@@ -111,6 +111,7 @@ namespace wh::xgenaimodule::BehaviorTree {
 // -----------------------------------------------------------------------------
 struct S_AddBuffContext : public S_BaseNodeContext   // base supplies the +0x00 vptr
 {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_AddBuffContext;
     /* +0x08 */ uint8_t   m_status;            // BT E_NodeStatus byte
     /* +0x09 */ uint8_t   _pad09[7];
     /* +0x10 */ uint64_t  m_unk10;             // copied by ctor; role [UNVERIFIED]
@@ -132,6 +133,7 @@ struct S_AddBuffContext : public S_BaseNodeContext   // base supplies the +0x00 
 class C_AddBuff : public C_Node
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AddBuff;
     using RuntimeData = S_AddBuffContext;
     // Type-specific vtable slots (addresses VERIFIED; see banner for behaviour):
     //   slot 0  = 0x180705660   slot 5  = 0x1806E37D4   slot 14 = 0x181568ED8

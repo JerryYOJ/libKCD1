@@ -13,6 +13,7 @@ namespace wh::combatmodule {
 // ---------------------------------------------------------------------------
 class I_CombatActorActionBlock : public I_CombatActorActionPrivate {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_CombatActorActionBlock;
     // No additional methods identified beyond I_CombatActorActionPrivate.
     // Block uses this as its primary interface type parameter in the
     // template chain: C_Action<I_CombatActorActionBlock>.

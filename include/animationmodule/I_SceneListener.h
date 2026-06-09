@@ -18,6 +18,7 @@ namespace wh::animationmodule {
 
 class I_SceneListener {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_SceneListener;
     virtual ~I_SceneListener() = default;       // [0]
     virtual void OnSceneChanged() = 0;          // [1] UNVERIFIED name
 };

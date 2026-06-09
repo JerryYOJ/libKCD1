@@ -18,6 +18,7 @@ namespace wh::combatmodule {
 // ---------------------------------------------------------------------------
 class I_CombatActorMercyKill {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_CombatActorMercyKill;
     virtual ~I_CombatActorMercyKill() = default;                    // [0]
     virtual int CanMercyKill(EntityId victimEntityId) = 0;          // [1] sub_180F50784
     virtual bool RequestMercyKill(EntityId victimEntityId) = 0;     // [2] sub_180F537E0
@@ -51,6 +52,7 @@ public:
 class C_CombatActorMercyKill : public C_CombatActorObject,
                                 public I_CombatActorMercyKill {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorMercyKill;
     inline static constexpr auto VTABLE = Offsets::VTABLE_C_CombatActorMercyKill;
 
     E_CombatSubsystem GetSubsystemId() const override { return COMBAT_SUB_MERCY_KILL; }

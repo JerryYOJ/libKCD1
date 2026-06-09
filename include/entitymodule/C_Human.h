@@ -30,6 +30,7 @@ class C_HumanHandHelper;
 
 class C_Human : public C_Actor {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Human;
     // No new virtual methods identified — overrides only
 
     // Signal (void)

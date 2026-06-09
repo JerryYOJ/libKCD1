@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_OnCombatEventContext;
 class C_OnCombatEvent : public C_NodeWrapper<C_OnCombatEvent, C_CombatantHubExtended<C_DeferredExecution>, S_OnCombatEventContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_OnCombatEvent;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_OnCombatEvent) == 0x30);

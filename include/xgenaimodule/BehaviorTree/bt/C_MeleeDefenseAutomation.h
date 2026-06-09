@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_MeleeDefenseAutomationContext;
 class C_MeleeDefenseAutomation : public C_NodeWrapper<C_MeleeDefenseAutomation, C_CombatAutomationBase<C_Node>, S_MeleeDefenseAutomationContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_MeleeDefenseAutomation;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_MeleeDefenseAutomation) == 0x28);

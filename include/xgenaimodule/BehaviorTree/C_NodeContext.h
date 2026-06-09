@@ -118,6 +118,7 @@ namespace wh { namespace xgenaimodule { namespace BehaviorTree {
 // ----------------------------------------------------------------------------
 struct S_BaseNodeContext
 {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_BaseNodeContext;
     // No data members (per-element stride is 1 byte for this pool).
 };
 static_assert(sizeof(S_BaseNodeContext) == 1,

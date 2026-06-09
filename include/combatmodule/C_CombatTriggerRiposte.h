@@ -12,6 +12,7 @@ namespace wh::combatmodule {
 // OnDeactivate: clears m_riposteTriggerActive, fires state+0x6C0
 class C_CombatTriggerRiposte : public C_CombatSlotTrigger {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatTriggerRiposte;
     ~C_CombatTriggerRiposte() override = default;               // [0]  sub_1806AADB4
     const char* GetName() const override { return ""; }          // [3]  sub_1806FC790
     void unk_6() override {}                                     // [6]  sub_180432B18

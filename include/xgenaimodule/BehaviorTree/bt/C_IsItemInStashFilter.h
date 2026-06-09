@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_WUIDFilterContext;
 class C_IsItemInStashFilter : public C_NodeWrapper<C_IsItemInStashFilter, C_WUIDFilter, S_WUIDFilterContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_IsItemInStashFilter;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_IsItemInStashFilter) == 0x30);

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_IntermissionGateContext;
 class C_IntermissionGate : public C_NodeWrapper<C_IntermissionGate, C_PassiveBarrier, S_IntermissionGateContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_IntermissionGate;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_IntermissionGate) == 0x30);

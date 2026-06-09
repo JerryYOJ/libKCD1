@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_PlayerOnBedContext;
 class C_PlayerOnBed : public C_NodeWrapper<C_PlayerOnBed, C_Decorator, S_PlayerOnBedContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_PlayerOnBed;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_PlayerOnBed) == 0x30);

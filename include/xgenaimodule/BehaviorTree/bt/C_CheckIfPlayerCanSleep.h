@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_CheckIfPlayerCanSleepContext;
 class C_CheckIfPlayerCanSleep : public C_NodeWrapper<C_CheckIfPlayerCanSleep, C_Node, S_CheckIfPlayerCanSleepContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CheckIfPlayerCanSleep;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_CheckIfPlayerCanSleep) == 0x28);

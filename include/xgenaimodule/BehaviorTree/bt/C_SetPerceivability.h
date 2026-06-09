@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SetPerceivabilityContext;
 class C_SetPerceivability : public C_NodeWrapper<C_SetPerceivability, C_Node, S_SetPerceivabilityContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SetPerceivability;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SetPerceivability) == 0x28);

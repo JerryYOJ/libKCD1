@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ExecuteSoundTriggerContext;
 class C_ExecuteSoundTrigger : public C_NodeWrapper<C_ExecuteSoundTrigger, C_Node, S_ExecuteSoundTriggerContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ExecuteSoundTrigger;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_ExecuteSoundTrigger) == 0x28);

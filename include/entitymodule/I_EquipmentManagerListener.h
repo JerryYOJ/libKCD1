@@ -9,6 +9,7 @@
 namespace wh::entitymodule {
 
 struct I_EquipmentManagerListener {
+    inline static constexpr auto RTTI = Offsets::RTTI_I_EquipmentManagerListener;
     virtual ~I_EquipmentManagerListener() = default;
     virtual void OnEquipmentChanged() {}
     virtual void OnEquipmentSlotUpdated() {}

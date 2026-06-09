@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ReadinessWaitContext;
 class C_ReadinessWait : public C_NodeWrapper<C_ReadinessWait, C_Node, S_ReadinessWaitContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ReadinessWait;
     uint8_t _ownState[0x8];   // [UNVERIFIED] own members above C_Node (0x28)
 };
 static_assert(sizeof(C_ReadinessWait) == 0x30);

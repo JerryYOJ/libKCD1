@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_DespawnContext;
 class C_Despawn : public C_NodeWrapper<C_Despawn, C_Node, S_DespawnContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Despawn;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_Despawn) == 0x28);

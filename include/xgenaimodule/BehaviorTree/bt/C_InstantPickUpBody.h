@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_InstantPickUpBodyContext;
 class C_InstantPickUpBody : public C_NodeWrapper<C_InstantPickUpBody, C_Node, S_InstantPickUpBodyContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_InstantPickUpBody;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_InstantPickUpBody) == 0x28);

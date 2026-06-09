@@ -32,6 +32,7 @@ class C_FastTravel
     , public I_ReadinessDebuggable      // +0x08  (2 slots)
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_FastTravel;
     guimodule::SUIEventSenderBlock m_signalStarted;  // +0x10  FT started signal
     guimodule::SUIEventSenderBlock m_signalStopped;  // +0x50  FT stopped signal
 

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_RangeSorterContext;
 class C_RangeSorter : public C_NodeWrapper<C_RangeSorter, C_LinkSorterDataSource, S_RangeSorterContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_RangeSorter;
     uint8_t _ownState[0x8];   // [UNVERIFIED] own members above C_LinkSorterDataSource (0x28)
 };
 static_assert(sizeof(C_RangeSorter) == 0x30);

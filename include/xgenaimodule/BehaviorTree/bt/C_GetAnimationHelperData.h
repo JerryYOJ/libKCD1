@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetAnimationHelperDataContext;
 class C_GetAnimationHelperData : public C_NodeWrapper<C_GetAnimationHelperData, C_Node, S_GetAnimationHelperDataContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetAnimationHelperData;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetAnimationHelperData) == 0x28);

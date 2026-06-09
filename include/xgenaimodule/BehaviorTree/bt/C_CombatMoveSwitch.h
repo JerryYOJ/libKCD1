@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_CombatMoveSwitchContext;
 class C_CombatMoveSwitch : public C_NodeWrapper<C_CombatMoveSwitch, C_ForwardingData<C_FixedComposite<2>>, S_CombatMoveSwitchContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatMoveSwitch;
     uint8_t _ownState[0x20];   // [UNVERIFIED] own members above C_ForwardingData<C_FixedComposite<2>> (0x38)
 };
 static_assert(sizeof(C_CombatMoveSwitch) == 0x58);

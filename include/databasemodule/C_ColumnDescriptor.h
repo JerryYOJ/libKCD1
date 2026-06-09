@@ -13,6 +13,7 @@ namespace wh::databasemodule {
 // Layout derived from vtable getters at 0x1822bff00
 class C_ColumnDescriptorBase : public I_ColumnDescriptor {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ColumnDescriptorBase;
     // +0x00: vtable*
     uint32_t m_typeId;          // +0x08  column type enum
     uint32_t m_offset;          // +0x0C  byte offset in row struct
@@ -31,19 +32,31 @@ static_assert(sizeof(C_ColumnDescriptorBase) == 0x38, "C_ColumnDescriptorBase mu
 
 // C_ColumnDescriptor — non-PK column. IsPrimaryKey() returns false.
 // vtable @ 0x1822bfdd8
-class C_ColumnDescriptor : public C_ColumnDescriptorBase {};
+class C_ColumnDescriptor : public C_ColumnDescriptorBase {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ColumnDescriptor;
+};
 
 // C_PKColumnDescriptor — primary key column. IsPrimaryKey() returns true.
 // vtable @ 0x1822bfd50
-class C_PKColumnDescriptor : public C_ColumnDescriptorBase {};
+class C_PKColumnDescriptor : public C_ColumnDescriptorBase {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_PKColumnDescriptor;
+};
 
 // C_NotPatchedColumnDescriptor — column that skips string pointer patching.
 // vtable @ 0x1822c6a68
-class C_NotPatchedColumnDescriptor : public C_ColumnDescriptorBase {};
+class C_NotPatchedColumnDescriptor : public C_ColumnDescriptorBase {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_NotPatchedColumnDescriptor;
+};
 
 // C_RenamedColumnDescriptor — column with a different name mapping.
 // vtable @ 0x1826a4a60
-class C_RenamedColumnDescriptor : public C_ColumnDescriptorBase {};
+class C_RenamedColumnDescriptor : public C_ColumnDescriptorBase {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_RenamedColumnDescriptor;
+};
 
 // Helper function that creates a C_ColumnDescriptor with int32 type and default value.
 // sub_180713848(descriptor_ptr, row_offset, "column_name", &default_value)

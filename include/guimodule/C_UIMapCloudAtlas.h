@@ -15,6 +15,7 @@ namespace wh::guimodule {
 
 class C_UIMapCloudAtlas {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_UIMapCloudAtlas;
     virtual void _vf0() {};   // [0] 0x00
     virtual void _vf1() {};   // [1] 0x08
     virtual void _vf2() {};   // [2] 0x10

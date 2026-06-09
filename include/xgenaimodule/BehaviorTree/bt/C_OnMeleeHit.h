@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_OnMeleeHitContext;
 class C_OnMeleeHit : public C_NodeWrapper<C_OnMeleeHit, C_CombatantHubExtended<C_DeferredExecution>, S_OnMeleeHitContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_OnMeleeHit;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_OnMeleeHit) == 0x30);

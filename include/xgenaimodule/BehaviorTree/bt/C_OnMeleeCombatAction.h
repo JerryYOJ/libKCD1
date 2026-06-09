@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_OnMeleeCombatActionContext;
 class C_OnMeleeCombatAction : public C_NodeWrapper<C_OnMeleeCombatAction, C_OnActionBase, S_OnMeleeCombatActionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_OnMeleeCombatAction;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_OnMeleeCombatAction) == 0x30);

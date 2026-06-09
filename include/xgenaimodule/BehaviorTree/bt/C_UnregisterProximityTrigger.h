@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_UnregisterProximityTriggerContext;
 class C_UnregisterProximityTrigger : public C_NodeWrapper<C_UnregisterProximityTrigger, C_Node, S_UnregisterProximityTriggerContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_UnregisterProximityTrigger;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_UnregisterProximityTrigger) == 0x28);

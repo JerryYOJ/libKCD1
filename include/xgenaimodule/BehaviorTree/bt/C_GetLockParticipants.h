@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetLockParticipantsContext;
 class C_GetLockParticipants : public C_NodeWrapper<C_GetLockParticipants, C_Node, S_GetLockParticipantsContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetLockParticipants;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetLockParticipants) == 0x28);

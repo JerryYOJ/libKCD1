@@ -154,6 +154,7 @@ namespace wh { namespace xgenaimodule { namespace BehaviorTree {
 // Base per-node-instance context for the C_ProcessMessageBase decorator layer.
 struct S_ProcessMessageBaseContext : public S_BaseNodeContext
 {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_ProcessMessageBaseContext;
     // [UNVERIFIED] members (decorator + message-base per-tick state).
 };
 
@@ -184,6 +185,7 @@ struct S_ReceiveMessageTimedContext : public TInner
 struct S_ProcessMessageContext
     : public S_ReceiveMessageTimedContext<S_ProcessMessageBaseContext>
 {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_ProcessMessageContext;
     // [UNVERIFIED] members. Total sizeof == 0x78 (VERIFIED via sub_1812EE27C).
     // Per-field bindings (the XML "variable" target + message attributes) are
     // resolved at runtime through the field-binding tables, not via fixed
@@ -199,6 +201,8 @@ struct S_ProcessMessageContext
 //   [UNVERIFIED] node-side data members beyond the C_Decorator header.
 // ----------------------------------------------------------------------------
 class C_ProcessMessageBase : public C_Decorator {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ProcessMessageBase;
     // [UNVERIFIED] extra members (message-routing ids/handles placed by the
     // node ctor's relocation-table fixup loop; offsets not individually pinned).
 };
@@ -243,6 +247,7 @@ class C_ReceiveMessageTimed : public C_ReceiveMessageBase<TBase> {
 class C_ProcessMessage
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ProcessMessage;
     using RuntimeData = S_ProcessMessageContext;
 
     // [14] sub_18148025C: bind each subscribed message field from the live inbox

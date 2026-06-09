@@ -16,6 +16,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ItemParamFilterContext;
 class C_ItemParamFilter : public C_NodeWrapper<C_ItemParamFilter, C_LinkFilterWithSource<C_ItemParamFilter, C_LinkLimitedData<C_Node>>, S_ItemParamFilterContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ItemParamFilter;
     uint8_t _ownState[0x8];   // [UNVERIFIED] own members above C_LinkFilterWithSource<C_ItemParamFilter, C_LinkLimitedData<C_Node>> (0x28)
 };
 static_assert(sizeof(C_ItemParamFilter) == 0x30);

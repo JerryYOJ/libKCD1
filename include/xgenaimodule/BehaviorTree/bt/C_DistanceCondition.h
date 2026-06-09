@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_DistanceConditionContext;
 class C_DistanceCondition : public C_NodeWrapper<C_DistanceCondition, C_Decorator, S_DistanceConditionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_DistanceCondition;
     uint8_t _ownState[0x18];   // [UNVERIFIED] own members above C_Decorator (0x30)
 };
 static_assert(sizeof(C_DistanceCondition) == 0x48);

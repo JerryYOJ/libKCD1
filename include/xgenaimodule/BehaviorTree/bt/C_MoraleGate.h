@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_NPCStateGateBaseContext;
 class C_MoraleGate : public C_NodeWrapper<C_MoraleGate, C_NPCStatGateBase, S_NPCStateGateBaseContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_MoraleGate;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_MoraleGate) == 0x30);

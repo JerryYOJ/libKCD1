@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_IsInsideAreaWithLabelBarrierContext;
 class C_IsInsideAreaWithLabelBarrier : public C_NodeWrapper<C_IsInsideAreaWithLabelBarrier, C_PassiveBarrier, S_IsInsideAreaWithLabelBarrierContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_IsInsideAreaWithLabelBarrier;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_IsInsideAreaWithLabelBarrier) == 0x30);

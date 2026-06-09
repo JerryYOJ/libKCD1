@@ -14,6 +14,7 @@ namespace wh::databasemodule {
 
 class I_DatabaseListener {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_DatabaseListener;
     virtual ~I_DatabaseListener() = default;
 };
 static_assert(sizeof(I_DatabaseListener) == 0x08);

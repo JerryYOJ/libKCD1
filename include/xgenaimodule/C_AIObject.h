@@ -25,6 +25,7 @@ class C_AIPuppet;   // the embodied AI agent (world transform + movement); see m
 
 class C_AIObject {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AIObject;
     // --- primary vtable, 9 slots (slot bodies are the C_AIObject base versions;
     //     C_LinkableObject/C_MessageCapableObject/C_IntelligentObject override 0,1,2) ---
     virtual void     OnInit();                 // [0] +0x00  per-level init/registration hook  [name inferred]

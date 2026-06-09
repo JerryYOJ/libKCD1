@@ -13,6 +13,7 @@ namespace wh::rpgmodule {
 
 class C_InjuredBuffInitParams : public I_BuffInitParams {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_InjuredBuffInitParams;
     ~C_InjuredBuffInitParams() override;                                                // 0x1806ED33C
     float GetFloatParam(int nKey) override;                                             // 0x1806CD564 key=0 -> m_injuryAmount
     int GetIntParam(int nKey) override;                                                 // 0x1806CD54C key=1 -> m_injuryIntParam, key=2 -> m_injuryFlag

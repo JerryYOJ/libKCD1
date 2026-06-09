@@ -9,6 +9,7 @@
 namespace wh::framework {
 class C_ScriptBindTrace : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindTrace;
     void* m_pContext;  // +0x60
     // int PlotXY(IFunctionHandler* pH);       // 0x180F32EF0 (noop)
     // int TableXY(IFunctionHandler* pH);      // 0x180F32EF0 (noop)

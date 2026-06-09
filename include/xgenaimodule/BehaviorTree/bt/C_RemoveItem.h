@@ -143,6 +143,7 @@ namespace wh::xgenaimodule::BehaviorTree {
 // documented head so the layout above is not over-asserted.
 // ---------------------------------------------------------------------------
 struct S_RemoveItemContext {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_RemoveItemContext;
     // NOTE: this is a forward layout sketch.  The two polymorphic bases
     // (C_AIObject at +0x00 and C_DynamicLinkableObject at +0x60) are real but
     // are not redefined here to avoid duplicating types that live in
@@ -193,6 +194,8 @@ struct S_RemoveItemContext {
 class C_RemoveItem
     : public C_NodeWrapper<C_RemoveItem, C_Node, S_RemoveItemContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_RemoveItem;
     // No own data members - object == sizeof(C_Node) == 0x28 (VERIFIED above).
     //
     // The four <RemoveItem .../> XML attributes (Item / Amount /

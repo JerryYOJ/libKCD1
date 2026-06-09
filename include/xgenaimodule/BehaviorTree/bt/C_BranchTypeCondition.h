@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_BranchTypeConditionContext;
 class C_BranchTypeCondition : public C_NodeWrapper<C_BranchTypeCondition, C_Gate, S_BranchTypeConditionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_BranchTypeCondition;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_BranchTypeCondition) == 0x68);

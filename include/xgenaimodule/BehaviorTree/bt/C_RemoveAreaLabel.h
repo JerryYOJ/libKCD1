@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ChangeAreaLabelContext;
 class C_RemoveAreaLabel : public C_NodeWrapper<C_RemoveAreaLabel, C_ChangeAreaLabel, S_ChangeAreaLabelContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_RemoveAreaLabel;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_RemoveAreaLabel) == 0x28);

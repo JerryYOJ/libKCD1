@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_StealthAcceptContext;
 class C_StealthAccept : public C_NodeWrapper<C_StealthAccept, C_DefferedStateChange, S_StealthAcceptContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_StealthAccept;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_StealthAccept) == 0x28);

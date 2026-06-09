@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_HandCheckContext;
 class C_HandCheck : public C_NodeWrapper<C_HandCheck, C_Node, S_HandCheckContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_HandCheck;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_HandCheck) == 0x28);

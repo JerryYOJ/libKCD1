@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_DoMonologueContext;
 class C_DoMonologue : public C_NodeWrapper<C_DoMonologue, C_DefferedStateChange, S_DoMonologueContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_DoMonologue;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_DoMonologue) == 0x28);

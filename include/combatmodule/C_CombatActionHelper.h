@@ -15,6 +15,7 @@ namespace wh::combatmodule {
 // ---------------------------------------------------------------------------
 class C_CombatActionHelperAttack : public _i_reference_target<int> {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActionHelperAttack;
     uint8_t m_data[0x28];  // +0x10..+0x37
 };
 static_assert(sizeof(C_CombatActionHelperAttack) == 0x38);
@@ -31,6 +32,7 @@ typedef _smart_ptr<C_CombatActionHelperAttack> C_CombatActionHelperAttackPtr;
 // ---------------------------------------------------------------------------
 class C_CombatActionHelperBlock : public _i_reference_target<int> {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActionHelperBlock;
     uint8_t m_data[0x18];  // +0x10..+0x27
 };
 static_assert(sizeof(C_CombatActionHelperBlock) == 0x28);

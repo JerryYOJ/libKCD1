@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SkipActivityContext;
 class C_SkipActivity : public C_NodeWrapper<C_SkipActivity, C_Node, S_SkipActivityContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SkipActivity;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SkipActivity) == 0x28);

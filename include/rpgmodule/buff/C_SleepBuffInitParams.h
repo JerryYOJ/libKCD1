@@ -12,6 +12,7 @@ namespace wh::rpgmodule {
 
 class C_SleepBuffInitParams : public I_BuffInitParams {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SleepBuffInitParams;
     ~C_SleepBuffInitParams() override;                                                  // 0x180568690
     float GetFloatParam(int nKey) override;                                             // 0x1802AD5F0 key=0 -> m_sleepParam0, key=1 -> m_sleepParam1
     int GetIntParam(int nKey) override;                                                 // 0x1803953E0 -> 0

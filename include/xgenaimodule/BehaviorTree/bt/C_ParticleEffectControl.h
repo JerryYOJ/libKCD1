@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ParticleEffectControlContext;
 class C_ParticleEffectControl : public C_NodeWrapper<C_ParticleEffectControl, C_Node, S_ParticleEffectControlContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ParticleEffectControl;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_ParticleEffectControl) == 0x28);

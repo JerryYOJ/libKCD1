@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ExistPathContext;
 class C_ExistPath : public C_NodeWrapper<C_ExistPath, C_GraphSearch, S_ExistPathContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ExistPath;
     uint8_t _ownState[0x8];   // [UNVERIFIED] own members above C_GraphSearch (0x58)
 };
 static_assert(sizeof(C_ExistPath) == 0x60);

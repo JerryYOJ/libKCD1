@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_AddLinkContext;
 class C_AddLink : public C_NodeWrapper<C_AddLink, C_Node, S_AddLinkContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AddLink;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_AddLink) == 0x28);

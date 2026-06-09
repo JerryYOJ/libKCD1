@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetFormationParticipantsContext;
 class C_GetFormationParticipants : public C_NodeWrapper<C_GetFormationParticipants, C_Node, S_GetFormationParticipantsContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetFormationParticipants;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetFormationParticipants) == 0x28);

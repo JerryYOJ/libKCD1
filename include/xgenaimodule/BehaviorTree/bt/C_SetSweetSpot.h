@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SetSweetSpotContext;
 class C_SetSweetSpot : public C_NodeWrapper<C_SetSweetSpot, C_Node, S_SetSweetSpotContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SetSweetSpot;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SetSweetSpot) == 0x28);

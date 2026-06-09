@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_OnInventoryEventContext;
 class C_OnInventoryEvent : public C_NodeWrapper<C_OnInventoryEvent, C_Decorator, S_OnInventoryEventContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_OnInventoryEvent;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_OnInventoryEvent) == 0x30);

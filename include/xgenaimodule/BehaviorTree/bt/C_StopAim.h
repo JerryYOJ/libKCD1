@@ -13,6 +13,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 // <StopAim>  RTTI C_StopAim  vtable 0x1823585d0  size 0x28  base C_Node  ctx S_BaseNodeContext
 class C_StopAim : public C_NodeWrapper<C_StopAim, C_Node, S_BaseNodeContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_StopAim;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_StopAim) == 0x28);

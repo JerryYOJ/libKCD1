@@ -89,6 +89,7 @@ static_assert(sizeof(S_SaveGameSlot) == 0x38);
 
 class C_SaveGameManager : public wh::I_ReadinessTask {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SaveGameManager;
     virtual ~C_SaveGameManager() = default;             // [4] introduces the virtual dtor
 
     // Core save routine (sub_180F12D64): serializes all modules into a save buffer,

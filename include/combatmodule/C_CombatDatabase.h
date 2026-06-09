@@ -122,6 +122,7 @@ class C_CombatComboDatabase
             C_CombatComboData,
             databasemodule::S_CombatComboTableRow>> {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatComboDatabase;
 
     // +0x148: Listener set for combat system rebuild notifications.
     //         Allocated via sub_180732120 (0x30-byte tree node).
@@ -193,6 +194,7 @@ class C_CombatComboStepDatabase
             C_CombatComboStepData,
             databasemodule::S_CombatComboStepTableRow>> {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatComboStepDatabase;
 
     // +0xF8: Combo damage/speed scale factor.
     //        Initialized to 1.0f (0x3F800000) in constructor.

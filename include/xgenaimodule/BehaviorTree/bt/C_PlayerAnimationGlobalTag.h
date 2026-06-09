@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_PlayerAnimationGlobalTagContext;
 class C_PlayerAnimationGlobalTag : public C_NodeWrapper<C_PlayerAnimationGlobalTag, C_WrapperDecorator, S_PlayerAnimationGlobalTagContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_PlayerAnimationGlobalTag;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_PlayerAnimationGlobalTag) == 0x30);

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SpreadInformationContext;
 class C_SpreadInformation : public C_NodeWrapper<C_SpreadInformation, C_Node, S_SpreadInformationContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SpreadInformation;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SpreadInformation) == 0x28);

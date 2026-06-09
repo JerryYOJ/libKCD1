@@ -30,6 +30,7 @@ struct S_ModifierNode;
 
 class C_BuffInstanceBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_BuffInstanceBase;
     // --- Pure virtuals (must be overridden by concrete buffs) ---
 
     // Initialize the buff instance with definition data and optional params.

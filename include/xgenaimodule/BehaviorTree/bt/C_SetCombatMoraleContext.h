@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ModifyMoraleContextBaseContext;
 class C_SetCombatMoraleContext : public C_NodeWrapper<C_SetCombatMoraleContext, C_ModifyMoraleContextBase, S_ModifyMoraleContextBaseContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SetCombatMoraleContext;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SetCombatMoraleContext) == 0x28);

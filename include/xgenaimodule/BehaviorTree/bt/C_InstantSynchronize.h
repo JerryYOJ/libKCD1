@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_InstantSynchronizeContext;
 class C_InstantSynchronize : public C_NodeWrapper<C_InstantSynchronize, C_LockNode<C_ExecutionBarrier>, S_InstantSynchronizeContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_InstantSynchronize;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_InstantSynchronize) == 0x30);

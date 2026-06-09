@@ -25,6 +25,7 @@ struct S_ColumnMetadata {
 // vtable @ 0x1822c1db0
 class I_ObjectDatabase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_ObjectDatabase;
     virtual ~I_ObjectDatabase() = 0;                        // [0]
     virtual int GetVersion() const = 0;                     // [1]  returns 1
     virtual bool Load() = 0;                                // [2]  pure — triggers XML/TBL loading

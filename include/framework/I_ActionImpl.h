@@ -24,6 +24,7 @@ namespace wh::framework {
 // ---------------------------------------------------------------------------
 class I_ActionImpl {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_ActionImpl;
     virtual ~I_ActionImpl() = default;                  // [0]
     virtual void Start() = 0;                           // [1] sub_18043065C
     virtual void Stop() = 0;                            // [2] sub_1804307F4

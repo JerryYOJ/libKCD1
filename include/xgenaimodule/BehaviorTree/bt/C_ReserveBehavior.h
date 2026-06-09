@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ReserveBehaviorContext;
 class C_ReserveBehavior : public C_NodeWrapper<C_ReserveBehavior, C_FixedComposite<2>, S_ReserveBehaviorContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ReserveBehavior;
     uint8_t _ownState[0x30];   // [UNVERIFIED] own members above C_FixedComposite<2> (0x38)
 };
 static_assert(sizeof(C_ReserveBehavior) == 0x68);

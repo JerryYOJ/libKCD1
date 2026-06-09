@@ -16,6 +16,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_OnPathFilterContext;
 class C_OnPathFilter : public C_NodeWrapper<C_OnPathFilter, C_LinkModifier<C_LinkNoData<C_FixedComposite<1>>, I_LinkFilter>, S_OnPathFilterContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_OnPathFilter;
     uint8_t _ownState[0x20];   // [UNVERIFIED] own members above C_LinkModifier<C_LinkNoData<C_FixedComposite<1>>, I_LinkFilter> (0x30)
 };
 static_assert(sizeof(C_OnPathFilter) == 0x50);

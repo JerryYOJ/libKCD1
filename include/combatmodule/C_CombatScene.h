@@ -25,6 +25,7 @@ class C_CombatActor;
 // ---------------------------------------------------------------------------
 class I_CombatScene {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_CombatScene;
     virtual ~I_CombatScene() = default;                                     // [0]
     // VERIFIED from sub_180FAA9F8: iterates m_actors vector, for each actor
     // calls vtable+0x40 (GetEntityId, returns uint32_t), compares with a2.
@@ -86,6 +87,7 @@ class C_CombatScene : public I_CombatScene,
                       public IEntitySystemSink
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatScene;
     // ---- Virtual method overrides (I_CombatScene) ----
     ~C_CombatScene() override = default;                                    // [0]
     void GetActorsByEntityId(uint32_t entityId,

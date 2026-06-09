@@ -22,6 +22,7 @@ namespace wh {
 
 class I_ReadinessTask : public I_ReadinessDebuggable {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_ReadinessTask;
     virtual bool     IsReady(uint8_t flags) = 0;   // pending work drained?
     virtual uint32_t GetTypeMask() = 0;            // readiness requirement bitmask
 };

@@ -35,6 +35,7 @@ class C_Soul;
 
 class C_BuffManager {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_BuffManager;
     static C_BuffManager* GetInstance();
 
     virtual C_BuffInstanceBase* AddBuff(C_Soul* pSoul, const CryGUID* pBuffGuid, void* pParams);    // [0] 0x18056998C

@@ -16,6 +16,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_IsHiddenFilterContext;
 class C_IsHiddenFilter : public C_NodeWrapper<C_IsHiddenFilter, C_LinkFilterWithSource<C_IsHiddenFilter, C_LinkLimitedData<C_Node>>, S_IsHiddenFilterContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_IsHiddenFilter;
     uint8_t _ownState[0x8];   // [UNVERIFIED] own members above C_LinkFilterWithSource<C_IsHiddenFilter, C_LinkLimitedData<C_Node>> (0x28)
 };
 static_assert(sizeof(C_IsHiddenFilter) == 0x30);

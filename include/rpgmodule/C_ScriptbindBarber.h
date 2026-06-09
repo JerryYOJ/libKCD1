@@ -9,6 +9,7 @@
 namespace wh::rpgmodule {
 class C_ScriptbindBarber : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptbindBarber;
     // int Create(IFunctionHandler* pH, ScriptHandle soul);    // 0x1811BE584
     // int Destroy(IFunctionHandler* pH, ScriptHandle barber); // 0x1811BEDD4
     // int TryHair(IFunctionHandler* pH, const char* guid);    // 0x1811CFDE8

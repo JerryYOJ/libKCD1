@@ -15,6 +15,7 @@ namespace wh::rpgmodule {
 
 class C_ScriptBindSoul : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindSoul;
     void* m_pScriptSystem;    // +0x60
     void* m_pEntitySystem;    // +0x68
     void* m_pContext;          // +0x70

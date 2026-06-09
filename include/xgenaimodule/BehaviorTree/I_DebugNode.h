@@ -13,6 +13,7 @@ namespace wh::xgenaimodule::BehaviorTree {
 // ---------------------------------------------------------------------------
 class I_DebugNode {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_DebugNode;
     virtual ~I_DebugNode() = default;           // [0]
     virtual void unk_debug_1() {}               // [1] nop
     virtual void GetDebugText(void* out) {}     // [2]

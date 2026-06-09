@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_DestroyInformationFromHolderContext;
 class C_DestroyInformationFromHolder : public C_NodeWrapper<C_DestroyInformationFromHolder, C_Node, S_DestroyInformationFromHolderContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_DestroyInformationFromHolder;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_DestroyInformationFromHolder) == 0x28);

@@ -42,6 +42,7 @@ enum class E_ItemDataType : int {
 
 // --- root ------------------------------------------------------------------
 struct S_ItemData {                             // ctor sub_181080034, vtable 0x1822E15D0
+    inline static constexpr auto RTTI = Offsets::RTTI_S_ItemData;
     virtual ~S_ItemData();                      // +0x00
     CryGUID           m_itemId;                 // +0x08  <- item.item_id  (the class GUID)
     CryStringT<char>  m_itemName;               // +0x18  <- item.item_name
@@ -49,12 +50,14 @@ struct S_ItemData {                             // ctor sub_181080034, vtable 0x
 static_assert(sizeof(S_ItemData) == 0x20);
 
 struct S_AlchemyBaseData : S_ItemData {         // ctor sub_18107FA28, vtable 0x1826C2848
+    inline static constexpr auto RTTI = Offsets::RTTI_S_AlchemyBaseData;
     CryStringT<char>  m_uiName;                 // +0x20  <- alchemy_base.ui_name
 };
 static_assert(sizeof(S_AlchemyBaseData) == 0x28);   // factory id 0xB
 
 // --- pickable --------------------------------------------------------------
 struct S_PickableItemData : S_ItemData {        // ctor sub_181080348, vtable 0x1822E1938
+    inline static constexpr auto RTTI = Offsets::RTTI_S_PickableItemData;
     CryStringT<char>  m_entityScript;           // +0x20  <- pickable_item.entity_script
     CryStringT<char>  m_material;               // +0x28  <- pickable_item.material
     CryStringT<char>  m_model;                  // +0x30  <- pickable_item.model
@@ -67,6 +70,7 @@ struct S_PickableItemData : S_ItemData {        // ctor sub_181080348, vtable 0x
 static_assert(sizeof(S_PickableItemData) == 0x60);
 
 struct S_NPCToolData : S_PickableItemData {     // ctor sub_181080244, vtable 0x1826C3158
+    inline static constexpr auto RTTI = Offsets::RTTI_S_NPCToolData;
     int32_t           m_npcToolSubtypeId;       // +0x60  <- npc_tool.npc_tool_subtype_id
     int32_t           m_npcToolTypeId;          // +0x64  <- npc_tool.npc_tool_type_id
     int32_t           m_manipulationType;       // +0x68  <- npc_tool.manipulation_type
@@ -75,6 +79,7 @@ struct S_NPCToolData : S_PickableItemData {     // ctor sub_181080244, vtable 0x
 static_assert(sizeof(S_NPCToolData) == 0x70);       // factory id 0xC
 
 struct S_PlayerItemData : S_PickableItemData {  // ctor sub_1810803B4, vtable 0x1822E1818
+    inline static constexpr auto RTTI = Offsets::RTTI_S_PlayerItemData;
     int32_t           m_iconId;                 // +0x60  <- player_item.icon_id
     uint32_t          _pad64;                   // +0x64
     CryStringT<char>  m_uiName;                 // +0x68  <- player_item.ui_name
@@ -84,6 +89,7 @@ static_assert(sizeof(S_PlayerItemData) == 0x78);
 
 // --- equippables -----------------------------------------------------------
 struct S_EquippableItemData : S_PlayerItemData {  // ctor sub_18107FE68, vtable 0x1822E16E0
+    inline static constexpr auto RTTI = Offsets::RTTI_S_EquippableItemData;
     float             m_charisma;               // +0x78  <- equippable_item.charisma
     float             m_conspicuousness;        // +0x7C  <- equippable_item.conspicuousness
     float             m_rpgBuffWeight;          // +0x80  <- equippable_item.rpg_buff_weight
@@ -94,11 +100,13 @@ struct S_EquippableItemData : S_PlayerItemData {  // ctor sub_18107FE68, vtable 
 static_assert(sizeof(S_EquippableItemData) == 0x90);
 
 struct S_WeaponEquipData : S_EquippableItemData {  // accessor sub_18044DA9C, vtable 0x1822E1460
+    inline static constexpr auto RTTI = Offsets::RTTI_S_WeaponEquipData;
     // no own fields — intermediate base for weapons & ammo (just swaps the vtable)
 };
 static_assert(sizeof(S_WeaponEquipData) == 0x90);
 
 struct S_WeaponData : S_WeaponEquipData {        // ctor sub_181080754, vtable 0x1822E12E8
+    inline static constexpr auto RTTI = Offsets::RTTI_S_WeaponData;
     void*             m_p90;                    // +0x90  [ctor-only] default &unk_1835A2820
     uint64_t          m_q98;                    // +0x98  [ctor-only] runtime
     int32_t           m_maxStatus;              // +0xA0  <- weapon.max_status
@@ -114,6 +122,7 @@ struct S_WeaponData : S_WeaponEquipData {        // ctor sub_181080754, vtable 0
 static_assert(sizeof(S_WeaponData) == 0xC8);
 
 struct S_MeleeWeaponData : S_WeaponData {        // ctor sub_1810801A4, vtable 0x1826C17C8
+    inline static constexpr auto RTTI = Offsets::RTTI_S_MeleeWeaponData;
     float             m_attack;                 // +0xC8  <- melee_weapon.attack
     float             m_smashAttMod;            // +0xCC  <- melee_weapon.smash_att_mod
     float             m_slashAttMod;            // +0xD0  <- melee_weapon.slash_att_mod
@@ -122,6 +131,7 @@ struct S_MeleeWeaponData : S_WeaponData {        // ctor sub_1810801A4, vtable 0
 static_assert(sizeof(S_MeleeWeaponData) == 0xD8);   // factory id 1
 
 struct S_MissileWeaponData : S_WeaponData {      // ctor sub_1810801EC, vtable 0x1826C1F20
+    inline static constexpr auto RTTI = Offsets::RTTI_S_MissileWeaponData;
     float             m_power;                  // +0xC8  <- missile_weapon.power
     uint32_t          _padCC;                   // +0xCC
     void*             m_pD0;                    // +0xD0  [ctor-only] = sub_18073DAD0() handle
@@ -131,6 +141,7 @@ struct S_MissileWeaponData : S_WeaponData {      // ctor sub_1810801EC, vtable 0
 static_assert(sizeof(S_MissileWeaponData) == 0xE8); // factory id 2
 
 struct S_AmmoData : S_WeaponEquipData {           // ctor sub_18107FB24, vtable 0x1826C26D0
+    inline static constexpr auto RTTI = Offsets::RTTI_S_AmmoData;
     int32_t           m_ammoClassId;            // +0x90  <- ammo.ammo_class_id
     int32_t           m_id94;                   // +0x94  [ctor-only] -1
     float             m_slashAtt;               // +0x98  <- ammo.slash_att
@@ -144,6 +155,7 @@ struct S_AmmoData : S_WeaponEquipData {           // ctor sub_18107FB24, vtable 
 static_assert(sizeof(S_AmmoData) == 0xC8);          // factory id 3
 
 struct S_ArmorData : S_EquippableItemData {       // ctor sub_18107FBB0, vtable 0x1826C3018
+    inline static constexpr auto RTTI = Offsets::RTTI_S_ArmorData;
     int32_t           m_armorSubtypeId;         // +0x90  <- armor.armor_subtype_id (FK for m_pArchetype)
     int32_t           m_armorTypeId;            // +0x94  <- armor.armor_type_id
     CryGUID           m_clothing2Id;            // +0x98  <- armor.clothing2_id
@@ -167,6 +179,7 @@ struct S_ArmorData : S_EquippableItemData {       // ctor sub_18107FBB0, vtable 
 static_assert(sizeof(S_ArmorData) == 0x118);        // factory id 4
 
 struct S_HelmetData : S_ArmorData {               // accessor sub_181083000, vtable 0x1822E0B50
+    inline static constexpr auto RTTI = Offsets::RTTI_S_HelmetData;
     int32_t           m_visorTypeId;            // +0x118 <- helmet.visor_type_id
     uint32_t          _pad11C;                  // +0x11C
 };
@@ -174,6 +187,7 @@ static_assert(sizeof(S_HelmetData) == 0x120);       // factory id 0x10
 
 // --- divisibles (stackables) -----------------------------------------------
 struct S_DivisibleItemData : S_PlayerItemData {   // ctor sub_18107FD7C, vtable 0x1826C2B98
+    inline static constexpr auto RTTI = Offsets::RTTI_S_DivisibleItemData;
     uint8_t           m_isDivisible;            // +0x78  <- divisible_item.is_divisible
     uint8_t           _pad79[7];                // +0x79
     CryStringT<char>  m_containerMaterial;      // +0x80  <- divisible_item.container_material
@@ -182,33 +196,39 @@ struct S_DivisibleItemData : S_PlayerItemData {   // ctor sub_18107FD7C, vtable 
 static_assert(sizeof(S_DivisibleItemData) == 0x90);
 
 struct S_MoneyData : S_DivisibleItemData {        // factory-inlined, vtable 0x1822E0908
+    inline static constexpr auto RTTI = Offsets::RTTI_S_MoneyData;
     // no own fields (factory id 6)
 };
 static_assert(sizeof(S_MoneyData) == 0x90);
 
 struct S_CookingData : S_DivisibleItemData {      // factory-inlined, vtable 0x1822E0A28
+    inline static constexpr auto RTTI = Offsets::RTTI_S_CookingData;
     // no own fields (factory id 0x13)
 };
 static_assert(sizeof(S_CookingData) == 0x90);
 
 struct S_KeyRingData : S_DivisibleItemData {      // ctor sub_181080174, vtable 0x1826C2CB8
+    inline static constexpr auto RTTI = Offsets::RTTI_S_KeyRingData;
     int32_t           m_keyringTypeId;          // +0x90  <- keyring.keyring_type_id
     int32_t           m_id94;                   // +0x94  [ctor-only] -1
 };
 static_assert(sizeof(S_KeyRingData) == 0x98);       // factory id 0x12
 
 struct S_DieData : S_DivisibleItemData {          // ctor sub_18107FD30, vtable 0x1826C2EF8
+    inline static constexpr auto RTTI = Offsets::RTTI_S_DieData;
     int32_t           m_sideValue[6];           // +0x90  <- die.side_value_1..6
     float             m_sideWeight[6];          // +0xA8  <- die.side_weight_1..6
 };
 static_assert(sizeof(S_DieData) == 0xC0);           // factory id 0xF
 
 struct S_ConsumableData : S_DivisibleItemData {   // ctor sub_18107FD00, vtable 0x1826C2A78
+    inline static constexpr auto RTTI = Offsets::RTTI_S_ConsumableData;
     CryGUID           m_buffId;                 // +0x90  <- consumable_item.buff_id
 };
 static_assert(sizeof(S_ConsumableData) == 0xA0);
 
 struct S_OintmentData : S_ConsumableData {        // ctor sub_181080278, vtable 0x1826C22F8
+    inline static constexpr auto RTTI = Offsets::RTTI_S_OintmentData;
     int32_t           m_ointmentSubtypeId;      // +0xA0  <- ointment_item.ointment_item_subtype_id
     int32_t           m_ointmentTypeId;         // +0xA4  <- ointment_item.ointment_item_type_id
     float             m_efficiency;             // +0xA8  <- ointment_item.efficiency
@@ -217,6 +237,7 @@ struct S_OintmentData : S_ConsumableData {        // ctor sub_181080278, vtable 
 static_assert(sizeof(S_OintmentData) == 0xB0);      // factory id 0xD
 
 struct S_FoodData : S_ConsumableData {            // ctor sub_18107FEA8, vtable 0x1826C2570
+    inline static constexpr auto RTTI = Offsets::RTTI_S_FoodData;
     float             m_nutritionBenefit;       // +0xA0  <- food.nutrition_benefit
     float             m_refreshBenefit;         // +0xA4  <- food.refresh_benefit
     float             m_alcoholContent;         // +0xA8  <- food.alcohol_content
@@ -234,17 +255,20 @@ struct S_FoodData : S_ConsumableData {            // ctor sub_18107FEA8, vtable 
 static_assert(sizeof(S_FoodData) == 0xF8);          // factory id 5
 
 struct S_PotionData : S_FoodData {                // ctor sub_1810803F8, vtable 0x1826C2428
+    inline static constexpr auto RTTI = Offsets::RTTI_S_PotionData;
     CryGUID           m_weaponBuffId;           // +0xF8  <- potion.weapon_buff_id
 };
 static_assert(sizeof(S_PotionData) == 0x108);       // factory id 0xE
 
 struct S_AlchemyMaterialData : S_DivisibleItemData {  // ctor sub_18107FAF4, vtable 0x1826C21D0
+    inline static constexpr auto RTTI = Offsets::RTTI_S_AlchemyMaterialData;
     int32_t           m_subtypeId;              // +0x90  <- alchemy_material.alchemy_material_subtype_id
     int32_t           m_typeId;                 // +0x94  <- alchemy_material.alchemy_material_type_id
 };
 static_assert(sizeof(S_AlchemyMaterialData) == 0x98);   // factory id 9
 
 struct S_HerbData : S_AlchemyMaterialData {       // ctor sub_18107FFCC, vtable 0x1826C20A8
+    inline static constexpr auto RTTI = Offsets::RTTI_S_HerbData;
     int32_t           m_id98;                   // +0x98  [ctor-only] -1
     uint32_t          _pad9C;                   // +0x9C
     CryStringT<char>  m_latinName;              // +0xA0  <- herb.latin_name
@@ -261,24 +285,28 @@ static_assert(sizeof(S_HerbData) == 0xD0);          // factory id 0xA
 
 // --- questibles (quest / story items) --------------------------------------
 struct S_QuestibleItemData : S_PlayerItemData {   // ctor sub_181080454, vtable 0x1826C2958
+    inline static constexpr auto RTTI = Offsets::RTTI_S_QuestibleItemData;
     uint8_t           m_isQuest;                // +0x78  <- questible_item.is_quest
     uint8_t           _pad79[7];                // +0x79
 };
 static_assert(sizeof(S_QuestibleItemData) == 0x80);
 
 struct S_MiscData : S_QuestibleItemData {         // factory-inlined, vtable 0x1826C1680
+    inline static constexpr auto RTTI = Offsets::RTTI_S_MiscData;
     int32_t           m_miscSubtypeId;          // +0x80  <- misc.misc_subtype_id
     int32_t           m_miscTypeId;             // +0x84  <- misc.misc_type_id
 };
 static_assert(sizeof(S_MiscData) == 0x88);          // factory id 0
 
 struct S_KeyData : S_QuestibleItemData {          // ctor sub_181080144, vtable 0x1826C2DD8
+    inline static constexpr auto RTTI = Offsets::RTTI_S_KeyData;
     int32_t           m_keySubtypeId;           // +0x80  <- key.key_subtype_id
     int32_t           m_keyTypeId;              // +0x84  <- key.key_type_id
 };
 static_assert(sizeof(S_KeyData) == 0x88);           // factory id 0x11
 
 struct S_DocumentData : S_QuestibleItemData {     // ctor sub_18107FDC4, vtable 0x1826C1DE8
+    inline static constexpr auto RTTI = Offsets::RTTI_S_DocumentData;
     int32_t           m_documentUiLayout;       // +0x80  <- document.document_ui_layout
     int32_t           m_id84;                   // +0x84  [ctor-only] -1
     int32_t           m_classId;                // +0x88  <- document.class_id

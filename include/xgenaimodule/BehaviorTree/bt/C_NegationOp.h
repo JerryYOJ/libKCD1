@@ -16,6 +16,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_NegationOpContext;
 class C_NegationOp : public C_NodeWrapper<C_NegationOp, C_LinkModifier<C_LinkNoData<C_FixedComposite<1>>, I_LinkFilter>, S_NegationOpContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_NegationOp;
     uint8_t _ownState[0x20];   // [UNVERIFIED] own members above C_LinkModifier<C_LinkNoData<C_FixedComposite<1>>, I_LinkFilter> (0x30)
 };
 static_assert(sizeof(C_NegationOp) == 0x50);

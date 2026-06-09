@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_InstantMoveItemToSlotContext;
 class C_InstantMoveItemToSlot : public C_NodeWrapper<C_InstantMoveItemToSlot, C_Node, S_InstantMoveItemToSlotContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_InstantMoveItemToSlot;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_InstantMoveItemToSlot) == 0x28);

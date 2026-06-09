@@ -143,6 +143,7 @@ namespace wh::xgenaimodule::BehaviorTree {
 // ---------------------------------------------------------------------------
 class C_SendToNPC_Data {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SendToNPC_Data;
     virtual ~C_SendToNPC_Data() = default;   // [UNVERIFIED] full vtable not mapped
     // [UNVERIFIED] members: recipient id + composed AI message + dispatch state.
 };
@@ -154,6 +155,7 @@ public:
 //   context. Presumed to derive from S_BaseNodeContext (see C_NodeContext.h).
 // ---------------------------------------------------------------------------
 struct S_SendMessageBaseContext : S_BaseNodeContext /* [UNVERIFIED] base */ {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_SendMessageBaseContext;
     // [UNVERIFIED] members not recovered.
 };
 
@@ -168,6 +170,7 @@ struct S_SendMessageBaseContext : S_BaseNodeContext /* [UNVERIFIED] base */ {
 //   [UNVERIFIED] member layout/size.
 // ---------------------------------------------------------------------------
 struct S_InstantSendMessageToNPCContext : S_SendMessageBaseContext /* [UNVERIFIED] */ {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_InstantSendMessageToNPCContext;
     // [UNVERIFIED] no members confirmed.
 };
 
@@ -181,6 +184,7 @@ struct S_InstantSendMessageToNPCContext : S_SendMessageBaseContext /* [UNVERIFIE
 // ---------------------------------------------------------------------------
 class C_SendMessageBase : public C_Node {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SendMessageBase;
     // [UNVERIFIED] family-shared parsed message attributes live here / in the
     // embedded C_SendToNPC_Data member of the derived node.
 };
@@ -194,6 +198,7 @@ public:
 // ---------------------------------------------------------------------------
 class C_InstantSendMessageToNPC : public C_SendMessageBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_InstantSendMessageToNPC;
     using RuntimeData = S_InstantSendMessageToNPCContext;
 
     // ---- VERIFIED fields written by ctor sub_1806986D8 ----

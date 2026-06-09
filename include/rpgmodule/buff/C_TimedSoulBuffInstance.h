@@ -20,6 +20,7 @@ namespace wh::rpgmodule {
 
 class C_TimedSoulBuffInstance : public C_SoulBuffInstance {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_TimedSoulBuffInstance;
     // Reads duration from buff definition at buffData+0x28.
     // Sets m_elapsedTime = 0.
     bool Init(void* pBuffData, I_BuffInitParams* pInitParams) override;                // [0] 0x1806D7AD4

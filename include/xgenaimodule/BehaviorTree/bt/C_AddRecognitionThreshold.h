@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_AddRecognitionThresholdContext;
 class C_AddRecognitionThreshold : public C_NodeWrapper<C_AddRecognitionThreshold, C_WrapperDecorator, S_AddRecognitionThresholdContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AddRecognitionThreshold;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_AddRecognitionThreshold) == 0x30);

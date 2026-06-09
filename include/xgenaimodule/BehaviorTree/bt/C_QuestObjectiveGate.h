@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_QuestObjectiveGateContext;
 class C_QuestObjectiveGate : public C_NodeWrapper<C_QuestObjectiveGate, C_PassiveBarrier, S_QuestObjectiveGateContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_QuestObjectiveGate;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_QuestObjectiveGate) == 0x30);

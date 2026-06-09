@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_RootContext;
 class C_LambdaRoot : public C_NodeWrapper<C_LambdaRoot, C_Root, S_RootContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_LambdaRoot;
     // no own data members (object == 0x60)
 };
 static_assert(sizeof(C_LambdaRoot) == 0x60);

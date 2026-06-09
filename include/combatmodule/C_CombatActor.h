@@ -186,6 +186,7 @@ class C_CombatActor : public I_CombatActor,
                       public IEntityEventListener
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActor;
     // ---- I_CombatActor overrides [0]-[15] ----
     // Warhorse classes are NOT interfuscator-shuffled — slot indices are stable.
     ~C_CombatActor() override = default;                                    // [0]

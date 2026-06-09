@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_MeleeTutorialSlotActionContext;
 class C_MeleeTutorialSlotAction : public C_NodeWrapper<C_MeleeTutorialSlotAction, C_CombatantHubExtended<C_DeferredExecution>, S_MeleeTutorialSlotActionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_MeleeTutorialSlotAction;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_MeleeTutorialSlotAction) == 0x30);

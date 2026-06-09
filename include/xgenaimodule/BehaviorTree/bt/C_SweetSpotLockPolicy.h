@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SweetSpotLockPolicyContext;
 class C_SweetSpotLockPolicy : public C_NodeWrapper<C_SweetSpotLockPolicy, C_Node, S_SweetSpotLockPolicyContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SweetSpotLockPolicy;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SweetSpotLockPolicy) == 0x28);

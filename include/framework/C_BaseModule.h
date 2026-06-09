@@ -13,6 +13,7 @@ namespace internal {
 // Destructor: sub_180F18294
 class S_Job {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_S_Job;
     virtual ~S_Job() = default;
 
     uint16_t m_flags;           // +0x08  (init 0)
@@ -27,6 +28,7 @@ static_assert(offsetof(S_Job, m_moduleId) == 0x0A);
 // Size: 0x78 bytes (S_Job 0x10 + own 0x68).
 class S_Graph : public S_Job {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_S_Graph;
     uint64_t m_graphData;                   // +0x10
 
     std::vector<uint64_t> m_predecessors;   // +0x18
@@ -43,6 +45,7 @@ static_assert(sizeof(S_Graph) == 0x78);
 // Secondary vtable in C_BaseModule at offset +0x78.
 class I_ModuleMessageListener {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_ModuleMessageListener;
     virtual ~I_ModuleMessageListener() = default;                   // [0]
     virtual void OnModuleMessage(void* msg) = 0;                    // [1]
 };
@@ -50,7 +53,10 @@ public:
 // C_Graph — graph node with full task scheduling.
 // RTTI: .?AVC_Graph@framework@wh@@
 // Inherits S_Graph, adds nothing visible in layout.
-class C_Graph : public internal::S_Graph {};
+class C_Graph : public internal::S_Graph {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Graph;
+};
 
 // C_BaseModule — base class for all Warhorse engine modules.
 // Provides module lifecycle integration (Init, Shutdown, Update).
@@ -78,6 +84,7 @@ class C_Graph : public internal::S_Graph {};
 //   [8] purecall — GetModuleName()
 class C_BaseModule : public C_Graph, public I_ModuleMessageListener {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_BaseModule;
     // +0x00: primary vtable (C_BaseModule)
     // +0x08: S_Job::m_flags, +0x0A: S_Job::m_moduleId
     // +0x10: S_Graph::m_graphData

@@ -14,6 +14,7 @@ class C_CombatActorActionBlock
       public I_CombatActionHelperBlockOwner
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorActionBlock;
     // Primary vtable: 0x1821B49C0 | Ctor: 0x1804E1268 | Size: 0x128
     // UNIQUE: only action using I_CombatActorActionBlock (not I_CombatActorActionPrivate)
     float                       m_blockTimer;       // (init -100000.0f)

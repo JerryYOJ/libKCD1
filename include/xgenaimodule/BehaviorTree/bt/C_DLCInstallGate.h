@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_DLCInstallGateContext;
 class C_DLCInstallGate : public C_NodeWrapper<C_DLCInstallGate, C_PassiveBarrier, S_DLCInstallGateContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_DLCInstallGate;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_DLCInstallGate) == 0x30);

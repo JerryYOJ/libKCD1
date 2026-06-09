@@ -18,6 +18,7 @@ namespace wh::combatmodule {
 // ---------------------------------------------------------------------------
 class I_CombatActorHorsePullDown {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_CombatActorHorsePullDown;
     virtual ~I_CombatActorHorsePullDown() = default;                    // [0]
     virtual int CanHorsePullDown(EntityId victimEntityId) = 0;          // [1] sub_1804563E8
     virtual bool RequestHorsePullDown(EntityId victimEntityId) = 0;     // [2] sub_180461A1C
@@ -47,6 +48,7 @@ public:
 class C_CombatActorHorsePullDown : public C_CombatActorObject,
                                     public I_CombatActorHorsePullDown {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorHorsePullDown;
     inline static constexpr auto VTABLE = Offsets::VTABLE_C_CombatActorHorsePullDown;
 
     E_CombatSubsystem GetSubsystemId() const override { return COMBAT_SUB_HORSE_PULLDOWN; }

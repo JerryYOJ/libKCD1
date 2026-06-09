@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_MockNodeContext;
 class C_MockNode : public C_NodeWrapper<C_MockNode, C_Node, S_MockNodeContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_MockNode;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_MockNode) == 0x28);

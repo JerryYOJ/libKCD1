@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetDynamicInformationValueContext;
 class C_GetDynamicInformationValue : public C_NodeWrapper<C_GetDynamicInformationValue, C_Node, S_GetDynamicInformationValueContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetDynamicInformationValue;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetDynamicInformationValue) == 0x28);

@@ -28,6 +28,7 @@ namespace wh { namespace entitymodule {
 
 class C_EquippableItemRuntimeData : public I_ItemRuntimeData {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_EquippableItemRuntimeData;
     // ---- second embedded change-signal (equippable-specific events) ----
     S_IntrusiveListNode* m_sentinel58;                      // +0x58  intrusive-list sentinel anchor (head/tail below point here)
     uint8_t  m_flag60;                                      // +0x60

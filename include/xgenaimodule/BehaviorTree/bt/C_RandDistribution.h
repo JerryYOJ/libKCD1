@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_RandDistributionContext;
 class C_RandDistribution : public C_NodeWrapper<C_RandDistribution, C_Node, S_RandDistributionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_RandDistribution;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_RandDistribution) == 0x28);

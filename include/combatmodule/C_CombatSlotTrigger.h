@@ -26,6 +26,7 @@ namespace wh::combatmodule {
 // ---------------------------------------------------------------------------
 class C_CombatSlotTrigger : public C_CombatTrigger {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatSlotTrigger;
     ~C_CombatSlotTrigger() override = default;
     virtual void unk_12() {}                        // [12] setup/evaluate
     virtual int  unk_13() { return 1; }             // [13] sub_1806F8140

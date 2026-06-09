@@ -18,6 +18,7 @@ namespace wh::rpgmodule {
 
 class I_BuffInitParams {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_BuffInitParams;
     virtual ~I_BuffInitParams() = default;                                             // [0]
     virtual float GetFloatParam(int nKey) = 0;                                         // [1]
     virtual int GetIntParam(int nKey) = 0;                                             // [2]

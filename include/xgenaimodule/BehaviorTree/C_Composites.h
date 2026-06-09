@@ -98,18 +98,22 @@ namespace wh::xgenaimodule::BehaviorTree {
 // UpdateContext as void*, then cast by the wrapper thunks.
 // ---------------------------------------------------------------------------
 struct S_SequenceContext {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_SequenceContext;
     uint32_t m_currentChildIndex = 0;   // [UNVERIFIED]
 };
 
 struct S_SelectorContext {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_SelectorContext;
     uint32_t m_currentChildIndex = 0;   // [UNVERIFIED]
 };
 
 struct S_ParallelContext {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_ParallelContext;
     uint32_t m_runningMask = 0;         // [UNVERIFIED]
 };
 
 struct S_LoopContext {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_LoopContext;
     uint32_t m_iteration     = 0;       // [UNVERIFIED]
     uint32_t m_maxIterations = 0;       // [UNVERIFIED]
 };
@@ -123,6 +127,8 @@ struct S_LoopContext {
 class C_Sequence
     : public C_NodeWrapper<C_Sequence, C_Composite, S_SequenceContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Sequence;
     // No own data members; object == sizeof(C_Composite) == 0x40 (VERIFIED:
     // create sub_180585E70 alloc(0x40), ctor sub_180585EE8 writes no extra field).
 };
@@ -137,6 +143,8 @@ static_assert(sizeof(C_Sequence) == 0x40);
 class C_Selector
     : public C_NodeWrapper<C_Selector, C_Composite, S_SelectorContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Selector;
     // No own data members; object == 0x40 (VERIFIED: create sub_1806AF734
     // alloc(0x40), ctor sub_1806AF7AC).
 };
@@ -150,6 +158,8 @@ static_assert(sizeof(C_Selector) == 0x40);
 class C_Parallel
     : public C_NodeWrapper<C_Parallel, C_Composite, S_ParallelContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Parallel;
     // No own data members; object == 0x40 (VERIFIED: create sub_1801FCF50
     // alloc(0x40), ctor sub_1801FD28C).
 };
@@ -171,6 +181,8 @@ static_assert(sizeof(C_Parallel) == 0x40);
 class C_Loop
     : public C_NodeWrapper<C_Loop, C_Decorator, S_LoopContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Loop;
     // No own data members; object == sizeof(C_Decorator) == 0x30 (VERIFIED).
 };
 static_assert(sizeof(C_Loop) == 0x30);

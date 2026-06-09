@@ -68,6 +68,7 @@ enum E_HandSlot : int32_t {
 
 class C_EquipmentManager {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_EquipmentManager;
     virtual ~C_EquipmentManager();                          // +0x00  MI vtable @ 0x1821a6c78 (primary slots 0..4)
 
     C_Inventory*  m_pInventory;                             // +0x08  owning inventory (item iterator via vtable[0x260])

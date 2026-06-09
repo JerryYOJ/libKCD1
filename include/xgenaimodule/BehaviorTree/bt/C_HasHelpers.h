@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_HasHelpersContext;
 class C_HasHelpers : public C_NodeWrapper<C_HasHelpers, C_Gate, S_HasHelpersContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_HasHelpers;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_HasHelpers) == 0x68);

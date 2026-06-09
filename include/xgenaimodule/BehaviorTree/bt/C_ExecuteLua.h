@@ -215,6 +215,7 @@ enum class E_ExecuteLuaState : std::uint32_t
 // here precisely because the modeled base is empty.
 struct S_ExecuteLuaContext   // : S_BaseNodeContext (base region is +0x00..+0x1F; see note)
 {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_ExecuteLuaContext;
     std::uint8_t      _baseRegion[0x20];  // +0x00  S_BaseNodeContext region (vptr + base subobjects)
     E_ExecuteLuaState m_state;            // +0x20  per-instance state (OnInitialize -> 0)
     std::uint32_t     _pad24;             // +0x24  tail padding to size 0x28
@@ -243,6 +244,7 @@ static_assert(offsetof(S_ExecuteLuaContext, m_state) == 0x20,
 class C_ExecuteLua
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ExecuteLua;
     using RuntimeData = S_ExecuteLuaContext;
 
     // OnInitialize (wrapper slot [14] -> sub_180395560): reset per-instance state.

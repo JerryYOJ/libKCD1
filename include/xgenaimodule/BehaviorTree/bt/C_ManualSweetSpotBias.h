@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ManualSweetSpotBiasContext;
 class C_ManualSweetSpotBias : public C_NodeWrapper<C_ManualSweetSpotBias, C_Node, S_ManualSweetSpotBiasContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ManualSweetSpotBias;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_ManualSweetSpotBias) == 0x28);

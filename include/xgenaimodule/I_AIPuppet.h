@@ -57,6 +57,7 @@ class C_Actor;    // Warhorse actor (IActorSystem::GetActor result; C_AIPuppet+0
 // 24-slot abstract interface. Names that are not directly evidenced are flagged.
 class I_AIPuppet {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_AIPuppet;
     // [0]  +0x00  virtual (deleting) destructor.
     virtual ~I_AIPuppet();
 

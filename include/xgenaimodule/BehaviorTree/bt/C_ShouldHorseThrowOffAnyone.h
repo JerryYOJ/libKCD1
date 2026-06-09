@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ShouldHorseThrowOffAnyoneContext;
 class C_ShouldHorseThrowOffAnyone : public C_NodeWrapper<C_ShouldHorseThrowOffAnyone, C_PassiveBarrier, S_ShouldHorseThrowOffAnyoneContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ShouldHorseThrowOffAnyone;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_ShouldHorseThrowOffAnyone) == 0x30);

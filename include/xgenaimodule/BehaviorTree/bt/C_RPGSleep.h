@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_RPGSleepContext;
 class C_RPGSleep : public C_NodeWrapper<C_RPGSleep, C_BuffDecoratorBase, S_RPGSleepContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_RPGSleep;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_RPGSleep) == 0x30);

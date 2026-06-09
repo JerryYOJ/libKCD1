@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_DisablePerceptionContext;
 class C_DisablePerception : public C_NodeWrapper<C_DisablePerception, C_Node, S_DisablePerceptionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_DisablePerception;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_DisablePerception) == 0x28);

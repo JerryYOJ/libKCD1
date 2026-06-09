@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GraphSearchContext;
 class C_GraphSearch : public C_NodeWrapper<C_GraphSearch, C_ForwardingData<C_Composite>, S_GraphSearchContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GraphSearch;
     uint8_t _ownState[0x18];   // [UNVERIFIED] own members above C_ForwardingData<C_Composite> (0x40)
 };
 static_assert(sizeof(C_GraphSearch) == 0x58);

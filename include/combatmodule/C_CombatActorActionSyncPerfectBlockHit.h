@@ -11,6 +11,7 @@ class C_CombatActorActionSyncPerfectBlockHit
     : public C_CombatActorAnimatedAction<S_CombatActorActionSyncPerfectBlockHitParams, 1, I_CombatActorActionPrivate>
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorActionSyncPerfectBlockHit;
     // Primary vtable: 0x1826A5540 | Ctor: 0x180F44688 | Size: 0x118
     // Additional MI subobject vtable at +0xF8 (from PerfectBlockHit-specific interface)
     uint64_t                    m_subobjectVtable;  // +0xF8 MI subobject vtable

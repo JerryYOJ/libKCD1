@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetCiviliansForLocationContext;
 class C_GetCiviliansForLocation : public C_NodeWrapper<C_GetCiviliansForLocation, C_Node, S_GetCiviliansForLocationContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetCiviliansForLocation;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetCiviliansForLocation) == 0x28);

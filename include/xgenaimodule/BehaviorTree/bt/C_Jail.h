@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_JailContext;
 class C_Jail : public C_NodeWrapper<C_Jail, C_Node, S_JailContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Jail;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_Jail) == 0x28);

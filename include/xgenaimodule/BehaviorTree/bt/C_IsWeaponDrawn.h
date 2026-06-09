@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_IsWeaponDrawnContext;
 class C_IsWeaponDrawn : public C_NodeWrapper<C_IsWeaponDrawn, C_Gate, S_IsWeaponDrawnContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_IsWeaponDrawn;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_IsWeaponDrawn) == 0x68);

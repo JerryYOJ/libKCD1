@@ -12,6 +12,7 @@
 namespace wh::rpgmodule {
 class C_ScriptBindRPGModule : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindRPGModule;
     void*                m_pScriptSystem;    // +0x60
     void*                m_pContext;          // +0x68
     C_FactionScriptBind  m_factionBind;      // +0x70  (0x60 bytes)

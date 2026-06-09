@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetQuestContext;
 class C_GetQuest : public C_NodeWrapper<C_GetQuest, C_Node, S_GetQuestContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetQuest;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetQuest) == 0x28);

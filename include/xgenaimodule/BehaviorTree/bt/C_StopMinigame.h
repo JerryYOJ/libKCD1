@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_StopMinigameContext;
 class C_StopMinigame : public C_NodeWrapper<C_StopMinigame, C_Node, S_StopMinigameContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_StopMinigame;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_StopMinigame) == 0x28);

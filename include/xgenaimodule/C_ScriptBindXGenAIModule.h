@@ -8,6 +8,7 @@
 namespace wh::xgenaimodule {
 class C_ScriptBindXGenAIModule : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindXGenAIModule;
     void*                   m_pGameFramework;   // +0x60
     Offsets::IScriptSystem* m_pScriptSystem;    // +0x68
     void*                   m_pUnk70;           // +0x70

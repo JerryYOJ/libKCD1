@@ -21,6 +21,7 @@ namespace wh::framework {
 
 class C_ModuleMessage {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ModuleMessage;
     virtual ~C_ModuleMessage() = default;           // [0] 0x00
     virtual void OnProcessed() {}                   // [1] 0x08  called after dispatch, nop in base
     virtual void _vf2() {}                          // [2] 0x10  nop in base

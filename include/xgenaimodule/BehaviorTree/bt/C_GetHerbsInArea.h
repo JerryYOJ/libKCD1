@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetHerbsInAreaContext;
 class C_GetHerbsInArea : public C_NodeWrapper<C_GetHerbsInArea, C_Node, S_GetHerbsInAreaContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetHerbsInArea;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetHerbsInArea) == 0x28);

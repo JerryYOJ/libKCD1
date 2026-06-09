@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_IfElseConditionContext;
 class C_IfElseCondition : public C_NodeWrapper<C_IfElseCondition, C_Gate, S_IfElseConditionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_IfElseCondition;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_IfElseCondition) == 0x68);

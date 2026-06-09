@@ -15,6 +15,7 @@ namespace wh::entitymodule {
 
 class C_ScriptBindInventory : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindInventory;
     void*  m_pContext;          // +0x60
     void*  m_pEntitySystem;    // +0x68  IEntitySystem*
 

@@ -42,6 +42,7 @@ class C_Soul;
 
 class C_SoulBuffInstance : public C_BuffInstanceBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SoulBuffInstance;
     // ====== Overrides from C_BuffInstanceBase ======
 
     // Stores pBuffData at m_pBuffData, calls InitModifiers to parse

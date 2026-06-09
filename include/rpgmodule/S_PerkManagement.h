@@ -16,6 +16,7 @@ namespace wh::rpgmodule {
 // Polymorphic dialog/interaction tail embedded in S_PerkManagement at +0x5E0.
 class S_DialogParams {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_S_DialogParams;
     virtual ~S_DialogParams();
 
     uint32_t            m_dialogState;       // +0x08  (init 0)

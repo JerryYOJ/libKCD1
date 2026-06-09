@@ -15,6 +15,7 @@ namespace wh::entitymodule {
 
 class C_ScriptBindGameRules : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindGameRules;
     Offsets::IScriptTable*  m_pTable1;          // +0x60
     Offsets::IScriptTable*  m_pTable2;          // +0x68
     Offsets::IScriptTable*  m_pTable3;          // +0x70

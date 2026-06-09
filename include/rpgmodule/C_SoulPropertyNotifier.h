@@ -15,6 +15,7 @@ namespace wh::rpgmodule {
 
 class C_SoulPropertyNotifier {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SoulPropertyNotifier;
     virtual ~C_SoulPropertyNotifier();      // vfunc[0]
 
     uint64_t    m_pConnectionList;          // +0x08  (init 0 — linked list of connections)

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_TerminateSituationContext;
 class C_TerminateSituation : public C_NodeWrapper<C_TerminateSituation, C_Node, S_TerminateSituationContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_TerminateSituation;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_TerminateSituation) == 0x28);

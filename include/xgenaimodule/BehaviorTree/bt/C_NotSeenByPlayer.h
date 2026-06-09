@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_NotSeenByPlayerContext;
 class C_NotSeenByPlayer : public C_NodeWrapper<C_NotSeenByPlayer, C_Node, S_NotSeenByPlayerContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_NotSeenByPlayer;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_NotSeenByPlayer) == 0x28);

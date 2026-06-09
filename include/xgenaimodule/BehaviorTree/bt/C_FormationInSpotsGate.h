@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_FormationInSpotsGateContext;
 class C_FormationInSpotsGate : public C_NodeWrapper<C_FormationInSpotsGate, C_ActiveBarrier, S_FormationInSpotsGateContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_FormationInSpotsGate;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_FormationInSpotsGate) == 0x30);

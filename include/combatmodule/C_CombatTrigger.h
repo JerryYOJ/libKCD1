@@ -24,6 +24,7 @@ namespace wh::combatmodule {
 // ---------------------------------------------------------------------------
 class C_CombatTrigger : public C_CombatActorUpdatedObject {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatTrigger;
     ~C_CombatTrigger() override = default;          // [0]  sub_180FAA03C
     virtual void unk_8() {}                         // [8]  nop
     virtual void unk_9() {}                         // [9]  nop

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_NotNearPlayerContext;
 class C_NotNearPlayer : public C_NodeWrapper<C_NotNearPlayer, C_Node, S_NotNearPlayerContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_NotNearPlayer;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_NotNearPlayer) == 0x28);

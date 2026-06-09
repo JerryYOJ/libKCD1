@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_OnNaturalComboContext;
 class C_OnNaturalCombo : public C_NodeWrapper<C_OnNaturalCombo, C_CombatantHubExtended<C_PassiveBarrier>, S_OnNaturalComboContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_OnNaturalCombo;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_OnNaturalCombo) == 0x30);

@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ClimbLadderContext;
 class C_ClimbLadder : public C_NodeWrapper<C_ClimbLadder, C_CombatAutomationBase<C_DefferedStateChange>, S_ClimbLadderContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ClimbLadder;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_ClimbLadder) == 0x28);

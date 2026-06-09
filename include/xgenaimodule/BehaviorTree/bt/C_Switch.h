@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SwitchBaseContext;
 class C_Switch : public C_NodeWrapper<C_Switch, C_SwitchBase, S_SwitchBaseContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Switch;
     uint8_t _ownState[0x8];   // [UNVERIFIED] own members above C_SwitchBase (0x58)
 };
 static_assert(sizeof(C_Switch) == 0x60);

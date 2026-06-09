@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_IsLevelLoadVideoPlayingContext;
 class C_IsLevelLoadVideoPlaying : public C_NodeWrapper<C_IsLevelLoadVideoPlaying, C_ActiveBarrier, S_IsLevelLoadVideoPlayingContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_IsLevelLoadVideoPlaying;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_IsLevelLoadVideoPlaying) == 0x30);

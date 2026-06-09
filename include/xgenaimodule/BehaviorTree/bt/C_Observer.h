@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ObserverContext;
 class C_Observer : public C_NodeWrapper<C_Observer, C_Node, S_ObserverContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Observer;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_Observer) == 0x28);

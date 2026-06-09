@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetTimeContext;
 class C_GetTime : public C_NodeWrapper<C_GetTime, C_Node, S_GetTimeContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetTime;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetTime) == 0x28);

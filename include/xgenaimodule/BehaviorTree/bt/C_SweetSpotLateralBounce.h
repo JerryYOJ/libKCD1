@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 // <SweetSpotLateralBounce>  RTTI C_SweetSpotLateralBounce  vtable 0x18236d020  size 0x28  base C_SweetSpotBounceBase<C_Node>  ctx S_BaseNodeContext
 class C_SweetSpotLateralBounce : public C_NodeWrapper<C_SweetSpotLateralBounce, C_SweetSpotBounceBase<C_Node>, S_BaseNodeContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SweetSpotLateralBounce;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SweetSpotLateralBounce) == 0x28);

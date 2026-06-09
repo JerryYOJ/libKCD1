@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_BuffTagCheckContext;
 class C_BuffTagCheck : public C_NodeWrapper<C_BuffTagCheck, C_Gate, S_BuffTagCheckContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_BuffTagCheck;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_BuffTagCheck) == 0x68);

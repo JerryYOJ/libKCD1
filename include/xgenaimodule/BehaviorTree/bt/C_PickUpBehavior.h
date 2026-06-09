@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_PickUpBehaviorContext;
 class C_PickUpBehavior : public C_NodeWrapper<C_PickUpBehavior, C_BehaviorAdopter, S_PickUpBehaviorContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_PickUpBehavior;
     uint8_t _ownState[0x10];   // [UNVERIFIED] own members above C_BehaviorAdopter (0x28)
 };
 static_assert(sizeof(C_PickUpBehavior) == 0x38);

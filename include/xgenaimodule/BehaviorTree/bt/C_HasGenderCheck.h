@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_HasGenderCheckContext;
 class C_HasGenderCheck : public C_NodeWrapper<C_HasGenderCheck, C_NPCStateCheckBase, S_HasGenderCheckContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_HasGenderCheck;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_HasGenderCheck) == 0x68);

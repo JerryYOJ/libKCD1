@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 // <JoinedAnimationSemaphore>  RTTI C_JoinedAnimationSemaphore  vtable 0x182380398  size 0x30  base C_JoinedAnimationLockBase<C_Semaphore>  ctx S_BaseNodeContext
 class C_JoinedAnimationSemaphore : public C_NodeWrapper<C_JoinedAnimationSemaphore, C_JoinedAnimationLockBase<C_Semaphore>, S_BaseNodeContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_JoinedAnimationSemaphore;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_JoinedAnimationSemaphore) == 0x30);

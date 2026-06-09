@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_LogToLabelContext;
 class C_LogToLabel : public C_NodeWrapper<C_LogToLabel, C_WrapperDecorator, S_LogToLabelContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_LogToLabel;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_LogToLabel) == 0x30);

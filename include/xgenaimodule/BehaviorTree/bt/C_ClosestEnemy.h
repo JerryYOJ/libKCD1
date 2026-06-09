@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ClosestEnemyContext;
 class C_ClosestEnemy : public C_NodeWrapper<C_ClosestEnemy, C_Decorator, S_ClosestEnemyContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ClosestEnemy;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_ClosestEnemy) == 0x30);

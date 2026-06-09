@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_LookContext;
 class C_Look : public C_NodeWrapper<C_Look, C_Node, S_LookContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Look;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_Look) == 0x28);

@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SemaphoreContext;
 class C_Semaphore : public C_NodeWrapper<C_Semaphore, C_LockBarrier<C_Decorator>, S_SemaphoreContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Semaphore;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_Semaphore) == 0x30);

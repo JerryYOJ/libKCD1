@@ -33,6 +33,7 @@ class C_CombatActor;
 // ---------------------------------------------------------------------------
 class C_CombatActorObject {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorObject;
     virtual ~C_CombatActorObject() = default;                       // [0]
     virtual void Reset() = 0;                                       // [1] subsystem reset
     virtual E_CombatSubsystem GetSubsystemId() const = 0;           // [2] VERIFIED via GetDebugLabel

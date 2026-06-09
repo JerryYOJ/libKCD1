@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_AnimationEndWaitContext;
 class C_AnimationEndWait : public C_NodeWrapper<C_AnimationEndWait, C_DefferedStateChange, S_AnimationEndWaitContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AnimationEndWait;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_AnimationEndWait) == 0x28);

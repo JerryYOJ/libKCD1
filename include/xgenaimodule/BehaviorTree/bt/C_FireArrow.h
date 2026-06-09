@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_FireArrowContext;
 class C_FireArrow : public C_NodeWrapper<C_FireArrow, C_Node, S_FireArrowContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_FireArrow;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_FireArrow) == 0x28);

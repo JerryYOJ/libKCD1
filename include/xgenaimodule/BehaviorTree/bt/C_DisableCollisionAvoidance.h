@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_DisableCollisionAvoidanceContext;
 class C_DisableCollisionAvoidance : public C_NodeWrapper<C_DisableCollisionAvoidance, C_WrapperDecorator, S_DisableCollisionAvoidanceContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_DisableCollisionAvoidance;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_DisableCollisionAvoidance) == 0x30);

@@ -38,6 +38,7 @@ class C_UIMap
     , public Offsets::I_LocationListener         // +0x18  (9 slots)
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_UIMap;
     SUIEventSenderBlock     m_eventSender0;                 // +0x20
     SUIEventSenderBlock     m_eventSender1;                 // +0x60
     SUIEventSenderBlock     m_eventSender2;                 // +0xA0

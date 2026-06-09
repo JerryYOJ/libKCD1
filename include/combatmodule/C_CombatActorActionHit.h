@@ -10,6 +10,7 @@ class C_CombatActorActionHit
     : public C_CombatActorAnimatedAction<S_CombatActorActionHitParams, 2, I_CombatActorActionPrivate>
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorActionHit;
     // Primary vtable: 0x1821B44C0 | Ctor: 0x1804E1020 | Size: 0x118
     // N=2: 2 animation scopes
     uint32_t    m_unknown_110;      // (init 0)

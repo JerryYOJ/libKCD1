@@ -17,6 +17,7 @@ namespace wh {
 
 class C_ReadinessObserver {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ReadinessObserver;
     virtual ~C_ReadinessObserver() = default;       // [0] 0x00
 
     void*       m_pReadinessMgr;    // +0x08  system readiness manager (gEnv.pSystem vf @0x2A0)

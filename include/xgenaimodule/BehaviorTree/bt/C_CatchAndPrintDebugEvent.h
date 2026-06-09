@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_CatchAndPrintDebugEventContext;
 class C_CatchAndPrintDebugEvent : public C_NodeWrapper<C_CatchAndPrintDebugEvent, C_Decorator, S_CatchAndPrintDebugEventContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CatchAndPrintDebugEvent;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_CatchAndPrintDebugEvent) == 0x30);

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SetWhistlingContext;
 class C_SetWhistling : public C_NodeWrapper<C_SetWhistling, C_Node, S_SetWhistlingContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SetWhistling;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SetWhistling) == 0x28);

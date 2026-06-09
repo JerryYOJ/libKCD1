@@ -132,6 +132,7 @@ class C_CombatScene;
 //                    SlotDelay, Attach, etc.
 class C_CombatModule : public wh::framework::C_BaseModule {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatModule;
     // ---- Virtual method overrides (interfuscator-shuffled) ----
     ~C_CombatModule() override = default;                                       // [0]
     bool Init() override { return true; }                                       // [4] sub_180F75108

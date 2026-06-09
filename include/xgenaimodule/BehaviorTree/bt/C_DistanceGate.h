@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_DistanceGateContext;
 class C_DistanceGate : public C_NodeWrapper<C_DistanceGate, C_ActiveBarrier, S_DistanceGateContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_DistanceGate;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_DistanceGate) == 0x30);

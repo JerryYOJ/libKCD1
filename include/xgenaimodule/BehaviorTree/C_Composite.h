@@ -12,6 +12,7 @@ namespace wh::xgenaimodule::BehaviorTree {
 // runtime-data layer). It was previously RE-defined here, which is an ODR
 // violation when both headers are co-included. Removed; use the include above.
 struct S_SwitchBaseContext {};   // canonical home (switch-base runtime ctx)
+    inline static constexpr auto RTTI = Offsets::RTTI_S_SwitchBaseContext;
 
 // ---------------------------------------------------------------------------
 // C_Composite — native multi-child base (directly inherits C_Node).
@@ -22,6 +23,7 @@ struct S_SwitchBaseContext {};   // canonical home (switch-base runtime ctx)
 // ---------------------------------------------------------------------------
 class C_Composite : public C_Node {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Composite;
     const char* GetNodeCategory() const override { return "Composite"; } // [6]
     bool        IsComposite()     const override { return true; }        // [10] manages N children
 
@@ -43,6 +45,7 @@ class C_SwitchBase
     : public C_NodeWrapper<C_SwitchBase, C_Composite, S_SwitchBaseContext>
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SwitchBase;
     std::vector<void*> m_switchCases;           // +0x40  case/branch data (0x18)
 };
 static_assert(sizeof(C_SwitchBase) == 0x58);

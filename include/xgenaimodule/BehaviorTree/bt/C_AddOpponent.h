@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_AddOpponentContext;
 class C_AddOpponent : public C_NodeWrapper<C_AddOpponent, C_Node, S_AddOpponentContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AddOpponent;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_AddOpponent) == 0x28);

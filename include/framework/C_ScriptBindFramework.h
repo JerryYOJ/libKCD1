@@ -8,6 +8,7 @@
 namespace wh::framework {
 class C_ScriptBindFramework : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindFramework;
     void* m_pFramework;  // +0x60
     // int ScriptHandlerToString(IFunctionHandler* pH);  // 0x180F1A914
     // int IsValidWUID(IFunctionHandler* pH);             // 0x180F1A2F8

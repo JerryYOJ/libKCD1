@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_FollowTargetContext;
 class C_FollowTarget : public C_NodeWrapper<C_FollowTarget, C_PassiveBarrier, S_FollowTargetContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_FollowTarget;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_FollowTarget) == 0x30);

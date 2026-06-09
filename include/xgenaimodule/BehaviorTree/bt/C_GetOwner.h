@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetOwnerContext;
 class C_GetOwner : public C_NodeWrapper<C_GetOwner, C_Node, S_GetOwnerContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetOwner;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetOwner) == 0x28);

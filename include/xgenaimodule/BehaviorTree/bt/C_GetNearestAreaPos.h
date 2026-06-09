@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetNearestAreaPosContext;
 class C_GetNearestAreaPos : public C_NodeWrapper<C_GetNearestAreaPos, C_Node, S_GetNearestAreaPosContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetNearestAreaPos;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetNearestAreaPos) == 0x28);

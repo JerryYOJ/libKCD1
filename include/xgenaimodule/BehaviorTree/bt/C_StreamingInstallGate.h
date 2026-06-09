@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_StreamingInstallGateContext;
 class C_StreamingInstallGate : public C_NodeWrapper<C_StreamingInstallGate, C_ActiveBarrier, S_StreamingInstallGateContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_StreamingInstallGate;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_StreamingInstallGate) == 0x30);

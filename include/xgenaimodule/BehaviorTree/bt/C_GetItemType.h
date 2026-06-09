@@ -110,6 +110,7 @@ namespace wh { namespace xgenaimodule { namespace BehaviorTree {
 // ----------------------------------------------------------------------------
 struct S_GetItemTypeContext : public S_BaseNodeContext
 {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_GetItemTypeContext;
     // [UNVERIFIED] members — re-derive from the wrapper ctor + policy slots.
     // (Expected per the poison use-case but NOT confirmed: a cached resolved
     //  item/entity handle with a -1 sentinel.)
@@ -135,6 +136,7 @@ struct S_GetItemTypeContext : public S_BaseNodeContext
 class C_GetItemType
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetItemType;
     using RuntimeData = S_GetItemTypeContext;
 
     // [UNVERIFIED] body. Per the C_NodeWrapper contract and the poison use-case:

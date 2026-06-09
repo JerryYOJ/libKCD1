@@ -105,6 +105,7 @@ struct S_VarOperationContext;
 // argument; the pool sizes/keys it per instance.
 // ---------------------------------------------------------------------------
 struct S_VarOperationContext /* : S_BaseNodeContext [UNVERIFIED base] */ {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_VarOperationContext;
     // -----------------------------------------------------------------------
     // E_VarOperations -- value of the 'operation' XML attribute.
     // VERIFIED (RTTI): the enum is nested in S_VarOperationContext and is bound
@@ -158,6 +159,8 @@ struct S_VarOperationContext /* : S_BaseNodeContext [UNVERIFIED base] */ {
 class C_VarOperation
     : public C_NodeWrapper<C_VarOperation, C_Node, S_VarOperationContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_VarOperation;
     // No own data members - object == sizeof(C_Node) == 0x28 (VERIFIED: base
     // ctor sub_180586330 writes ONLY the C_Node fields - m_pNodeData=0 @+0x10,
     // m_nodeId @+0x18, m_pCreator=0 @+0x20 - nothing past +0x20; the factory

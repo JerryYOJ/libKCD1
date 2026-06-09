@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_LoopUntilContext;
 class C_LoopUntil : public C_NodeWrapper<C_LoopUntil, C_Decorator, S_LoopUntilContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_LoopUntil;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_LoopUntil) == 0x30);

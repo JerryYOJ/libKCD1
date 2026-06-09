@@ -48,6 +48,7 @@ namespace wh::xgenaimodule {
 
 class C_AIPuppet : public C_CachedPuppet {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AIPuppet;
     // --- vtable overrides (slots 0..21; 22/23 inherited from I_AIPuppet) ---
     // Behavior is the verified vtable-body semantics; see I_AIPuppet for slot map.
     ~C_AIPuppet() override;                                   // [0]  sub_1805AFEC8 / sub_1805AFEFC (unregisters)

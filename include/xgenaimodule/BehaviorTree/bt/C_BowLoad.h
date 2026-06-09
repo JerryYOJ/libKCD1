@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_BowLoadContext;
 class C_BowLoad : public C_NodeWrapper<C_BowLoad, C_Node, S_BowLoadContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_BowLoad;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_BowLoad) == 0x28);

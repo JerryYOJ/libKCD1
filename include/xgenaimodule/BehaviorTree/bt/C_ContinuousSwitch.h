@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ContinuousSwitchContext;
 class C_ContinuousSwitch : public C_NodeWrapper<C_ContinuousSwitch, C_SwitchBase, S_ContinuousSwitchContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ContinuousSwitch;
     // no own data members (object == 0x58)
 };
 static_assert(sizeof(C_ContinuousSwitch) == 0x58);

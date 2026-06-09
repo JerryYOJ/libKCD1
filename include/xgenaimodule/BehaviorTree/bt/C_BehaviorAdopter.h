@@ -10,6 +10,9 @@ namespace wh::xgenaimodule::BehaviorTree {
 
 // C_BehaviorAdopter : public C_SmartEntityBehaviorTag   (RTTI-confirmed intermediate base; modeled THIN,
 //  own members [UNVERIFIED] absorbed into deriving node size.)
-class C_BehaviorAdopter : public C_SmartEntityBehaviorTag {};
+class C_BehaviorAdopter : public C_SmartEntityBehaviorTag {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_BehaviorAdopter;
+};
 
 }  // namespace wh::xgenaimodule::BehaviorTree

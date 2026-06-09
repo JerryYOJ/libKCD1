@@ -69,6 +69,7 @@ static_assert(sizeof(S_SortedMap<S_FactionMapEntry>) == 0x18);
 // -----------------------------------------------
 class I_FactionManager {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_FactionManager;
     virtual ~I_FactionManager() = 0;
 };
 
@@ -104,6 +105,7 @@ class C_FactionManager : public I_FactionManager,                        // vtab
                          public wh::databasemodule::I_DatabaseListener  // vtable at +0x08
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_FactionManager;
     // +0x00: I_FactionManager vtable (C_FactionManager primary)
     // +0x08: I_DatabaseListener vtable (secondary)
 

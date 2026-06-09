@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ProfileLoadedGateContext;
 class C_ProfileLoadedGate : public C_NodeWrapper<C_ProfileLoadedGate, C_PassiveBarrier, S_ProfileLoadedGateContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ProfileLoadedGate;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_ProfileLoadedGate) == 0x30);

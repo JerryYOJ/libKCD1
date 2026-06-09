@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SetZoneContext;
 class C_SetZone : public C_NodeWrapper<C_SetZone, C_CombatNode<C_Node>, S_SetZoneContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SetZone;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SetZone) == 0x28);

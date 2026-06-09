@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_CircularSpatialQueryContext;
 class C_CircularSpatialQuery : public C_NodeWrapper<C_CircularSpatialQuery, C_Node, S_CircularSpatialQueryContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CircularSpatialQuery;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_CircularSpatialQuery) == 0x28);

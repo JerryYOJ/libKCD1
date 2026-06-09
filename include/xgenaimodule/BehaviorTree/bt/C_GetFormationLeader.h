@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetFormationLeaderContext;
 class C_GetFormationLeader : public C_NodeWrapper<C_GetFormationLeader, C_Node, S_GetFormationLeaderContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetFormationLeader;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetFormationLeader) == 0x28);

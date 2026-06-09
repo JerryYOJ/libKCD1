@@ -8,6 +8,7 @@
 namespace wh::databasemodule {
 class C_ScriptBindDatabase : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindDatabase;
     void* m_pDatabaseManager;  // +0x60
     // int LoadTable(IFunctionHandler* pH);                                            // 0x180F3A278
     // int GetTableInfo(IFunctionHandler* pH);                                         // 0x180F39F54

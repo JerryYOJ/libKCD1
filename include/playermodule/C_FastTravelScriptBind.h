@@ -15,6 +15,7 @@ namespace wh::playermodule {
 
 class C_FastTravelScriptBind : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_FastTravelScriptBind;
     // -- Direct Lua methods --
     // int Stop(IFunctionHandler* pH);                                     // 0x181287904
     // int DespawnLastRandomEvent(IFunctionHandler* pH);                   // 0x181283454

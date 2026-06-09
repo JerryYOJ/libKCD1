@@ -2,8 +2,11 @@
 
 #include <vector>
 #include "I_ObjectDatabase.h"
+#include "I_DatabaseListener.h"   // base of C_DynamicEnumManager (declared below)
 
 namespace wh::databasemodule {
+
+class C_DatabaseDynamicEnum;  // fwd: used as a pointer in S_EnumEntry below
 
 // C_ObjectDatabaseManager — global registry of all I_ObjectDatabase instances.
 //
@@ -24,6 +27,7 @@ namespace wh::databasemodule {
 //   +0x30: I_ObjectDatabase** m_databases_capacity
 class C_ObjectDatabaseManager : public I_ObjectDatabase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ObjectDatabaseManager;
     // Inherited from I_ObjectDatabase:
     // +0x00: vtable*
 
@@ -53,6 +57,7 @@ struct S_EnumEntry {
 
 class C_DynamicEnumManager : public I_DatabaseListener {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_DynamicEnumManager;
     // +0x00: vtable (inherited from I_DatabaseListener)
     S_EnumEntry* m_entries;                 // +0x08  flat array of (key, enum) pairs
     int64_t m_entryCount;                   // +0x10  number of entries
@@ -85,6 +90,7 @@ static_assert(sizeof(C_DynamicEnumManager) == 0x40, "C_DynamicEnumManager must b
 // vtable[9..14] = 0 (pure virtual — not implemented, enum is read-only)
 class C_DatabaseDynamicEnum {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_DatabaseDynamicEnum;
     virtual int GetRowCount() const = 0;                    // [0]
     virtual const void* GetRowByIndex(int idx) const = 0;   // [1]
     virtual const void* GetRowData(int idx) const = 0;      // [2]

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_RandomEventVariantContext;
 class C_SetRandomEventVariant : public C_NodeWrapper<C_SetRandomEventVariant, C_Node, S_RandomEventVariantContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SetRandomEventVariant;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SetRandomEventVariant) == 0x28);

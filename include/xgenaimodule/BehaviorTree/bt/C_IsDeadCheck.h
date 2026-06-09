@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_NPCStateCheckBaseContext;
 class C_IsDeadCheck : public C_NodeWrapper<C_IsDeadCheck, C_NPCStateCheckBase, S_NPCStateCheckBaseContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_IsDeadCheck;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_IsDeadCheck) == 0x68);

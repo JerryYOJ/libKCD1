@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SwitchLevelContext;
 class C_SwitchLevel : public C_NodeWrapper<C_SwitchLevel, C_DefferedStateChange, S_SwitchLevelContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SwitchLevel;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SwitchLevel) == 0x28);

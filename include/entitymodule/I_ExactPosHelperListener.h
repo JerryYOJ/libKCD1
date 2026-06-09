@@ -9,6 +9,7 @@
 namespace wh::entitymodule {
 
 struct I_ExactPosHelperListener {
+    inline static constexpr auto RTTI = Offsets::RTTI_I_ExactPosHelperListener;
     virtual ~I_ExactPosHelperListener() = default;
     virtual void OnExactPosReached() {}
     virtual bool OnExactPosQuery() { return false; }

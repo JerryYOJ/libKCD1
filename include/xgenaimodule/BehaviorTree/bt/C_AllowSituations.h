@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_AllowSituationsContext;
 class C_AllowSituations : public C_NodeWrapper<C_AllowSituations, C_WrapperDecorator, S_AllowSituationsContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AllowSituations;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_AllowSituations) == 0x30);

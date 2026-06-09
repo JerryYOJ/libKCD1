@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 // <HolsterWeapon>  RTTI C_HolsterWeapon  vtable 0x182219f98  size 0x28  base C_InstantHolsterWeapon<C_AnimatedAction<C_HolsterItemAnimAction>>  ctx S_BaseNodeContext
 class C_HolsterWeapon : public C_NodeWrapper<C_HolsterWeapon, C_InstantHolsterWeapon<C_AnimatedAction<C_HolsterItemAnimAction>>, S_BaseNodeContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_HolsterWeapon;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_HolsterWeapon) == 0x28);

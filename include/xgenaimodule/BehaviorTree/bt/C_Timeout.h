@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_TimeoutContext;
 class C_Timeout : public C_NodeWrapper<C_Timeout, C_Decorator, S_TimeoutContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Timeout;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_Timeout) == 0x30);

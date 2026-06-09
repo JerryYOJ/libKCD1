@@ -81,6 +81,7 @@ class C_SoulList : public I_SoulResolver,                        // vtable at +0
                    public wh::databasemodule::I_DatabaseListener // vtable at +0x10
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SoulList;
     // Signal fires when souls are added/removed
     // Type: C_Signal<I_Soul&, I_Soul&, E_AddRemove>
     wh::shared::C_Signal<I_Soul&, I_Soul&> m_soulChangedSignal;  // +0x18  (0x30 bytes)

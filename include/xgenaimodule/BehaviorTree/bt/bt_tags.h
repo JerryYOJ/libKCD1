@@ -21,6 +21,9 @@ struct S_UnionTrait;
 
 // MI mixin interfaces (inherited by link/filter families) - modeled as
 // minimal complete types [layout UNVERIFIED] so they can be base classes.
-class I_LinkFilter {};
+class I_LinkFilter {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_LinkFilter;
+};
 
 }  // namespace wh::xgenaimodule::BehaviorTree

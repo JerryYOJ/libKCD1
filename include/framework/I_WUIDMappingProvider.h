@@ -18,6 +18,7 @@ namespace wh::framework {
 
 class I_WUIDMappingProvider {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_WUIDMappingProvider;
     // [0] reverse: given a 16-byte object key (a CryGUID), return the owning WUID (or an invalid
     //     sentinel if not registered).
     //     impls: C_InventoryManager sub_1810653BC, C_ItemManager sub_18108BB9C.

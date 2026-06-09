@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_DeSpawnPerceptibleVolumeContext;
 class C_DeSpawnPerceptibleVolume : public C_NodeWrapper<C_DeSpawnPerceptibleVolume, C_Node, S_DeSpawnPerceptibleVolumeContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_DeSpawnPerceptibleVolume;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_DeSpawnPerceptibleVolume) == 0x28);

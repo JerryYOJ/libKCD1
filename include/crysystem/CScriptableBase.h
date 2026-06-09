@@ -3,6 +3,11 @@
 #include "../Offsets/vtables/IScriptTable.h"
 #include "../Offsets/vtables/IScriptSystem.h"
 
+// CryEngine script-callback handler (SDK: IScriptSystem.h). ScriptBind headers only
+// take IFunctionHandler* parameters, so a global forward declaration suffices and lets
+// every C_ScriptBind* header compile standalone (e.g. via the kcd.h umbrella / PCH).
+struct IFunctionHandler;
+
 // -----------------------------------------------
 // CScriptableBase — CryEngine script binding base class
 // -----------------------------------------------

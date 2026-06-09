@@ -23,6 +23,7 @@ namespace wh { namespace entitymodule {
 
 class C_ArmorRuntimeData : public C_EquippableItemRuntimeData {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ArmorRuntimeData;
     I_ItemRuntimeData* Clone() override;        // slot0 = sub_18062BC80 (alloc from pool + deep-copy)
 
     uint8_t   m_flagA8;          // +0xA8  flag; slot5 (sub_18069AFF4) clears it & raises m_dirtyBits bit0. save tag 0x230E

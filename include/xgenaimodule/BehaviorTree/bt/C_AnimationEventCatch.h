@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_AnimationEventCatchContext;
 class C_AnimationEventCatch : public C_NodeWrapper<C_AnimationEventCatch, C_FixedComposite<2>, S_AnimationEventCatchContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AnimationEventCatch;
     uint8_t _ownState[0x20];   // [UNVERIFIED] own members above C_FixedComposite<2> (0x38)
 };
 static_assert(sizeof(C_AnimationEventCatch) == 0x58);

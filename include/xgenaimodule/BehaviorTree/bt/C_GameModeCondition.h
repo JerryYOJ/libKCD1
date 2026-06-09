@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GameModeConditionContext;
 class C_GameModeCondition : public C_NodeWrapper<C_GameModeCondition, C_Gate, S_GameModeConditionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GameModeCondition;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_GameModeCondition) == 0x68);

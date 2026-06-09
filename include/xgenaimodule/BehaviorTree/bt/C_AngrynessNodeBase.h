@@ -10,6 +10,9 @@ namespace wh::xgenaimodule::BehaviorTree {
 
 // C_AngrynessNodeBase : public C_Node   (RTTI-confirmed intermediate base; modeled THIN,
 //  own members [UNVERIFIED] absorbed into deriving node size.)
-class C_AngrynessNodeBase : public C_Node {};
+class C_AngrynessNodeBase : public C_Node {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AngrynessNodeBase;
+};
 
 }  // namespace wh::xgenaimodule::BehaviorTree

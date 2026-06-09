@@ -7,6 +7,7 @@ namespace wh::combatmodule {
 
 // Vtable: 0x1821B3BC8 (primary), 0x1821B3AF0 (reflect at +0x08)
 struct S_CombatActorActionComposedRipostePerfectBlockParams : public I_CombatActorActionParamsReflect {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_CombatActorActionComposedRipostePerfectBlockParams;
     ~S_CombatActorActionComposedRipostePerfectBlockParams() override = default;
     I_CombatActorActionParamsReflect m_reflect; // +0x08  embedded reflection vtable
     uint64_t m_data;            // +0x10

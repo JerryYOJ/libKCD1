@@ -6,6 +6,7 @@
 namespace wh::combatmodule {
 
 struct S_CombatActorActionSyncAttackParams : public I_CombatActorActionParamsReflect {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_CombatActorActionSyncAttackParams;
     ~S_CombatActorActionSyncAttackParams() = default;
     uint64_t m_data;            // +0x08  (init 0)
     bool     m_syncFlag;        // +0x10  (init 1)

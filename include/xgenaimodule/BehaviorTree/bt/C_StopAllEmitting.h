@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_StopAllEmittingContext;
 class C_StopAllEmitting : public C_NodeWrapper<C_StopAllEmitting, C_Node, S_StopAllEmittingContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_StopAllEmitting;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_StopAllEmitting) == 0x28);

@@ -16,6 +16,7 @@ namespace wh::combatmodule {
 // ---------------------------------------------------------------------------
 class I_CombatActionHelperAttackOwner {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_CombatActionHelperAttackOwner;
     virtual ~I_CombatActionHelperAttackOwner() = default;   // [0]
     virtual void unk_atk1() = 0;                            // [1]
     virtual void unk_atk2() = 0;                            // [2]
@@ -36,6 +37,7 @@ public:
 // ---------------------------------------------------------------------------
 class I_CombatActionHelperBlockOwner {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_CombatActionHelperBlockOwner;
     virtual ~I_CombatActionHelperBlockOwner() = default;    // [0]
     virtual void unk_blk1() = 0;                            // [1]
     virtual void unk_blk2() = 0;                            // [2]

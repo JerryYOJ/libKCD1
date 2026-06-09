@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ShapePositionContext;
 class C_ShapePosition : public C_NodeWrapper<C_ShapePosition, C_DefferedStateChange, S_ShapePositionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ShapePosition;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_ShapePosition) == 0x28);

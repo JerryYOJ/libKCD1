@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_BehaviorTagCatchContext;
 class C_BehaviorTagCatch : public C_NodeWrapper<C_BehaviorTagCatch, C_Decorator, S_BehaviorTagCatchContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_BehaviorTagCatch;
     uint8_t _ownState[0x8];   // [UNVERIFIED] own members above C_Decorator (0x30)
 };
 static_assert(sizeof(C_BehaviorTagCatch) == 0x38);

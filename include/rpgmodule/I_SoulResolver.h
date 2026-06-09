@@ -24,6 +24,7 @@ class I_Soul;
 
 class I_SoulResolver {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_SoulResolver;
     virtual ~I_SoulResolver() = default;                                // [0]
     virtual void vf01() {}                                              // [1]
     virtual void vf02() {}                                              // [2]

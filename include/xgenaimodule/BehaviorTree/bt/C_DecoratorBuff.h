@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_DecoratorBuffContext;
 class C_DecoratorBuff : public C_NodeWrapper<C_DecoratorBuff, C_BuffDecoratorBase, S_DecoratorBuffContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_DecoratorBuff;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_DecoratorBuff) == 0x30);

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_AssignClothingPresetContext;
 class C_AssignClothingPreset : public C_NodeWrapper<C_AssignClothingPreset, C_Node, S_AssignClothingPresetContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AssignClothingPreset;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_AssignClothingPreset) == 0x28);

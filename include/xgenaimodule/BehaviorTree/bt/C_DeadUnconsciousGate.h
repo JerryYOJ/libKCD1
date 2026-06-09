@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_DeadUnconsciousGateContext;
 class C_DeadUnconsciousGate : public C_NodeWrapper<C_DeadUnconsciousGate, C_PassiveBarrier, S_DeadUnconsciousGateContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_DeadUnconsciousGate;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_DeadUnconsciousGate) == 0x30);

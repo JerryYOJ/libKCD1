@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetDogCompanionModeContext;
 class C_GetDogCompanionMode : public C_NodeWrapper<C_GetDogCompanionMode, C_Node, S_GetDogCompanionModeContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetDogCompanionMode;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetDogCompanionMode) == 0x28);

@@ -18,6 +18,7 @@ namespace wh::framework {
 
 class I_Action : public _i_multithread_reference_target<int> {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_Action;
     // No additional members -- _i_multithread_reference_target provides:
     //   +0x00: vtable
     //   +0x08: volatile int m_nRefCounter

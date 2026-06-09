@@ -26,6 +26,7 @@ namespace wh::combatmodule {
 class C_CombatActorDirector : public wh::framework::C_ActionDirector,
                               public C_CombatActorObject {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorDirector;
     inline static constexpr auto VTABLE = Offsets::VTABLE_C_CombatActorDirector;
 
     bool IsActive() override;  // sub_18043423C: owner state.m_isInCombat || sub_1805637FC

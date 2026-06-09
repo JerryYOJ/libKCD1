@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_AreaPresenceContext;
 class C_AreaPresence : public C_NodeWrapper<C_AreaPresence, C_Decorator, S_AreaPresenceContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AreaPresence;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_AreaPresence) == 0x30);

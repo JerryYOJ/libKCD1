@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GuardContext;
 class C_Guard : public C_NodeWrapper<C_Guard, C_CombatNode<C_PassiveBarrier>, S_GuardContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Guard;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_Guard) == 0x30);

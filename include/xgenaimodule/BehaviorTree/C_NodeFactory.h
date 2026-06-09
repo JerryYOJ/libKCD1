@@ -140,6 +140,7 @@ namespace wh { namespace xgenaimodule { namespace BehaviorTree {
 class I_NodeFactory : public wh::xgenaimodule::I_CastableIface
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_NodeFactory;
     // [0] Destructor. VERIFIED abstract 0x1812edf68.
     virtual ~I_NodeFactory();
 

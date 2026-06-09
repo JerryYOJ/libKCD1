@@ -31,6 +31,7 @@ namespace wh::rpgmodule {
 // I_Soul convention and does not change the 5-slot vtable layout.
 class I_CombatSoul {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_CombatSoul;
     // The connect/disconnect helpers append/remove a 16-byte {object, member-fn}
     // delegate (wh::shared::S_Delegate<bool>) on the matching C_Signal<bool>.
     virtual void ConnectSignal1(const wh::shared::S_Delegate<bool>& slot) {}     // [0] 0x1811be440

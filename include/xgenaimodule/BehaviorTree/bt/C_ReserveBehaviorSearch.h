@@ -13,6 +13,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 // <ReserveBehaviorSearch>  RTTI C_ReserveBehaviorSearch  vtable 0x182208840  size 0x30  base C_Decorator  ctx S_BaseNodeContext
 class C_ReserveBehaviorSearch : public C_NodeWrapper<C_ReserveBehaviorSearch, C_Decorator, S_BaseNodeContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ReserveBehaviorSearch;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_ReserveBehaviorSearch) == 0x30);

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_CheckGlobalTagStateContext;
 class C_CheckGlobalTagState : public C_NodeWrapper<C_CheckGlobalTagState, C_Node, S_CheckGlobalTagStateContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CheckGlobalTagState;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_CheckGlobalTagState) == 0x28);

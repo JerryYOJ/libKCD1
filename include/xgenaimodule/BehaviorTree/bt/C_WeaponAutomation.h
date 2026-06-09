@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_WeaponAutomationContext;
 class C_WeaponAutomation : public C_NodeWrapper<C_WeaponAutomation, C_CombatAutomationBase<C_AnimatedAction<C_ItemAIAnimAction>>, S_WeaponAutomationContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_WeaponAutomation;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_WeaponAutomation) == 0x28);

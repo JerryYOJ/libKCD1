@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_EnableProfileContext;
 class C_EnableProfile : public C_NodeWrapper<C_EnableProfile, C_Node, S_EnableProfileContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_EnableProfile;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_EnableProfile) == 0x28);

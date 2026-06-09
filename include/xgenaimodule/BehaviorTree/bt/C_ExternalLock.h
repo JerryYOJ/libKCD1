@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ExternalLockContext;
 class C_ExternalLock : public C_NodeWrapper<C_ExternalLock, C_LockBarrier<C_ExecutionBarrier>, S_ExternalLockContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ExternalLock;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_ExternalLock) == 0x30);

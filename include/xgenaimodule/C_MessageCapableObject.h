@@ -20,6 +20,7 @@ namespace wh::xgenaimodule {
 
 class C_MessageCapableObject : public C_LinkableObject {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_MessageCapableObject;
     // --- primary-vtable addition (slot 16) ---
     // Introduced here as a pure/abstract slot; C_IntelligentObject provides the body.
     virtual int64_t vf16_MessageHook();   // [16] +0x80  [name UNVERIFIED]

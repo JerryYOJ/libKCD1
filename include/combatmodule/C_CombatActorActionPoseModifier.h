@@ -10,6 +10,7 @@ class C_CombatActorActionPoseModifier
     : public C_CombatActorAnimatedAction<S_CombatActorActionPoseModifierParams, 1, I_CombatActorActionPrivate>
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorActionPoseModifier;
     // Primary vtable: 0x1821AC250 | Ctor: 0x180433EEC | Size: 0x108
     // Action state initialized to 4 (priority = 4)
     bool        m_flag;             // (init 0)

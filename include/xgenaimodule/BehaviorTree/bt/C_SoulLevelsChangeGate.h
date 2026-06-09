@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct C_SoulLevelsChangeGateContext;
 class C_SoulLevelsChangeGate : public C_NodeWrapper<C_SoulLevelsChangeGate, C_PassiveBarrier, C_SoulLevelsChangeGateContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SoulLevelsChangeGate;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_SoulLevelsChangeGate) == 0x30);

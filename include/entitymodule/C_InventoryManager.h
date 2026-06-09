@@ -34,6 +34,7 @@ class C_Inventory;
 class C_InventoryManager : public I_InventoryListener,                  // +0x00 vtable
                            public wh::framework::I_WUIDMappingProvider { // +0x08 vtable
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_InventoryManager;
     // engine-function forwarder (impl in RE/src/entitymodule/C_InventoryManager.cpp)
     C_Inventory* LookupByWUID(wh::framework::WUID w) const;             // sub_18055E7D8(this+0x10, &w)
 

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_IfGateContext;
 class C_IfGate : public C_NodeWrapper<C_IfGate, C_PassiveBarrier, S_IfGateContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_IfGate;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_IfGate) == 0x30);

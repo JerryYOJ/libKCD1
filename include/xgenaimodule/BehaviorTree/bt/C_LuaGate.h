@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_LuaGateContext;
 class C_LuaGate : public C_NodeWrapper<C_LuaGate, C_Gate, S_LuaGateContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_LuaGate;
     uint8_t _ownState[0x10];   // [UNVERIFIED] own members above C_Gate (0x68)
 };
 static_assert(sizeof(C_LuaGate) == 0x78);

@@ -38,6 +38,7 @@ enum class E_ItemProperty : int {
 
 class C_Item {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Item;
     virtual ~C_Item();                              // +0x00  scalar deleting dtor (sub_180453974)
 
     wh::framework::WUID  m_wuid;                    // +0x08  own WUID (registry key)

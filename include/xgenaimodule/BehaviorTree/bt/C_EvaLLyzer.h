@@ -16,6 +16,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_EvaLLyzerContext;
 class C_EvaLLyzer : public C_NodeWrapper<C_EvaLLyzer, C_LyzerBase<C_LinkNoData<C_FixedComposite<1>>>, S_EvaLLyzerContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_EvaLLyzer;
     uint8_t _ownState[0x20];   // [UNVERIFIED] own members above C_LyzerBase<C_LinkNoData<C_FixedComposite<1>>> (0x30)
 };
 static_assert(sizeof(C_EvaLLyzer) == 0x50);

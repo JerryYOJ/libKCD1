@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ClearInboxContext;
 class C_ClearInbox : public C_NodeWrapper<C_ClearInbox, C_Node, S_ClearInboxContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ClearInbox;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_ClearInbox) == 0x28);

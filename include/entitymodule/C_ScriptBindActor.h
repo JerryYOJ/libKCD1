@@ -18,6 +18,7 @@ namespace wh::entitymodule {
 
 class C_ScriptBindActor : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindActor;
     void*                   m_pVtable2;         // +0x60  secondary vftable
     Offsets::IScriptTable*  m_pEntityTable;     // +0x68  entity script table
     void*                   m_pGameFramework;   // +0x70  IGameFramework*

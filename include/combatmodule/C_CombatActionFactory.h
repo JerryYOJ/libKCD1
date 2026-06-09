@@ -42,6 +42,7 @@ namespace wh::combatmodule {
 // ---------------------------------------------------------------------------
 class C_CombatActionFactoryBase : public C_CombatActorObject {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActionFactoryBase;
     ~C_CombatActionFactoryBase() override = default;
 
     E_CombatSubsystem GetSubsystemId() const override { return COMBAT_SUB_ACTION_FACTORY; }
@@ -64,6 +65,7 @@ static_assert(sizeof(C_CombatActionFactoryBase) == 0x10);
 // ---------------------------------------------------------------------------
 class C_CombatActionAttackFactory : public C_CombatActionFactoryBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActionAttackFactory;
     ~C_CombatActionAttackFactory() override = default;
     // CreateAction override at vtable[6] = sub_182447370 region
 
@@ -90,6 +92,7 @@ static_assert(sizeof(C_CombatActionAttackFactory) == 0x10);
 // ---------------------------------------------------------------------------
 class C_CombatActionPerfectBlockFactory : public C_CombatActionFactoryBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActionPerfectBlockFactory;
     ~C_CombatActionPerfectBlockFactory() override = default;
     // CreateAction override at vtable[6] = sub_1824406B0 region
 };

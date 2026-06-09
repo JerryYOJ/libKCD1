@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SetGlobalVarContext;
 class C_SetGlobalVar : public C_NodeWrapper<C_SetGlobalVar, C_Node, S_SetGlobalVarContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SetGlobalVar;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SetGlobalVar) == 0x28);

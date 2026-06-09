@@ -21,6 +21,7 @@ namespace wh::xgenaimodule {
 // Name from C_NPC RTTI base list. Exact lock semantics UNVERIFIED.
 class I_RWLocked {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_RWLocked;
     virtual ~I_RWLocked();   // [0]
     virtual void vf1();      // [1]  (lock/unlock primitive — UNVERIFIED)
     virtual void vf2();      // [2]
@@ -28,6 +29,7 @@ public:
 
 class C_LinkableObject : public C_AIObject, public I_RWLocked {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_LinkableObject;
     // --- primary-vtable additions (slots 9..15) ---
     virtual void* GetTypeDescriptor2();   // [9]  +0x48  -> off_1829DAFC0 (static)  [name UNVERIFIED]
     virtual void* GetTypeDescriptor3();   // [10] +0x50  -> off_1829DAFC8 (static)  [name UNVERIFIED]

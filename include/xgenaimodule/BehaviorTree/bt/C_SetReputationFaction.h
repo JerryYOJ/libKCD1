@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SetReputationFactionContext;
 class C_SetReputationFaction : public C_NodeWrapper<C_SetReputationFaction, C_Node, S_SetReputationFactionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SetReputationFaction;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SetReputationFaction) == 0x28);

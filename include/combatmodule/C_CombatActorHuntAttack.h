@@ -23,6 +23,7 @@ enum class E_HuntAttackResult : int {
 
 class I_CombatActorHuntAttack {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_CombatActorHuntAttack;
     virtual ~I_CombatActorHuntAttack() = default;                           // [0]
     virtual E_HuntAttackResult TryHuntAttack(EntityId victimEntityId) = 0; // [1] sub_180639804
     virtual E_HuntAttackResult Request(EntityId victimEntityId) = 0;     // [2] sub_18063A428
@@ -72,6 +73,7 @@ public:
 class C_CombatActorHuntAttack : public C_CombatActorObject,
                                  public I_CombatActorHuntAttack {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorHuntAttack;
     inline static constexpr auto VTABLE = Offsets::VTABLE_C_CombatActorHuntAttack;
 
     // C_CombatActorObject overrides (VERIFIED: GetSubsystemId=0x1C, GetName="HUNT_ATTACK")

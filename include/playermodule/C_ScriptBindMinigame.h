@@ -15,6 +15,7 @@ namespace wh::playermodule {
 
 class C_ScriptBindMinigame : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindMinigame;
     void* m_pOwner;  // +0x60
 
     // -- Virtual Lua methods --

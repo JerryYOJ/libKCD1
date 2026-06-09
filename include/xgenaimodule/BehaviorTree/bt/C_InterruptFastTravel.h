@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_InterruptFastTravelContext;
 class C_InterruptFastTravel : public C_NodeWrapper<C_InterruptFastTravel, C_Node, S_InterruptFastTravelContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_InterruptFastTravel;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_InterruptFastTravel) == 0x28);

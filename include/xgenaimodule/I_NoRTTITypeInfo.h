@@ -9,6 +9,7 @@ namespace wh::xgenaimodule {
 // ---------------------------------------------------------------------------
 class I_NoRTTITypeInfo {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_NoRTTITypeInfo;
     virtual ~I_NoRTTITypeInfo() = default;
 };
 
@@ -18,6 +19,8 @@ public:
 // Inherits I_NoRTTITypeInfo, base of I_Node.
 // ---------------------------------------------------------------------------
 class I_CastableIface : public I_NoRTTITypeInfo {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_CastableIface;
 };
 
 }  // namespace wh::xgenaimodule

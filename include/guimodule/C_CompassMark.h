@@ -17,6 +17,7 @@ namespace wh::guimodule {
 
 class C_CompassMark {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CompassMark;
     virtual void _vf0() {}   // [0] sub_18110F6B0
     virtual void _vf1() {}   // [1] sub_18110F6BC
     virtual void _vf2() {}   // [2] nop

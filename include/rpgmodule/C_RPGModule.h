@@ -35,6 +35,7 @@ class C_SoulList;
 
 class C_RPGModule {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_RPGModule;
     // +0x00..+0x77: primary vtable + module base fields
     char            _pad00[0x78];
     // +0x78: secondary vtable (C_RPGModule _0)

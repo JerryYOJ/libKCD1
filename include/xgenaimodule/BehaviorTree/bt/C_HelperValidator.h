@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_HelperValidatorContext;
 class C_HelperValidator : public C_NodeWrapper<C_HelperValidator, C_Node, S_HelperValidatorContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_HelperValidator;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_HelperValidator) == 0x28);

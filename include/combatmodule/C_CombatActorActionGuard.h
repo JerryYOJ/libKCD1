@@ -11,6 +11,7 @@ class C_CombatActorActionGuard
           C_CombatActorParamAction_Base<S_CombatActorActionGuardParams, I_CombatActorActionPrivate>>
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorActionGuard;
     // Primary vtable: 0x1821AEF00 (57 slots) | Ctor: 0x18046279C | Size: 0x118
     // NO C_CombatActorAnimatedAction layer
     uint16_t    m_stateFlags;       // (init 0)

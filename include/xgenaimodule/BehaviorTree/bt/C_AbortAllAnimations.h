@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_AbortAllAnimationsContext;
 class C_AbortAllAnimations : public C_NodeWrapper<C_AbortAllAnimations, C_Node, S_AbortAllAnimationsContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AbortAllAnimations;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_AbortAllAnimations) == 0x28);

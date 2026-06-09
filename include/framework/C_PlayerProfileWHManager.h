@@ -33,6 +33,7 @@ class C_PlayerProfileWHManager
     , public Offsets::ISystemEventListener
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_PlayerProfileWHManager;
     // Run the pending save request (sub_180F095F0): forwards m_activeSaveType /
     // m_saveParam / m_pSaveName to m_pSaveGameManager->SaveGameToSlot, broadcasts the
     // post-save module message, then returns the manager to the idle (None) state.

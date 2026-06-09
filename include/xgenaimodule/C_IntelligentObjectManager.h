@@ -53,6 +53,7 @@ namespace wh::xgenaimodule {
 // ---------------------------------------------------------------------------
 class I_DebugDraw {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_DebugDraw;
     virtual ~I_DebugDraw();                 // [0] 0x18159B0A8
     virtual void DebugDraw();               // [1] empty default (0x1802E39B0) [name UNVERIFIED]
 };
@@ -62,6 +63,7 @@ class C_IntelligentObjectManager
     , public virtual I_DebugDraw                                                     // vbase @+0x60 (vbptr @+0x58)
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_IntelligentObjectManager;
     static C_IntelligentObjectManager* GetInstance();   // -> *qword_183799950 (sub_180705DE0)
 
     // --- engine ops (non-virtual; address forwarders, see Offsets.cpp) ---

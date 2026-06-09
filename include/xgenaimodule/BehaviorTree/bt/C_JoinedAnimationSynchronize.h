@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 // <JoinedAnimationSynchronize>  RTTI C_JoinedAnimationSynchronize  vtable 0x182380750  size 0x30  base C_JoinedAnimationLockBase<C_Synchronize>  ctx S_BaseNodeContext
 class C_JoinedAnimationSynchronize : public C_NodeWrapper<C_JoinedAnimationSynchronize, C_JoinedAnimationLockBase<C_Synchronize>, S_BaseNodeContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_JoinedAnimationSynchronize;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_JoinedAnimationSynchronize) == 0x30);

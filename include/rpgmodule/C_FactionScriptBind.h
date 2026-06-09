@@ -10,6 +10,7 @@
 namespace wh::rpgmodule {
 class C_FactionScriptBind : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_FactionScriptBind;
     // int __tostring(IFunctionHandler* pH);                                    // 0x1811D1A58
     // int GetId(IFunctionHandler* pH);                                         // 0x1811C124C
     // int GetName(IFunctionHandler* pH);                                       // 0x1811C2520

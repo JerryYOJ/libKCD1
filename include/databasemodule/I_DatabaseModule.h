@@ -13,6 +13,7 @@ class C_ObjectDatabaseManager;
 // vtable @ 0x1822c1e10 (all pure virtual)
 class I_DatabaseModule {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_DatabaseModule;
     virtual ~I_DatabaseModule() = 0;                                    // [0]
     virtual bool Initialize() = 0;                                      // [1]
     virtual void Shutdown() = 0;                                        // [2]

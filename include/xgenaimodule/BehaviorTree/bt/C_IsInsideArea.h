@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_IsInsideAreaContext;
 class C_IsInsideArea : public C_NodeWrapper<C_IsInsideArea, C_Gate, S_IsInsideAreaContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_IsInsideArea;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_IsInsideArea) == 0x68);

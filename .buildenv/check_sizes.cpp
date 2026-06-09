@@ -138,3 +138,18 @@
 #include "xgenaimodule/C_AIPuppet.h"
 #include "xgenaimodule/S_InformationRecord.h"
 #include "xgenaimodule/C_InformationManager.h"
+
+// ---- RTTI / kcd_cast smoke test ----
+#include "Offsets/RTTI.h"
+namespace {
+    [[maybe_unused]] void rtti_smoke_test() {
+        wh::framework::I_Action* base = nullptr;
+        // downcast across the inheritance chain using the game's own RTTI
+        auto* hit  = kcd_cast<wh::combatmodule::C_CombatActorActionSyncHit*>(base);
+        auto* atk  = kcd_cast<wh::combatmodule::C_CombatActorActionSyncAttack*>(base);
+        // sibling/unrelated cast must also compile (returns nullptr at runtime)
+        wh::combatmodule::C_CombatActor* actor = nullptr;
+        auto* soul = kcd_cast<wh::rpgmodule::C_Soul*>(actor);
+        (void)hit; (void)atk; (void)soul;
+    }
+}

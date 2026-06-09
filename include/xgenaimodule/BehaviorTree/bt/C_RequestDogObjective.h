@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_RequestDogObjectiveContext;
 class C_RequestDogObjective : public C_NodeWrapper<C_RequestDogObjective, C_DefferedStateChange, S_RequestDogObjectiveContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_RequestDogObjective;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_RequestDogObjective) == 0x28);

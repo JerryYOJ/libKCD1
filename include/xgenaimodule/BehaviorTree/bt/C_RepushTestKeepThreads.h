@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_RepushTestContext;
 class C_RepushTestKeepThreads : public C_NodeWrapper<C_RepushTestKeepThreads, C_RepushTest, S_RepushTestContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_RepushTestKeepThreads;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_RepushTestKeepThreads) == 0x30);

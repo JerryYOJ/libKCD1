@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_TryCatchContext;
 class C_TryCatch : public C_NodeWrapper<C_TryCatch, C_Composite, S_TryCatchContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_TryCatch;
     uint8_t _ownState[0x20];   // [UNVERIFIED] own members above C_Composite (0x40)
 };
 static_assert(sizeof(C_TryCatch) == 0x60);

@@ -73,6 +73,7 @@ class I_DebugNode;
 // ===========================================================================
 class I_Node : public wh::xgenaimodule::I_CastableIface {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_Node;
     // ---- Identity / lifecycle [0]-[5] ----
     virtual const void* GetTypeInfo() const = 0;                // [0]  override returns a static type/category blob [UNVERIFIED exact]
     virtual void  Destroy(uint8_t flags) = 0;                   // [1]  +0x08 VERIFIED scalar/vector deleting dtor; if(flags&1) free 0x28; sets both vptrs

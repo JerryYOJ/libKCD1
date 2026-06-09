@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_PlayVideoContext;
 class C_PlayVideo : public C_NodeWrapper<C_PlayVideo, C_DefferedStateChange, S_PlayVideoContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_PlayVideo;
     uint8_t _ownState[0x8];   // [UNVERIFIED] own members above C_DefferedStateChange (0x28)
 };
 static_assert(sizeof(C_PlayVideo) == 0x30);

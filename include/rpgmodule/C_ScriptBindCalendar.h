@@ -9,6 +9,7 @@
 namespace wh::rpgmodule {
 class C_ScriptBindCalendar : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindCalendar;
     void* m_pCalendar;  // +0x60
 
     // int SetWorldTimeRatio(IFunctionHandler* pH, float worldTimeRatio);     // 0x1811CF660

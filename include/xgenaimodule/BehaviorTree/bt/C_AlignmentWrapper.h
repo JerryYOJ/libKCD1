@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_AlignmentWrapperContext;
 class C_AlignmentWrapper : public C_NodeWrapper<C_AlignmentWrapper, C_ForwardingData<C_WrapperDecorator>, S_AlignmentWrapperContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AlignmentWrapper;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_AlignmentWrapper) == 0x30);

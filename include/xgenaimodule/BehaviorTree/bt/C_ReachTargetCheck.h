@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ReachTargetCheckContext;
 class C_ReachTargetCheck : public C_NodeWrapper<C_ReachTargetCheck, C_Node, S_ReachTargetCheckContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ReachTargetCheck;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_ReachTargetCheck) == 0x28);

@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_Gen2EntityClassFilterContext;
 class C_Gen2EntityClassFilter : public C_NodeWrapper<C_Gen2EntityClassFilter, C_GraphSearchFilterBase<C_Gen2EntityClassFilter, C_Node>, S_Gen2EntityClassFilterContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Gen2EntityClassFilter;
     uint8_t _ownState[0x8];   // [UNVERIFIED] own members above C_GraphSearchFilterBase<C_Gen2EntityClassFilter, C_Node> (0x28)
 };
 static_assert(sizeof(C_Gen2EntityClassFilter) == 0x30);

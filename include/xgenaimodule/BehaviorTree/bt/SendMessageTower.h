@@ -27,14 +27,20 @@
 namespace wh::xgenaimodule::BehaviorTree {
 
 class C_SendToNPC_MultiData : public virtual C_SendMessageBase {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SendToNPC_MultiData;
     uint8_t _ownState[0x08];   // [UNVERIFIED]; complete object 0x38
 };
 
 class C_InstantMultiSendMessageToNPC : public C_SendToNPC_MultiData {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_InstantMultiSendMessageToNPC;
     // complete object 0x40 [own members UNVERIFIED]
 };
 
 class C_SendToNPC_TimeBase : public virtual C_SendMessageBase {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SendToNPC_TimeBase;
     // abstract / never most-derived; standalone size [UNVERIFIED]
 };
 
@@ -43,6 +49,8 @@ class C_SendToNPC_TimeBase : public virtual C_SendMessageBase {
 class C_MultiSendToNPC_Time
     : public C_SendToNPC_TimeBase
     , public virtual C_SendToNPC_MultiData {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_MultiSendToNPC_Time;
     // complete object 0x48 [own members UNVERIFIED]
 };
 

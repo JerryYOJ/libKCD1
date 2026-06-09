@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetRandomNavmeshPosDebugContext;
 class C_GetRandomNavmeshPosDebug : public C_NodeWrapper<C_GetRandomNavmeshPosDebug, C_Node, S_GetRandomNavmeshPosDebugContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetRandomNavmeshPosDebug;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetRandomNavmeshPosDebug) == 0x28);

@@ -13,6 +13,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 // (virtual-base layout makes a static_assert unreliable here).
 class C_InstantSendMessageToInhabitants : public C_SendToNPC_MultiData
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_InstantSendMessageToInhabitants;
     // [UNVERIFIED] own members; complete object == 0x48
 };
 

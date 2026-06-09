@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_RestrictCameraContext;
 class C_RestrictCamera : public C_NodeWrapper<C_RestrictCamera, C_WrapperDecorator, S_RestrictCameraContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_RestrictCamera;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_RestrictCamera) == 0x30);

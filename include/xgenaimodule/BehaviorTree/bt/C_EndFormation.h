@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_EndFormationContext;
 class C_EndFormation : public C_NodeWrapper<C_EndFormation, C_Node, S_EndFormationContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_EndFormation;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_EndFormation) == 0x28);

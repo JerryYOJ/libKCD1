@@ -16,6 +16,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SoulIsAliveFilterContext;
 class C_SoulIsAliveFilter : public C_NodeWrapper<C_SoulIsAliveFilter, C_LinkFilterWithSource<C_SoulIsAliveFilter, C_LinkLimitedData<C_Node>>, S_SoulIsAliveFilterContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SoulIsAliveFilter;
     uint8_t _ownState[0x8];   // [UNVERIFIED] own members above C_LinkFilterWithSource<C_SoulIsAliveFilter, C_LinkLimitedData<C_Node>> (0x28)
 };
 static_assert(sizeof(C_SoulIsAliveFilter) == 0x30);

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_POIDiscoveryBarrier;
 class C_POIDiscoveryBarrier : public C_NodeWrapper<C_POIDiscoveryBarrier, C_PassiveBarrier, S_POIDiscoveryBarrier>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_POIDiscoveryBarrier;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_POIDiscoveryBarrier) == 0x30);

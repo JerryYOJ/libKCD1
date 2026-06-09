@@ -33,6 +33,7 @@ namespace wh::xgenaimodule {
 
 class C_CachedPuppet : public I_AIPuppet {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CachedPuppet;
     // Overrides only the destructor (sub_18167DD24 -> sub_18044FAC8).
     ~C_CachedPuppet() override;
 

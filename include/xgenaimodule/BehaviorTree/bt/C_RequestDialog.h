@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_RequestDialogContext;
 class C_RequestDialog : public C_NodeWrapper<C_RequestDialog, C_Node, S_RequestDialogContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_RequestDialog;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_RequestDialog) == 0x28);

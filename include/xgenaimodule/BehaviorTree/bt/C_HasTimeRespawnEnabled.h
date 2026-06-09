@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_HasTimeRespawnEnabledContext;
 class C_HasTimeRespawnEnabled : public C_NodeWrapper<C_HasTimeRespawnEnabled, C_Gate, S_HasTimeRespawnEnabledContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_HasTimeRespawnEnabled;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_HasTimeRespawnEnabled) == 0x68);

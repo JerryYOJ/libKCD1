@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SurrenderActionHintContext;
 class C_SurrenderActionHint : public C_NodeWrapper<C_SurrenderActionHint, C_Node, S_SurrenderActionHintContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SurrenderActionHint;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SurrenderActionHint) == 0x28);

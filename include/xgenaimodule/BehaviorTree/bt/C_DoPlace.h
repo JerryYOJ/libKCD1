@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_DoPlaceContext;
 class C_DoPlace : public C_NodeWrapper<C_DoPlace, C_InstantDoPlace<C_AnimatedAction<C_PlaceItemAnimAction>>, S_DoPlaceContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_DoPlace;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_DoPlace) == 0x28);

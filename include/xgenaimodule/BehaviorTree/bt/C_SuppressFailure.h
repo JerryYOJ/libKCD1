@@ -13,6 +13,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 // <SuppressFailure>  RTTI C_SuppressFailure  vtable 0x1821f1b90  size 0x30  base C_Decorator  ctx S_BaseNodeContext
 class C_SuppressFailure : public C_NodeWrapper<C_SuppressFailure, C_Decorator, S_BaseNodeContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SuppressFailure;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_SuppressFailure) == 0x30);

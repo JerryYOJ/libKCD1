@@ -70,6 +70,7 @@ struct S_IntrusiveListNode {
 
 class I_ItemRuntimeData {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_ItemRuntimeData;
     // slot0 — deep-copy this record into a fresh pool instance (pure here; the runtime-
     //   data table acquires entries through it). C_WeaponRuntimeData::Clone = sub_18062BB00
     //   (allocate from pool qword_183785930, copy every field, return the new object).

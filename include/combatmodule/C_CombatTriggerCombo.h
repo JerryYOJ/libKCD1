@@ -11,6 +11,7 @@ namespace wh::combatmodule {
 // OnDeactivate: clears m_comboTriggerActive, fires state+0x6F0
 class C_CombatTriggerCombo : public C_CombatSlotTrigger {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatTriggerCombo;
     ~C_CombatTriggerCombo() override = default;                 // [0]  sub_1806AAD80
     const char* GetName() const override { return ""; }         // [3]  sub_1806FC760
     void unk_6() override {}                                    // [6]  sub_180432AEC

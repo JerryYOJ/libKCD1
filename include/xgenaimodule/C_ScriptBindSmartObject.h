@@ -8,6 +8,7 @@
 namespace wh::xgenaimodule {
 class C_ScriptBindSmartObject : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindSmartObject;
     void*                   m_pGameFramework;   // +0x60
     Offsets::IScriptSystem* m_pScriptSystem;    // +0x68
     // int GetHelpers(IFunctionHandler* pH);                                                       // 0x18166ECF4

@@ -16,6 +16,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_InAreaFilterContext;
 class C_InAreaFilter : public C_NodeWrapper<C_InAreaFilter, C_LinkFilterWithSource<C_InAreaFilter, C_LinkLimitedData<C_Node>>, S_InAreaFilterContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_InAreaFilter;
     uint8_t _ownState[0x8];   // [UNVERIFIED] own members above C_LinkFilterWithSource<C_InAreaFilter, C_LinkLimitedData<C_Node>> (0x28)
 };
 static_assert(sizeof(C_InAreaFilter) == 0x30);

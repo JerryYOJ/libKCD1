@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_StopMovementContext;
 class C_StopMovement : public C_NodeWrapper<C_StopMovement, C_DefferedStateChange, S_StopMovementContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_StopMovement;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_StopMovement) == 0x28);

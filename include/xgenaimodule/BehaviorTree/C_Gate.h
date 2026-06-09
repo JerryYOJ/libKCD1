@@ -32,6 +32,7 @@ struct S_SwitchContext {
 };
 
 struct S_GateContext {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_GateContext;
     // UNVERIFIED: gate evaluation state
 };
 
@@ -40,15 +41,18 @@ struct S_GateContext {
 // the C_Composites.h include above.
 
 struct S_IfConditionContext {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_IfConditionContext;
     // UNVERIFIED: condition evaluation result
 };
 
 struct S_IfElseConditionContext {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_IfElseConditionContext;
     bool m_conditionResult;             // which branch to take
     // UNVERIFIED
 };
 
 struct S_FuseBoxContext {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_FuseBoxContext;
     // UNVERIFIED
 };
 
@@ -109,6 +113,7 @@ class C_FuseBoxLogic {};           // [UNVERIFIED]
 // ---------------------------------------------------------------------------
 class C_Gate : public C_NodeWrapper<C_Gate, C_FixedComposite<2>, S_GateContext> {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Gate;
     const char* GetNodeCategory() const override { return "Gate"; } // [6]
 
     // Own state beyond the C_FixedComposite<2> base (0x30 bytes: "Then"/"Else"

@@ -127,6 +127,7 @@ namespace wh { namespace xgenaimodule { namespace BehaviorTree {
 // ----------------------------------------------------------------------------
 struct S_GetItemPropertyContext : public S_BaseNodeContext
 {
+    inline static constexpr auto RTTI = Offsets::RTTI_S_GetItemPropertyContext;
     // ------------------------------------------------------------------------
     // E_ItemProperty — selects which property of the resolved item to read.
     //   Backing type std::int32_t (RTTI "W4E_ItemProperty" == 32-bit int enum).
@@ -172,6 +173,7 @@ struct S_GetItemPropertyContext : public S_BaseNodeContext
 class C_GetItemProperty
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetItemProperty;
     using Context = S_GetItemPropertyContext;
     // Stateless policy: no data members (does NOT appear in node-object layout).
 };
@@ -218,6 +220,7 @@ class C_NodeFactory_GetItemProperty
                                 C_DefaultNodeContextCasting<S_GetItemPropertyContext> >
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_NodeFactory_GetItemProperty;
     // Single XML attribute bound by this factory: the property selector.
     EnumNodeAttribute<S_GetItemPropertyContext::E_ItemProperty> m_propertyAttr;
     // [UNVERIFIED] m_propertyAttr offset and any additional factory members.

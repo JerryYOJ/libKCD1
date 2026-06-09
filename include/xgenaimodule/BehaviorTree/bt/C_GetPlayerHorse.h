@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetPlayerHorseContext;
 class C_GetPlayerHorse : public C_NodeWrapper<C_GetPlayerHorse, C_Node, S_GetPlayerHorseContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetPlayerHorse;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetPlayerHorse) == 0x28);

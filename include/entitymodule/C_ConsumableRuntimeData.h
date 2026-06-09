@@ -12,6 +12,7 @@ namespace wh { namespace entitymodule {
 
 class C_ConsumableRuntimeData : public C_EquippableItemRuntimeData {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ConsumableRuntimeData;
     I_ItemRuntimeData* Clone() override;    // slot0 (per-class deep-copy)
     // own per-instance fields (consumable state, ...) start at +0xA8 [UNVERIFIED]
 };

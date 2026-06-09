@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_MoraleCheckContext;
 class C_MoraleCheck : public C_NodeWrapper<C_MoraleCheck, C_Gate, S_MoraleCheckContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_MoraleCheck;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_MoraleCheck) == 0x68);

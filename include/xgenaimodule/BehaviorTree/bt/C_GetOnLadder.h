@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetOnLadderContext;
 class C_GetOnLadder : public C_NodeWrapper<C_GetOnLadder, C_Node, S_GetOnLadderContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetOnLadder;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetOnLadder) == 0x28);

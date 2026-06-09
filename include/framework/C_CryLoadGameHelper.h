@@ -20,6 +20,7 @@ namespace wh::framework {
 
 class C_CryLoadGameHelper {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CryLoadGameHelper;
     virtual ~C_CryLoadGameHelper() = default;                       // [0]
     virtual bool        SetLoadPath(const char* path);              // [1]  copies path into m_loadPath
     virtual void        _vf2();                                     // [2]  ret 0

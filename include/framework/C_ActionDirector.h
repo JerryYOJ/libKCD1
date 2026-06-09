@@ -29,6 +29,7 @@ enum class E_ActionNotificationType : int32_t;
 // ---------------------------------------------------------------------------
 class C_ActionDirector {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ActionDirector;
     virtual ~C_ActionDirector();        // [0]
     virtual bool IsActive() = 0;        // [1]
 

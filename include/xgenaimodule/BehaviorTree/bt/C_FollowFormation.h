@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_FollowFormationContext;
 class C_FollowFormation : public C_NodeWrapper<C_FollowFormation, C_PassiveBarrier, S_FollowFormationContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_FollowFormation;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_FollowFormation) == 0x30);

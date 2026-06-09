@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SetSituationMaxInstancesContext;
 class C_SetSituationMaxInstances : public C_NodeWrapper<C_SetSituationMaxInstances, C_Node, S_SetSituationMaxInstancesContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SetSituationMaxInstances;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SetSituationMaxInstances) == 0x28);

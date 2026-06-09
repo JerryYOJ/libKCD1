@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_MoveItemContext;
 class C_MoveItem : public C_NodeWrapper<C_MoveItem, C_Node, S_MoveItemContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_MoveItem;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_MoveItem) == 0x28);

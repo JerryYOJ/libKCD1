@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_PlaySequenceContext;
 class C_PlaySequence : public C_NodeWrapper<C_PlaySequence, C_PassiveBarrier, S_PlaySequenceContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_PlaySequence;
     uint8_t _ownState[0x8];   // [UNVERIFIED] own members above C_PassiveBarrier (0x30)
 };
 static_assert(sizeof(C_PlaySequence) == 0x38);

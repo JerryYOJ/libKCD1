@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_IsInSweetSpotRangeContext;
 class C_IsInSweetSpotRange : public C_NodeWrapper<C_IsInSweetSpotRange, C_ActiveBarrier, S_IsInSweetSpotRangeContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_IsInSweetSpotRange;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_IsInSweetSpotRange) == 0x30);

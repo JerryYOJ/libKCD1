@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_KillAnimationContext;
 class C_KillNPC : public C_NodeWrapper<C_KillNPC, C_DefferedStateChange, S_KillAnimationContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_KillNPC;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_KillNPC) == 0x28);

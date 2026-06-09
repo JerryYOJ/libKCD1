@@ -15,6 +15,7 @@ namespace wh::playermodule {
 
 class C_ScriptBindTutorial : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindTutorial;
     void* m_pOwner;  // +0x60
 
     virtual int GetStage(IFunctionHandler* pH);    // 0x181284240

@@ -63,6 +63,7 @@ namespace wh::databasemodule {
 
 class C_ObjectDatabaseBase : public I_ObjectDatabase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ObjectDatabaseBase;
     // --- Init phase fields (overwritten after loading) ---
     // +0x00: vtable* OR void* m_rowData (post-load)
     // +0x08: int32_t m_type OR int32_t m_rowCount (post-load)

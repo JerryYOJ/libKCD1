@@ -10,6 +10,9 @@ namespace wh::xgenaimodule::BehaviorTree {
 
 // C_BuffDecoratorBase : public C_WrapperDecorator   (RTTI-confirmed intermediate base; modeled THIN,
 //  own members [UNVERIFIED] absorbed into deriving node size.)
-class C_BuffDecoratorBase : public C_WrapperDecorator {};
+class C_BuffDecoratorBase : public C_WrapperDecorator {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_BuffDecoratorBase;
+};
 
 }  // namespace wh::xgenaimodule::BehaviorTree

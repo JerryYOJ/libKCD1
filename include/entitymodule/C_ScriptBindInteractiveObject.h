@@ -15,6 +15,7 @@ namespace wh::entitymodule {
 
 class C_ScriptBindInteractiveObject : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindInteractiveObject;
     void*       m_pContext;         // +0x60
     void*       m_pManager1;       // +0x68
     void*       m_pUnk70;          // +0x70

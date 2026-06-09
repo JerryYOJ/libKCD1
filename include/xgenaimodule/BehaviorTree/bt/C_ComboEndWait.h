@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ComboEndWaitContext;
 class C_ComboEndWait : public C_NodeWrapper<C_ComboEndWait, C_CombatantHubExtended<C_DefferedStateChange>, S_ComboEndWaitContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ComboEndWait;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_ComboEndWait) == 0x28);

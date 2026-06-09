@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_TimedLoopContext;
 class C_TimedLoop : public C_NodeWrapper<C_TimedLoop, C_Loop, S_TimedLoopContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_TimedLoop;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_TimedLoop) == 0x30);

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_TeleportHorseToPlayerContext;
 class C_TeleportHorseToPlayer : public C_NodeWrapper<C_TeleportHorseToPlayer, C_Node, S_TeleportHorseToPlayerContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_TeleportHorseToPlayer;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_TeleportHorseToPlayer) == 0x28);

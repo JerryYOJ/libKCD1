@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_FixedPositionLODBarrierContext;
 class C_FixedPositionLODBarrier : public C_NodeWrapper<C_FixedPositionLODBarrier, C_PassiveBarrier, S_FixedPositionLODBarrierContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_FixedPositionLODBarrier;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_FixedPositionLODBarrier) == 0x30);

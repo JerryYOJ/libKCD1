@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_EnsureWuidValidContext;
 class C_EnsureWuidValid : public C_NodeWrapper<C_EnsureWuidValid, C_PassiveBarrier, S_EnsureWuidValidContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_EnsureWuidValid;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_EnsureWuidValid) == 0x30);

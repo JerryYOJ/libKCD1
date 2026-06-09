@@ -8,6 +8,7 @@
 namespace wh::questmodule {
 class C_ScriptBindQuest : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindQuest;
     void*                   m_pGameFramework;   // +0x60
     Offsets::IScriptSystem* m_pScriptSystem;    // +0x68
     // int StartQuest(IFunctionHandler* pH);                               // 0x1812A282C

@@ -11,6 +11,7 @@ namespace wh::playermodule {
 
 class I_RandomEventListener {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_RandomEventListener;
     virtual void _vf0() {}    // [0]
     virtual void _vf1() {}    // [1]
     virtual void _vf2() {}    // [2]

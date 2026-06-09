@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_WrapperDecoratorContext;
 class C_StealthCrouch : public C_NodeWrapper<C_StealthCrouch, C_WrapperDecorator, S_WrapperDecoratorContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_StealthCrouch;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_StealthCrouch) == 0x30);

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_CompanionObjectiveConditionContext;
 class C_CompanionObjectiveCondition : public C_NodeWrapper<C_CompanionObjectiveCondition, C_Gate, S_CompanionObjectiveConditionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CompanionObjectiveCondition;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_CompanionObjectiveCondition) == 0x68);

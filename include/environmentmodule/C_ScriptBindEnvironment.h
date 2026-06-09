@@ -8,6 +8,7 @@
 namespace wh::environmentmodule {
 class C_ScriptBindEnvironment : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindEnvironment;
     void*                   m_pGameFramework;   // +0x60
     Offsets::IScriptSystem* m_pScriptSystem;    // +0x68
     // int MakeHole(IFunctionHandler* pH, bool make, EntityId entityId);                       // 0x1810FDF7C

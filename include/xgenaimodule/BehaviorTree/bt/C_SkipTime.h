@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SkipTimeContext;
 class C_SkipTime : public C_NodeWrapper<C_SkipTime, C_DefferedStateChange, S_SkipTimeContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SkipTime;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SkipTime) == 0x28);

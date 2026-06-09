@@ -15,6 +15,7 @@ namespace wh::entitymodule {
 
 class C_ScriptBindPickableItem : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindPickableItem;
     void*                   m_pContext;          // +0x60
     Offsets::IScriptSystem* m_pScriptSystem;    // +0x68
     void*                   m_pModule;          // +0x70

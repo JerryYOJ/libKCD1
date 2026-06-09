@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_FaderBarrierContext;
 class C_FaderBarrier : public C_NodeWrapper<C_FaderBarrier, C_DeferredExecution, S_FaderBarrierContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_FaderBarrier;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_FaderBarrier) == 0x30);

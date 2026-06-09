@@ -20,6 +20,7 @@ class C_ObjectDatabaseBase;
 //   [7] Serialize(db) -> bool (returns false by default)
 class I_TableSerializer {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_TableSerializer;
     virtual ~I_TableSerializer() = 0;
     virtual const char* GetFormatName() const = 0;
     virtual const char* GetFileExtension() const = 0;
@@ -53,6 +54,7 @@ public:
 //   +0x20: bool m_validateLayout    (set to 0)
 class C_XMLTableSerializer : public I_TableSerializer {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_XMLTableSerializer;
     // +0x00: vtable*
     bool m_modified;                // +0x08
     uint8_t _pad09[7];             // +0x09
@@ -84,6 +86,7 @@ static_assert(sizeof(C_XMLTableSerializer) == 0x28, "C_XMLTableSerializer must b
 //   +0x18: bool m_validateLayout   (= module+0x154 byte, skips stale file check if false)
 class C_TBLTableSerializer : public I_TableSerializer {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_TBLTableSerializer;
     // +0x00: vtable*
     bool m_modified;                // +0x08
     uint8_t _pad09[7];             // +0x09

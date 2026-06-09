@@ -13,6 +13,7 @@ class C_CombatActorActionSyncAttack
       public I_CombatActionHelperAttackOwner
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorActionSyncAttack;
     // Primary vtable: 0x1821AD970 | Ctor: 0x180461E10 | Size: 0x128
     C_CombatActionHelperAttack* m_pAttackHelper;    // alloc 0x38
     C_CombatActionSyncHelper*   m_pSyncHelper;      // alloc 0x18

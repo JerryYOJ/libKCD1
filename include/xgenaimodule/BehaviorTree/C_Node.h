@@ -24,6 +24,7 @@ namespace wh::xgenaimodule::BehaviorTree {
 // ---------------------------------------------------------------------------
 class C_Node : public I_Node, public I_DebugNode {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Node;
     bool IsComposite() const override { return false; }   // [10] VERIFIED base = false (leaf)
 
     // ---- Data members (VERIFIED from node ctors) ----

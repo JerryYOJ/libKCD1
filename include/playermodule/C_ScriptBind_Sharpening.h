@@ -15,6 +15,7 @@ namespace wh::playermodule {
 
 class C_ScriptBind_Sharpening : public CScriptableBase {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBind_Sharpening;
     void* m_pOwner;  // +0x60
 
     virtual int Start(IFunctionHandler* pH);              // 0x181287324

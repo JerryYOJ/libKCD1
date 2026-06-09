@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_LockOrientationContext;
 class C_LockOrientation : public C_NodeWrapper<C_LockOrientation, C_WrapperDecorator, S_LockOrientationContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_LockOrientation;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_LockOrientation) == 0x30);

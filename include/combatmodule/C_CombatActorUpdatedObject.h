@@ -17,6 +17,7 @@ namespace wh::combatmodule {
 // ---------------------------------------------------------------------------
 class C_CombatActorUpdatedObject : public C_CombatActorObject {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatActorUpdatedObject;
     ~C_CombatActorUpdatedObject() override = default;
     virtual void Update(float dt) {}                        // [7]
 

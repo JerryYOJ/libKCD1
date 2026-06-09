@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_ParentizerContext;
 class C_Parentizer : public C_NodeWrapper<C_Parentizer, C_Node, S_ParentizerContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Parentizer;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_Parentizer) == 0x28);

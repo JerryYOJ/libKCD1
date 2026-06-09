@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_StealthActionContext;
 class C_StealthAction : public C_NodeWrapper<C_StealthAction, C_Node, S_StealthActionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_StealthAction;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_StealthAction) == 0x28);

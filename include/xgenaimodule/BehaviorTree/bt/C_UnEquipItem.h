@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_UnEquipItemContext;
 class C_UnEquipItem : public C_NodeWrapper<C_UnEquipItem, C_Node, S_UnEquipItemContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_UnEquipItem;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_UnEquipItem) == 0x28);

@@ -15,6 +15,7 @@ namespace wh::combatmodule {
 //   fires signal state+0x5D0 on 1→0
 class C_CombatTriggerPerfectBlock : public C_CombatSlotTrigger {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatTriggerPerfectBlock;
     ~C_CombatTriggerPerfectBlock() override = default;          // [0]  sub_1806EA874
     const char* GetName() const override { return ""; }         // [3]  sub_1806FC780
     void unk_6() override {}                                    // [6]  sub_18043244C

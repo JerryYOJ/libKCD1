@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_RemoveBuffsContext;
 class C_RemoveBuffs : public C_NodeWrapper<C_RemoveBuffs, C_Node, S_RemoveBuffsContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_RemoveBuffs;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_RemoveBuffs) == 0x28);

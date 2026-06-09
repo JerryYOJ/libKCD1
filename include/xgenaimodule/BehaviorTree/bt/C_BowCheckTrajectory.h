@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_BowCheckTrajectoryContext;
 class C_BowCheckTrajectory : public C_NodeWrapper<C_BowCheckTrajectory, C_BowCheckBase, S_BowCheckTrajectoryContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_BowCheckTrajectory;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_BowCheckTrajectory) == 0x28);

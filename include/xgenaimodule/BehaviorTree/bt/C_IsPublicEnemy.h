@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_IsPublicEnemyContext;
 class C_IsPublicEnemy : public C_NodeWrapper<C_IsPublicEnemy, C_Gate, S_IsPublicEnemyContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_IsPublicEnemy;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_IsPublicEnemy) == 0x68);

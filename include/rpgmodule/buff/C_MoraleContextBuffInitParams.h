@@ -15,6 +15,7 @@ namespace wh::rpgmodule {
 
 class C_MoraleContextBuffInitParams : public I_BuffInitParams {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_MoraleContextBuffInitParams;
     ~C_MoraleContextBuffInitParams() override;                                          // 0x180568690
     float GetFloatParam(int nKey) override;                                             // 0x1802AD99C key=0xD8864 -> m_moraleValue
     int GetIntParam(int nKey) override;                                                 // 0x1802AD97C key=0xD8865 -> m_moraleFlag1, key=0xD8866 -> m_moraleFlag2

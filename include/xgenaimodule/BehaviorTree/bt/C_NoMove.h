@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_WrapperDecoratorContext;
 class C_NoMove : public C_NodeWrapper<C_NoMove, C_WrapperDecorator, S_WrapperDecoratorContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_NoMove;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_NoMove) == 0x30);

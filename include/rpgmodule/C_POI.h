@@ -44,6 +44,7 @@ class C_POI
     , public I_POI                   // +0x10  (35+ slots, POI interface)
 {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_POI;
     // --- Members (offsets relative to C_POI base) ---
     uint64_t    m_unk18;            // +0x18  (I_POI+0x08)
     uint64_t    m_unk20;            // +0x20  (I_POI+0x10)

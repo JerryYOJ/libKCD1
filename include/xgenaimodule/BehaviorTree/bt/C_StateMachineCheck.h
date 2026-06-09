@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_StateMachineCheckContext;
 class C_StateMachineCheck : public C_NodeWrapper<C_StateMachineCheck, C_Gate, S_StateMachineCheckContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_StateMachineCheck;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_StateMachineCheck) == 0x68);

@@ -47,6 +47,7 @@ namespace wh { namespace entitymodule {
 
 class I_InventoryListener {
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_I_InventoryListener;
     virtual ~I_InventoryListener() {}
 
     // amount is the stack delta / new count.

@@ -33,6 +33,7 @@ static_assert(sizeof(S_ItemSlot) == 0x18);
 
 class C_ItemManager : public wh::framework::I_WUIDMappingProvider {     // +0x00 vtable
 public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_ItemManager;
     // engine-function forwarder (impl in RE/src/entitymodule/C_ItemManager.cpp)
     C_Item* LookupByWUID(wh::framework::WUID w) const;                 // sub_180454638(this+0x18, &w)
     // (vtable slot [2] is the virtual dtor sub_181081EA0 — not declared here; the class is

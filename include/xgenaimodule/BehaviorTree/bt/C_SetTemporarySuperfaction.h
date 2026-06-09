@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_SetTemporarySuperfactionContext;
 class C_SetTemporarySuperfaction : public C_NodeWrapper<C_SetTemporarySuperfaction, C_Node, S_SetTemporarySuperfactionContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_SetTemporarySuperfaction;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_SetTemporarySuperfaction) == 0x28);

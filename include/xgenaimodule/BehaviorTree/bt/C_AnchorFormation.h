@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_AnchorFormationContext;
 class C_AnchorFormation : public C_NodeWrapper<C_AnchorFormation, C_PassiveBarrier, S_AnchorFormationContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_AnchorFormation;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_AnchorFormation) == 0x30);

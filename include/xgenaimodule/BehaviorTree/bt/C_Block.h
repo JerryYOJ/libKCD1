@@ -15,6 +15,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_BlockContext;
 class C_Block : public C_NodeWrapper<C_Block, C_CombatNode<C_Decorator>, S_BlockContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_Block;
     // no own data members (object == 0x30)
 };
 static_assert(sizeof(C_Block) == 0x30);

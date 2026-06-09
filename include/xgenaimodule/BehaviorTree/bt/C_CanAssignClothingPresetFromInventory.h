@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_CanAssignClothingPresetFromInventoryContext;
 class C_CanAssignClothingPresetFromInventory : public C_NodeWrapper<C_CanAssignClothingPresetFromInventory, C_Gate, S_CanAssignClothingPresetFromInventoryContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_CanAssignClothingPresetFromInventory;
     // no own data members (object == 0x68)
 };
 static_assert(sizeof(C_CanAssignClothingPresetFromInventory) == 0x68);

@@ -14,6 +14,8 @@ namespace wh::xgenaimodule::BehaviorTree {
 struct S_GetIndulgencePriceContext;
 class C_GetIndulgencePrice : public C_NodeWrapper<C_GetIndulgencePrice, C_Node, S_GetIndulgencePriceContext>
 {
+public:
+    inline static constexpr auto RTTI = Offsets::RTTI_C_GetIndulgencePrice;
     // no own data members (object == 0x28)
 };
 static_assert(sizeof(C_GetIndulgencePrice) == 0x28);
