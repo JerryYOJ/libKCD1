@@ -90,11 +90,11 @@ struct C_CombatActionSyncHitData {
 
     int32_t     combat_class_id;        // +0x148
     uint32_t    _pad14C;                // +0x14C
-    uint64_t    m_mnFragment;           // +0x150 CryStringT<char> (mn_fragment_id)
+    CryStringT<char> m_mnFragment;      // +0x150 (mn_fragment_id)
     int32_t     m_mnOptionIndex;        // +0x158
     uint32_t    _field15C;              // +0x15C
     uint8_t     m_animScopeData[0x18];  // +0x160
-    uint64_t    m_mnTags;               // +0x178 CryStringT<char> (mn_tags)
+    CryStringT<char> m_mnTags;          // +0x178 (mn_tags)
 
     int GetActionTypeId() const { return m_pActionType ? m_pActionType->combat_action_type_id : -1; }
 };

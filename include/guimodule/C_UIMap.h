@@ -33,7 +33,7 @@ namespace wh::guimodule {
 
 class C_UIMap
     : public Offsets::IUIGameEventSystem        // +0x00  (8 slots)
-    , public Offsets::IUIElementEventListener    // +0x08  (20 slots)
+    , public Offsets::IUIElementEventListener    // +0x08  (8 slots; [0] OnUIEvent = sub_1811368C8)
     , public Offsets::IActionListener            // +0x10  (3 slots)
     , public Offsets::I_LocationListener         // +0x18  (9 slots)
 {
@@ -44,12 +44,17 @@ public:
     SUIEventSenderBlock     m_eventSender2;                 // +0xA0
     SUIEventSenderBlock     m_eventSender3;                 // +0xE0
 
-    SUIEventReceiverDispatcher<C_UIMap> m_eventRecvDispatcher; // +0x120
+    // Embedded dispatcher (0x28: vtable 0x1826d15d8, mFunctionMap @+0x128,
+    // m_pEventSystem @+0x138, m_pThis @+0x140 — set by Init; the former
+    // m_unk138/m_unk140 members were this tail).
+    SUIEventReceiverDispatcher<C_UIMap> m_eventRecvDispatcher; // +0x120 .. 0x148
 
-    uint64_t                m_unk138;                       // +0x138
-    uint64_t                m_unk140;                       // +0x140
-    void*                   m_pFlashEventDispatcher;        // +0x148  C++→Flash event dispatch (sub_180730B28)
-    uint64_t                m_unk150;                       // +0x150
+    // +0x148/+0x150 look like a std::map (head sentinel from sub_180730B28 —
+    // which is a std::map sentinel-node allocator, NOT a "FlashEventDispatcher"
+    // as previously labeled; likely a sender-dispatcher m_EventMap, pairing
+    // UNVERIFIED).
+    void*                   m_senderMapHead148;             // +0x148  std::map sentinel (sub_180730B28)
+    uint64_t                m_senderMapSize150;             // +0x150
     void*                   m_pFTSimulation;                // +0x158  FT simulation object
     char                    _pad160[0x8];                   // +0x160
     uint64_t                m_unk168;                       // +0x168

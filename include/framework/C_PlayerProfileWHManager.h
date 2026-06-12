@@ -6,7 +6,6 @@
 #include "framework/C_ReadinessObserver.h"
 #include "framework/C_SaveGameManager.h"
 #include "Offsets/vtables/ISystemEventListener.h"
-#include "../CryEngine/CryCommon/CryString.h"
 
 namespace wh::framework {
 

@@ -5,6 +5,8 @@
 #include "Offsets/vtables/IConsole.h"
 #include "Offsets/vtables/ILog.h"
 #include "Offsets/vtables/IScriptSystem.h"
+#include "Offsets/vtables/ITimer.h"
+#include "Offsets/vtables/IFlashUI.h"
 
 // -----------------------------------------------
 // SSystemGlobalEnvironment — KCD1 binary layout
@@ -42,7 +44,7 @@ struct SSystemGlobalEnvironment {
     void*                       pParticleManager;       // +0x70  SDK (has xrefs)
     void*                       pOpticsManager;         // +0x78  SDK (has xrefs)
     void*                       pFrameProfileSystem;    // +0x80  CONFIRMED: CSystem ctor writes this+0xB18
-    void*                       pTimer;                 // +0x88  CONFIRMED: CSystem ctor writes this+0x28
+    Offsets::ITimer*            pTimer;                 // +0x88  CONFIRMED: CSystem ctor writes this+0x28
     void*                       pCryFont;               // +0x90  SDK (has xrefs)
     void*                       pGame;                  // +0x98  CONFIRMED: IGame* (C_Game)
     void*                       pLocalMemoryUsage;      // +0xA0  SDK (has xrefs)
@@ -63,7 +65,7 @@ struct SSystemGlobalEnvironment {
     void*                       _unk118;                // +0x118 has xrefs
     void*                       _unk120;                // +0x120 has xrefs
     void*                       _unk128;                // +0x128 has xrefs
-    void*                       _unk130;                // +0x130 has xrefs
+    Offsets::IFlashUI*          pFlashUI;               // +0x130 CONFIRMED: CFlashUI singleton; GetUIElement("hud") sub_18111B2C8, CreateEventSystem callers (UI elements' InitEventSystem), RegisterModule (sub-controllers)
     void*                       _unk138;                // +0x138 has xrefs
     void*                       _unk140;                // +0x140 has xrefs
     void*                       _unk148;                // +0x148 no xrefs

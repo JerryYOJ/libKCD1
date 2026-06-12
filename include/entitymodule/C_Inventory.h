@@ -2,7 +2,6 @@
 
 #include "I_InventoryListener.h"
 #include "../framework/WUID.h"
-#include "../CryEngine/CryCommon/CryString.h"   // CryStringT<char> (m_name)
 // <cstdint>/<vector>/<unordered_set>/<functional> + std::hash<WUID> come from PCH.h.
 
 // ===========================================================================

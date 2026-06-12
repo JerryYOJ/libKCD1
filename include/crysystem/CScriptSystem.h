@@ -3,7 +3,6 @@
 #include <cstdint>
 #include <vector>
 #include <set>
-#include "../CryEngine/CryCommon/CryString.h"
 #include "../CryEngine/CryCommon/CryFixedString.h"
 #include "../Offsets/vtables/IScriptSystem.h"
 #include "../Offsets/vtables/ISystemEventListener.h"

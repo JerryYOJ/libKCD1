@@ -4,7 +4,6 @@
 #include <vector>
 #include "../framework/C_HashMap.h"              // wh::shared::C_HashMap, C_Set, hash primitives
 #include "../framework/WUID.h"                   // wh::framework::WUID
-#include "../CryEngine/CryCommon/CryString.h"    // CryStringT<char>
 #include "S_InformationRecord.h"                 // wh::xgenaimodule::S_InformationRecord
 #include "C_IntelligentObject.h"                 // wh::xgenaimodule::C_IntelligentObject (holder type)
 

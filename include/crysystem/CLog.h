@@ -88,7 +88,7 @@ public:
     uint32_t        m_initFloat;            // +0x10  (0xBF800000 = -1.0f as bits)
     char            m_logFileName[0x100];   // +0x14  (memset 0)
     char            _pad114[4];             // +0x114
-    uint64_t        m_backupLogPath;        // +0x118  (CryStringT, init from "permanent.log")
+    CryStringT<char> m_backupLogPath;       // +0x118  (init from "permanent.log")
     char            m_logFilePath[0x100];   // +0x120  (memset 0)
 
     FILE*           m_pLogFile;             // +0x220  (kcd.log file handle)

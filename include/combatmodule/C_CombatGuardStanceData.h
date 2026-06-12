@@ -8,11 +8,11 @@ namespace wh::combatmodule {
 // strings followed by a runtime block). Field order matches S_CombatGuardStanceTableRow.
 // VERIFIED.
 struct C_CombatGuardStanceData {
-    int32_t     combat_guard_stance_id;     // +0x00
-    const char* combat_guard_stance_name;   // +0x08  CryStringT<char>
-    const char* mn_tag;                     // +0x10  CryStringT<char>
-    const char* opp_mn_tag;                 // +0x18  CryStringT<char>
-    uint8_t     _runtime20[0x18];           // +0x20  zero-init runtime (mn fragment data)
+    int32_t          combat_guard_stance_id;    // +0x00
+    CryStringT<char> combat_guard_stance_name;  // +0x08
+    CryStringT<char> mn_tag;                     // +0x10
+    CryStringT<char> opp_mn_tag;                 // +0x18
+    uint8_t          _runtime20[0x18];           // +0x20  zero-init runtime (mn fragment data)
 };
 static_assert(sizeof(C_CombatGuardStanceData) == 0x38);
 

@@ -18,6 +18,7 @@
 
 #include "CryEngine/CryCommon/BaseTypes.h"
 #include "CryEngine/CryCommon/CryExtension/CryGUID.h"
+#include "CryEngine/CryCommon/CryString.h"  // CryStringT<char> for all RE headers (no per-header include)
 
 // common RE utility predicate (was defined inline in PCH.h)
 namespace wh::guimodule {
@@ -32,7 +33,7 @@ struct CStrLess { bool operator()(const char* a, const char* b) const { return s
 
 // ---- proven PCH order (CryEngine platform set-up) ----
 
-// ---- every remaining RE header (1184) ----
+// ---- every remaining RE header (1185) ----
 #include "Offsets/vtables/IActionListener.h"
 #include "Offsets/vtables/IActor.h"
 #include "Offsets/vtables/IActorSystem.h"
@@ -592,12 +593,33 @@ struct CStrLess { bool operator()(const char* a, const char* b) const { return s
 #include "guimodule/CUIManager.h"
 #include "guimodule/C_CompassMark.h"
 #include "guimodule/C_ScriptBindMap.h"
-#include "guimodule/C_UIMap.h"
 #include "guimodule/C_UIHUDElements.h"
+#include "guimodule/C_UIMap.h"
 #include "guimodule/C_UIMapCloudAtlas.h"
 #include "guimodule/SSpatialBucketContainer.h"
 #include "guimodule/SUIEventReceiverDispatcher.h"
 #include "guimodule/SUIEventSenderBlock.h"
+#include "guimodule/SUIEventSenderDispatcher.h"
+#include "guimodule/IUIEventSystemFactory.h"
+#include "guimodule/SAutoRegUIEventSystem.h"
+#include "guimodule/CUIInput.h"
+#include "guimodule/CUIGameEvents.h"
+#include "guimodule/C_UIMenuEvents.h"
+#include "guimodule/C_UIInventoryActions.h"
+#include "guimodule/C_UISaveLoad.h"
+#include "guimodule/C_UICombatListener.h"
+#include "guimodule/C_UIActionHintManager.h"
+#include "guimodule/C_UIEventLog.h"
+#include "guimodule/CUIEntityDynTexTag.h"
+#include "guimodule/C_UIInventoryElements.h"
+#include "guimodule/C_UIKeybinds.h"
+#include "guimodule/C_UIEBase.h"
+#include "guimodule/C_UIInteractiveDialog.h"
+#include "guimodule/CUISettings.h"
+#include "guimodule/C_UISubtitles.h"
+#include "guimodule/C_UIRPGElements.h"
+#include "guimodule/C_UIMinigameElements.h"
+#include "guimodule/C_UIQuestLog.h"
 #include "playermodule/C_FastTravel.h"
 #include "playermodule/C_FastTravelScriptBind.h"
 #include "playermodule/C_PlayerModule.h"

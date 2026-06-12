@@ -62,13 +62,20 @@ class C_UIHUDElements
     , public Offsets::I_LocationListener           // +0x10
 {
 public:
-    void*    m_pFlashEventDispatcher;   // +0x18  C++->Flash dispatch (sub_180730B28)
-    void*    _unk20;                    // +0x20
-    void*    _unk28;                    // +0x28
+    // +0x18/+0x20 look like a std::map (head sentinel from sub_180730B28 — a
+    // std::map sentinel-node allocator; the old "FlashEventDispatcher" label
+    // was a misnomer). With +0x28 this matches a SUIEventSenderDispatcher
+    // <E_UIHUDElementEvent> at +0x18..0x30 (that instantiation's RTTI exists
+    // in the binary) — pairing UNVERIFIED, kept as raw members.
+    void*    m_senderMapHead18;         // +0x18  std::map sentinel (sub_180730B28)
+    uint64_t m_senderMapSize20;         // +0x20
+    void*    _unk28;                    // +0x28  likely the sender's m_pEventSystem (UNVERIFIED)
 
-    SUIEventReceiverDispatcher<C_UIHUDElements> m_eventRecvDispatcher; // +0x30 (0x18)
+    // Embedded dispatcher (0x28: vtable 0x1826cf5f0, mFunctionMap @+0x38,
+    // m_pEventSystem @+0x40 = UI->system "HUDElements", m_pThis @+0x48).
+    SUIEventReceiverDispatcher<C_UIHUDElements> m_eventRecvDispatcher; // +0x30 .. 0x58
 
-    char     _pad48[0x20];              // +0x48
+    char     _pad58[0x10];              // +0x58
     uint8_t  _unk68[0x28];              // +0x68  embedded object (sub_1811192C4)
     void*    _unk90;                    // +0x90  back-ref (= this+0x18)
     void*    m_pIntrusiveListHead;      // +0x98  self-linked node (alloc 0x10)

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../CryEngine/CryCommon/CryExtension/CryGUID.h"
-#include "../CryEngine/CryCommon/CryString.h"   // CryStringT<char> (the string columns)
 // <cstdint> + CryGUID base types come from PCH.h.
 
 // ===========================================================================

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstdint>
-#include "../CryEngine/CryCommon/CryString.h"
 
 namespace wh::framework {
 

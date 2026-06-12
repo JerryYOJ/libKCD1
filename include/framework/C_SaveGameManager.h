@@ -7,7 +7,6 @@
 #include "framework/C_ReadinessObserver.h"
 #include "framework/C_CrySaveGameHelper.h"
 #include "framework/C_CryLoadGameHelper.h"
-#include "../CryEngine/CryCommon/CryString.h"
 
 namespace wh::framework {
 

@@ -10,7 +10,6 @@
 #include "../framework/WUID.h"
 #include "../entitymodule/I_InventoryListener.h"
 #include "../CryEngine/CryCommon/CryExtension/CryGUID.h"
-#include "../CryEngine/CryCommon/CryString.h"   // CryStringT<char> (8-byte refcounted string handle)
 
 #include "I_Soul.h"
 #include "I_CombatSoul.h"

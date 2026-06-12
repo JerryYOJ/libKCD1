@@ -2,36 +2,48 @@
 #include <cstdint>
 
 // -----------------------------------------------
-// IUIElementEventListener — Binary vtable order (interfuscated)
+// IUIElementEventListener — Binary vtable order (NOT interfuscated)
 // -----------------------------------------------
-// SDK: CryEngine CryAction/IFlashUI.h
-// RTTI: .?AUIUIElementEventListener@@
-// Binary vtable for C_UIMap at 0x1826d1738 (20 slots):
-//   [0] sub_1811368C8  OnFlashMessage — main Flash→C++ dispatcher
+// SDK: CryCommon/IFlashUI.h:1019 (GLOBAL namespace, untagged header ->
+// declaration order). RTTI: .?AUIUIElementEventListener@@
+//
+// EXACTLY 8 SLOTS. (This file previously claimed 20 slots from the C_UIMap
+// vtable @ 0x1826d1738 — that fused THREE adjacent vtables: the following
+// 2-slot + 8-slot vtables (COLs at 0x1826d1778 / 0x1826d1790) belong to
+// C_UIInventoryElements, a different class. Corrected via COL walk
+// 2026-06-12.)
+//
+// Slot map (SDK declaration order; all SDK impls are empty defaults):
+//   [0] OnUIEvent            C_UIMap impl sub_1811368C8 (main Flash->C++
+//                            dispatcher); C_UIEBase impl sub_180501E90
+//   [1] OnUIEventEx          (decl-mapped; nop in observed implementers)
+//   [2] OnInit               (decl-mapped)
+//   [3] OnUnload             (decl-mapped)
+//   [4] OnSetVisible         (decl-mapped)
+//   [5] OnInstanceCreated    (decl-mapped)
+//   [6] OnInstanceDestroyed  CUIEntityDynTexTag impl sub_18111E534 (zeroes
+//                            the destroyed instance in m_Tags) — VERIFIED
+//   [7] Dtor                 deleting dtor (protected ~ in SDK); C_UIEBase
+//                            thunk sub_180B1AF7C
+//
+// Forward declarations of real SDK types (GLOBAL namespace, pointer/ref use only):
+struct SUIEventDesc;
+struct SUIArguments;
 
 namespace Offsets {
 
+struct IUIElement;
+struct IFlashPlayer;
+
 struct IUIElementEventListener {
-    virtual void _vf0() = 0;   // [0]  0x00   OnFlashMessage (C_UIMap: sub_1811368C8)
-    virtual void _vf1() = 0;   // [1]  0x08
-    virtual void _vf2() = 0;   // [2]  0x10
-    virtual void _vf3() = 0;   // [3]  0x18
-    virtual void _vf4() = 0;   // [4]  0x20
-    virtual void _vf5() = 0;   // [5]  0x28
-    virtual void _vf6() = 0;   // [6]  0x30
-    virtual void _vf7() = 0;   // [7]  0x38
-    virtual void _vf8() = 0;   // [8]  0x40
-    virtual void _vf9() = 0;   // [9]  0x48
-    virtual void _vf10() = 0;  // [10] 0x50
-    virtual void _vf11() = 0;  // [11] 0x58
-    virtual void _vf12() = 0;  // [12] 0x60
-    virtual void _vf13() = 0;  // [13] 0x68
-    virtual void _vf14() = 0;  // [14] 0x70
-    virtual void _vf15() = 0;  // [15] 0x78
-    virtual void _vf16() = 0;  // [16] 0x80
-    virtual void _vf17() = 0;  // [17] 0x88
-    virtual void _vf18() = 0;  // [18] 0x90
-    virtual void _vf19() = 0;  // [19] 0x98
+    virtual void OnUIEvent(IUIElement* pSender, const SUIEventDesc& event, const SUIArguments& args) = 0;      // [0] 0x00
+    virtual void OnUIEventEx(IUIElement* pSender, const char* fscommand, const SUIArguments& args, void* pUserData) = 0; // [1] 0x08  (pUserData is void* in the SDK too)
+    virtual void OnInit(IUIElement* pSender, IFlashPlayer* pFlashPlayer) = 0;                                  // [2] 0x10
+    virtual void OnUnload(IUIElement* pSender) = 0;                                                            // [3] 0x18
+    virtual void OnSetVisible(IUIElement* pSender, bool bVisible) = 0;                                         // [4] 0x20
+    virtual void OnInstanceCreated(IUIElement* pSender, IUIElement* pNewInstance) = 0;                         // [5] 0x28
+    virtual void OnInstanceDestroyed(IUIElement* pSender, IUIElement* pDeletedInstance) = 0;                   // [6] 0x30
+    virtual void Dtor(char flags) = 0;                                                                         // [7] 0x38
 };
 
 }  // namespace Offsets

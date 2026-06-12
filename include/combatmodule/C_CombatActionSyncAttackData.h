@@ -105,13 +105,13 @@ public:
 
     int32_t     combat_class_id;        // +0x188
     uint32_t    _pad18C;                // +0x18C
-    uint64_t    m_mnFragment;           // +0x190 CryStringT<char> (mn_fragment_id)
+    CryStringT<char> m_mnFragment;      // +0x190 (mn_fragment_id)
     int32_t     _field198;              // +0x198
     uint32_t    _pad19C;                // +0x19C
     int32_t     m_mnOptionIndex;        // +0x1A0
     int32_t     _field1A4;              // +0x1A4
     uint8_t     m_animScopeData[0x18];  // +0x1A8
-    uint64_t    m_mnTags;               // +0x1C0 CryStringT<char> (mn_tags)
+    CryStringT<char> m_mnTags;          // +0x1C0 (mn_tags)
     int32_t     _field1C8;              // +0x1C8
     uint32_t    _pad1CC;                // +0x1CC
     int32_t     _field1D0;              // +0x1D0

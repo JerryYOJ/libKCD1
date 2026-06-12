@@ -2,7 +2,6 @@
 
 #include <cstdint>
 #include <vector>
-#include "../CryEngine/CryCommon/CryString.h"
 
 namespace wh::framework {
 

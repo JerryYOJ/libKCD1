@@ -2,7 +2,6 @@
 
 #include <cstdint>
 #include "../framework/WUID.h"
-#include "../CryEngine/CryCommon/CryString.h"   // CryStringT<char> (8-byte refcounted string handle)
 
 // ===========================================================================
 // wh::xgenaimodule::S_InformationRecord

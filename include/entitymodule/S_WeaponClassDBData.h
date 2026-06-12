@@ -24,9 +24,9 @@
 namespace wh::entitymodule {
 
 struct S_WeaponClassDBData {
-    int32_t     weapon_class_id;            // +0x00
-    int32_t     _field04;                   // +0x04  [UNVERIFIED]
-    const char* weapon_class_name;          // +0x08  CryStringT<char>
+    int32_t          weapon_class_id;       // +0x00
+    int32_t          _field04;              // +0x04  [UNVERIFIED]
+    CryStringT<char> weapon_class_name;     // +0x08
     int32_t     skill_id;                   // +0x10
     int32_t     attachment_slot_id;         // +0x14
     int32_t     weapon_equip_slot_id;       // +0x18
