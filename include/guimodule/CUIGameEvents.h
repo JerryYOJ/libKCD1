@@ -1,26 +1,27 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
 #include <map>
-#include "Offsets/vtables/IUIEventSystem.h"
+// consolidated into IFlashUI.h
 #include "Offsets/vtables/IGameFramework.h"
-#include "guimodule/SUIEventReceiverDispatcher.h"
+// consolidated into IFlashUI.h
 
 // -----------------------------------------------
-// CUIGameEvents — game-flow flash events ("Game" event system)
+// CUIGameEvents 鈥?game-flow flash events ("Game" event system)
 // -----------------------------------------------
 // RTTI: .?AVCUIGameEvents@guimodule@wh@@  (single vtable @ 0x1822e76e8, no
-// bases — its own polymorphic root, 3 slots; see virtuals below)
+// bases 鈥?its own polymorphic root, 3 slots; see virtuals below)
 // Constructor: sub_1811193B8 (called by CUIManager ctor sub_181125C08,
 //              allocation 0x60); the ctor itself calls InitEventSystem
 //              (sub_18111C0AC) at the end
-// Destructor:  slot [2] sub_18111A2C8 (body sub_181119DA0) — CUIManager dtor
+// Destructor:  slot [2] sub_18111A2C8 (body sub_181119DA0) 鈥?CUIManager dtor
 //              sub_18112906C deletes this member through vtbl+0x10, unlike the
 //              IUIModule-based siblings (slot [0])
 // Size:        0x60
 //
 // Derived from CryEngine GameSDK Game/UI/UIGameEvents.{h,cpp} (CUIGameEvents);
-// the Warhorse version dropped the IUIGameEventSystem/IUIModule bases — it is
+// the Warhorse version dropped the IUIGameEventSystem/IUIModule bases 鈥?it is
 // a direct member of CUIManager (+0x28).
 //
 // InitEventSystem (sub_18111C0AC):
@@ -54,7 +55,7 @@ public:
     Offsets::IUIEventSystem*  m_pUIFunctions;  // +0x10  "Game" eEST_SYSTEM_TO_UI
 
     // EMBEDDED dispatcher (0x28: vtbl 0x1822e7560, mFunctionMap @+0x20,
-    // m_pEventSystem @+0x30 = m_pUIEvents, m_pThis @+0x38 — set by Init).
+    // m_pEventSystem @+0x30 = m_pUIEvents, m_pThis @+0x38 鈥?set by Init).
     SUIEventReceiverDispatcher<CUIGameEvents> m_eventDispatcher; // +0x18 .. 0x40
 
     Offsets::IGameFramework*  m_pGameFramework; // +0x40

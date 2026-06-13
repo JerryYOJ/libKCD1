@@ -1,19 +1,19 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
 #include <map>
 #include "Offsets/vtables/IActionListener.h"
 #include "Offsets/vtables/IVirtualKeyboardEvents.h"
 #include "Offsets/vtables/IHardwareMouseEventListener.h"
-#include "Offsets/vtables/IUIEventSystem.h"
-#include "guimodule/SUIEventReceiverDispatcher.h"
+// (individual UI includes consolidated into IFlashUI.h)
 
-// CryAction/IActionMapManager.h — TActionHandler<T>
+// CryAction/IActionMapManager.h 鈥?TActionHandler<T>
 // (std::multimap<ActionId, bool (T::*)(EntityId, const ActionId&, int, float)>)
 template<typename T> class TActionHandler;
 
 // -----------------------------------------------
-// CUIInput — UI input routing (action map / virtual keyboard / hardware mouse)
+// CUIInput 鈥?UI input routing (action map / virtual keyboard / hardware mouse)
 // -----------------------------------------------
 // RTTI: .?AVCUIInput@guimodule@wh@@  (3 vtables: +0x00 / +0x08 / +0x10)
 //   0x1822e8ac8 IActionListener            [0] dtor sub_181129B2C
@@ -26,7 +26,7 @@ template<typename T> class TActionHandler;
 // Destructor:  via IActionListener slot [0] from CUIManager dtor sub_18112906C
 // Size:        0x58
 //
-// Derived from CryEngine GameSDK Game/UI/UIInput.{h,cpp} (CUIInput) — but the
+// Derived from CryEngine GameSDK Game/UI/UIInput.{h,cpp} (CUIInput) 鈥?but the
 // Warhorse version dropped GameSDK's IUIGameEventSystem/IUIModule bases: it is
 // a direct member of CUIManager (+0x10), NOT registered in the event-system
 // map and NOT a FlashUI module.

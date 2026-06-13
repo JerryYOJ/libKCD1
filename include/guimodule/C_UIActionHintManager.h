@@ -1,18 +1,18 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
 #include <map>
 #include "Offsets/vtables/IUIGameEventSystem.h"
 #include "Offsets/vtables/IInputEventListener.h"
-#include "Offsets/vtables/IUIEventSystem.h"
+// consolidated into IFlashUI.h
 #include "Offsets/vtables/IConsole.h"
-#include "guimodule/SUIEventReceiverDispatcher.h"
-#include "guimodule/SUIEventSenderDispatcher.h"
+// (individual UI includes consolidated into IFlashUI.h)
 
 // -----------------------------------------------
-// C_UIActionHintManager — HUD action hints / crosshair / input device ("ActionHints")
+// C_UIActionHintManager 鈥?HUD action hints / crosshair / input device ("ActionHints")
 // -----------------------------------------------
-// RTTI: .?AVC_UIActionHintManager@@   *** GLOBAL namespace — declared at
+// RTTI: .?AVC_UIActionHintManager@@   *** GLOBAL namespace 鈥?declared at
 // global scope; file lives in guimodule/ for organization only. ***
 // Constructor:     sub_18110CDDC
 // Factory:         sub_18110D7BC  (SAutoRegUIEventSystem<C_UIActionHintManager>
@@ -24,10 +24,11 @@
 // Inheritance (RTTI class-hierarchy descriptor):
 //   [+0x00] IUIGameEventSystem (: IUIPseudoRTTI)  (vtable 0x1826ccf70)
 //   [+0x08] IInputEventListener                    (vtable 0x1826ccfb8)
-// The ctor tail registers the IInputEventListener subobject (this+8) with an
-// engine system via a gEnv slot vfunc+0x18 — the IDA gEnv struct labels that
-// slot pStatoscope, but the receiver being an input listener makes this
-// almost certainly IInput::AddEventListener. UNVERIFIED label.
+// The ctor registers the IInputEventListener subobject (this+8) via
+// gEnv+0x48 vtable[3] +0x18 = IInput::AddEventListener, and the dtor
+// (sub_18110D284) unregisters it via vtable[4] +0x20 = RemoveEventListener.
+// VERIFIED: gEnv+0x48 is IInput (the IDA/SDK label "pStatoscope" is wrong —
+// KCD reorders gEnv). See Offsets/vtables/IInput.h.
 //
 // InitEventSystem (sub_18110DE2C):
 //   - creates system->UI IUIEventSystem "ActionHints" (direction 1), registers
@@ -35,7 +36,7 @@
 //   - creates UI->system IUIEventSystem "ActionHints" (direction 0), registers
 //     the receiver dispatcher as listener "C_UIActionHintManager" and one
 //     function:
-//       "GetActionButtons" ("GetActionsButtons") — "Sets list of key names
+//       "GetActionButtons" ("GetActionsButtons") 鈥?"Sets list of key names
 //        for all actions received."; params: ActionMapName(String, "Action
 //        map name, if empty, it will search all maps"), Actions(String,
 //        "List of actions which needs to be converted into key names."),
@@ -87,7 +88,7 @@ public:
     void*                     _unkArray68[0xE];        // +0x68 .. 0xD8
 
     // std::map with 0x40-byte nodes (sentinel sub_18073F5AC; payload 0x20 =
-    // two pointer-sized fields). Key/value types UNVERIFIED — plausibly the
+    // two pointer-sized fields). Key/value types UNVERIFIED 鈥?plausibly the
     // control->device data parsed from Libs/UI/ActionHintControls.xml.
     std::map<uint64_t, uint64_t> m_mapD8;              // +0xD8  {head @0xD8, size @0xE0}
 

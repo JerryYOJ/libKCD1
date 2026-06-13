@@ -1,5 +1,6 @@
 #pragma once
-#include <cstdint>
+#include "guimodule/SUITypes.h"
+#include "IUIElementEventListener.h"
 
 // -----------------------------------------------
 // IUIElement — Binary vtable order (NOT interfuscated)
@@ -35,28 +36,11 @@
 // - Anchor: sub_18111FD4C calls vtbl+0x208 ("fc_showInfoText", args, 0, 0)
 //   -> CallFunction(const char*, ...) [65]. GetFlashPlayer is [40] = +0x140.
 
-// Forward declarations of real SDK types (GLOBAL namespace — compatible with
-// the definitions in CryCommon/IFlashUI.h etc.; pointer/ref use only):
-struct SUIParameterDesc;
-struct SUIEventDesc;
-struct SUIMovieClipDesc;
-struct SUIArguments;
-struct ITexture;
-struct IDynTextureSource;
-struct SFlashKeyEvent;
-struct SFlashCharEvent;
-struct ICrySizer;
-class XmlNodeRef;
-template<typename F> struct Vec2_tpl;     typedef Vec2_tpl<float> Vec2;
-template<typename F> struct Vec3_tpl;     typedef Vec3_tpl<float> Vec3;
-template<typename F> struct Matrix34_tpl; typedef Matrix34_tpl<float> Matrix34;
-
 namespace Offsets {
 
 struct IUIElementIterator;
 struct IFlashPlayer;
 struct IFlashVariableObject;
-struct IUIElementEventListener;
 
 struct IUIElement {
     // SDK nested type (CryCommon/IFlashUI.h:1049) — POD replicated verbatim:
@@ -195,7 +179,7 @@ struct IUIElement {
     virtual void UnloadTexFromMc(const char* movieClip, ITexture* pTexture, const char* pTmplName) = 0;      // [88] 0x2C0  sub_181897E44  (decl-mapped)
 
     virtual void ScreenToFlash(const float& px, const float& py, float& rx, float& ry, bool bStageScaleMode) const = 0; // [89] 0x2C8  sub_181894158  (decl-mapped)
-    virtual void WorldToFlash(const Matrix34& camMat, const Vec3& worldpos, Vec3& flashpos, Vec2& borders, float& scale, bool bStageScaleMode) const = 0; // [90] 0x2D0  sub_181899F00  (decl-mapped)
+    virtual void WorldToFlash(const ::Matrix34& camMat, const ::Vec3& worldpos, ::Vec3& flashpos, ::Vec2& borders, float& scale, bool bStageScaleMode) const = 0; // [90] 0x2D0  sub_181899F00  (decl-mapped)
 
     // dyn textures
     virtual void AddTexture(IDynTextureSource* pDynTexture) = 0;                    // [91]  0x2D8  sub_18186A608  (decl-mapped)

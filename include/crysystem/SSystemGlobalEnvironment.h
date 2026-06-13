@@ -6,6 +6,7 @@
 #include "Offsets/vtables/ILog.h"
 #include "Offsets/vtables/IScriptSystem.h"
 #include "Offsets/vtables/ITimer.h"
+#include "Offsets/vtables/IInput.h"
 #include "Offsets/vtables/IFlashUI.h"
 
 // -----------------------------------------------
@@ -34,9 +35,12 @@ struct SSystemGlobalEnvironment {
     void*                       _unk20;                 // +0x20  SDK=pScriptSystem — NO XREFS, dead slot
     void*                       pPhysicalWorld;         // +0x28  CONFIRMED: physics vtable calls
     Offsets::IScriptSystem*     pScriptSystem;          // +0x30  CONFIRMED: IScriptSystem ops (SDK calls this pFlowSystem)
-    void*                       pInput;                 // +0x38  SDK (has xrefs)
+    void*                       _unk38_view;            // +0x38  SDK=pInput but WRONG: vtable+0x78 returns a
+                                                        //         camera/view object (sub_1802B9A24) — NOT IInput. Identity TBD.
     void*                       pMusicSystem;           // +0x40  SDK (has xrefs)
-    void*                       pStatoscope;            // +0x48  SDK (has xrefs)
+    Offsets::IInput*            pInput;                 // +0x48  VERIFIED IInput (SDK/IDA mislabel this pStatoscope):
+                                                        //         input listeners register here via AddEventListener[3]/
+                                                        //         RemoveEventListener[4] (C_UIActionHintManager ctor/dtor)
     void*                       pAnimationGraphSystem;  // +0x50  SDK (has xrefs)
     void*                       pCryPak;                // +0x58  SDK (has xrefs)
     void*                       pFileChangeMonitor;     // +0x60  SDK (no xrefs)

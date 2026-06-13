@@ -1,22 +1,23 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
 #include <map>
-#include "Offsets/vtables/IUIModule.h"
+// consolidated into IFlashUI.h
 #include "Offsets/vtables/IPlayerProfileListener.h"
 #include "Offsets/vtables/IUIGameEventSystem.h"
-#include "Offsets/vtables/IUIEventSystem.h"
+// consolidated into IFlashUI.h
 #include "Offsets/vtables/IConsole.h"
-#include "guimodule/SUIEventReceiverDispatcher.h"
+// consolidated into IFlashUI.h
 
 // -----------------------------------------------
-// CUISettings — game/graphics/input/sound settings UI ("UISettings")
+// CUISettings 鈥?game/graphics/input/sound settings UI ("UISettings")
 // -----------------------------------------------
 // RTTI: .?AVCUISettings@guimodule@wh@@  (GameSDK-derived name; 3 vtables:
 // +0x00 0x1822ecf98, +0x08 0x1822ecfe0, +0x10 0x1822ecf50)
 // Constructor:     sub_1811419C4
 // Factory:         sub_181148298  (SAutoRegUIEventSystem<CUISettings>,
-//                  allocates 0x260, returns this+0x10 — the IUIGameEventSystem
+//                  allocates 0x260, returns this+0x10 鈥?the IUIGameEventSystem
 //                  subobject CUIManager registers)
 // GetName:         sub_1806FE830  -> "UISettings"
 // InitEventSystem: sub_18114B4E8  (IUIGameEventSystem slot [2])
@@ -27,11 +28,11 @@
 //   [+0x00] IUIModule               (8 slots; pFlashUI->RegisterModule(this,
 //           "CUISettings") at the END of InitEventSystem, vtbl+0xA8)
 //   [+0x08] IPlayerProfileListener  (3 slots; ctor tail registers via
-//           PlayerProfileManager::AddListener(this+8, true) — manager from
+//           PlayerProfileManager::AddListener(this+8, true) 鈥?manager from
 //           S_GameContext+8 vfunc+0x130, AddListener = vfunc+0xF0)
 //   [+0x10] IUIGameEventSystem (: IUIPseudoRTTI) (8 slots; here slots [6]/[7]
 //           are NOT nops: [6] sub_181150D40 = LoadFromProfile impl,
-//           [7] sub_1811559C0 = SaveToProfile impl — the
+//           [7] sub_1811559C0 = SaveToProfile impl 鈥?the
 //           IPlayerProfileListener slots are this+8 re-dispatch thunks into
 //           them; both walk profile attributes "controls_sensitivity",
 //           "controls_invertMouse", ...)
@@ -42,7 +43,7 @@
 //   - UI->system IUIEventSystem "Settings" (dir 0) -> m_pUIFunctions;
 //     m_pEventRecvDispatcher->Init (sub_18114B000) registers it with listener
 //     name "CUISettings"; 37 UI->system functions (SetGraphics,
-//     SetGameSettings, GetCurr*, Reset*, LogoutUser, ...) — full table with
+//     SetGameSettings, GetCurr*, Reset*, LogoutUser, ...) 鈥?full table with
 //     handler addresses in analysis/ui_infra/ui_elements_batch2.md.
 //
 // Constructor (sub_1811419C4) also:
@@ -103,8 +104,7 @@ public:
 
     // Sender event-id map (E_UISettingsEvent -> engine event id from
     // IUIEventSystem::RegisterEvent). Open-coded here (insert helper
-    // sub_181129A08) instead of the usual SUIEventSenderDispatcher member —
-    // m_pUIEvents sits BEFORE the map, not after it.
+    // sub_181129A08) instead of the usual SUIEventSenderDispatcher member 鈥?    // m_pUIEvents sits BEFORE the map, not after it.
     std::map<E_UISettingsEvent, unsigned int> m_eventMap; // +0x68
 
     void*    _unk78[0x15];                      // +0x78..0x118  NOT initialized in ctor

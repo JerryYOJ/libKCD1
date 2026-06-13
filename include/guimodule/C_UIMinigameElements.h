@@ -1,19 +1,19 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
 #include "Offsets/vtables/I_MinigameElementsController.h"
 #include "Offsets/vtables/IUIGameEventSystem.h"
-#include "Offsets/vtables/IUIEventSystem.h"
-#include "guimodule/SUIEventReceiverDispatcher.h"
+// (individual UI includes consolidated into IFlashUI.h)
 
 // -----------------------------------------------
-// C_UIMinigameElements — minigame/book UI bridge ("UIMinigame")
+// C_UIMinigameElements 鈥?minigame/book UI bridge ("UIMinigame")
 // -----------------------------------------------
 // RTTI: .?AVC_UIMinigameElements@guimodule@wh@@  (2 vtables: +0x00
 // 0x1826d29e0, +0x08 0x1826d29f0)
 // Constructor:     sub_181143B74
 // Factory:         sub_181148394  (SAutoRegUIEventSystem<C_UIMinigameElements>
-//                  vtable 0x1822ed1e0; allocates 0x48, returns this+8 — the
+//                  vtable 0x1822ed1e0; allocates 0x48, returns this+8 鈥?the
 //                  IUIGameEventSystem subobject CUIManager registers)
 // GetName:         sub_1806FE840  -> "UIMinigame"
 // InitEventSystem: sub_18114E0E4  (IUIGameEventSystem slot [2])
@@ -31,10 +31,10 @@
 //      direction 0) -> m_pUIFunctions; m_eventRecvDispatcher.Init(es, this,
 //      "C_UIMinigameElements") (es->RegisterListener vtbl+0x20)
 //   2. registers ONE UI->system function (dynamic-args desc, handler takes
-//      SUIEvent const& — cf. RTTI vtable
+//      SUIEvent const& 鈥?cf. RTTI vtable
 //      SUIEventDispatchFct1<C_UIMinigameElements,void,SUIEvent const&>
 //      @ 0x1822ecc08):
-//        "OnBookPosition" — "Get information about book pages."
+//        "OnBookPosition" 鈥?"Get information about book pages."
 //            isPrev : Bool "If there is another page before the current page."
 //            isNext : Bool "If there is another page after the current page."
 //            + dynamic String array

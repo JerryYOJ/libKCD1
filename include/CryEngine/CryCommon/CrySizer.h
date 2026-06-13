@@ -262,7 +262,7 @@ public:
 	template<typename K, typename T, typename Comp, typename Alloc>
 	void AddObject( const stl::hash_map<K,T,Comp, Alloc> &rVector)
 	{
-		
+
 	}
 
 	template<typename T,typename Alloc>

@@ -1,20 +1,21 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
 #include "Offsets/vtables/I_SubtitlesController.h"
 #include "Offsets/vtables/IUIGameEventSystem.h"
-#include "Offsets/vtables/IUIEventSystem.h"
+// consolidated into IFlashUI.h
 #include "Offsets/vtables/IConsole.h"
-#include "guimodule/SUIEventSenderDispatcher.h"
+// consolidated into IFlashUI.h
 
 // -----------------------------------------------
-// C_UISubtitles — dialog subtitle text bridge ("UISubtitles")
+// C_UISubtitles 鈥?dialog subtitle text bridge ("UISubtitles")
 // -----------------------------------------------
 // RTTI: .?AVC_UISubtitles@guimodule@wh@@  (2 vtables: +0x00 0x1826d27f8,
 // +0x08 0x1826d2818)
 // Constructor:     inlined in the factory (no separate ctor function)
 // Factory:         sub_181148680  (SAutoRegUIEventSystem<C_UISubtitles>
-//                  vtable 0x1822ece38; allocates 0x38, returns this+8 — the
+//                  vtable 0x1822ece38; allocates 0x38, returns this+8 鈥?the
 //                  IUIGameEventSystem subobject CUIManager registers)
 // GetName:         sub_1806FE870  -> "UISubtitles"
 // InitEventSystem: sub_18115034C  (IUIGameEventSystem slot [2])
@@ -30,11 +31,11 @@
 //   1. m_pCVarSubtitlesEnabled = GetCVar("wh_ui_SubtitlesEnabled")
 //   2. creates the system->UI IUIEventSystem "Subtitles" (pFlashUI vtbl+0xC8,
 //      direction 1) and registers one event:
-//        [0] "OnText" — "triggered when subtitle text has changed"
+//        [0] "OnText" 鈥?"triggered when subtitle text has changed"
 //            Text : String "Multi lined HTML text"
 //
 // SetText (I_SubtitlesController [1], sub_1811577E8): if
-// wh_ui_SubtitlesEnabled->GetIVal() || bForce || text empty — send
+// wh_ui_SubtitlesEnabled->GetIVal() || bForce || text empty 鈥?send
 // OnText(text) through m_eventSender (sub_18113ED40), else send the clear
 // form (sub_18113ECC4).
 

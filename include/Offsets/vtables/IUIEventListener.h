@@ -1,4 +1,5 @@
 #pragma once
+#include "guimodule/SUITypes.h"
 
 // -----------------------------------------------
 // IUIEventListener — Binary vtable order (NOT interfuscated)
@@ -16,10 +17,6 @@
 //
 // SDK signature of [0] is `SUIArgumentsRet OnEvent(const SUIEvent& event)` —
 // SUIArguments returned by value => hidden sret first parameter in the binary.
-
-// Forward declarations of real SDK types (GLOBAL namespace, pointer/ref use only):
-struct SUIArguments;
-struct SUIEvent;
 
 namespace Offsets {
 

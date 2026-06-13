@@ -1,5 +1,6 @@
 #pragma once
-#include <cstdint>
+#include "guimodule/SUITypes.h"
+#include "IUIEventListener.h"
 
 // -----------------------------------------------
 // IUIEventSystem — Binary vtable order (NOT interfuscated)
@@ -25,15 +26,7 @@
 // MSVC overload REVERSAL applies to the GetEventDesc pair: (const char*) at
 // [7], (int) at [8].
 
-// Forward declarations of real SDK types (GLOBAL namespace, pointer/ref use only):
-struct SUIEventDesc;
-struct SUIEvent;
-struct SUIArguments;
-struct ICrySizer;
-
 namespace Offsets {
-
-struct IUIEventListener;
 
 struct IUIEventSystem {
     enum EEventSystemType {

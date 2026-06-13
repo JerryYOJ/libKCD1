@@ -1,21 +1,22 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
 #include "Offsets/vtables/I_HUDElementsController.h"
 #include "Offsets/vtables/IUIGameEventSystem.h"
 #include "Offsets/vtables/I_LocationListener.h"
-#include "guimodule/SUIEventReceiverDispatcher.h"
+// consolidated into IFlashUI.h
 
 // -----------------------------------------------
-// C_UIHUDElements — in-game HUD controller ("UIHelpBar")
+// C_UIHUDElements 鈥?in-game HUD controller ("UIHelpBar")
 // -----------------------------------------------
 // RTTI: .?AVC_UIHUDElements@guimodule@wh@@   (3 vtables: +0x00, +0x08, +0x10)
 // Constructor:     sub_181119680
-// Factory:         sub_18111AB18  (allocates 0x1A8, returns this+8 — the
+// Factory:         sub_18111AB18  (allocates 0x1A8, returns this+8 鈥?the
 //                  IUIGameEventSystem subobject that CUIManager stores in its
 //                  registry; CUIManager::Get("UIHelpBar")-8 recovers `this`)
 // InitEventSystem: sub_18111C520  (IUIGameEventSystem slot [2]; registers the
-//                  "HUDElements" Flash event system — see E_UIHUDElementEvent)
+//                  "HUDElements" Flash event system 鈥?see E_UIHUDElementEvent)
 // GetName:         sub_1806FE780  -> "UIHelpBar"
 // Size:            0x1A8
 //
@@ -25,11 +26,11 @@
 // "HUDElements" IUIEventSystem).
 //
 // Inheritance (binary layout, from RTTI class-hierarchy descriptor):
-//   [+0x00] I_HUDElementsController — HUD operations API (38 slots)
-//   [+0x08] IUIGameEventSystem      — FlashUI plumbing (: IUIPseudoRTTI)
-//   [+0x10] I_LocationListener      — location-discovery callbacks (wh::rpgmodule)
+//   [+0x00] I_HUDElementsController 鈥?HUD operations API (38 slots)
+//   [+0x08] IUIGameEventSystem      鈥?FlashUI plumbing (: IUIPseudoRTTI)
+//   [+0x10] I_LocationListener      鈥?location-discovery callbacks (wh::rpgmodule)
 // NOTE: SUIEventReceiverDispatcher<C_UIHUDElements> is an EMBEDDED MEMBER at
-// +0x30 (NOT a base — it is absent from the class-hierarchy descriptor).
+// +0x30 (NOT a base 鈥?it is absent from the class-hierarchy descriptor).
 
 namespace wh::guimodule {
 
@@ -62,11 +63,11 @@ class C_UIHUDElements
     , public Offsets::I_LocationListener           // +0x10
 {
 public:
-    // +0x18/+0x20 look like a std::map (head sentinel from sub_180730B28 — a
+    // +0x18/+0x20 look like a std::map (head sentinel from sub_180730B28 鈥?a
     // std::map sentinel-node allocator; the old "FlashEventDispatcher" label
     // was a misnomer). With +0x28 this matches a SUIEventSenderDispatcher
     // <E_UIHUDElementEvent> at +0x18..0x30 (that instantiation's RTTI exists
-    // in the binary) — pairing UNVERIFIED, kept as raw members.
+    // in the binary) 鈥?pairing UNVERIFIED, kept as raw members.
     void*    m_senderMapHead18;         // +0x18  std::map sentinel (sub_180730B28)
     uint64_t m_senderMapSize20;         // +0x20
     void*    _unk28;                    // +0x28  likely the sender's m_pEventSystem (UNVERIFIED)

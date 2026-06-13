@@ -1,13 +1,12 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
 #include "Offsets/vtables/IUIGameEventSystem.h"
-#include "Offsets/vtables/IUIEventSystem.h"
-#include "guimodule/SUIEventReceiverDispatcher.h"
-#include "guimodule/SUIEventSenderDispatcher.h"
+// (individual UI includes consolidated into IFlashUI.h)
 
 // -----------------------------------------------
-// C_UIKeybinds — key-rebinding settings screen ("Keybinds")
+// C_UIKeybinds 鈥?key-rebinding settings screen ("Keybinds")
 // -----------------------------------------------
 // RTTI: .?AVC_UIKeybinds@guimodule@wh@@
 // Constructor:     sub_1811284FC  (factory memsets 0x58 first)
@@ -17,8 +16,7 @@
 // InitEventSystem: sub_18112EC3C  (IUIGameEventSystem slot [2])
 // Size:            0x58
 //
-// Inheritance (RTTI class-hierarchy descriptor): single base —
-//   [+0x00] IUIGameEventSystem (: IUIPseudoRTTI)  (vtable 0x1826d1638)
+// Inheritance (RTTI class-hierarchy descriptor): single base 鈥?//   [+0x00] IUIGameEventSystem (: IUIPseudoRTTI)  (vtable 0x1826d1638)
 //
 // InitEventSystem (sub_18112EC3C):
 //  A. creates system->UI IUIEventSystem "Keybinds" (direction 1), registers

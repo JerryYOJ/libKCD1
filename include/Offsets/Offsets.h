@@ -51,6 +51,16 @@ inline static constexpr uintptr_t kWuidObjectMapOffset         = 0x37999E0; // c
 inline static constexpr uintptr_t kLinkablesManagerOffset      = 0x37999D8; // C_LinkablesManager ptr (qword_1837999D8; WUID->C_LinkableObject map)
 inline static constexpr uintptr_t kFindLinkableObjectOffset    = 0x24D6E4;  // sub_18024D6E4 (linkables-map find: (manager, &wuid) -> C_LinkableObject*)
 inline static constexpr uintptr_t kGetInventoryForWuidOffset   = 0x15F457C; // sub_1815F457C (container WUID -> single C_Inventory; a1 unused)
+inline static constexpr uintptr_t kFastTravelStopOffset             = 0x1226EA8; // C_FastTravel::Stop (sub_181226EA8; Lua FastTravel.Stop; UIMap signal +0xE0 handler)
+inline static constexpr uintptr_t kFastTravelStartTravellingOffset  = 0x1226C54; // C_FastTravel::StartTravelling (sub_181226C54; UIMap signal +0xA0 handler; autosave + flags|=1)
+inline static constexpr uintptr_t kFastTravelAnswerRandomEventOffset = 0x1226864; // C_FastTravel::AnswerRandomEvent(eventId, optionId) (sub_181226864; wh_pl_RandomEventAnswer)
+inline static constexpr uintptr_t kFastTravelScheduleStopOffset     = 0x12271B0; // C_FastTravel::ScheduleStopAtEvent(seconds, eventId) (sub_1812271B0; Lua FastTravel.StopToEvent)
+inline static constexpr uintptr_t kFastTravelCanStartOffset         = 0x121E530; // C_FastTravel::CanStartTravelling (sub_18121E530; E_FastTravelResult; first check = player+0xA30 & 0x20)
+inline static constexpr uintptr_t kFastTravelIsTravellingOffset     = 0x3DBE28;  // C_FastTravel::IsFastTravelling (sub_1803DBE28; m_isTravelling || m_pAfterFastTravelObserver->active(+0x68))
+inline static constexpr uintptr_t kFastTravelSetDestinationOffset   = 0x1226B24; // C_FastTravel::SetDestination(&pos, forced) (sub_181226B24; UIMap signal +0x60 handler; stores +0xC0, sets flag 0x8, ComputePath)
+inline static constexpr uintptr_t kUIMapForceStartFastTravelOffset  = 0x112C494; // C_UIMap::ForceStartFastTravel(&pos, iconType) (sub_18112C494; wh_pl_FastTravelTo entry; blocks sim = visual-only)
+inline static constexpr uintptr_t kGameTimerIsExpiredOffset         = 0x652DB4; // wh::framework::S_GameTimer::IsExpired (sub_180652DB4)
+inline static constexpr uintptr_t kGameTimerArmOffset               = 0x652DEC; // wh::framework::S_GameTimer::Arm(ms)  (sub_180652DEC)
 
 // CryAction has no RE'd header — getter stays here
 IGameFramework* GetCCryAction();

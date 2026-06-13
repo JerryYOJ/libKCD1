@@ -1,6 +1,32 @@
 #pragma once
-#include <cstdint>
+
+// =====================================================================
+// IFlashUI.h — Umbrella header for the KCD UI interface replicas
+// =====================================================================
+// Mirrors the SDK's CryCommon/IFlashUI.h organization: one include gets
+// all FlashUI value types, all Offsets:: interface replicas, and both
+// dispatcher templates. Consumer headers should include only this file.
+//
+// Includes (in dependency order):
+//   guimodule/SUITypes.h    — FlashUI value types (SUIParameterDesc, SUIArguments,
+//                             SUIEventDesc, TUIData, SUIEvent, ...) — real & usable
+//   IUIEventListener.h      — 3 slots
+//   IUIEventSystem.h        — 12 slots
+//   IUIElementEventListener.h — 8 slots
+//   IUIElementIterator.h    — 5 slots
+//   IUIElement.h            — 101 slots (KCD-divergent: +RequestUnload [18])
+//   IUIModule.h             — 8 slots (KCD-divergent: +Update [5])
+//   [this file]             — IFlashUI: 43 slots (KCD-divergent: +slot[6], -CreateLookup* trio)
+//   SUIEventReceiverDispatcher.h  — 0x28, global namespace
+//   SUIEventSenderDispatcher.h    — 0x18, global namespace
+
+#include "guimodule/SUITypes.h"
+#include "IUIEventListener.h"
 #include "IUIEventSystem.h"
+#include "IUIElementEventListener.h"
+#include "IUIElementIterator.h"
+#include "IUIElement.h"
+#include "IUIModule.h"
 
 // -----------------------------------------------
 // IFlashUI — Binary vtable order (NOT interfuscated)
@@ -35,19 +61,8 @@
 //   LoadElementsFromFile [10] logs "FlashUI parse element XML file %s" and
 //   news 0x228-byte CFlashUIElement (ctor sub_1818644BC).
 
-// Forward declarations of real SDK types (GLOBAL namespace, pointer/ref use only):
-struct ICryFactory;
-struct IUIAction;
-struct IUIActionManager;
-struct ITexture;
-struct ICrySizer;
-class CFlashUIActionEvents;   // engine-internal (CryAction); RTTI'd vftables exist in WHGame.dll
-
 namespace Offsets {
 
-struct IUIElement;
-struct IUIElementIterator;
-struct IUIModule;
 struct IVirtualKeyboardEvents;
 
 struct IFlashUI {
@@ -117,3 +132,9 @@ struct IFlashUI {
 };
 
 }  // namespace Offsets
+
+// Dispatcher templates (GLOBAL namespace, matching binary RTTI).
+// These depend on Offsets::IUIEventSystem and Offsets::IUIEventListener
+// defined above.
+#include "guimodule/SUIEventReceiverDispatcher.h"
+#include "guimodule/SUIEventSenderDispatcher.h"

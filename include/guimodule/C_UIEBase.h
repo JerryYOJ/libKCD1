@@ -1,10 +1,11 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
-#include "Offsets/vtables/IUIElementEventListener.h"
+// consolidated into IFlashUI.h
 
 // -----------------------------------------------
-// C_UIEBase — base class for Flash-element-bound UI controllers
+// C_UIEBase 鈥?base class for Flash-element-bound UI controllers
 // -----------------------------------------------
 // RTTI: .?AVC_UIEBase@uielement@guimodule@wh@@  (namespace
 // wh::guimodule::uielement)
@@ -14,28 +15,26 @@
 //
 // RTTI class-hierarchy descriptor: C_UIEBase : IUIElementEventListener (+0).
 // IUIElementEventListener has EXACTLY 8 slots in declaration order (the SDK
-// header IFlashUI.h is untagged — NOT interfuscated; the old 20-slot replica
-// fused three adjacent vtables and has been corrected — see
+// header IFlashUI.h is untagged 鈥?NOT interfuscated; the old 20-slot replica
+// fused three adjacent vtables and has been corrected 鈥?see
 // Offsets/vtables/IUIElementEventListener.h).
 //
 // Slot table for the C_UIRPGElements instantiation (vtable 0x1826d28f0):
-//   [0]  0x00  sub_180501E90  OnUIEvent — main element-event entry
+//   [0]  0x00  sub_180501E90  OnUIEvent 鈥?main element-event entry
 //   [1..6]     _guard_check_icall_nop (empty SDK default impls)
 //   [7]  0x38  sub_180B1AF7C  adjustor thunk (this-0x10) -> deleting dtor
 //              sub_181146D8C
 //   --- C_UIEBase own virtuals ---
 //   [8]  0x40  sub_18114B164  (0x21A; refs "RequestSkills",
 //              "RequestSkillPerks", "RequestSoulValues", "RequestStatPerks",
-//              "RequestLearnPerk", "GetStatisticsCategory", "GetStatistics" —
-//              element-function registration/dispatch for the bound element)
+//              "RequestLearnPerk", "GetStatisticsCategory", "GetStatistics" 鈥?//              element-function registration/dispatch for the bound element)
 //   [9]  0x48  sub_181113030  = { if (m_pElement) m_pElement->vfunc+0x1F8; }
-//   [10] 0x50  sub_1806FE690  returns "Inventory" — name of the bound Flash
+//   [10] 0x50  sub_1806FE690  returns "Inventory" 鈥?name of the bound Flash
 //              element (C_UIRPGElements binds to the "Inventory" element)
 //
 // Data members: ctor is inlined into the derived ctor (C_UIRPGElements
 // sub_181143C38 zero-fills exactly +0x08..+0x28 of this subobject).
-// sizeof == 0x28 inferred from that layout (no factory allocation evidence —
-// static_assert intentionally based on member layout only). [UNVERIFIED size]
+// sizeof == 0x28 inferred from that layout (no factory allocation evidence 鈥?// static_assert intentionally based on member layout only). [UNVERIFIED size]
 
 namespace wh::guimodule::uielement {
 

@@ -1,20 +1,20 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
 #include "Offsets/vtables/I_DialogUIController.h"
 #include "Offsets/vtables/I_UIEntityDynText.h"
 #include "Offsets/vtables/IUIGameEventSystem.h"
-#include "Offsets/vtables/IUIEventSystem.h"
-#include "guimodule/SUIEventSenderDispatcher.h"
+// (individual UI includes consolidated into IFlashUI.h)
 
 // -----------------------------------------------
-// C_UIInteractiveDialog — dialog topics / haggling / skill-check UI ("UIInteractiveDialog")
+// C_UIInteractiveDialog 鈥?dialog topics / haggling / skill-check UI ("UIInteractiveDialog")
 // -----------------------------------------------
 // RTTI: .?AVC_UIInteractiveDialog@guimodule@wh@@  (3 vtables: +0x00
 // 0x1826d17e8, +0x08 0x1826d1848, +0x10 0x1826d1870)
 // Constructor:     sub_1811260B4
 // Factory:         sub_18112A9F0  (SAutoRegUIEventSystem<C_UIInteractiveDialog>,
-//                  allocates 0xA0, returns this+0x10 — the IUIGameEventSystem
+//                  allocates 0xA0, returns this+0x10 鈥?the IUIGameEventSystem
 //                  subobject CUIManager registers)
 // GetName:         sub_1806FE7E0  -> "UIInteractiveDialog"
 // InitEventSystem: sub_18112DEFC  (IUIGameEventSystem slot [2])

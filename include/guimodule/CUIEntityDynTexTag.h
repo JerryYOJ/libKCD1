@@ -1,16 +1,15 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
 #include <vector>
 #include "Offsets/vtables/IUIGameEventSystem.h"
-#include "Offsets/vtables/IUIModule.h"
-#include "Offsets/vtables/IUIElementEventListener.h"
+// (individual UI includes consolidated into IFlashUI.h)
 #include "Offsets/vtables/IEntityEventListener.h"
-#include "Offsets/vtables/IUIEventSystem.h"
-#include "guimodule/SUIEventReceiverDispatcher.h"
+// (individual UI includes consolidated into IFlashUI.h)
 
 // -----------------------------------------------
-// CUIEntityDynTexTag — 3D entity-attached dynamic-texture UI tags
+// CUIEntityDynTexTag 鈥?3D entity-attached dynamic-texture UI tags
 // -----------------------------------------------
 // RTTI: .?AVCUIEntityDynTexTag@guimodule@wh@@   (GameSDK-derived class; the
 // CryEngine GameSDK original renders UIElements onto dynamic textures
@@ -22,8 +21,7 @@
 // InitEventSystem: sub_18111B884  (IUIGameEventSystem slot [2])
 // UnloadEventSystem: sub_1811205CC (slot [3]: ClearAllTags sub_18111A6BC +
 //                  pFlashUI->UnregisterModule(this+8) via vtbl+0xB0)
-// OnUpdate:        sub_1805F38B4  (slot [5], (this, float fDeltaTime) —
-//                  per-frame tag transform/lerp update)
+// OnUpdate:        sub_1805F38B4  (slot [5], (this, float fDeltaTime) 鈥?//                  per-frame tag transform/lerp update)
 // Size:            0x68
 //
 // Inheritance (RTTI class-hierarchy descriptor):

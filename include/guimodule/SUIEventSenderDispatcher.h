@@ -1,11 +1,13 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
 #include <map>
-#include "Offsets/vtables/IUIEventSystem.h"
+#include "guimodule/SUITypes.h"
+// consolidated into IFlashUI.h
 
 // -----------------------------------------------
-// SUIEventSenderDispatcher<TEventType> — CryEngine template (system->UI send)
+// SUIEventSenderDispatcher<TEventType> 鈥?CryEngine template (system->UI send)
 // -----------------------------------------------
 // SDK: CryCommon/IFlashUI.h:2092. GLOBAL namespace (binary RTTI inside
 // std::function wrappers: ...SUIEventSenderDispatcher@W4E_UIHUDElementEvent@

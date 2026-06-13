@@ -1,24 +1,25 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
 #include <map>
 #include <vector>
-#include "Offsets/vtables/IUIModule.h"
+// consolidated into IFlashUI.h
 #include "Offsets/vtables/I_ShadowPlayHightlightCountListener.h"
-#include "Offsets/vtables/IUIEventSystem.h"
+// consolidated into IFlashUI.h
 #include "Offsets/vtables/IConsole.h"
-#include "guimodule/SUIEventReceiverDispatcher.h"
+// consolidated into IFlashUI.h
 
 // -----------------------------------------------
-// C_UIMenuEvents — main-menu / ingame-menu / inventory-screen flow
+// C_UIMenuEvents 鈥?main-menu / ingame-menu / inventory-screen flow
 // -----------------------------------------------
 // RTTI: .?AVC_UIMenuEvents@guimodule@wh@@  (2 vtables: +0x00 / +0x08)
-//   0x1822ed1f8 IUIModule  — overrides: [0] dtor sub_181146C94,
+//   0x1822ed1f8 IUIModule  鈥?overrides: [0] dtor sub_181146C94,
 //               [1] Init sub_18114B0C4, [4] Reset sub_181155910
 //               ([6] EditorAllowReload inherits shared `return true`
 //               sub_1806F8140)
-//   0x1822ed240 I_ShadowPlayHightlightCountListener — [0] sub_181155770
-// Constructor: sub_1811425C8(this, C_UISaveLoad*) — called by CUIManager ctor
+//   0x1822ed240 I_ShadowPlayHightlightCountListener 鈥?[0] sub_181155770
+// Constructor: sub_1811425C8(this, C_UISaveLoad*) 鈥?called by CUIManager ctor
 //              sub_181125C08 (allocation 0xC8) AFTER C_UISaveLoad
 // Size:        0xC8
 //

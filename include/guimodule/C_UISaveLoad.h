@@ -1,23 +1,23 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
 #include <map>
-#include "Offsets/vtables/IUIModule.h"
-#include "Offsets/vtables/IUIEventSystem.h"
+// (individual UI includes consolidated into IFlashUI.h)
 #include "Offsets/vtables/IConsole.h"
-#include "guimodule/SUIEventReceiverDispatcher.h"
+// consolidated into IFlashUI.h
 #include "framework/C_ReadinessObserver.h"
 
 // -----------------------------------------------
-// C_UISaveLoad — savegame / playline / new-game flash <-> game bridge
+// C_UISaveLoad 鈥?savegame / playline / new-game flash <-> game bridge
 // -----------------------------------------------
 // RTTI: .?AVC_UISaveLoad@guimodule@wh@@  (single vtable @ 0x1822ed138)
-//   IUIModule — overrides: [0] dtor sub_181146DC0, [1] Init sub_18114B380
+//   IUIModule 鈥?overrides: [0] dtor sub_181146DC0, [1] Init sub_18114B380
 //   (the IDA name wh::guimodule::C_UISaveLoad::DispatchPreparingNewGame_18114B380
-//   is MISLEADING: it is IUIModule::Init — it SUBSCRIBES a "PreparingNewGame"
+//   is MISLEADING: it is IUIModule::Init 鈥?it SUBSCRIBES a "PreparingNewGame"
 //   observer from *(S_GameContext+0xB8)+0xE8 into m_pPreparingNewGameHook
 //   (+0xC0) via sub_181140ED8/sub_1811469A0)
-// Constructor: sub_181143CF4 — called by CUIManager ctor sub_181125C08
+// Constructor: sub_181143CF4 鈥?called by CUIManager ctor sub_181125C08
 //              (allocation 0xE0), constructed BEFORE C_UIMenuEvents which
 //              receives a pointer to it
 // Size:        0xE0

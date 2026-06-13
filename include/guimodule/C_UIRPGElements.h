@@ -1,21 +1,21 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
 #include "Offsets/vtables/I_RPGElementsController.h"
 #include "Offsets/vtables/IUIGameEventSystem.h"
-#include "Offsets/vtables/IUIEventSystem.h"
+// consolidated into IFlashUI.h
 #include "guimodule/C_UIEBase.h"
-#include "guimodule/SUIEventSenderDispatcher.h"
-#include "guimodule/SUIEventReceiverDispatcher.h"
+// (individual UI includes consolidated into IFlashUI.h)
 
 // -----------------------------------------------
-// C_UIRPGElements — buffs / bleeding / level-up / perk HUD ("UIRPG")
+// C_UIRPGElements 鈥?buffs / bleeding / level-up / perk HUD ("UIRPG")
 // -----------------------------------------------
 // RTTI: .?AVC_UIRPGElements@guimodule@wh@@  (3 vtables: +0x00 0x1826d2880,
 // +0x08 0x1826d28a8, +0x10 0x1826d28f0)
 // Constructor:     sub_181143C38
 // Factory:         sub_181148584  (SAutoRegUIEventSystem<C_UIRPGElements>
-//                  vtable 0x1822ed120; allocates 0xB8, returns this+8 — the
+//                  vtable 0x1822ed120; allocates 0xB8, returns this+8 鈥?the
 //                  IUIGameEventSystem subobject CUIManager registers)
 // GetName:         sub_1806FE860  -> "UIRPG"
 // InitEventSystem: sub_18114F2FC  (IUIGameEventSystem slot [2])
@@ -29,7 +29,7 @@
 //           = sub_181157F40)
 //   [+0x10] wh::guimodule::uielement::C_UIEBase          (: IUIElementEventListener;
 //           0x28 bytes incl. 4 data qwords; its GetElementName ([10]
-//           sub_1806FE690) returns "Inventory" — the bound Flash element)
+//           sub_1806FE690) returns "Inventory" 鈥?the bound Flash element)
 //
 // InitEventSystem (sub_18114F2FC):
 //   0. lazily creates the buff-event source singleton qword_183500F10 (0x80

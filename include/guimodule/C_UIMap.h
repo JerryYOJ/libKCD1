@@ -1,25 +1,26 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
 #include <vector>
+#include <unordered_map>
 #include "CryEngine/CryCommon/CryPodArray.h"
 #include "CryEngine/CryCommon/smartptr.h"
 #include "rpgmodule/C_POI.h"
 #include "Offsets/vtables/IUIGameEventSystem.h"
-#include "Offsets/vtables/IUIElementEventListener.h"
+// consolidated into IFlashUI.h
 #include "Offsets/vtables/IActionListener.h"
 #include "Offsets/vtables/I_LocationListener.h"
 #include "guimodule/SUIEventSenderBlock.h"
-#include "guimodule/SUIEventReceiverDispatcher.h"
+// consolidated into IFlashUI.h
 #include "guimodule/C_UIMapCloudAtlas.h"
 #include "guimodule/C_ScriptBindMap.h"
-#include "guimodule/SSpatialBucketContainer.h"
 #include "guimodule/C_CompassMark.h"
 #include "rpgmodule/I_POI.h"
 #include "Offsets/vtables/IConsole.h"
 
 // -----------------------------------------------
-// C_UIMap — Map UI, fast travel, POI, checkpoint
+// C_UIMap 鈥?Map UI, fast travel, POI, checkpoint
 // -----------------------------------------------
 // RTTI: .?AVC_UIMap@guimodule@wh@@
 // Constructor: sub_181128558
@@ -31,6 +32,18 @@
 
 namespace wh::guimodule {
 
+// Element types of the C_UIMap spatial/POI hash maps below. The maps are stock
+// MSVC std::unordered_map (the old "SSpatialBucketContainer" was a misRE — it is
+// the 0x40-byte _Hash base, NOT a custom type; ctor sub_180F993F0 etc. = the
+// _Hash init: max_load=1.0f@+0, list head@+8, bucket-vec@+0x18, mask@+0x30,
+// maxidx@+0x38). The int32 key + the dispatch map's value are verified; these
+// two value layouts are sized from the heap node (0x30 / 0x28) but their fields
+// are NOT yet RE'd.
+struct S_UIMapBucketValue20 { uint8_t _unverified[0x1C]; };   // node 0x30 → element 0x20
+static_assert(sizeof(S_UIMapBucketValue20) == 0x1C);
+struct S_UIMapBucketValue18 { uint8_t _unverified[0x14]; };   // node 0x28 → element 0x18
+static_assert(sizeof(S_UIMapBucketValue18) == 0x14);
+
 class C_UIMap
     : public Offsets::IUIGameEventSystem        // +0x00  (8 slots)
     , public Offsets::IUIElementEventListener    // +0x08  (8 slots; [0] OnUIEvent = sub_1811368C8)
@@ -39,17 +52,20 @@ class C_UIMap
 {
 public:
     inline static constexpr auto RTTI = Offsets::RTTI_C_UIMap;
-    SUIEventSenderBlock     m_eventSender0;                 // +0x20
-    SUIEventSenderBlock     m_eventSender1;                 // +0x60
-    SUIEventSenderBlock     m_eventSender2;                 // +0xA0
-    SUIEventSenderBlock     m_eventSender3;                 // +0xE0
+    // C_FastTravel subscribes to these four signals (C_FastTravel::BindToUIMap
+    // = sub_1812269BC): +0x20 → AnswerRandomEvent, +0x60 → ComputePath,
+    // +0xA0 → StartTravelling, +0xE0 → Stop.
+    SUIEventSenderBlock     m_signalRandomEventAnswer;      // +0x20
+    SUIEventSenderBlock     m_signalFTPathComputed;         // +0x60
+    SUIEventSenderBlock     m_signalFTStart;                // +0xA0
+    SUIEventSenderBlock     m_signalFTStop;                 // +0xE0
 
     // Embedded dispatcher (0x28: vtable 0x1826d15d8, mFunctionMap @+0x128,
-    // m_pEventSystem @+0x138, m_pThis @+0x140 — set by Init; the former
+    // m_pEventSystem @+0x138, m_pThis @+0x140 鈥?set by Init; the former
     // m_unk138/m_unk140 members were this tail).
     SUIEventReceiverDispatcher<C_UIMap> m_eventRecvDispatcher; // +0x120 .. 0x148
 
-    // +0x148/+0x150 look like a std::map (head sentinel from sub_180730B28 —
+    // +0x148/+0x150 look like a std::map (head sentinel from sub_180730B28 鈥?
     // which is a std::map sentinel-node allocator, NOT a "FlashEventDispatcher"
     // as previously labeled; likely a sender-dispatcher m_EventMap, pairing
     // UNVERIFIED).
@@ -116,30 +132,40 @@ public:
     Offsets::ICVar*                  m_pCVar_EnableZoom;             // +0x318
     Offsets::ICVar*                  m_pCVar_ShowFastTravelPoints;   // +0x320
     Offsets::ICVar*                  m_pCVar_ShowOnlyDiscoveredPOI;  // +0x328
-    Offsets::ICVar*                  m_pCVar_DiscoveredMsgTimeout;   // +0x330
+    // NOTE: previously mis-typed as ICVar* m_pCVar_DiscoveredMsgTimeout. The ctor
+    // sub_181128558 writes the float below at +0x334, so this slot is only 4 bytes
+    // — it cannot be an 8-byte CVar pointer. It is the discovered-message timeout
+    // VALUE (type float/int not yet pinned).
+    uint32_t                m_discoveredMsgTimeout;         // +0x330
 
     float                   m_fMovingMarkUpdateOffsetSq;    // +0x334  default 0.1
-    char                    _pad338[0x4];                   // +0x338  alignment
 
-    SSpatialBucketContainer m_eventBuckets;                 // +0x340
-    char                    _pad370[0x18];                  // +0x370
+    // Flash UI-event dispatch table: hash(event name) → internal handler id.
+    // Verified in OnUIEvent sub_1811368C8 (key@node+0x10, value dword@node+0x14,
+    // hash sub_1804BF50C over 4 bytes) and ctor sub_181128558 (@+0x338).
+    std::unordered_map<int32_t, uint32_t> m_uiEventDispatch;  // +0x338  (0x40)
 
-    char*                   m_szUnk388;                     // +0x388  CryString
+    uint64_t                m_unk378;                       // +0x378  (uninit in ctor)
+    char*                   m_szUnk380;                     // +0x380  CryString (StringHash sub_18028CEA4)
 
-    SSpatialBucketContainer m_nearbyPOIs0;                  // +0x390
-    char                    _pad3C0[0x10];                  // +0x3C0
-    SSpatialBucketContainer m_nearbyPOIs1;                  // +0x3D0
-    char                    _pad400[0x10];                  // +0x400
+    // Spatial/POI hash maps (purpose UNVERIFIED; see value-type note above the class).
+    std::unordered_map<int32_t, S_UIMapBucketValue20> m_unk388;  // +0x388  (0x40, node 0x30)
+    std::unordered_map<int32_t, S_UIMapBucketValue20> m_unk3C8;  // +0x3C8  (0x40, node 0x30)
 
-    float                   m_fPlayerX;                     // +0x410
-    float                   m_fPlayerY;                     // +0x414
-    float                   m_fPlayerZ;                     // +0x418
-    char                    _pad41C[0x4];                   // +0x41C
+    Vec3                    m_unk408_focus;                 // +0x408  default copied from globals
+                                                            //   (qword_1829DA4E0 + dword_1829DA4E8);
+                                                            //   likely map focus / player position
+    char                    _pad414[0x4];                   // +0x414
 
-    C_ScriptBindMap         m_scriptBindMap;                // +0x420
+    C_ScriptBindMap         m_scriptBindMap;                // +0x418  (Lua "UIMap"; ctor sub_18110CD28)
 
-    SSpatialBucketContainer m_unk490;                       // +0x490
-    char                    _pad4C0[0x8];                   // +0x4C0
+    std::unordered_map<int32_t, S_UIMapBucketValue18> m_unk488;  // +0x488  (0x40, node 0x28)
+
+    // --- Native methods (forwarded by RVA in C_UIMap.cpp) ---
+    // Fires "OnForceStartFastTravel{Pos, PlayerId, IconType}" to Flash and
+    // blocks the FT sim (BlockSources 0x80) — visual-only warp, no time
+    // passage/encounters (= wh_pl_FastTravelTo). Caller must check FT idle.
+    void ForceStartFastTravel(const Vec3& worldPos, int iconType = 0);  // sub_18112C494
 };
 static_assert(sizeof(C_UIMap) == 0x4C8);
 

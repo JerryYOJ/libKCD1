@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include "IActionMapManager.h"
 
 typedef unsigned int EntityId;
 
@@ -73,7 +74,7 @@ struct IGameFramework {
     virtual IActorSystem* GetIActorSystem() = 0;                         // [25] 0xC8   returns CCryAction+0x508 (confirmed)
     virtual void* GetIItemSystem() = 0;                                  // [26] 0xD0   returns CItemSystem inner ptr (+0x510+8)
     virtual void* GetITimeDemoRecorder() = 0;                            // [27] 0xD8   returns global qword_183785D98+8
-    virtual void* GetIActionMapManager() = 0;                            // [28] 0xE0   returns CCryAction+0x528 (CActionMapManager)
+    virtual Offsets::IActionMapManager* GetIActionMapManager() = 0;      // [28] 0xE0   returns CCryAction+0x528 (CActionMapManager)
     virtual void* GetIViewSystem() = 0;                                  // [29] 0xE8   returns CCryAction+0x530 (CViewSystem)
     virtual void _vf30() = 0;                                           // [30] 0xF0
     virtual void* GetIVehicleSystem() = 0;                               // [31] 0xF8   returns CCryAction+0x518 (CVehicleSystem)

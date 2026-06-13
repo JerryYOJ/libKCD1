@@ -1,20 +1,19 @@
-#pragma once
+﻿#pragma once
+#include "Offsets/vtables/IFlashUI.h"
 
 #include <cstdint>
 #include "Offsets/vtables/I_QuestUIController.h"
 #include "Offsets/vtables/IUIGameEventSystem.h"
-#include "Offsets/vtables/IUIEventSystem.h"
-#include "guimodule/SUIEventSenderDispatcher.h"
-#include "guimodule/SUIEventReceiverDispatcher.h"
+// (individual UI includes consolidated into IFlashUI.h)
 
 // -----------------------------------------------
-// C_UIQuestLog — quest log UI bridge ("UIQuestLog")
+// C_UIQuestLog 鈥?quest log UI bridge ("UIQuestLog")
 // -----------------------------------------------
 // RTTI: .?AVC_UIQuestLog@guimodule@wh@@  (2 vtables: +0x00 0x1826d2950,
 // +0x08 0x1826d2998)
 // Constructor:     sub_181143BCC
 // Factory:         sub_18114848C  (SAutoRegUIEventSystem<C_UIQuestLog>
-//                  vtable 0x1822ed180; allocates 0x60, returns this+8 — the
+//                  vtable 0x1822ed180; allocates 0x60, returns this+8 鈥?the
 //                  IUIGameEventSystem subobject CUIManager registers)
 // GetName:         sub_1806FE850  -> "UIQuestLog"
 // InitEventSystem: sub_18114E254  (IUIGameEventSystem slot [2])

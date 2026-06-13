@@ -1,5 +1,5 @@
 #pragma once
-#include <cstdint>
+#include "guimodule/SUITypes.h"
 
 // -----------------------------------------------
 // IUIElementEventListener — Binary vtable order (NOT interfuscated)
@@ -26,10 +26,6 @@
 //   [7] Dtor                 deleting dtor (protected ~ in SDK); C_UIEBase
 //                            thunk sub_180B1AF7C
 //
-// Forward declarations of real SDK types (GLOBAL namespace, pointer/ref use only):
-struct SUIEventDesc;
-struct SUIArguments;
-
 namespace Offsets {
 
 struct IUIElement;
