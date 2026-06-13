@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include "IFlashVariableObject.h"
+#include "CryEngine/CryCommon/SFlashVarValue.h"   // global SFlashVarValue (NOT the SDK IFlashPlayer.h — Cry_Math swamp)
 
 // -----------------------------------------------
 // IFlashPlayer — Binary vtable order (INTERFUSCATED)
@@ -37,7 +38,6 @@
 // member-declaration-order correlation with the SDK. Slot [36] is a true no-op.
 // Slot [56]/[62] names are CE-version guesses for behavior not in our SDK copy.
 
-struct SFlashVarValue;
 struct SFlashCursorEvent;
 struct SFlashKeyEvent;
 struct SFlashCharEvent;
@@ -102,14 +102,18 @@ struct IFlashPlayer {
     virtual void SetVisible(bool visible) = 0;                              // [34] 0x110 sub_180E76260  GFxMovie vf+0x40
     virtual bool GetVisible() const = 0;                                    // [35] 0x118 sub_180E70060  GFxMovie vf+0x48 (IsVisible)
     virtual void _vf36() = 0;                                               // [36] 0x120 sub_180E75664  NO-OP (Enter/LeaveCriticalSection only). UNVERIFIED: likely the stubbed RenderRecordLockless or RenderPlaybackLockless
-    virtual bool SetVariable(const char* pPathToVar,
-                             const IFlashVariableObject* pVarObj) = 0;      // [37] 0x128 sub_180E760C4  GFxValue copied from pVarObj+8 (sub_18020C558), nullptr -> undefined; GFxMovie vf+0x80
+    // SetVariable/GetVariable overload pairs: SFlashVarValue& declared FIRST so
+    // MSVC's overload-reversal lands it at the HIGHER slot (+0x130 / +0x140) that
+    // the binary uses. Declaring the IFlashVariableObject overload first sends the
+    // SFlashVarValue& call to the lower slot -> wrong handler -> garbage value.
     virtual bool SetVariable(const char* pPathToVar,
                              const SFlashVarValue& value) = 0;              // [38] 0x130 sub_180E7602C  SFlashVarValue->GFxValue (sub_18020C590); GFxMovie vf+0x80
-    virtual bool GetVariable(const char* pPathToVar,
-                             IFlashVariableObject*& pVarObj) const = 0;     // [39] 0x138 sub_180556878  GFxMovie vf+0x88; wraps result: operator new(0x70) + CFlashVariableObject::Ctor_18020C17C
+    virtual bool SetVariable(const char* pPathToVar,
+                             const IFlashVariableObject* pVarObj) = 0;      // [37] 0x128 sub_180E760C4  GFxValue copied from pVarObj+8 (sub_18020C558), nullptr -> undefined; GFxMovie vf+0x80
     virtual bool GetVariable(const char* pPathToVar,
                              SFlashVarValue& value) const = 0;              // [40] 0x140 sub_180E6FC48  vf+0x88; GFxValue->SFlashVarValue sub_18020CE4C; (w)string results cached at this+0x108
+    virtual bool GetVariable(const char* pPathToVar,
+                             IFlashVariableObject*& pVarObj) const = 0;     // [39] 0x138 sub_180556878  GFxMovie vf+0x88; wraps result: operator new(0x70) + CFlashVariableObject::Ctor_18020C17C
     virtual bool IsAvailable(const char* pPathToVar) const = 0;             // [41] 0x148 sub_180500C20  GFxMovie vf+0x50 (VariableExists)
     virtual bool SetVariableArray(EFlashVariableArrayType type, const char* pPathToVar,
                                   unsigned int index, const void* pData,

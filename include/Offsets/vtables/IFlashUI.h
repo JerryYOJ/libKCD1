@@ -87,15 +87,19 @@ struct IFlashUI {
     virtual bool LoadElementsFromFile(const char* fileName) = 0;                    // [10] 0x050  sub_1818858B8  VERIFIED: "FlashUI parse element XML file %s", news CFlashUIElement(0x228)
     virtual bool LoadActionFromFile(const char* sFileName, int type) = 0;           // [11] 0x058  sub_1818856D8  IUIAction::EUIActionType (decl-mapped)
 
-    // access for IUIElements (overload pair REVERSED vs declaration)
-    virtual IUIElement* GetUIElement(int index) const = 0;                          // [12] 0x060  sub_18187E62C  (decl-mapped; indexes array at this+0x60)
-    virtual IUIElement* GetUIElement(const char* name) const = 0;                   // [13] 0x068  sub_180372A8C  VERIFIED ANCHOR: map lookup this+0x68 -> array this+0x60; sub_18111B2C8 calls with "hud"
+    // access for IUIElements. MSVC emits adjacent same-name virtual overloads in
+    // REVERSED source order (proven: the 2nd-declared lands at the LOWER slot), so
+    // const-char*-FIRST here compiles to the binary order int@+0x60 / const char*@
+    // +0x68. Declaring (int) first instead sends GetUIElement("name") to the +0x60
+    // (int) slot -> string ptr used as an index -> crash.
+    virtual IUIElement* GetUIElement(const char* name) const = 0;                   // [13] 0x068  sub_180372A8C  VERIFIED ANCHOR: map lookup this+0x68; sub_18111B2C8 calls with "hud"; returns null on miss
+    virtual IUIElement* GetUIElement(int index) const = 0;                          // [12] 0x060  sub_18187E62C  (indexes array at this+0x60)
     virtual int GetUIElementCount() const = 0;                                      // [14] 0x070  sub_180708EF0  (decl-mapped)
     virtual IUIElement* GetUIElementByInstanceStr(const char* UIInstanceStr) const = 0; // [15] 0x078  sub_18187E648  (decl-mapped)
 
-    // access for IUIActions (overload pair REVERSED vs declaration)
-    virtual IUIAction* GetUIAction(int index) const = 0;                            // [16] 0x080  sub_18046E0D4  (decl-mapped)
-    virtual IUIAction* GetUIAction(const char* name) const = 0;                     // [17] 0x088  sub_1806C8D74  (decl-mapped)
+    // access for IUIActions (const-char*-first, same MSVC overload-reversal reason as above)
+    virtual IUIAction* GetUIAction(const char* name) const = 0;                     // [17] 0x088  sub_1806C8D74
+    virtual IUIAction* GetUIAction(int index) const = 0;                            // [16] 0x080  sub_18046E0D4
     virtual int GetUIActionCount() const = 0;                                       // [18] 0x090  sub_180708EE0  (decl-mapped)
 
     virtual IUIActionManager* GetUIActionManager() const = 0;                       // [19] 0x098  0x1806fbe30  VERIFIED shape: returns this+0xE0

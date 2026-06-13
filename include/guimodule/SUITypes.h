@@ -19,12 +19,7 @@
 // ---------------------------------------------------------------------------
 
 typedef uint32_t EntityId;
-
-#ifndef WH_VEC3_DEFINED
-#define WH_VEC3_DEFINED
-struct Vec3 { float x, y, z; };
-static_assert(sizeof(Vec3) == 0x0C, "Vec3 must be 3 floats");
-#endif
+// Vec3 / Vec2 / Matrix34 come from the real SDK Cry_Math.h (included by kcd.h).
 
 // Type tags = index into the variant's type list {int, float, EntityId, Vec3,
 // string, wstring, bool}. eUIDT_Any (-1) means "untyped / any".
@@ -287,8 +282,7 @@ static_assert(sizeof(SUIEvent) == 0x38);
 struct IUIEventDispatchFct;
 
 // --- Forward declarations (pointer/ref use only in the interface replicas) ---
-struct Vec2 { float x, y; };
-struct Matrix34;
+// Vec2 / Matrix34 are real SDK types from Cry_Math.h (kcd.h).
 struct ITexture;
 struct IDynTextureSource;
 struct ICrySizer;

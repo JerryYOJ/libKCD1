@@ -8,6 +8,8 @@
 #include "Offsets/vtables/ITimer.h"
 #include "Offsets/vtables/IInput.h"
 #include "Offsets/vtables/IFlashUI.h"
+#include "Offsets/vtables/I3DEngine.h"
+#include "Offsets/vtables/I3DEngine.h"
 
 // -----------------------------------------------
 // SSystemGlobalEnvironment — KCD1 binary layout
@@ -29,7 +31,7 @@
 
 struct SSystemGlobalEnvironment {
     void*                       pDialogSystem;          // +0x00  SDK (no xrefs)
-    void*                       p3DEngine;              // +0x08  SDK (has xrefs)
+    void*                       p3DEngine_DEAD;         // +0x08  DEAD SDK slot — ALWAYS NULL in KCD (every reader guards it). Real engine = Offsets::Get3DEngine() (static C3DEngine* @ 0x3785BC0). C3DEngine vtable 0x1827160a8; GetTerrainElevation[87]/0x2B8
     void*                       pNetwork;               // +0x10  SDK (has xrefs)
     void*                       pLobby;                 // +0x18  SDK (has xrefs)
     void*                       _unk20;                 // +0x20  SDK=pScriptSystem — NO XREFS, dead slot

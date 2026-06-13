@@ -21,9 +21,7 @@ typedef unsigned int EntityId;
 //   +0xF8: reference count (uint16)
 
 struct IEntityProxy;
-struct Matrix34;
-struct Vec3;
-struct Quat;
+// Matrix34 / Vec3 / Quat are the real SDK Cry_Math.h types (included by kcd.h).
 
 namespace Offsets {
 

@@ -42,7 +42,11 @@ struct IFlashVariableObject {
         virtual ~ObjectVisitor() {}                      // [1]
     };
 
-    // Binary vtable 0x1821a30d0 (46 slots)
+    // Binary vtable 0x1821a30d0 (46 slots).
+    // NOTE: each same-name overload PAIR is declared higher-slot-FIRST, because
+    // MSVC emits adjacent virtual overloads reversed (2nd-declared -> lower slot).
+    // This makes the SFlashVarValue&/const char* overloads compile to the binary
+    // slot the game uses; declaring them in slot order would mis-dispatch (garbage).
     virtual void Release() = 0;                                             // [0]  0x000 sub_18020C22C  vcall self vf+0x168 == slot [45] scalar dtor(1)
     virtual IFlashVariableObject* Clone() const = 0;                        // [1]  0x008 sub_180E6BEFC  operator new(0x70) + copy-ctor sub_180E651D0(new, this)
     virtual bool IsObject() const = 0;                                      // [2]  0x010 sub_180E70F28  (type&0x8F)-6 <= 2  (object/array/displayobject)
@@ -51,27 +55,27 @@ struct IFlashVariableObject {
     virtual SFlashVarValue ToVarValue() const = 0;                          // [5]  0x028 sub_180E768D8  GFxValue(this+8) -> SFlashVarValue via sub_18020CE4C
     virtual bool HasMember(const char* pMemberName) const = 0;              // [6]  0x030 sub_180E70534  ObjectInterface::HasMember sub_18083C600
     virtual bool SetMember(const char* pMemberName,
-                           const IFlashVariableObject* pVarObj) = 0;        // [7]  0x038 sub_180E75794  GFxValue copy from pVarObj+8 (sub_18020C558), nullptr -> undefined; ObjectInterface::SetMember sub_18083C930
-    virtual bool SetMember(const char* pMemberName,
                            const SFlashVarValue& value) = 0;                // [8]  0x040 sub_180E756EC  SFlashVarValue -> GFxValue (sub_18020C590); sub_18083C930
-    virtual bool GetMember(const char* pMemberName,
-                           IFlashVariableObject*& pVarObj) const = 0;       // [9]  0x048 sub_18020AD84  ObjectInterface::GetMember sub_18083C740 + new(0x70) Ctor_18020C17C
+    virtual bool SetMember(const char* pMemberName,
+                           const IFlashVariableObject* pVarObj) = 0;        // [7]  0x038 sub_180E75794  GFxValue copy from pVarObj+8 (sub_18020C558), nullptr -> undefined; ObjectInterface::SetMember sub_18083C930
     virtual bool GetMember(const char* pMemberName,
                            SFlashVarValue& value) const = 0;                // [10] 0x050 sub_180E6F59C  sub_18083C740 + sub_18020CE4C; (w)string results cached at this+0x30
+    virtual bool GetMember(const char* pMemberName,
+                           IFlashVariableObject*& pVarObj) const = 0;       // [9]  0x048 sub_18020AD84  ObjectInterface::GetMember sub_18083C740 + new(0x70) Ctor_18020C17C
     virtual void VisitMembers(ObjectVisitor* pVisitor) const = 0;           // [11] 0x058 sub_180E780B8  wraps pVisitor in local adaptor — `CFlashVariableObject::VisitMembers'::VisitorAdaptor::`vftable'; sub_18083CDF0
     virtual bool DeleteMember(const char* pMemberName) = 0;                 // [12] 0x060 sub_180E6E5B4  ObjectInterface::DeleteMember sub_18083CCE0
     virtual bool Invoke(const char* pMethodName, const SFlashVarValue* pArgs,
                         unsigned int numArgs, SFlashVarValue* pResult = 0) = 0; // [13] 0x068 sub_18020C27C  alloca GFxValue[numArgs] from 0x10-stride SFlashVarValue array; ObjectInterface::Invoke sub_18083CA60 (IDA-misnamed "_store_winword")
     virtual unsigned int GetArraySize() const = 0;                          // [14] 0x070 sub_180E6EE60  type==7; ObjectInterface::GetArraySize sub_18083CEF0
     virtual bool SetArraySize(unsigned int size) = 0;                       // [15] 0x078 sub_180E75284  sub_18083CF50
+    virtual bool SetElement(unsigned int idx, const SFlashVarValue& value) = 0; // [17] 0x088 sub_180E754F8  sub_18020C590; sub_18083D0A0
     virtual bool SetElement(unsigned int idx,
                             const IFlashVariableObject* pVarObj) = 0;       // [16] 0x080 sub_180E7558C  sub_18020C558 (null -> undefined); ObjectInterface::SetElement sub_18083D0A0
-    virtual bool SetElement(unsigned int idx, const SFlashVarValue& value) = 0; // [17] 0x088 sub_180E754F8  sub_18020C590; sub_18083D0A0
+    virtual bool GetElement(unsigned int idx, SFlashVarValue& value) const = 0; // [19] 0x098 sub_180E6F3C0  sub_18083CFC0 + sub_18020CE4C (+string cache)
     virtual bool GetElement(unsigned int idx,
                             IFlashVariableObject*& pVarObj) const = 0;      // [18] 0x090 sub_180E6F238  ObjectInterface::GetElement sub_18083CFC0 + new(0x70)
-    virtual bool GetElement(unsigned int idx, SFlashVarValue& value) const = 0; // [19] 0x098 sub_180E6F3C0  sub_18083CFC0 + sub_18020CE4C (+string cache)
-    virtual bool PushBack(const IFlashVariableObject* pVarObj) = 0;         // [20] 0x0A0 sub_180E73648  sub_18020C558 (null -> undefined); ObjectInterface::PushBack sub_18083D3C0
     virtual bool PushBack(const SFlashVarValue& value) = 0;                 // [21] 0x0A8 sub_180E735C4  sub_18020C590; sub_18083D3C0
+    virtual bool PushBack(const IFlashVariableObject* pVarObj) = 0;         // [20] 0x0A0 sub_180E73648  sub_18020C558 (null -> undefined); ObjectInterface::PushBack sub_18083D3C0
     virtual bool PopBack() = 0;                                             // [22] 0x0B0 sub_180E729DC  ObjectInterface::PopBack sub_18083D460(..., 0)
     virtual bool RemoveElements(unsigned int idx, int count = -1) = 0;      // [23] 0x0B8 sub_180E73C7C  ObjectInterface::RemoveElements sub_18083D540(idx, count)
     virtual bool SetDisplayInfo(const SFlashDisplayInfo& info) = 0;         // [24] 0x0C0 sub_18020B0E8  reads exact SFlashDisplayInfo layout (x@0 y@4 z@8 ... alpha@0x24 visible@0x28 m_varsSet@0x2A), remaps FDIF_* bits, ObjectInterface::SetDisplayInfo sub_18083D930
@@ -83,10 +87,10 @@ struct IFlashVariableObject {
     virtual bool SetColorTransform(const SFlashCxform& cx) = 0;             // [30] 0x0F0 sub_180E7536C  8 floats {ColorF mul, ColorF add} interleaved -> GRenderer::Cxform; sub_18083EA00
     virtual bool GetColorTransform(SFlashCxform& cx) const = 0;             // [31] 0x0F8 sub_180E6F054  sub_18083E970, inverse interleave
     virtual bool SetVisible(bool visible) = 0;                              // [32] 0x100 sub_18061B798  builds GFx DisplayInfo with only Visible flag (0x40) set; sub_18083D930
-    virtual bool SetText(const wchar_t* pText) = 0;                         // [33] 0x108 sub_180E75D88  sub_18083ECE0(...,html=0): direct TextField SetText if AS type==4, else SetMember("text", GFxValue type 5 = WSTRING)
     virtual bool SetText(const char* pText) = 0;                            // [34] 0x110 sub_180E75D1C  sub_18083EBE0(...,html=0): fallback GFxValue type 4 = STRING
-    virtual bool SetTextHTML(const wchar_t* pHtml) = 0;                     // [35] 0x118 sub_180E75E60  sub_18083ECE0(...,html=1): member name "htmlText"
+    virtual bool SetText(const wchar_t* pText) = 0;                         // [33] 0x108 sub_180E75D88  sub_18083ECE0(...,html=0): direct TextField SetText if AS type==4, else SetMember("text", GFxValue type 5 = WSTRING)
     virtual bool SetTextHTML(const char* pHtml) = 0;                        // [36] 0x120 sub_180E75DF4  sub_18083EBE0(...,html=1)
+    virtual bool SetTextHTML(const wchar_t* pHtml) = 0;                     // [35] 0x118 sub_180E75E60  sub_18083ECE0(...,html=1): member name "htmlText"
     virtual bool GetText(SFlashVarValue& text) const = 0;                   // [37] 0x128 sub_180E6F97C  sub_18083EAA0(...,html=0) + sub_18020CE4C (+string cache)
     virtual bool GetTextHTML(SFlashVarValue& html) const = 0;               // [38] 0x130 sub_180E6FA5C  sub_18083EAA0(...,html=1)
     virtual bool CreateEmptyMovieClip(IFlashVariableObject*& pVarObjMC, const char* pInstanceName,
@@ -94,11 +98,40 @@ struct IFlashVariableObject {
     virtual bool AttachMovie(IFlashVariableObject*& pVarObjMC, const char* pSymbolName,
                              const char* pInstanceName, int depth = -1,
                              const IFlashVariableObject* pInitObj = 0) = 0; // [40] 0x140 sub_180E69E54  ObjectInterface::AttachMovie sub_18083F020; pInitObj's GFxValue at +8 (null-safe) + new(0x70)
-    virtual bool GotoAndPlay(unsigned int frame) = 0;                       // [41] 0x148 sub_180E700B8  sub_18083F4D0(frame, stop=0): sprite GotoFrame(frame-1) then SetPlayState(Playing)
     virtual bool GotoAndPlay(const char* pFrame) = 0;                       // [42] 0x150 sub_180E70124  sub_18083F3F0(label, stop=0)
-    virtual bool GotoAndStop(unsigned int frame) = 0;                       // [43] 0x158 sub_18020B6E4  sub_18083F4D0(frame, stop=1)
+    virtual bool GotoAndPlay(unsigned int frame) = 0;                       // [41] 0x148 sub_180E700B8  sub_18083F4D0(frame, stop=0): sprite GotoFrame(frame-1) then SetPlayState(Playing)
     virtual bool GotoAndStop(const char* pFrame) = 0;                       // [44] 0x160 sub_18020ACC0  sub_18083F3F0(label, stop=1)
+    virtual bool GotoAndStop(unsigned int frame) = 0;                       // [43] 0x158 sub_18020B6E4  sub_18083F4D0(frame, stop=1)
     virtual ~IFlashVariableObject() {}                                      // [45] 0x168 sub_18020C248  scalar deleting dtor -> ~CFlashVariableObject sub_18020C448 (+free if flags&1); Release vcalls this slot
+};
+
+// RAII unique owner for engine-allocated IFlashVariableObjects. GetVariable /
+// GetMember / GetElement / Create* / Clone each operator-new a fresh 0x70
+// CFlashVariableObject; Release() (slot [0]) == `delete this` (scalar deleting
+// dtor) — there is NO AddRef, so ownership is UNIQUE. Releases on scope exit;
+// move-only. Use put() for the `IFlashVariableObject*&` out-params.
+//   FlashVarPtr v;
+//   fp->GetVariable("_root.Foo", v.put());
+//   if (v) fp->SetVariable("_root.Bar", v.get());   // auto-Release at scope end
+class FlashVarPtr {
+    IFlashVariableObject* m_p = nullptr;
+public:
+    FlashVarPtr() = default;
+    explicit FlashVarPtr(IFlashVariableObject* p) noexcept : m_p(p) {}
+    ~FlashVarPtr() { if (m_p) m_p->Release(); }
+    FlashVarPtr(FlashVarPtr&& o) noexcept : m_p(o.m_p) { o.m_p = nullptr; }
+    FlashVarPtr& operator=(FlashVarPtr&& o) noexcept {
+        if (this != &o) { if (m_p) m_p->Release(); m_p = o.m_p; o.m_p = nullptr; }
+        return *this;
+    }
+    FlashVarPtr(const FlashVarPtr&) = delete;
+    FlashVarPtr& operator=(const FlashVarPtr&) = delete;
+
+    IFlashVariableObject*  get() const noexcept       { return m_p; }
+    IFlashVariableObject*  operator->() const noexcept { return m_p; }
+    explicit operator bool() const noexcept           { return m_p != nullptr; }
+    // Releases any held value, then yields the slot for a Get*/Create* out-param.
+    IFlashVariableObject*& put() noexcept { if (m_p) { m_p->Release(); m_p = nullptr; } return m_p; }
 };
 
 }  // namespace Offsets

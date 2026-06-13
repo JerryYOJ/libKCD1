@@ -140,10 +140,12 @@ struct IUIElement {
     virtual void AddEventListener(IUIElementEventListener* pListener, const char* name) = 0; // [62]  0x1F0  sub_180502430  (decl-mapped)
     virtual void RemoveEventListener(IUIElementEventListener* pListener) = 0;       // [63]  0x1F8  sub_1805023B4  (decl-mapped)
 
-    // functions (overload pair REVERSED). pDataRes = TUIData* (CryVariant
-    // typedef — not forward-declarable, kept void*).
-    virtual bool CallFunction(const SUIEventDesc* pFctDesc, const SUIArguments& args, void* pDataRes, const SUIMovieClipDesc* pTmplDesc) = 0; // [64] 0x200  sub_18020C9D8  VERIFIED: "Function invoked: %s (%s)" GFx Invoke
+    // functions. const char* overload declared FIRST so MSVC's overload-reversal
+    // lands it at the higher binary slot +0x208; declaring SUIEventDesc* first
+    // sends CallFunction("name", ...) to +0x200 -> wrong handler. pDataRes =
+    // TUIData* (CryVariant typedef — not forward-declarable, kept void*).
     virtual bool CallFunction(const char* fctName, const SUIArguments& args, void* pDataRes, const char* pTmplName) = 0;  // [65] 0x208  sub_18020DC54  VERIFIED ANCHOR: sub_18111FD4C ("fc_showInfoText", args, 0, 0); creates "Dynamic Created Fct" desc, tail-calls [64]
+    virtual bool CallFunction(const SUIEventDesc* pFctDesc, const SUIArguments& args, void* pDataRes, const SUIMovieClipDesc* pTmplDesc) = 0; // [64] 0x200  sub_18020C9D8  VERIFIED: "Function invoked: %s (%s)" GFx Invoke
 
     virtual IFlashVariableObject* GetMovieClip(const SUIMovieClipDesc* pMovieClipDesc, const SUIMovieClipDesc* pTmplDesc) = 0; // [66] 0x210  sub_18020BB50  (decl-mapped)
     virtual IFlashVariableObject* GetMovieClip(const char* movieClipName, const char* pTmplName) = 0;                          // [67] 0x218  sub_18020BB08  (decl-mapped)

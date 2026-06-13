@@ -31,21 +31,7 @@
 // Confidence tags below: [V]=verified body+delegation, [L]=likely, [S]=speculative.
 // ===========================================================================
 
-// CryEngine math types (guarded) so the puppet headers stand alone; replace
-// with the project's Vec3/Quat/QuatT once they are RE'd.
-#ifndef WH_VEC3_DEFINED
-#define WH_VEC3_DEFINED
-struct Vec3 { float x, y, z; };
-static_assert(sizeof(Vec3) == 0x0C, "Vec3 must be 3 floats");
-#endif
-
-#ifndef WH_QUAT_DEFINED
-#define WH_QUAT_DEFINED
-struct Quat  { Vec3 v; float w; };   // CryEngine Quat_tpl layout: v.x,v.y,v.z,w (16 bytes)
-struct QuatT { Quat q; Vec3 t; };    // CryEngine QuatT: rotation + translation (28 bytes)
-static_assert(sizeof(Quat)  == 0x10, "Quat must be 4 floats");
-static_assert(sizeof(QuatT) == 0x1C, "QuatT must be Quat + Vec3");
-#endif
+// Vec3 / Quat / QuatT are the real SDK Cry_Math.h types (included by kcd.h).
 
 struct IEntity;          // CryEngine entity interface (forward; bound at C_AIPuppet+0x38)
 struct IPhysicalEntity;  // CryEngine physics interface (forward; returned by slot 16)

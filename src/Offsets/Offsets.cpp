@@ -11,6 +11,12 @@ Offsets::IGameFramework* Offsets::GetCCryAction() {
     return *reinterpret_cast<IGameFramework**>(GetBase() + kCCryActionOffset);
 }
 
+// gEnv.p3DEngine (+0x08) is null in KCD; the live engine is the Cry3DEngineBase
+// static C3DEngine* (qword_183785BC0), set in the C3DEngine ctor.
+Offsets::I3DEngine* Offsets::Get3DEngine() {
+    return *reinterpret_cast<I3DEngine**>(GetBase() + kC3DEngineOffset);
+}
+
 // Central WUID->C_AIObject* map: the global qword_1837999E0 holds a pointer to the heap map.
 namespace wh { namespace framework {
 C_WuidObjectMap* GetWuidObjectMap() {

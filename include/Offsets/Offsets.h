@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include "vtables/IGameFramework.h"
+#include "vtables/I3DEngine.h"
 
 // -----------------------------------------------
 // Global singleton offsets
@@ -26,6 +27,7 @@ uintptr_t GetBase();
 
 inline static constexpr uintptr_t kGEnvOffset              = 0x29D16B8;
 inline static constexpr uintptr_t kCCryActionOffset         = 0x3785D88;
+inline static constexpr uintptr_t kC3DEngineOffset          = 0x3785BC0; // Cry3DEngineBase static C3DEngine* (qword_183785BC0; set in C3DEngine ctor). gEnv.p3DEngine(+0x08) is a DEAD slot in KCD (always null).
 inline static constexpr uintptr_t kRPGModuleOffset          = 0x35AC728;
 inline static constexpr uintptr_t kCUIManagerOffset         = 0x2F77888;
 inline static constexpr uintptr_t kGameContextOffset        = 0x34FFD10;
@@ -64,6 +66,10 @@ inline static constexpr uintptr_t kGameTimerArmOffset               = 0x652DEC; 
 
 // CryAction has no RE'd header — getter stays here
 IGameFramework* GetCCryAction();
+
+// I3DEngine: gEnv.p3DEngine (+0x08) is a DEAD SDK slot in KCD (always null) — read
+// the Cry3DEngineBase static C3DEngine* instead (set in the C3DEngine ctor).
+I3DEngine* Get3DEngine();
 
 // -----------------------------------------------
 // Combat action type IDs (runtime-assigned globals)

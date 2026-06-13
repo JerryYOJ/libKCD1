@@ -30,10 +30,7 @@
 
 struct IScriptTable;
 struct IMovementController;
-#ifndef WH_VEC3_DEFINED
-#define WH_VEC3_DEFINED
-struct Vec3 { float x, y, z; };
-#endif
+// Vec3 is the real SDK Cry_Math.h type (included by kcd.h).
 
 namespace wh::animationmodule {
     class C_AnimatedCharacter;
