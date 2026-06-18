@@ -42,7 +42,7 @@
 // size 0x48.
 // ===========================================================================
 
-struct IEntity;   // forward (CryEngine)
+// Offsets::IEntity (canonical CryEngine entity vtable) comes via I_AIPuppet.h; IPhysicalEntity too.
 
 namespace wh::xgenaimodule {
 
@@ -53,8 +53,8 @@ public:
     // Behavior is the verified vtable-body semantics; see I_AIPuppet for slot map.
     ~C_AIPuppet() override;                                   // [0]  sub_1805AFEC8 / sub_1805AFEFC (unregisters)
     uint32_t GetEntityId() override;                          // [1]  sub_180246C4C -> m_pEntity->GetId()
-    IEntity* GetEntity() override;                            // [2]  sub_1806F8C30 -> m_pEntity
-    IEntity* GetEntityConst() override;                       // [3]  sub_1806F8C30 -> m_pEntity (same body)
+    Offsets::IEntity* GetEntity() override;                            // [2]  sub_1806F8C30 -> m_pEntity
+    Offsets::IEntity* GetEntityConst() override;                       // [3]  sub_1806F8C30 -> m_pEntity (same body)
     const wh::framework::WUID* GetWUID() override;            // [4]  sub_1806F9160 -> &m_wuid
     const Vec3* GetWorldPos() override;                      // [5]  sub_18033C404 (cached world pos, +0x08)
     const Vec3* GetWorldDir() override;                      // [6]  sub_1802866A0 (cached forward dir, +0x14)
@@ -72,14 +72,14 @@ public:
     void* EnqueueDirectionSpatialOp(const Vec3& dir) override; // [18] sub_1806BABC8
     void* EnqueueRotationSpatialOp(const Quat& rot) override;  // [19] sub_18042CF64
     void* EnqueueTransformSpatialOp(const QuatT& tm) override; // [20] sub_18040594C (thunk -> sub_180405954)
-    C_Actor* GetActor() override;                             // [21] sub_180705F70 -> m_pActor
+    wh::entitymodule::C_Actor* GetActor() override;          // [21] sub_180705F70 -> m_pActor
     // [22] vf22_IsValid()  : inherited (I_AIPuppet default returns true)
     // [23] vf23_Hook()     : inherited (I_AIPuppet no-op)
 
     // --- fields (verified from ctor sub_1805AFE64) ---
     wh::framework::WUID m_wuid;     // +0x30  AI WUID of the hosted C_IntelligentObject (copy)
-    IEntity*            m_pEntity;  // +0x38  bound CryEngine entity (ctor arg)
-    C_Actor*            m_pActor;   // +0x40  IActorSystem::GetActor(m_pEntity->GetId()); may be null
+    Offsets::IEntity*   m_pEntity;  // +0x38  bound CryEngine entity (ctor arg)
+    wh::entitymodule::C_Actor*            m_pActor;   // +0x40  IActorSystem::GetActor(m_pEntity->GetId()); may be null
 };
 static_assert(sizeof(C_AIPuppet) == 0x48);
 

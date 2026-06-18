@@ -8,7 +8,7 @@
 // -----------------------------------------------
 // RTTI: .?AVC_PerkList@rpgmodule@wh@@
 // vtable: 0x1821b0ea8  (1 virtual method only)
-// Constructor: within S_PerkSubsystem::Ctor_1804A2090 (at subsystem + 0x1E8)
+// Constructor: within S_ProgressionSubsystem::Ctor_1804A2090 (at subsystem + 0x1E8)
 // Destructor:  C_PerkList::Dtor_1804A2C3C  (NON-virtual)
 //
 // Active instance lives at: soul + 0x690  (inside m_activePerks; the one GetActivePerkList returns,

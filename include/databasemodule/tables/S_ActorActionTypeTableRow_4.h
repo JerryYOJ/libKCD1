@@ -20,10 +20,14 @@ struct S_ActorActionTypeTableRow_4 {
     int32_t mn_option_index;  // 0x038
     float animation_duration;  // 0x03C
     int32_t actor_side_id;  // 0x040
-    int16_t init_align0;  // 0x044
-    int16_t init_align1;  // 0x050
-    int16_t init_sec_align0;  // 0x05C
-    int16_t init_sec_align1;  // 0x068
+    int16_t init_align0;  // 0x044  (under-typed: occupies a 12-byte slot, likely a Vec3 — see _pad below)
+    uint8_t _pad_0x046[10];  // 0x046..0x050  trailing bytes of the init_align0 column (unmapped by auto-RE)
+    int16_t init_align1;  // 0x050  (under-typed: occupies a 12-byte slot, likely a Vec3)
+    uint8_t _pad_0x052[10];  // 0x052..0x05C  trailing bytes of the init_align1 column
+    int16_t init_sec_align0;  // 0x05C  (under-typed: occupies a 12-byte slot, likely a Vec3)
+    uint8_t _pad_0x05E[10];  // 0x05E..0x068  trailing bytes of the init_sec_align0 column
+    int16_t init_sec_align1;  // 0x068  (under-typed: occupies a 12-byte slot, likely a Vec3)
+    uint8_t _pad_0x06A[10];  // 0x06A..0x074  trailing bytes of the init_sec_align1 column
     float fade_in;  // 0x074
     // --- virtual columns (offset=-1, not in struct memory) ---
     // bool mounted;

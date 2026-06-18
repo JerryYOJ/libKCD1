@@ -5,7 +5,7 @@
 // ===========================================================================
 // wh::rpgmodule::E_RPGSkill  -  the 33 character skills (skill_id).
 // ===========================================================================
-// Index into S_PerkSubsystem::m_skillLevels (soul+0x540) and S_PerkPointCounters::skillPoints.
+// Index into S_ProgressionSubsystem::m_skillLevels (soul+0x540) and S_PerkPointCounters::skillPoints.
 // Also the value of S_PerkDefinition::skillSelector (with Count(0x21) meaning "none / main level").
 //
 // SOURCE: VERIFIED verbatim from the game table Libs/Tables/rpg/skill.xml (columns skill_id +

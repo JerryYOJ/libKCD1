@@ -4,6 +4,38 @@
 
 #include "CryEngine/CryCommon/BaseTypes.h"   // uint64 etc. needed by CryGUID.h
 
+// ---- boost::container::vector layout probe ----
+// The game's sorted containers (faction maps, info-manager holder index) are
+// boost::container::vector (count-based {ptr, size, capacity}). Verify vcpkg's boost
+// reproduces the shipped layout: 0x18, with m_start@0 / m_size@8 / m_capacity@0x10.
+#include <boost/container/vector.hpp>
+static_assert(sizeof(boost::container::vector<void*>) == 0x18,
+              "boost::container::vector must be {ptr,size,cap} == 0x18 to match the binary");
+
+// ---- The game's hash containers ARE MSVC std::unordered_map/set (0x40 _Hash, verified in IDA +
+//      STL source). The old C_HashMap/C_Set replicas were removed; callers use the real std types.
+//      This guard pins that the toolchain still produces the game's 0x40 layout. ----
+#include <unordered_map>
+#include <unordered_set>
+static_assert(sizeof(std::unordered_map<unsigned long long, void*>) == 0x40, "std::unordered_map must match the game's 0x40 _Hash");
+static_assert(sizeof(std::unordered_set<void*>) == 0x40, "std::unordered_set must match the game's 0x40 _Hash");
+// SDK CryArray.h DynArray (SmallDynStorage). SmallDynStorage has only m_aElems (8 bytes)
+// plus two EMPTY bases (RawStorage<T> + AllocPrefix); MSVC won't collapse multiple empty
+// bases without __declspec(empty_bases), which bloats it to 16. We patched SmallDynStorage
+// with __declspec(empty_bases) in CryArray.h so it matches the retail 8-byte single-pointer
+// layout -- these guards confirm the patch:
+#include "CryEngine/CryCommon/CryArray.h"
+static_assert(sizeof(DynArray<int>)   == 0x8, "patched SmallDynStorage DynArray<int> must be 8 bytes");
+static_assert(sizeof(DynArray<void*>) == 0x8, "patched SmallDynStorage DynArray<void*> must be 8 bytes");
+
+// ---- stateful inline-pool allocator probe: a non-empty allocator (one Pool* member) must
+//      make std::vector 0x20 ({alloc,begin,end,cap}) -- the shape of C_Faction's pool vectors.
+#include <vector>
+#include "framework/C_InlinePoolAllocator.h"
+namespace { struct _AllocProbePool; }
+static_assert(sizeof(std::vector<int, wh::framework::C_InlinePoolAllocator<int, _AllocProbePool>>) == 0x20,
+              "stateful inline-pool allocator must make std::vector 0x20 (alloc ptr + begin/end/cap)");
+
 #include "rpgmodule/C_Soul.h"                // pulls in most rpgmodule headers
 #include "rpgmodule/C_RPGModule.h"
 #include "rpgmodule/C_Effect.h"
@@ -120,7 +152,7 @@
 #include "rpgmodule/buff/C_ConstantSoulBuffInstance.h"
 #include "rpgmodule/buff/C_TimedSoulBuffInstance.h"
 #include "rpgmodule/buff/C_BuffManager.h"
-#include "framework/C_HashMap.h"
+#include "framework/HashPrimitives.h"
 #include "framework/S_TypeFactoryEntry.h"
 #include "rpgmodule/buff/C_BuffFactory.h"
 #include "rpgmodule/buff/C_BuffInitParamsDefault.h"
@@ -138,6 +170,21 @@
 #include "xgenaimodule/C_AIPuppet.h"
 #include "xgenaimodule/S_InformationRecord.h"
 #include "xgenaimodule/C_InformationManager.h"
+#include "xgenaimodule/S_InformationResolution.h"
+#include "rpgmodule/E_CrimeIconLevel.h"
+#include "rpgmodule/I_Location.h"
+#include "rpgmodule/C_RPGLocation.h"
+#include "rpgmodule/I_RPGLocationManager.h"
+#include "rpgmodule/C_RPGLocationManager.h"
+#include "rpgmodule/buff/C_TwoStateSoulBuffInstance.h"
+#include "rpgmodule/buff/C_WantedBuff.h"
+#include "rpgmodule/E_ReputationChangeTarget.h"
+#include "rpgmodule/S_AngrinessContribution.h"
+#include "rpgmodule/S_TimedFactionEvent.h"
+#include "rpgmodule/S_ReputationChangeEntry.h"
+#include "rpgmodule/S_ReputationChangeDBData.h"
+#include "rpgmodule/S_FactionDef.h"
+#include "rpgmodule/C_Faction.h"
 
 // ---- RTTI / kcd_cast smoke test ----
 #include "Offsets/RTTI.h"

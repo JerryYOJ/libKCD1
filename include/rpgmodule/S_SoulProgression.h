@@ -2,18 +2,18 @@
 
 #include <cstdint>
 #include <vector>
-#include "S_PerkSubsystem.h"
+#include "S_ProgressionSubsystem.h"
 
 // -----------------------------------------------
 // Perk Management Container
 // -----------------------------------------------
 // No RTTI name found (inlined structure)
-// Constructor: S_PerkManagement::Ctor_1804A1F54
+// Constructor: S_SoulProgression::Ctor_1804A1F54
 // Lives at: soul + 0x3D0
 
 namespace wh::rpgmodule {
 
-// Polymorphic dialog/interaction tail embedded in S_PerkManagement at +0x5E0.
+// Polymorphic dialog/interaction tail embedded in S_SoulProgression at +0x5E0.
 class S_DialogParams {
 public:
     inline static constexpr auto RTTI = Offsets::RTTI_S_DialogParams;
@@ -32,7 +32,7 @@ public:
 };
 static_assert(sizeof(S_DialogParams) == 0x90);
 
-struct S_PerkManagement {
+struct S_SoulProgression {
     // +0x000 to +0x0BF: set externally (not by this constructor)
     // Contains parent-soul chain pointer at +0x0B0 (soul+0x480)
     char                _pad000[0xB0];          // +0x000
@@ -52,7 +52,7 @@ struct S_PerkManagement {
     // It is SEEDED from m_basePerks (see below) at create/reset/clone, and is the only
     // subsystem that is serialized (perkMgmt (de)serialize dispatcher sub_180AA4A90
     // case 0x92A targets perkMgmt+0xD8 only).
-    S_PerkSubsystem     m_activeStats;          // +0x0D8  (size 0x260)
+    S_ProgressionSubsystem     m_activeStats;          // +0x0D8  (size 0x260)
     // Access: soul+0x4A8 = soul+0x3D0+0xD8
     //   stat levels:  soul+0x4B4 = m_activeStats.m_statLevels[0]
     //   skill levels: soul+0x540 = m_activeStats.m_skillLevels[0]
@@ -77,12 +77,12 @@ struct S_PerkManagement {
     // Its perk-point counter is not allocated via the enable helper — the no-op
     // sub_1811F79A8(soul+0x750, 0) — its C_PerkList is populated directly during the rebuild.
     // (Was previously mislabeled "m_skillPerks".)
-    S_PerkSubsystem     m_basePerks;            // +0x380  (size 0x260)
+    S_ProgressionSubsystem     m_basePerks;            // +0x380  (size 0x260)
     // Access: soul+0x750 = soul+0x3D0+0x380
 
     S_DialogParams      m_dialogParams;         // +0x5E0  dialog/interaction state
 };
-static_assert(sizeof(S_PerkManagement) == 0x670);
+static_assert(sizeof(S_SoulProgression) == 0x670);
 // Flag at +0x5C8 relative: *(byte*)(this+0x5C8) |= 2  (m_basePerks' C_PerkList flags, set at ctor)
 
 }  // namespace wh::rpgmodule

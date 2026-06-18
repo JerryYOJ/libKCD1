@@ -33,12 +33,11 @@
 
 // Vec3 / Quat / QuatT are the real SDK Cry_Math.h types (included by kcd.h).
 
-struct IEntity;          // CryEngine entity interface (forward; bound at C_AIPuppet+0x38)
-struct IPhysicalEntity;  // CryEngine physics interface (forward; returned by slot 16)
+namespace Offsets { struct IEntity; }   // canonical CryEngine entity vtable (Offsets/vtables/IEntity.h); bound at C_AIPuppet+0x38
+struct IPhysicalEntity;  // CryEngine physics interface (forward; returned by slot 16) [no Offsets vtable RE'd yet]
+namespace wh { namespace entitymodule { class C_Actor; } }  // backing Warhorse actor (slot 21 GetActor); fwd-decl avoids the C_Actor.h <-> puppet include cycle
 
 namespace wh::xgenaimodule {
-
-class C_Actor;    // Warhorse actor (IActorSystem::GetActor result; C_AIPuppet+0x40)
 
 // 24-slot abstract interface. Names that are not directly evidenced are flagged.
 class I_AIPuppet {
@@ -51,10 +50,10 @@ public:
     virtual uint32_t GetEntityId() = 0;
 
     // [2]  +0x10  [V] the bound engine entity  (C_AIPuppet -> returns m_pEntity).
-    virtual IEntity* GetEntity() = 0;
+    virtual Offsets::IEntity* GetEntity() = 0;
 
     // [3]  +0x18  [L] const overload of GetEntity (folded onto the same body -> m_pEntity).
-    virtual IEntity* GetEntityConst() = 0;
+    virtual Offsets::IEntity* GetEntityConst() = 0;
 
     // [4]  +0x20  [V] this puppet's WUID handle  (C_AIPuppet -> &m_wuid).
     virtual const wh::framework::WUID* GetWUID() = 0;
@@ -140,7 +139,7 @@ public:
 
     // [21] +0xA8  [V] the backing Warhorse actor. I_AIPuppet default returns null;
     //             C_AIPuppet returns m_pActor.
-    virtual C_Actor* GetActor();
+    virtual wh::entitymodule::C_Actor* GetActor();
 
     // [22] +0xB0  [V] capability/validity predicate; default returns true.
     virtual bool vf22_IsValid();

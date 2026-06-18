@@ -17,10 +17,10 @@ target_include_directories(FastTravelTweaks PRIVATE
 target_link_libraries(FastTravelTweaks PRIVATE kcd_re spdlog::spdlog)
 
 # ---- Auto-deploy to the game's mod folder ----
-set(PLUGIN_DEPLOY "C:/Program Files (x86)/Steam/steamapps/common/KingdomComeDeliverance/mods/FastTravelTweaks/KCSE/Plugins")
-add_custom_command(TARGET FastTravelTweaks POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E make_directory "${PLUGIN_DEPLOY}"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:FastTravelTweaks>" "${PLUGIN_DEPLOY}/"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_PDB_FILE:FastTravelTweaks>" "${PLUGIN_DEPLOY}/"
-    COMMENT "Deploying FastTravelTweaks.dll + .pdb to ${PLUGIN_DEPLOY}"
-)
+#set(PLUGIN_DEPLOY "C:/Program Files (x86)/Steam/steamapps/common/KingdomComeDeliverance/mods/FastTravelTweaks/KCSE/Plugins")
+#add_custom_command(TARGET FastTravelTweaks POST_BUILD
+#    COMMAND ${CMAKE_COMMAND} -E make_directory "${PLUGIN_DEPLOY}"
+#    COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:FastTravelTweaks>" "${PLUGIN_DEPLOY}/"
+#    COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_PDB_FILE:FastTravelTweaks>" "${PLUGIN_DEPLOY}/"
+#    COMMENT "Deploying FastTravelTweaks.dll + .pdb to ${PLUGIN_DEPLOY}"
+#)

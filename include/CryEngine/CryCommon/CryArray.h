@@ -662,7 +662,9 @@ namespace NArray
 	};
 
 	template<class T, class I = int, class A = NAlloc::StandardAlloc>
-	struct SmallDynStorage: RawStorage<T>, NAlloc::AllocPrefix<A, sizeof(StorageHeader<T,I>)>
+	// KCD-RE patch: __declspec(empty_bases) so MSVC collapses the two empty bases
+	// (RawStorage + AllocPrefix) and this matches the retail single-pointer (8-byte) layout.
+	struct __declspec(empty_bases) SmallDynStorage: RawStorage<T>, NAlloc::AllocPrefix<A, sizeof(StorageHeader<T,I>)>
 	{
 		typedef SmallDynStorage<T,I,A> self_type;
 		typedef StorageHeader<T,I> Header;

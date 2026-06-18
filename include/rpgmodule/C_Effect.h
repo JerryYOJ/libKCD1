@@ -94,6 +94,21 @@ public:
 };
 static_assert(sizeof(C_LearnPerkEffect) == 0x30);
 
+// -----------------------------------------------
+// C_SoulReputationEffect
+// -----------------------------------------------
+// RTTI: .?AVC_SoulReputationEffect@rpgmodule@wh@@ (vftable written by the factory)
+// Factory: sub_181184324 (alloc 0x20; sets base +0x08=cause, +0x10=target soul WUID, then the two below).
+// Apply:   sub_18118F878 -> sub_1811F3224: writes the target soul's opinion-of-player (soul+0x6F8)
+//          and/or routes a faction reputation change, per the reputation_change row's flags byte.
+// Inherits: C_SoulEffect -> C_Effect (base m_entityId @+0x10 = the target soul's WUID).
+class C_SoulReputationEffect : public C_SoulEffect {
+public:
+    int32_t     m_repChangeId;          // +0x18  reputation_change row id (table qword_1835AA3B8, lookup sub_18117EAD8)
+    float       m_weight;               // +0x1C  init 1.0f (scales the applied delta)
+};
+static_assert(sizeof(C_SoulReputationEffect) == 0x20);
+
 }  // namespace wh::rpgmodule
 
 // -----------------------------------------------

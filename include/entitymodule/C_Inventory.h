@@ -74,12 +74,18 @@ public:
     std::unordered_set<wh::framework::WUID> m_itemIds;  // +0x60
 
     uint8_t              m_isProxy;        // +0xA0  delegating/virtual inventory flag (set from create arg a6)
-    uint8_t              _padA1[3];        // +0xA1
+    uint8_t              _padA1[2];        // +0xA1
+    uint8_t              m_hasPreset;      // +0xA3  1 = inventory was populated from a preset (set by sub_18030F340 via sub_18030F678)
     uint8_t              m_flag2;          // +0xA4  cleared on create (init sub_18030DF04 sets 1, create clears to 0)
     uint8_t              _padA5[3];        // +0xA5
-    uint64_t             m_unkA8;          // +0xA8  (=0 in ctor) [role UNVERIFIED]
-    uint64_t             m_unkB0[2];       // +0xB0  16-byte sentinel (init = xmmword_1834F6360) [role UNVERIFIED — looks like a GUID/WUID-pair]
+    int64_t              m_lastRestockTime;// +0xA8  world time (ms) of last restock or heartbeat (sub_181074410 writes; 0 = never)
+    CryGUID              m_inventoryDefId; // +0xB0  "inventory" table row GUID used to populate this inventory (sentinel xmmword_1834F6360 = none)
     uint64_t             m_unkC0;          // +0xC0  (=0 in ctor) [role UNVERIFIED]
+
+    // Zero the restock timer so the next CanUseInventory check triggers a full
+    // wipe-and-repopulate from the inventory's preset. Only works if the inventory
+    // HAS a preset (m_hasPreset && m_inventoryDefId != null sentinel).
+    void InvalidateRestockTimer() { m_lastRestockTime = 0; }
 };
 // SIZE VERIFIED: the C_Inventory pool strides entries by 0xC8 (sub_18030E0C0:
 // base + 0xC8*index); the member-initializer sub_18030DF04 writes fields out to +0xC0.

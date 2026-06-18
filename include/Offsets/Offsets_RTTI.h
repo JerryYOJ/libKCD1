@@ -12,6 +12,18 @@
 
 namespace Offsets {
 
+    // --- Manually added (RE'd this session; not yet in analysis/rtti_map.json -- fold in on next regen).
+    //     Brain-variable subsystem + AI brain. TD RVAs VERIFIED (type_info vtable 0x18227F750 @TD+0,
+    //     mangled name @TD+0x10).
+    inline constexpr std::uintptr_t RTTI_C_Variable                     = 0x2B37F08;  // .?AVC_Variable@xgenaimodule@wh@@
+    inline constexpr std::uintptr_t RTTI_C_SingleVariable               = 0x2B37F78;  // .?AVC_SingleVariable@xgenaimodule@wh@@
+    inline constexpr std::uintptr_t RTTI_C_AssociativeArrayTreeVariable = 0x2B37EC0;  // .?AVC_AssociativeArrayTreeVariable@xgenaimodule@wh@@
+    inline constexpr std::uintptr_t RTTI_C_IndexedArrayTreeVariable     = 0x2B37E70;  // .?AVC_IndexedArrayTreeVariable@xgenaimodule@wh@@
+    inline constexpr std::uintptr_t RTTI_I_VariableIndex               = 0x2B16288;  // .?AVI_VariableIndex@xgenaimodule@wh@@
+    inline constexpr std::uintptr_t RTTI_C_VariableIndex               = 0x2B16250;  // .?AVC_VariableIndex@xgenaimodule@wh@@
+    inline constexpr std::uintptr_t RTTI_I_Intellect                  = 0x2B162C0;  // .?AVI_Intellect@xgenaimodule@wh@@
+    inline constexpr std::uintptr_t RTTI_C_AIBrain                    = 0x2B162F8;  // .?AVC_AIBrain@xgenaimodule@wh@@
+
     inline constexpr std::uintptr_t RTTI_C_AIObject                                           = 0x2B179C0;  // .?AVC_AIObject@xgenaimodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_AIPuppet                                           = 0x2B367F8;  // .?AVC_AIPuppet@xgenaimodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_AbortAllAnimations                                 = 0x2A8CA90;  // .?AVC_AbortAllAnimations@BehaviorTree@xgenaimodule@wh@@

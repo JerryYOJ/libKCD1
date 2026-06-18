@@ -1,6 +1,5 @@
 #pragma once
 #include <cstdint>
-#include "../../framework/C_HashMap.h"
 #include "../../framework/S_TypeFactoryEntry.h"
 
 // -----------------------------------------------

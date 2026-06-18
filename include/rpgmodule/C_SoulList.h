@@ -1,6 +1,8 @@
 #pragma once
 
 #include <cstdint>
+#include <array>
+#include <vector>
 #include "../framework/C_Signal.h"
 #include "../databasemodule/I_DatabaseListener.h"
 #include "../framework/I_WUIDMappingProvider.h"
@@ -53,14 +55,30 @@ struct S_WUIDSlot {
 static_assert(sizeof(S_WUIDSlot) == 0x10);
 
 // -----------------------------------------------
-// S_SlotMapHeader — header before the slot array
+// S_SoulPoolEntry — one block in the soul-allocation pool (std::vector element, 0x10 bytes).
 // -----------------------------------------------
-// Located at C_SoulList + 0x48. Passed as first arg to sub_180284B04.
-// Slots begin at header + 0x28 (= C_SoulList + 0x70).
-struct S_SlotMapHeader {
-    uint64_t    _fields[5];             // +0x00  (capacity, count, free list, etc. — zeroed in ctor)
-    // S_WUIDSlot slots[0x10000] follows immediately at +0x28
+// The insert (sub_1806D7764) reuses a pool entry when *(uint32*)(entry+0xC) != 0 and turns it
+// into soul storage via sub_1806D77DC. Element internals not fully RE'd. [INFERRED]
+struct S_SoulPoolEntry {
+    uint64_t    _data0;                 // +0x00  soul-storage block descriptor (layout not RE'd)
+    uint32_t    _data8;                 // +0x08
+    uint32_t    m_reuseFlag;            // +0x0C  != 0 => entry available for reuse (insert scan key)
 };
+static_assert(sizeof(S_SoulPoolEntry) == 0x10);
+
+// -----------------------------------------------
+// S_SlotMapHeader — allocator header before the slot array (C_SoulList + 0x48, size 0x28).
+// -----------------------------------------------
+// Passed as first arg to sub_180284B04. The WUID->soul slot array follows at header + 0x28
+// (= C_SoulList + 0x70). The growable free pool is a real std::vector: its grow helper
+// sub_180E43E10 is a std::vector reallocator (std::_Xlength_error("vector<T> too long"),
+// geometric growth, 0x10-byte elements).
+struct S_SlotMapHeader {
+    S_SoulPoolEntry*             m_freeCursor;   // +0x00  last-served free entry (insert fast path)
+    S_SoulPoolEntry*             m_recentFree;   // +0x08  cleared when consumed [INFERRED]
+    std::vector<S_SoulPoolEntry> m_freePool;     // +0x10  soul-allocation pool {begin,end,cap}
+};
+static_assert(sizeof(S_SlotMapHeader) == 0x28);
 
 // -----------------------------------------------
 // C_SoulList
@@ -88,7 +106,7 @@ public:
 
     // Inline slot map — generation-counted entity lookup
     S_SlotMapHeader m_slotMapHeader;    // +0x48  (0x28 bytes header)
-    S_WUIDSlot      m_slots[0x10000];   // +0x70  (0x100000 bytes — 65536 × 0x10)
+    std::array<S_WUIDSlot, 0x10000> m_slots;   // +0x70  (0x100000 bytes — 65536 × 0x10)
     // End of slot array: +0x100070
     // +0x100068 is slots[0xFFFF].pSoul, not a post-slot field.
 
@@ -96,7 +114,7 @@ public:
     uint64_t    m_unk100070;            // +0x100070
     uint64_t    m_unk100078;            // +0x100078
     uint64_t    m_unk100080;            // +0x100080
-    uint32_t    m_unk100088;            // +0x100088  (zeroed)
+    uint32_t    m_liveSoulCount;        // +0x100088  live soul count (++ on insert sub_1806D7764)
     uint32_t    _pad10008C;             // +0x10008C
     float       m_unk100090;            // +0x100090  (init 1.0f, then sub_18071265C scales)
     uint32_t    _pad100094;             // +0x100094
@@ -112,6 +130,10 @@ public:
     uint64_t    m_unk1000D8;            // +0x1000D8
     uint64_t    m_unk1000E0;            // +0x1000E0
     uint64_t    m_unk1000E8;            // +0x1000E8
+
+    // --- accessors (impl in C_Soul.cpp) ---
+    static C_SoulList* GetInstance();                                      // *(*(base+kRPGModuleOffset)+0x548)
+    C_Soul*            LookupByWUID(const wh::framework::WUID& wuid);      // sub_180284B04(&m_slotMapHeader, &wuid)
 };
 static_assert(sizeof(C_SoulList) == 0x1000F0);
 

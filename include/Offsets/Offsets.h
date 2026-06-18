@@ -64,6 +64,47 @@ inline static constexpr uintptr_t kUIMapForceStartFastTravelOffset  = 0x112C494;
 inline static constexpr uintptr_t kGameTimerIsExpiredOffset         = 0x652DB4; // wh::framework::S_GameTimer::IsExpired (sub_180652DB4)
 inline static constexpr uintptr_t kGameTimerArmOffset               = 0x652DEC; // wh::framework::S_GameTimer::Arm(ms)  (sub_180652DEC)
 
+// C_InformationManager (crime/knowledge store; singleton + the crime-erase chain). RVAs = address - 0x180000000.
+inline static constexpr uintptr_t kInformationManagerOffset         = 0x3501790; // C_InformationManager* singleton (qword_183501790)
+// (GetHolderRecords needs no offset -- m_holders is a stock std::unordered_map, queried natively.)
+inline static constexpr uintptr_t kInfoFindInformationIdOffset      = 0x15D3FEC; // FindInformationId (sub_1815D3FEC; arg = &m_records @+0x88)
+inline static constexpr uintptr_t kInfoDestroyByIdOffset            = 0x15DB7C0; // DestroyInformationById (sub_1815DB7C0)
+inline static constexpr uintptr_t kInfoRemoveFromHolderOffset       = 0x15DB81C; // RemoveInformationFromHolder (sub_1815DB81C)
+inline static constexpr uintptr_t kInfoRemoveHolderOffset           = 0x513938;  // RemoveHolder (sub_180513938)
+
+// Dynamic-info value store (C_DynamicInformationStore) -- backing for the *DynamicInformationValue BT nodes.
+// Read this GLOBAL pointer DIRECTLY: it is null until the first dynamic value is touched in a session.
+// Do NOT call the lazy creator sub_1814CEBBC -- it allocates the store (malloc + mutex) as a side effect.
+inline static constexpr uintptr_t kDynInfoStoreOffset              = 0x3501560; // C_DynamicInformationStore* (qword_183501560; sibling global to the manager)
+
+// C_FactionManager (faction reputation store). The manager is a Meyers-singleton OBJECT
+// embedded at qword_1836E39F0; this accessor returns &it (and lazy-inits on first call).
+inline static constexpr uintptr_t kFactionManagerAccessorOffset     = 0x22877C;  // sub_18022877C -> &C_FactionManager
+
+// NPC reputation / soul access (RVAs = absolute address - 0x180000000).
+inline static constexpr uintptr_t kSoulGetPlayerOpinionOffset       = 0x2287D0;  // sub_1802287D0: read soul opinion-of-player (root+0x6F8, master-walk)
+inline static constexpr uintptr_t kSoulApplyRepDeltaOffset          = 0x11F3224; // sub_1811F3224: write opinion (soul+0x6F8) + optional faction-change route
+inline static constexpr uintptr_t kSoulRepEffectApplyOffset         = 0x118F878; // sub_18118F878: C_SoulReputationEffect apply
+inline static constexpr uintptr_t kSoulGetFactionIdOffset           = 0x64D750;  // sub_18064D750: faction id from soul (root+0x294)
+inline static constexpr uintptr_t kModifyPlayerReputationOffset     = 0x11C6950; // sub_1811C6950: Lua Soul:ModifyPlayerReputation(repChangeName, propagate)
+inline static constexpr uintptr_t kSoulResetInventoryOffset         = 0x30E278;  // sub_18030E278: C_Soul inventory reset (clear + repopulate from preset; args: soul, force, resetEquip, presetMul)
+inline static constexpr uintptr_t kSoulListLookupByWuidOffset       = 0x284B04;  // sub_180284B04: C_SoulList::LookupByWUID(&slotmap@+0x48, &wuid)
+inline static constexpr uintptr_t kGetSoulByEntityIdOffset          = 0x33B518;  // sub_18033B518: entityId -> C_Soul* (0 if not an actor; doubles as NPC test)
+
+// AI-registry accessors (impl: AIRegistries.cpp). EntityToAIMap is a real std::unordered_map
+// (indexed natively); the C_IntelligentObjectManager map is a custom T_WuidHashMap (uses engine Find).
+inline static constexpr uintptr_t kEntityGuidWuidMapPtr             = 0x378D6E8; // qword_18378D6E8: ptr to the C_EntityToAIMap (std::unordered_map)
+inline static constexpr uintptr_t kEntityGuidToWuidOffset           = 0x23BDCC;  // sub_18023BDCC(map, guid-by-value) -> WUID* (null sentinel on miss) [FindWuidByEntity]
+inline static constexpr uintptr_t kIntelligentObjMgrPtr             = 0x3799950; // qword_183799950: ptr to the C_IntelligentObjectManager singleton
+inline static constexpr uintptr_t kWuidToAIObjectOffset             = 0x2B620C;  // sub_1802B620C(mgr, &wuid) -> C_IntelligentObject* (0 if absent) [C_IntelligentObjectManager::Find]
+
+// Game CRT allocator thunks (WHGame.dll, all jmp -> __imp_*). CrySDKStubs' CryModule*
+// allocator forwards here so plugin allocations live on the GAME's heap (matched malloc/free).
+inline static constexpr uintptr_t kGameMallocOffset                 = 0x28D0A8;  // malloc  (thunk -> __imp_malloc)
+inline static constexpr uintptr_t kGameFreeOffset                   = 0xA2CB19;  // free    (thunk -> __imp_free)
+inline static constexpr uintptr_t kGameCallocOffset                 = 0xA2CB13;  // calloc  (thunk -> __imp_calloc)
+inline static constexpr uintptr_t kGameReallocOffset                = 0xA2CB31;  // realloc (thunk -> __imp_realloc)
+
 // CryAction has no RE'd header — getter stays here
 IGameFramework* GetCCryAction();
 

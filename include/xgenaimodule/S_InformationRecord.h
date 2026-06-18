@@ -20,9 +20,10 @@
 // The {perceivedEntity, label} composite is the dedup key (comparison
 // sub_1815CDE7C: match if wuid==wuid AND label==label).
 //
-// Hash for the composite key (used in m_byLabelWuid set):
+// Hash for the composite key (used in the m_records std::unordered_set):
 //   boost::hash_combine(fnv1_32(label.c_str()), fnv1a_64(&perceivedEntity, 8))
-//   (see framework/C_HashMap.h for the hash primitives).
+//   (see framework/HashPrimitives.h for the hash primitives; functors S_InformationHash/
+//    S_InformationEq in C_InformationManager.h).
 // ===========================================================================
 
 namespace wh::xgenaimodule {
@@ -30,12 +31,12 @@ namespace wh::xgenaimodule {
 struct S_InformationRecord {
     uint32_t              informationId;    // +0x00  unique id (assigned by C_InformationManager::m_nextId)
     int32_t               version;          // +0x04  version counter (incremented on update)
-    wh::framework::WUID   perceivedEntity;  // +0x08  the entity this info is ABOUT (perceived target)
+    wh::framework::WUID   perceivedEntity;  // +0x08  victim(can be object) or player if victimless like lockpicking
     CryStringT<char>      label;            // +0x10  information label string (e.g. crime type / event name)
     float                 posX;             // +0x18  world position where the event was perceived
     float                 posY;             // +0x1C
     float                 posZ;             // +0x20
-    uint8_t               _pad24[4];        // +0x24  (align to 0x28)
+    uint32_t              _pad24;           // +0x24  trailing padding to 0x28 (NOT a field).
 };
 static_assert(sizeof(S_InformationRecord) == 0x28);
 

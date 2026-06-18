@@ -1,8 +1,9 @@
 #pragma once
 
 #include <cstdint>
+#include <unordered_map>
 #include "C_LinkableObject.h"
-#include "../framework/C_HashMap.h"
+#include "../framework/HashPrimitives.h"   // wh::shared::S_DefaultHash<WUID>
 #include "../framework/WUID.h"
 
 // ===========================================================================
@@ -29,7 +30,8 @@ public:
     void* m_interwebNode[2];                 // +0xA0  C_NPC2NPCInterweb registration node (sub_1802787DC) [size LIKELY 0x10]
     void* m_owner;                           // +0xB0  owner/context (ctor arg)
     uint8_t m_delegate[0x20];                // +0xB8  std::function-style delegate pair (sub_1803A95AC / sub_180273D10) [UNVERIFIED]
-    wh::shared::C_HashMap<wh::framework::WUID, void*> m_messageMap;  // +0xD8  (0x40) message/handler map [key/value UNVERIFIED]
+    std::unordered_map<wh::framework::WUID, void*, wh::shared::S_DefaultHash<wh::framework::WUID>>
+        m_messageMap;                        // +0xD8  (0x40) message/handler map [key/value UNVERIFIED]
 };
 static_assert(sizeof(C_MessageCapableObject) == 0x118);
 

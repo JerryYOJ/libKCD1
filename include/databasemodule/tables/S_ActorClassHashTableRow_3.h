@@ -16,8 +16,10 @@ struct S_ActorClassHashTableRow_3 {
     bool looped;  // 0x028
     bool aligned;  // 0x029
     uint8_t _pad_0x02A[2];
-    int16_t align_tm_pos;  // 0x02C
-    int16_t align_tm_rotv;  // 0x038
+    int16_t align_tm_pos;  // 0x02C  (under-typed: occupies a 12-byte slot, likely a Vec3 — see _pad below)
+    uint8_t _pad_0x02E[10];  // 0x02E..0x038  trailing bytes of the align_tm_pos column (unmapped by auto-RE)
+    int16_t align_tm_rotv;  // 0x038  (under-typed: occupies a 12-byte slot, likely a Vec3)
+    uint8_t _pad_0x03A[10];  // 0x03A..0x044  trailing bytes of the align_tm_rotv column
     float align_tm_rotw;  // 0x044
     uint8_t align_secondary[28];  // 0x048
     float relative_movement_y;  // 0x064

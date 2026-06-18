@@ -5,7 +5,7 @@
 // ===========================================================================
 // wh::rpgmodule::E_RPGStat  -  the 4 main character stats (stat_id).
 // ===========================================================================
-// Index into S_PerkSubsystem::m_statLevels (soul+0x4B4) and S_PerkPointCounters::statPoints.
+// Index into S_ProgressionSubsystem::m_statLevels (soul+0x4B4) and S_PerkPointCounters::statPoints.
 // Accessed as *(soul + 8*stat_id + 0x4B4) (C_StatXPEffect::Apply) and base value via
 // GetModifiedStatValue -> sub_180229950.
 //

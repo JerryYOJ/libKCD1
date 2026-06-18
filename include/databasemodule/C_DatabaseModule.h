@@ -1,41 +1,10 @@
 #pragma once
 
 #include <vector>
+#include "../framework/C_BaseModule.h"   // canonical wh::framework::C_BaseModule (0x88, includes I_ModuleMessageListener @ +0x78)
 #include "I_DatabaseModule.h"
 #include "I_TableSerializer.h"
-#include "C_ObjectDatabaseManager.h"
-
-namespace wh::framework {
-
-// I_ModuleMessageListener — interface for receiving module lifecycle messages.
-// vtable @ 0x1822c1d98
-// Size as sub-object: 0x10 bytes (vtable + padding)
-class I_ModuleMessageListener {
-public:
-    inline static constexpr auto RTTI = Offsets::RTTI_I_ModuleMessageListener;
-    virtual ~I_ModuleMessageListener() = default;   // [0]
-    virtual void OnModuleMessage() = 0;             // [1] pure
-    virtual void unk_02() = 0;                      // [2]
-    virtual I_ModuleMessageListener* unk_03() = 0;  // [3] returns this
-    virtual bool unk_04() = 0;                      // [4] returns 1
-    virtual void unk_05() = 0;                      // [5] pure
-};
-
-// C_BaseModule — base class for all Warhorse engine modules.
-// Size: 0x78 bytes (from C_DatabaseModule constructor: base occupies +0x00 to +0x77)
-// vtable @ 0x1829ecbd0
-// Constructor: 0x180F364AC (called first in C_DatabaseModule ctor)
-class C_BaseModule {
-public:
-    inline static constexpr auto RTTI = Offsets::RTTI_C_BaseModule;
-    virtual ~C_BaseModule() = default;
-    // 0x78 bytes total — lifecycle management, module name, framework registration
-    // Full member layout requires RE of sub_180F364AC
-    uint8_t _baseData[0x70];    // +0x08 (0x78 - 8 for vtable)
-};
-static_assert(sizeof(C_BaseModule) == 0x78, "C_BaseModule must be 0x78");
-
-}  // namespace wh::framework
+#include "C_ObjectDatabaseManager.h"     // C_DynamicEnumManager (0x40)
 
 namespace wh::databasemodule {
 
@@ -49,10 +18,14 @@ struct C_ScriptBindDatabase;
 // Destructor:  0x180F36914
 // Global singleton stored at: 0x18378D5E0
 //
-// Multiple inheritance (3 vtable pointers):
-//   +0x00: C_BaseModule vtable           (@6B@_0 = 0x1826a46a0)
-//   +0x78: I_ModuleMessageListener vtable (@6B@  = 0x1826a45a8)
+// Multiple inheritance (3 vtable pointers in the binary):
+//   +0x00: C_BaseModule vtable            (@6B@_0 = 0x1826a46a0)
+//   +0x78: I_ModuleMessageListener vtable (@6B@   = 0x1826a45a8)  <- C_BaseModule's own 2nd base
 //   +0x88: I_DatabaseModule vtable        (@6B@_1 = 0x1826a45c0)
+//
+// The +0x78 I_ModuleMessageListener sub-object is supplied by C_BaseModule itself
+// (C_BaseModule : C_Graph, I_ModuleMessageListener; sizeof 0x88). So C_DatabaseModule
+// is just `C_BaseModule, I_DatabaseModule` — two declared bases, three vtables.
 //
 // ScriptBindDatabase stores (module + 0x88) as its I_DatabaseModule pointer.
 // All I_DatabaseModule vtable offsets are relative to +0x88:
@@ -68,21 +41,18 @@ struct C_ScriptBindDatabase;
 //   [14] FindDatabaseByName(name) -> iterates m_databases
 //   [19] GetEnumValueName(enum, id)
 //
-// Size: 0x160 bytes
-
-class C_DatabaseModule {
+// Size: 0x160 bytes. Abstract (inherited pure virtuals are not overridden here);
+// this header models layout only, the type is never instantiated.
+class C_DatabaseModule : public wh::framework::C_BaseModule,
+                         public I_DatabaseModule {
 public:
     inline static constexpr auto RTTI = Offsets::RTTI_C_DatabaseModule;
-    // +0x00: first base class
-    wh::framework::C_BaseModule m_baseModule;                   // +0x00  (0x78 bytes)
+    // bases:
+    //   wh::framework::C_BaseModule  @ +0x00  (0x88: primary vtable @+0x00,
+    //                                          I_ModuleMessageListener vtable @+0x78, m_state @+0x80)
+    //   I_DatabaseModule             @ +0x88  (vtable only)
+    // first own member begins at +0x90.
 
-    // +0x78: second base class
-    wh::framework::I_ModuleMessageListener m_msgListener;       // +0x78  (0x10 bytes: vtable + pad)
-
-    // +0x88: third base class — THIS is what external code uses
-    I_DatabaseModule m_iDatabaseModule;                         // +0x88  (vtable only, data follows)
-
-    // --- members accessed relative to I_DatabaseModule sub-object (this+0x88) ---
     void* _unk90;                                               // +0x90  (0 in ctor)
     void* _unk98;                                               // +0x98  (0 in ctor)
     void* _unkA0;                                               // +0xA0  (0 in ctor)
@@ -99,8 +69,8 @@ public:
 
     std::vector<I_TableSerializer*> m_serializers;              // +0xE8  XML + TBL serializers
 
-    void* _unk100;                                              // +0x100 (0 in ctor)
-    void* _unk108;                                              // +0x108 (0 in ctor)
+    void* _unk100;                                             // +0x100 (0 in ctor)
+    void* _unk108;                                             // +0x108 (0 in ctor)
 
     // +0x110: embedded, owns all dynamic enum definitions
     C_DynamicEnumManager m_dynamicEnumManager;                  // +0x110 (0x40 bytes)

@@ -14,8 +14,9 @@
 #include "I_Soul.h"
 #include "I_CombatSoul.h"
 #include "C_SoulPropertyNotifier.h"
-#include "S_PerkManagement.h"
+#include "S_SoulProgression.h"
 #include "S_SoulArchetype.h"
+#include "E_CrimeSystemRole.h"
 #include "buff/S_ModifierNode.h"
 
 // -----------------------------------------------
@@ -23,12 +24,15 @@
 // -----------------------------------------------
 namespace Offsets { struct IEntity; }
 namespace wh { namespace entitymodule { class C_Inventory; class C_EquipmentManager; } }
+namespace wh { namespace xgenaimodule { class C_IntelligentObject; } }   // crime/info holder (resolved via entity->WUID->IO)
 
 namespace wh::rpgmodule {
 
 class C_BuffInstanceBase;   // owned (move-only) combat buff instance, C_CombatSoul+0x70
 class C_DogSoulComponent;   // lazily-created dog-soul extension, C_Soul+0x160 (partial RE; size 0x18)
-struct S_SocialClass;       // POD row from rpg/social_class (C_SocialClassDatabase), C_Soul+0xBD0
+struct S_SocialClass;       // runtime row object from C_SocialClassDatabase (rpg/social_class), C_Soul+0xBD0 (full def in S_SocialClass.h)
+struct S_RoleRow;           // 0x38 RPG role row (C_RPGSystem+0x588), C_Soul+0xBD8 [row layout not RE'd; named like its sibling row pointers]
+struct C_Faction;           // faction record (C_FactionManager::GetFactionById), C_Soul+0xBE0
 
 // ===========================================================================
 // C_Soul -- the RPG "soul": stats, skills, perks, buffs, faction, inventory,
@@ -246,14 +250,19 @@ public:
     CryStringT<char>        m_str3C8;                // +0x3C8 (default empty); purpose UNVERIFIED
 
     // ---------------------------------------------------------- perk management
-    S_PerkManagement        m_perkMgmt;              // +0x3D0  (size 0x670)
+    S_SoulProgression        m_perkMgmt;              // +0x3D0  (size 0x670)
     // Within m_perkMgmt (soul-relative offsets):
     //   +0x480 = parent-soul pointer (compound entities; walked by GetFactionIDInternal)
-    //   +0x4A8 = m_activePerks (S_PerkSubsystem) — the LIVE subsystem; holds BOTH
+    //   +0x4A8 = m_activePerks (S_ProgressionSubsystem) — the LIVE subsystem; holds BOTH
     //            stat levels (+0x4B4) AND skill levels (+0x540)
     //   +0x690 = m_activePerks.m_perkList (C_PerkList; returned by GetActivePerkList)
     //   +0x6E8 = m_activePerks' live S_PerkPointCounters* (stat + skill + main perk points)
-    //   +0x750 = m_basePerks (S_PerkSubsystem) — the archetype-derived BASELINE: rebuilt from
+    //   +0x6F8 = m_activeStats.m_playerOpinion (S_ProgressionSubsystem+0x250): per-NPC opinion-of-the-PLAYER
+    //            float, domain [-1,+1]. Genuinely the active perk-subsystem's last dword (copied
+    //            base->active by sub_1805A3F34, serialized with active perks). Read sub_1802287D0
+    //            (master-walk +0x480); written sub_1811F3224; player-npc term of GetRelationship
+    //            sub_180228414. [VERIFIED -- was the perk side's unnamed m_unkDword250]
+    //   +0x750 = m_basePerks (S_ProgressionSubsystem) — the archetype-derived BASELINE: rebuilt from
     //            base stats + perk/skill tables (sub_1811F7FB0), then copied wholesale into
     //            m_activePerks (sub_1805A3F34) at soul create/reset/clone. Not serialized
     //            (recomputed on load); never the queried subsystem.
@@ -292,10 +301,11 @@ public:
     S_SoulArchetype*        m_pArchetype;            // +0xBC8 init -> static all-0xFF sentinel archetype; resolved from
                                                      //        C_SoulArchetypeDatabase (rpg/soul_archetype). GetGender etc.
     S_SocialClass*          m_pSocialClass;          // +0xBD0 init -> static sentinel; from C_SocialClassDatabase (rpg/social_class)
-    void*                   m_pRoleRow;              // +0xBD8 init -> sentinel; 0x38-byte RPG role row from C_RPGSystem+0x588
-                                                     //        keyed by soul+0x280; concrete row type UNVERIFIED
-    void*                   m_pFactionData;          // +0xBE0 faction object resolved from C_FactionManager by faction id
-                                                     //        (soul+0x294); read via I_Soul slot[25]. Pointee type UNVERIFIED
+    S_RoleRow*              m_pRoleRow;              // +0xBD8 init -> sentinel; 0x38-byte RPG role row from C_RPGSystem+0x588
+                                                     //        keyed by soul+0x280; row layout not RE'd (named for consistency)
+    C_Faction*              m_pFactionData;          // +0xBE0 faction record resolved from C_FactionManager by faction id (soul+0x294);
+                                                     //        read via I_Soul slot[25]. [CONFIRMED C_Faction: sub_180228414 reads
+                                                     //        m_pFactionData->m_pDef(+0x278)->superfactionId(+0x1C)]
     Offsets::IEntity*       m_boundEntities[2];      // +0xBE8 bound CryEngine entities (compound: e.g. horse+rider).
                                                      //        Set by SetBoundEntity_18030F274. [LIKELY IEntity*]
     uint32_t                m_flags;                 // +0xBF8 bit 0x20 = use m_overrideWUID; bits 0x08/0x40 set on clone.
@@ -311,6 +321,18 @@ public:
     bool                    m_propCacheValid;        // +0xC30 1 = m_cachedPropValue valid; cleared by the property-change callback
     char                    _padC31[3];              // +0xC31
     float                   m_cachedPropValue;       // +0xC34 cached value of soul property 0x27
+
+    // --- non-virtual accessors (forward to verified engine fns; impl in C_Soul.cpp) ---
+    static C_Soul* FromEntityId(uint32_t entityId);  // sub_18033B518: actor-system GetActor(id)->soul (C_Actor+0x650);
+                                                     // nullptr if the entity is not a registered actor (= player/NPC test)
+    wh::xgenaimodule::C_IntelligentObject* GetIntelligentObject() const; // this soul's AI object (the crime/info holder); entity->WUID->IO; null if not an AI object
+    E_CrimeSystemRole GetCrimeRole() const;          // crime role from social class (m_pSocialClass+0x14); = game's GetCrimeSystemRole; sentinel-safe
+    E_CrimeSystemRole GetEffectiveCrimeRole() const; // LIVE role: brain var b_soul.crimeSystemRole (override-aware); falls back to GetCrimeRole()
+    bool              IsGuard() const;               // effective crime role is Soldier or Circator -- the crime "guard" test
+    float   GetPlayerOpinion() const;   // sub_1802287D0: opinion-of-player [-1,+1] (root soul +0x6F8)
+    void    SetPlayerOpinion(float v);  // direct clamped write to root+0x6F8 (engine has no value-setter, only delta-apply)
+    int32_t GetFactionId() const;       // sub_18064D750: faction id (root soul +0x294)
+    void    ResetInventory(bool resetEquipment = true); // sub_18030E278: clear inventory + repopulate from soul-class preset; optionally resets equipment too
 };
 static_assert(sizeof(C_Soul) == 0xC38);
 

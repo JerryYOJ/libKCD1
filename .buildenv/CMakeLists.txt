@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
 set(VCPKG_TARGET_TRIPLET "x64-windows-static-md" CACHE STRING "")
+
 project(KCD_RE LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -11,6 +12,7 @@ set(RE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/..")
 set(RE_BUILDENV "${CMAKE_CURRENT_SOURCE_DIR}")
 
 find_package(spdlog CONFIG REQUIRED)
+find_package(boost_container CONFIG REQUIRED)   # boost::container::vector / flat_map (the game's sorted containers)
 
 # ---- kcd_re static library ----
 file(GLOB_RECURSE RE_HEADERS "${RE_ROOT}/include/*.h")
@@ -27,6 +29,8 @@ target_compile_options(kcd_re PRIVATE /utf-8 /W4 /wd4819 /wd4100)
 
 target_include_directories(kcd_re PRIVATE
     ${RE_ROOT}/include ${RE_ROOT}/include/CryEngine/CryCommon)
+
+target_link_libraries(kcd_re PUBLIC Boost::container)
 
 # ---- Auto-discover subprojects under src/*/.buildenv ----
 file(GLOB PLUGIN_DIRS "${RE_ROOT}/Projects/*")

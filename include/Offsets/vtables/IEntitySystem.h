@@ -17,11 +17,22 @@ typedef unsigned int EntityId;
 // The agent's raw offsets from 0x182796800 are 0x08 higher than these.
 
 struct SEntitySpawnParams;
-struct IEntityIt;
 struct ICrySizer;
 typedef uint64_t EntityGUID;
 
 namespace Offsets {
+
+// IEntityIt — entity-system iterator. Slots cracked from CScriptBind_System::GetEntitiesInSphere
+// (sub_182130554): Release@0x10, Next@0x20, MoveFirst@0x30; AddRef@0x08 (via sub_18021A634).
+struct IEntityIt {
+    virtual void     Dtor() = 0;        // [0] 0x00
+    virtual void     AddRef() = 0;      // [1] 0x08
+    virtual void     Release() = 0;     // [2] 0x10  VERIFIED
+    virtual void     _vf3() = 0;        // [3] 0x18  (IsEnd? unverified)
+    virtual IEntity* Next() = 0;        // [4] 0x20  VERIFIED -> next IEntity* (null at end)
+    virtual void     _vf5() = 0;        // [5] 0x28  (This? unverified)
+    virtual void     MoveFirst() = 0;   // [6] 0x30  VERIFIED (reset to first)
+};
 
 struct IEntitySystem {
     virtual void Dtor() = 0;                                                             // [0]  0x00   sub_181D9CBC8

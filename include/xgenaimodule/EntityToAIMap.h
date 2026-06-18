@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include "../framework/C_HashMap.h"   // wh::shared::C_HashMap, S_HashNode, S_DefaultHash (FNV-1a-64)
+#include <unordered_map>              // C_EntityToAIMap is a std::unordered_map (MSVC _Hash, 0x40)
 #include "../framework/WUID.h"        // wh::framework::WUID
 
 // ===========================================================================
@@ -15,12 +15,11 @@
 // It is NOT a bespoke manager class and has NO RTTI / NO vtable: the init writes
 // only the 1.0f load factor (0x3F800000 @0x181670535), the circular sentinel
 // (sub_180255920), count=0, and the 8-bucket pool (sub_18071265C). It is a bare
-// instantiation of the existing wh::shared::C_HashMap template (whose 0x40 header
-// matches a raw MSVC std::unordered_map: load-factor@+0x00, sentinel@+0x08,
+// MSVC std::unordered_map (0x40 _Hash header: load-factor@+0x00, sentinel@+0x08,
 // count@+0x10, bucket-vector begin/end/cap @+0x18/+0x20/+0x28, mask@+0x30,
-// bucketCount@+0x38 — all VERIFIED, see C_HashMap.h).
+// maxidx@+0x38 — all VERIFIED in IDA).
 //
-//   map header        0x40   (== sizeof(wh::shared::C_HashMap<...>))
+//   map header        0x40   (== sizeof(std::unordered_map<...>))
 //   hash node         0x28   (sentinel/node alloc sub_180255920 uses size 0x28)
 //   mapped value      0x10   (S_AIPuppetMapping)
 //
@@ -57,10 +56,9 @@ struct S_AIPuppetMapping {
 };
 static_assert(sizeof(S_AIPuppetMapping) == 0x10);
 
-// The map type. Key = EntityGUID; default hash = FNV-1a-64 over 8 bytes (sub_1804BF50C).
-using C_EntityToAIMap = wh::shared::C_HashMap<EntityGUID, S_AIPuppetMapping>;
+// The map type. Key = EntityGUID (uint64; MSVC std::hash<uint64> = FNV-1a, matching the engine).
+using C_EntityToAIMap = std::unordered_map<EntityGUID, S_AIPuppetMapping>;
 static_assert(sizeof(C_EntityToAIMap) == 0x40);
-static_assert(sizeof(wh::shared::S_HashNode<EntityGUID, S_AIPuppetMapping>) == 0x28);
 
 // --- global accessors / ops (free funcs; the map is a bare global) ---------------------------
 

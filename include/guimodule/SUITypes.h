@@ -5,7 +5,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <new>
-#include "framework/DynArray.h"   // wh::DynArray — single-pointer, binary-exact
+#include "CryEngine/CryCommon/CryArray.h"   // CryEngine DynArray (SmallDynStorage; patched __declspec(empty_bases) -> retail-exact 8 bytes)
 
 // ---------------------------------------------------------------------------
 // FlashUI value types — fully usable, binary-layout-matched to WHGame.dll.
@@ -189,7 +189,7 @@ struct SUIArguments
 private:
     void push(EUIDataTypes t, const TUIData& d) { m_ArgList.push_back(SUIData(t, d)); m_Dirty = eBDF_ALL; }
 
-    wh::DynArray<SUIData> m_ArgList;          // +0x00
+    DynArray<SUIData>   m_ArgList;            // +0x00  CryEngine DynArray (8-byte SmallDynStorage)
     CryStringT<char>    m_sArgStringBuffer;   // +0x08  lazy GetAsString() cache
     CryStringT<wchar_t> m_sArgWStringBuffer;  // +0x10  lazy GetAsWString() cache
     void*               m_pFlashValueCache;   // +0x18  lazy DynArray<SFlashVarValue> for GetAsList() (unmanaged here)
@@ -231,7 +231,7 @@ struct SUIEventDesc : public SUIParameterDesc
         bool                     IsDynamic;
         const char*              sDynamicName;
         const char*              sDynamicDesc;
-        wh::DynArray<SUIParameterDesc> Params;
+        DynArray<SUIParameterDesc> Params;
 
         SEvtParams(bool isDyn = false, const char* dynName = "Array", const char* dynDesc = "")
             : IsDynamic(isDyn), sDynamicName(dynName), sDynamicDesc(dynDesc) {}
