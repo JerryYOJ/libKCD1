@@ -39,7 +39,8 @@ public:
 
 // Primary vtable 0x1822F85A8:
 //  [0] dtor  [1] Init  [2] LoadFromDatabase  [3] Serialize
-//  [4] GetAngriness(id,def)->float             sub_181198F34  (faction sub_18117EAD8, *(f+0x10))
+//  [4] GetReputation(id,def)->float            sub_181198F34  (faction sub_18117EAD8, *(f+0x10) = m_reputation)
+//      [was mislabeled "GetAngriness"; it returns reputation @+0x10, NOT angriness @+0x20]
 //  [5] GetFactionByIndex(idx)->int             sub_181198F6C
 //  [6] GetFactionName(locId)->CryString        sub_181198FA4  (loc sub_181196894, *(loc+0x08))
 //  [7] GetLocationCount / GetLocation
