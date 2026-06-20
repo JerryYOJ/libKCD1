@@ -16,14 +16,20 @@
 #define USE_HASH_MAP
 
 #if (_MSC_VER >= 1400) && !defined(_STLP_BEGIN_NAMESPACE) // Visual Studio 2005 without STLPort
+    #include <unordered_map>
+    #include <unordered_set>
+  #if _MSC_VER < 1930 // <hash_map> removed in VS 2022 (MSVC 14.30+)
     #define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
     #include <hash_map>
-	#include <unordered_map>
-	#include <unordered_set>
     #undef std__hash_map
     #define std__hash_map stdext::hash_map
     #define std__hash_compare stdext::hash_compare
-	#define std__hash_multimap stdext::hash_multimap
+    #define std__hash_multimap stdext::hash_multimap
+  #else
+    #define std__hash_map std::unordered_map
+    #define std__hash_compare std::hash<Key>
+    #define std__hash_multimap std::unordered_multimap
+  #endif
 #elif (defined(LINUX) || defined(APPLE)) && !defined(USING_STLPORT)
     #include "platform.h"
     // Uncomment when compiling with clang and c++11 support
