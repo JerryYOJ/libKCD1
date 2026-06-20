@@ -98,6 +98,11 @@ inline static constexpr uintptr_t kEntityGuidToWuidOffset           = 0x23BDCC; 
 inline static constexpr uintptr_t kIntelligentObjMgrPtr             = 0x3799950; // qword_183799950: ptr to the C_IntelligentObjectManager singleton
 inline static constexpr uintptr_t kWuidToAIObjectOffset             = 0x2B620C;  // sub_1802B620C(mgr, &wuid) -> C_IntelligentObject* (0 if absent) [C_IntelligentObjectManager::Find]
 
+// SmartArea layer (xgenaimodule). qword_183785A20 = C_SmartAreaManager (the WUID type-7 registry). The spatial
+// point-query grid is a SEPARATE process-global wh::shared::C_RegularGrid (holder qword_1835012A8, getter sub_180498DE8).
+inline static constexpr uintptr_t kSmartAreaManagerPtr             = 0x3785A20; // C_SmartAreaManager* singleton (qword_183785A20; getter sub_180705E80)
+inline static constexpr uintptr_t kSmartAreaGridHolderPtr          = 0x35012A8; // holder of the global SmartArea C_RegularGrid (qword_1835012A8; getter sub_180498DE8); grid = *(holder)
+
 // Game CRT allocator thunks (WHGame.dll, all jmp -> __imp_*). CrySDKStubs' CryModule*
 // allocator forwards here so plugin allocations live on the GAME's heap (matched malloc/free).
 inline static constexpr uintptr_t kGameMallocOffset                 = 0x28D0A8;  // malloc  (thunk -> __imp_malloc)

@@ -72,12 +72,10 @@ public:
 
     std::unordered_map<int32_t, C_RPGLocation*> m_locationsById;  // +0x208  init sub_180F39820; insert sub_18118994C
 
-    // ---- +0x248 region: zero-init only; no reader/writer found [UNRESOLVED] ----
-    uint64_t m_unk248;                 // +0x248
-    uint64_t m_unk250;                 // +0x250
-    uint64_t m_unk258;                 // +0x258
-    uint64_t m_unk260;                 // +0x260
-    uint8_t  m_unk268;                 // +0x268
+    // ---- two "special location" guid keys (lazily get-or-create'd by I_RPGLocationManager slots [35]/[36]) ----
+    CryGUID  m_specialLocationGuidA;   // +0x248  guid for GetSpecialLocationA (sub_181197660 -> GetOrCreateLocation)
+    CryGUID  m_specialLocationGuidB;   // +0x258  guid for GetSpecialLocationB (sub_1811976AC -> GetOrCreateLocation)
+    uint8_t  m_idMapsDirty;            // +0x268  set to 1 when m_idToGuid/m_guidToId change (slots [33] RegisterLocationKey / [34] Unregister)
     uint8_t  _pad269[7];               // +0x269
 
     // ---- change-notify listener list (deferred-removal "callbacks notify stack") ----
