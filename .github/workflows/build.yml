@@ -10,6 +10,7 @@ jobs:
     env:
       BUILD_DIR: .buildenv/build
       VCPKG_DEFAULT_TRIPLET: x64-windows-static-md
+      VCPKG_BINARY_SOURCES: clear
 
     steps:
       - uses: actions/checkout@v4
@@ -23,7 +24,6 @@ jobs:
         uses: lukka/run-vcpkg@v11
         with:
           vcpkgDirectory: ${{ runner.temp }}/vcpkg
-          vcpkgGitCommitId: 'a34c873a9717a888f58dc05268dea15592c2f0ff'
 
       - name: Configure
         run: >
