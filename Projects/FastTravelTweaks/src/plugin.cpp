@@ -38,6 +38,15 @@ static wh::guimodule::C_CompassMark* MapMarker(Offsets::IFlashPlayer*& fp,
     return mark;
 }
 
+static void TryStopFastTravel()
+{
+    if (auto* ft = GetFastTravel()) {
+        if (ft->IsFastTravelling() && !ft->m_pPendingEventPrompt) {
+            ft->Stop();
+        }
+    }
+}
+
 //static void UpdateMarkerPrompt()
 //{
 //    static bool shown = false;
@@ -70,7 +79,14 @@ class FastTravelTweaks : public Offsets::IInputEventListener {
                 return true;
             }
         }
-        else if (event.keyId == Offsets::eKI_E) {
+        else if (event.keyId == Offsets::eKI_XI_B) {
+            auto* ft = GetFastTravel();
+            if (ft && ft->IsFastTravelling() && !ft->m_pPendingEventPrompt) {
+                KCSE::GetTaskInterface()->AddTask(TryStopFastTravel);
+            }
+            return false;
+        }
+        else if (event.keyId == Offsets::eKI_E || event.keyId == Offsets::eKI_XI_A) {
             Offsets::IFlashPlayer* fp; wh::playermodule::C_FastTravel* ft; bool isNear;
             auto* mark = MapMarker(fp, ft, isNear);
             if (!mark || !isNear) return false;
@@ -121,7 +137,7 @@ class FastTravelTweaks : public Offsets::IInputEventListener {
 //    KCSE::GetTaskInterface()->AddTask(Tick);
 //}
 
-KCSE_PLUGIN_INFO("Fast Travel Tweaks", "JerryYOJ", 1);
+KCSE_PLUGIN_INFO("Fast Travel Tweaks", "JerryYOJ", 2);
 KCSE_PLUGIN_LOAD(kcse)
 {
     KCSE::GetMessagingInterface()->RegisterListener([](KCSE::Message* msg) {
