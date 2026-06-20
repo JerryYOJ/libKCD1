@@ -10,6 +10,7 @@ jobs:
     env:
       BUILD_DIR: .buildenv/build
       VCPKG_DEFAULT_TRIPLET: x64-windows-static-md
+      VCPKG_BINARY_SOURCES: clear
 
     steps:
       - uses: actions/checkout@v4
