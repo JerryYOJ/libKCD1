@@ -8,7 +8,7 @@ jobs:
     runs-on: windows-latest
 
     env:
-      BUILD_DIR: RE/.buildenv/build
+      BUILD_DIR: .buildenv/build
       VCPKG_DEFAULT_TRIPLET: x64-windows-static-md
 
     steps:
@@ -27,7 +27,7 @@ jobs:
 
       - name: Configure
         run: >
-          cmake -S RE/.buildenv -B ${{ env.BUILD_DIR }}
+          cmake -S .buildenv -B ${{ env.BUILD_DIR }}
           -G Ninja
           -DCMAKE_BUILD_TYPE=RelWithDebInfo
           -DCMAKE_TOOLCHAIN_FILE=${{ runner.temp }}/vcpkg/scripts/buildsystems/vcpkg.cmake

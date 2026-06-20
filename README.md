@@ -20,7 +20,7 @@ Reverse-engineered headers and runtime library for **Kingdom Come: Deliverance 1
 
 ## Notes
 
-- libKCD1 targets game version **1.9.7.0**. CryEngine's interfuscator shuffles vtable order in release builds — SDK headers cannot be used for direct virtual calls across versions.
+- libKCD1 targets game version **1.9.8**. CryEngine's interfuscator shuffles vtable order in release builds — SDK headers cannot be used for direct virtual calls across versions.
 
 ## Developing a KCSE Plugin
 
