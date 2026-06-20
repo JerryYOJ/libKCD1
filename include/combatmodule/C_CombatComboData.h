@@ -137,8 +137,8 @@ static_assert(sizeof(C_CombatComboStepData) == 0x20, "C_CombatComboStepData must
 struct C_CombatComboData {
     int32_t         m_rowId;                // +0x00  row base value / combo ID
     int32_t         _pad04;                 // +0x04  alignment padding
-    const char*     m_comboStrid;           // +0x08  CryStringT<char> (string ID)
-    const char*     m_comboName;            // +0x10  CryStringT<char> (display name)
+    CryStringT<char> m_comboStrid;          // +0x08  string ID  (CryString; destroyed by dtor sub_1807471D4)
+    CryStringT<char> m_comboName;           // +0x10  display name (CryString; destroyed by dtor sub_1807471D4)
     int32_t         m_atkRWeaponClassId;    // +0x18  right-hand weapon class FK
     int32_t         m_atkLWeaponClassId;    // +0x1C  left-hand weapon class FK
     int32_t         m_atkRWeaponGroupId;    // +0x20  right-hand weapon group FK

@@ -35,7 +35,7 @@ namespace wh::rpgmodule {
 struct S_SoulArchetype {
     int32_t     soul_archetype_id;              // +0x00  PK (integer)
     char        _pad04[4];                      // +0x04  alignment
-    const char* soul_archetype_name;            // +0x08  CryStringT ptr
+    CryStringT<char> soul_archetype_name;       // +0x08  archetype name (CryString; from PCH prelude)
     int32_t     race_id;                        // +0x10  FK → race table
     int32_t     gender_id;                      // +0x14  FK → gender table (1=male, 2=female)
     float       normal_body_weight;             // +0x18  body weight in kg(?)

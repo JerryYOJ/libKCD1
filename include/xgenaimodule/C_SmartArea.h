@@ -2,68 +2,74 @@
 
 #include <cstdint>
 #include <vector>
-#include "C_IntelligentObject.h"   // the AI-object spine (C_AIObject..C_IntelligentObject, 0x178) -- primary base
-#include "I_Area.h"                // the identity sub-object @+0x218 (AsArea())
+#include <unordered_map>
+#include <unordered_set>
+#include <boost/container/vector.hpp>     // count-based {ptr,size,cap} sorted tag sets
+#include "C_SmartEntity.h"               // primary parent (spine + virtual base I_TemplateIdentification)
+#include "I_Area.h"                      // identity sub-object @+0x218
+#include "S_VariableReference.h"         // embedded value @+0x288
+#include "C_Ownership.h"                 // embedded value @+0x400
+#include "../framework/CryStringHash.h"  // std::hash<CryStringT<char>> for the name-keyed maps
 // CryStringT<char> / Vec3 come from the PCH prelude.
 
 // ===========================================================================
-// wh::xgenaimodule::C_SmartArea  (size 0x440)  RTTI .?AVC_SmartArea@xgenaimodule@wh@@
+// wh::xgenaimodule::C_SmartArea : C_SmartEntity, I_Area   (size 0x440)
 // ===========================================================================
-// A world region primitive (WUID type 7). Owns its geometry (AABB + boundary polygon) and a set of
-// tags; the location system resolves a point to a C_SmartArea and maps its WUID to a C_RPGLocation.
-// Created by the SmartArea manager (factory sub_1815EA2D0: operator new(0x440) + ctor sub_1815CC0F0);
-// resolve by key via C_SmartAreaManager::ResolveWuid; get the area(s) at a point via the manager's
-// EnumerateAreasAtPoint (global C_RegularGrid). Parent area = raw field m_parent (+0x238).
+// RTTI: .?AVC_SmartArea@xgenaimodule@wh@@. A world region primitive (WUID type 7): owns its geometry
+// (XY boundary polygon + AABB) and two sorted tag sets, exposes a "parentArea" Lua variable, forms a
+// parent/child area tree, and is tracked by C_SmartAreaManager (qword_183785A20). Created by the
+// manager factory (operator new(0x440) + ctor sub_1815CC0F0); the I_TemplateIdentification virtual
+// base (from C_SmartEntity) lands at +0x438 with MSVC's vtordisp at +0x434; I_Area is a vtable-only
+// identity sub-object at +0x218 and C_SmartArea's own fields follow at +0x220.
 //
-// MODELING NOTE: C_SmartArea is a deep multiple-inheritance object with a VIRTUAL base, and its
-// secondary interface sub-objects are INTERLEAVED with data fields, so C++ inheritance cannot reproduce
-// the exact layout. We therefore model the primary spine via inheritance (C_IntelligentObject) and lay
-// the rest out as a flat, byte-exact field map: interleaved secondary-base vtable pointers and un-RE'd
-// embedded objects are kept as opaque regions (clearly named). The full base/vtable map is documented
-// in the SmartArea recon. Real bases per RTTI: C_SmartEntity(+0x00), I_RWLocked(+0x60),
-// I_SmartEntitySubbrainListener(+0x178), I_SmartEntity(+0x180), I_Area(+0x218),
-// I_TemplateIdentification(+0x438, virtual). Layout VERIFIED (factory new 0x440 + ctor sub_1815CC0F0).
+// Layout VERIFIED byte-exact from ctor sub_1815CC0F0, member-dtor sub_1815CD644 (per-member
+// destructor calls reveal element types), I_Area accessors (ContainsPoint sub_180375AB8 / GetAABB
+// sub_1815D3A18 / GetBoundaryPoints sub_180655C14 / GetHeight sub_1806F99C0 / HasTag sub_180428068),
+// and SetParent sub_1815DD4A0. The two name-keyed maps and the set carry trivial 8-byte values whose
+// exact element type is UNVERIFIED (no insert/lookup site was localized -- only ctor/clear/dtor); the
+// KEYS are confirmed CryStringT<char> (node dtors call StringHashCleanup on the key).
 // ===========================================================================
 
 namespace wh::xgenaimodule {
 
-class C_SmartArea : public C_IntelligentObject {   // +0x000  C_AIObject..C_IntelligentObject spine (m_key WUID @+0x08)
+// Force the vtordisp before the I_TemplateIdentification virtual base so the layout matches retail
+// (vtordisp @+0x434, vbase @+0x438). MSVC's default (/vd1) omits it here, landing the vbase at +0x430.
+#pragma vtordisp(push, 2)
+class C_SmartArea : public C_SmartEntity, public I_Area {   // C_SmartEntity @+0x00, I_Area @+0x218
 public:
-    // --- C_SmartEntity additions (0x178..0x218): subbrain-listener/smart-entity sub-object vtables,
-    //     the virtual-base vbptr (+0x188) + vtordisp (+0x184), and the subbrain/behavior container
-    //     (+0x190). Kept opaque (virtual-inheritance plumbing; not needed to use a SmartArea). ---
-    uint8_t            m_smartEntityRegion[0xA0];   // +0x178  (I_SmartEntitySubbrainListener@+0x178,
-                                                    //          I_SmartEntity@+0x180, vbptr@+0x188, subbrain@+0x190)
+    // override the virtual-base virtual (SmartArea's template-type id == 3); makes MSVC place the vtordisp.
+    int GetTemplateType() override;   // [I_TemplateIdentification] sub_180B1C650 -> 3
 
-    // --- C_SmartArea identity + geometry (0x218..) ---
-    void*              m_areaVtbl;          // +0x218  I_Area sub-object vtable (use AsArea())
-    std::vector<void*> m_childAreas;        // +0x220  {begin,end,cap}; 8-byte elems [purpose UNVERIFIED: child/linked areas]
-    C_SmartArea*       m_parent;            // +0x238  parent area (null at top); resolver walks this
-    uint64_t           m_unk240;            // +0x240  [UNVERIFIED]
-    std::vector<Vec3>  m_boundaryPoints;    // +0x248  boundary polygon {begin,end,cap} (I_Area::GetBoundaryPoints)
-    float              m_height;            // +0x260  init -1.0f (I_Area slot7) [likely Z-extent]
-    Vec3               m_aabbMin;           // +0x264  AABB min (ctor inits +1e15; I_Area::GetAABB/ContainsPoint)
-    Vec3               m_aabbMax;           // +0x270  AABB max (ctor inits -1e15)
-    uint8_t            m_unk27C[0xC];       // +0x27C  not ctor-inited [UNVERIFIED: center/origin or pad]
+    // --- own fields (+0x220 .. +0x430) ---
+    std::vector<C_SmartArea*>                m_childAreas;        // +0x220  child areas (non-owning; built by SetParent)
+    C_SmartArea*                             m_parent;            // +0x238  parent area (null at top of the tree)
+    void*                                    m_parentLinkHandle;  // +0x240  cached handle from the parent's variable store
+                                                                  //         (SetParent: parent+0x58->GetStore->vtbl+0x10; 0 when detached)
+    std::vector<Vec3>                        m_boundaryPoints;    // +0x248  XY boundary polygon (I_Area::GetBoundaryPoints)
+    float                                    m_height;            // +0x260  area height, init -1.0f (I_Area::GetHeight)
+    Vec3                                     m_aabbMin;           // +0x264  AABB min, init +1e15 (inverted) (ContainsPoint/GetAABB)
+    Vec3                                     m_aabbMax;           // +0x270  AABB max, init -1e15
+    float                                    _unk27C;             // +0x27C  not ctor-inited [UNVERIFIED]
+    bool                                     m_parentLinkValid;   // +0x280  set when the parentArea var/link is established
+    uint8_t                                  _pad281[7];          // +0x281  -> +0x288
+    S_VariableReference                      m_parentAreaVar;     // +0x288  the lazily-created "parentArea" Lua variable (sub_1815CEBF8)
+    std::unordered_map<CryStringT<char>, void*> m_mapA;           // +0x2E8  key=CryStringT (StringHash); value=trivial 8-byte [UNVERIFIED]
+    std::unordered_map<CryStringT<char>, void*> m_mapB;           // +0x328  key=CryStringT (StringHash); value=trivial 8-byte [UNVERIFIED]
+    CryStringT<char>                         m_label;             // +0x368  "Label" brain-variable text
+    std::unordered_set<void*>                m_members;           // +0x370  objects tracking this area via their +0x1E0 back-ref
+                                                                  //         (reparented to m_parent on removal; element type UNVERIFIED)
+    std::vector<Vec3>                        m_boundaryPoints2;   // +0x3B0  second Vec3 polygon (cleared during "inside" var setup; purpose UNVERIFIED)
+    void*                                    m_pResolvedSystem;   // +0x3C8  subsystem resolved from the parent (sub_1815C8EB4) [UNVERIFIED type]
+    boost::container::vector<CryStringT<char>> m_tags1;           // +0x3D0  sorted tag set, registered with the manager (I_Area::HasTag)
+    boost::container::vector<CryStringT<char>> m_tags2;           // +0x3E8  sorted tag set, rebuilt by sub_1815D1888 (I_Area::HasTag fallback)
+    C_Ownership                              m_ownership;         // +0x400  owner/owned WUIDs (0x30)
+    // MSVC appends here: vtordisp @+0x434, then virtual base I_TemplateIdentification @+0x438; object ends 0x440.
 
-    uint8_t            m_varRef[0x60];      // +0x288  embedded S_VariableReference (ctor sub_180207B44) [opaque]
-    uint8_t            m_embed2E8[0x40];    // +0x2E8  embedded object (ctor sub_1807402B4) [type UNVERIFIED]
-    uint8_t            m_embed328[0x40];    // +0x328  embedded container (ctor sub_180F39820) [type UNVERIFIED]
-    CryStringT<char>   m_label;             // +0x368  area label (brain var "Label"; ctor + sub_1815D1888)
-    uint8_t            m_embed370[0x40];    // +0x370  embedded object w/ inner array (ctor sub_1815CAC14) [type UNVERIFIED]
-    uint8_t            m_unk3B0[0x10];      // +0x3B0  vector/smart-ptr {+0x3B0,+0x3B8} [UNVERIFIED]
-    uint64_t           m_unk3C0;            // +0x3C0  [UNVERIFIED]
-    uint64_t           m_unk3C8;            // +0x3C8  [UNVERIFIED]
-    std::vector<CryStringT<char>> m_tags1;  // +0x3D0  sorted tag set #1 (I_Area::HasTag binary-search)
-    std::vector<CryStringT<char>> m_tags2;  // +0x3E8  sorted tag set #2 (I_Area::HasTag; built by sub_1815D1888)
-
-    uint8_t            m_ownership[0x38];   // +0x400  embedded wh::xgenaimodule::C_Ownership (vtable @+0x400) [opaque]
-    void*              m_templateIdVtbl;    // +0x438  I_TemplateIdentification virtual-base vtable (returns 3)
-
-    // --- typed accessors over the embedded sub-objects (no construction; views over `this`) ---
-    I_Area*       AsArea()       { return reinterpret_cast<I_Area*>(reinterpret_cast<char*>(this) + 0x218); }
-    C_SmartArea*  GetParent() const { return m_parent; }   // raw field; NOT a virtual (resolver reads +0x238)
+    // identity sub-object access (proper upcast, not a raw pointer)
+    I_Area*      AsArea()          { return static_cast<I_Area*>(this); }
+    C_SmartArea* GetParent() const { return m_parent; }   // raw field +0x238 (not a virtual)
 };
+#pragma vtordisp(pop)
 static_assert(sizeof(C_SmartArea) == 0x440, "C_SmartArea (factory operator new 0x440; ctor sub_1815CC0F0)");
 
 }  // namespace wh::xgenaimodule

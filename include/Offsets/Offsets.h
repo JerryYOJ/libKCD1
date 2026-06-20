@@ -13,6 +13,7 @@
 //   wh::game::S_GameContext::GetInstance()           — game/S_GameContext.h
 //   wh::rpgmodule::C_RPGModule::GetInstance()        — rpgmodule/C_RPGModule.h
 //   wh::guimodule::CUIManager::GetInstance()         — guimodule/CUIManager.h
+//   wh::guimodule::uielement::C_UIEHud::GetInstance() — guimodule/C_UIEHud.h
 //   wh::combatmodule::C_CombatModule::GetInstance()  — combatmodule/C_CombatModule.h
 //   wh::combatmodule::C_CombatScene::GetInstance()   — combatmodule/C_CombatScene.h
 //   wh::combatmodule::S_CombatSettings::GetInstance() — combatmodule/S_CombatSettings.h
@@ -30,6 +31,7 @@ inline static constexpr uintptr_t kCCryActionOffset         = 0x3785D88;
 inline static constexpr uintptr_t kC3DEngineOffset          = 0x3785BC0; // Cry3DEngineBase static C3DEngine* (qword_183785BC0; set in C3DEngine ctor). gEnv.p3DEngine(+0x08) is a DEAD slot in KCD (always null).
 inline static constexpr uintptr_t kRPGModuleOffset          = 0x35AC728;
 inline static constexpr uintptr_t kCUIManagerOffset         = 0x2F77888;
+inline static constexpr uintptr_t kUIEHudOffset             = 0x3785948; // qword_183785948 — C_UIEHud* heap ptr (HUD singleton)
 inline static constexpr uintptr_t kGameContextOffset        = 0x34FFD10;
 inline static constexpr uintptr_t kCombatSettingsOffset     = 0x36DD8A0;
 inline static constexpr uintptr_t kRPGParamsOffset          = 0x35004A0;

@@ -5,6 +5,7 @@
 #include "../C_NodeWrapper.h"
 #include "../C_NodeFactory.h"
 #include "../NodeAttribute.h"
+#include "../../C_DynamicLinkableObject.h"   // base of S_RemoveItemContext (C_AIObject @+0x00 + DLO @+0x60)
 
 // ===========================================================================
 // C_RemoveItem.h  -  Behavior-tree leaf action node "RemoveItem".
@@ -142,26 +143,18 @@ namespace wh::xgenaimodule::BehaviorTree {
 // was not bounded under the stalled tooling.  Treated as opaque below the
 // documented head so the layout above is not over-asserted.
 // ---------------------------------------------------------------------------
-struct S_RemoveItemContext {
+// The two polymorphic bases the old sketch modeled with raw vtable pointers -- C_AIObject @+0x00
+// (vtable + m_wuid/m_pool/m_idx/m_pHost) and the I_RWLocked secondary @+0x60 -- are the
+// C_DynamicLinkableObject base chain (C_DynamicLinkableObject : C_LinkableObject : C_AIObject),
+// now inherited rather than duplicated. VERIFIED: the runner ctor sub_180450300 builds the
+// C_LinkableObject base (sub_180450530 -> C_AIObject ctor sub_1804505F4), overrides both vtables,
+// and registers into the dynamic-linkable registry qword_1837999C0. The node's context pool
+// allocates 0xA8 records (factory init sub_1807128D4(...,0xA8,8)) = the 0xA0 base + one own qword.
+struct S_RemoveItemContext : public C_DynamicLinkableObject {
     inline static constexpr auto RTTI = Offsets::RTTI_S_RemoveItemContext;
-    // NOTE: this is a forward layout sketch.  The two polymorphic bases
-    // (C_AIObject at +0x00 and C_DynamicLinkableObject at +0x60) are real but
-    // are not redefined here to avoid duplicating types that live in
-    // xgenaimodule core headers; include those and inherit once they exist.
-    void*    m_aiObjectVtable;   // +0x00  &wh::xgenaimodule::C_AIObject::vftable
-    void*    m_pOwner;           // +0x08  owner / node back-pointer (= *a2)
-    uint8_t  m_fixedContainer[0x24]; // +0x10..+0x33  cap-0xC/stride-3 container
-    uint32_t m_actorOrItemId;    // +0x34  WUID slot (init 0xFFFFFFFF)
-    uint32_t m_field38;          // +0x38  (init 0xFFFFFFFF)  [UNVERIFIED]
-    void*    m_field40;          // +0x40  (init 0)
-    void*    m_field48;          // +0x48  (init 0)
-    uint16_t m_field50;          // +0x50  (init 0)            [UNVERIFIED]
-    uint8_t  _pad52[6];          // +0x52  alignment
-    void*    m_pCreatorOrCtx;    // +0x58  (= ctor arg a3)
-    void*    m_dloVtable;        // +0x60  &C_DynamicLinkableObject::vftable
-    // +0x68 .. : embedded WUID->entry hashmap (opaque here) [UNVERIFIED tail]
-    uint8_t  m_contextMap[0x98]; // +0x68..+0xFF  raw map region (see notes)
+    uint64_t m_runtimeState;   // +0xA0  RemoveItem-specific per-entity state [exact use UNVERIFIED]
 };
+static_assert(sizeof(S_RemoveItemContext) == 0xA8, "C_DynamicLinkableObject (0xA0) + 0x08 (context-pool record 0xA8)");
 
 // ---------------------------------------------------------------------------
 // C_RemoveItem  -  the BT leaf action node.

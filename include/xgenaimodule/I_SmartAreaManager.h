@@ -45,10 +45,16 @@ public:
     // [8]  0x40  find-by-name helper (re-fetches singleton; strcmp name) (sub_1815e9644) [INFERRED]
     virtual C_SmartArea* FindByName(const char* name) = 0;
     virtual void _vf9()  = 0;   // [9]  0x48  sub_180705df0 (8-byte stub) [UNVERIFIED]
-    virtual void _vf10() = 0;   // [10] 0x50  sub_18039d8f0 [UNVERIFIED]
-    virtual void _vf11() = 0;   // [11] 0x58  sub_180427278 [UNVERIFIED]
-    virtual void _vf12() = 0;   // [12] 0x60  sub_18042724c [UNVERIFIED]
-    virtual void _vf13() = 0;   // [13] 0x68  sub_18067c918 [UNVERIFIED]
+    // [10] 0x50  pause/resume the +0x190 update scheduler (sub_18039d8f0 -> sub_18039A57C / sub_18039CE6C)
+    virtual void SetUpdatePaused(bool paused) = 0;
+    // [11] 0x58  connect/add a listener delegate to the area-changed C_Signal @+0x480 (sub_180427278 ->
+    //            sub_1804272A4: dedup + append {invoke,instance} to the delegate vector @+0x490)
+    virtual void ConnectAreaChanged(void* delegate) = 0;
+    virtual void _vf12() = 0;   // [12] 0x60  area-changed C_Signal op (sub_18042724c) -- likely disconnect [UNVERIFIED]
+    // [13] 0x68  EMIT/broadcast the area-changed signal (sub_18067c918 -> sub_18067C924: walks the delegate
+    //            vector @+0x490, invokes each, using the reentrancy slots @+0x4A8/+0x4AC). C_SmartArea calls
+    //            this (via mgr vtbl+0x68) on a tag change to notify all listeners.
+    virtual void NotifyAreaChanged(C_SmartArea& area, CryStringT<char> const& tag, bool added) = 0;
     // [14] 0x70  reset all areas (iterates the +0xA0 map twice: sub_1815DD4A0 + sub_1815E9AA0) (sub_1815eb070)
     virtual void ResetAllAreas() = 0;
     virtual void _vf15() = 0;   // [15] 0x78  sub_180706370 (7-byte stub) [UNVERIFIED]

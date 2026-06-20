@@ -1,13 +1,14 @@
 #pragma once
 
 #include "../crysystem/CScriptableBase.h"
+#include "../guimodule/I_UIMenuEventsListener.h"
 
 // -----------------------------------------------
 // C_ScriptBindActor — entity script binding for actors
 // -----------------------------------------------
 // RTTI: .?AVC_ScriptBindActor@entitymodule@wh@@
-// vtable primary: 0x1826c60f8
-// vtable secondary: 0x1826c60d8 (at +0x60)
+// Inheritance (RTTI base array): C_ScriptBindActor : CScriptableBase (+0x00; primary vtable 0x1826c60f8),
+//   wh::guimodule::I_UIMenuEventsListener (+0x60; secondary vtable 0x1826c60d8, base TD img 0x2A42850).
 // Constructor: sub_1810B7800
 // Size: 0x90
 //
@@ -16,10 +17,11 @@
 
 namespace wh::entitymodule {
 
-class C_ScriptBindActor : public CScriptableBase {
+class C_ScriptBindActor : public CScriptableBase,                        // +0x00 (0x60)
+                          public wh::guimodule::I_UIMenuEventsListener   // +0x60 (secondary vtable, pure interface)
+{
 public:
     inline static constexpr auto RTTI = Offsets::RTTI_C_ScriptBindActor;
-    void*                   m_pVtable2;         // +0x60  secondary vftable
     Offsets::IScriptTable*  m_pEntityTable;     // +0x68  entity script table
     void*                   m_pGameFramework;   // +0x70  IGameFramework*
     Offsets::IScriptSystem* m_pScriptSystem;    // +0x78
@@ -166,6 +168,10 @@ public:
     virtual int RequestItemExchange(IFunctionHandler* pH);                  // 0x1810E1998
     virtual int MakeLookAsActor(IFunctionHandler* pH);                      // 0x1810D567C
     virtual int MakeLookAsSoul(IFunctionHandler* pH);                       // 0x1810D5708
+
+    // -- I_UIMenuEventsListener overrides (secondary vtable @+0x60) --
+    void OnInventoryClosed(bool closed) override;                           // 0x1810D8208
+    void OnInventoryItemUsed(int64_t item) override;                        // 0x1810D8170
 
     // -- Direct Lua methods (non-virtual, direct dispatch) --
     // int SetForcedLookDir(IFunctionHandler* pH, Vec3 dir);                // 0x1810E6088

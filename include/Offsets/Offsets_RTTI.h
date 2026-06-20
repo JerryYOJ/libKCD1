@@ -60,6 +60,7 @@ namespace Offsets {
     inline constexpr std::uintptr_t RTTI_C_AtomicDecorator                                    = 0x2AC8EB0;  // .?AVC_AtomicDecorator@BehaviorTree@xgenaimodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_AttachObject                                       = 0x2A8AC60;  // .?AVC_AttachObject@BehaviorTree@xgenaimodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_BaseModule                                         = 0x29ECBC0;  // .?AVC_BaseModule@framework@wh@@
+    inline constexpr std::uintptr_t RTTI_C_ParallelModuleUpdater                              = 0x29EA0B0;  // .?AVC_ParallelModuleUpdater@framework@wh@@
     inline constexpr std::uintptr_t RTTI_C_BehaviorAdopter                                    = 0x2AA1D20;  // .?AVC_BehaviorAdopter@BehaviorTree@xgenaimodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_BehaviorTag                                        = 0x2AA2110;  // .?AVC_BehaviorTag@BehaviorTree@xgenaimodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_BehaviorTagCatch                                   = 0x2B0DB20;  // .?AVC_BehaviorTagCatch@BehaviorTree@xgenaimodule@wh@@
@@ -390,6 +391,7 @@ namespace Offsets {
     inline constexpr std::uintptr_t RTTI_C_LinkOperationBarrier                               = 0x2B03CE0;  // .?AVC_LinkOperationBarrier@BehaviorTree@xgenaimodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_LinkSorterDataSource                               = 0x2AFFDA0;  // .?AVC_LinkSorterDataSource@BehaviorTree@xgenaimodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_LinkTagFilter                                      = 0x2AF8410;  // .?AVC_LinkTagFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr std::uintptr_t RTTI_C_DynamicLinkableObject                              = 0x2B207B8;  // .?AVC_DynamicLinkableObject@xgenaimodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_LinkableObject                                     = 0x2B176E8;  // .?AVC_LinkableObject@xgenaimodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_LinkablesManager                                   = 0x2B35978;  // .?AVC_LinkablesManager@xgenaimodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_LocalTagWrapper                                    = 0x2ADAC20;  // .?AVC_LocalTagWrapper@BehaviorTree@xgenaimodule@wh@@

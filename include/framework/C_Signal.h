@@ -35,7 +35,12 @@ struct S_SortedConnectionEntry {
 static_assert(sizeof(S_SortedConnectionEntry<>) == 0x18);
 
 
-// Layout matches CryEngine FastDynArray<T, int64_t>: {T* m_aElems, I m_nCount, I m_nCapacity}
+// A {ptr, size_t count, size_t cap} 0x18 container. Per the codebase convention such 0x18 {ptr,size,cap}
+// containers are boost::container::vector (the old "FastDynArray" label is SUPERSEDED -- see the
+// boost::container::vector memory note). CAVEAT: this BypassedConnections policy is never stored in the
+// plain 0x30 C_Signal; the one bypassed-connections instance actually examined (C_SmartAreaManager's)
+// was a std::vector<Connection*> ({begin,end,cap}, count by pointer subtraction). So treat this triple
+// as a nominal/unverified model of the policy, not a confirmed layout.
 template<typename Traits>
 class C_BypassedConnections;
 

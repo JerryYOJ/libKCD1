@@ -49,4 +49,12 @@ inline constexpr std::array<uintptr_t, 2> VTABLE_C_CombatActorDirector{ 0x21EB71
 //     [0] dtor  [1] CanHorsePullDown  [2] RequestHorsePullDown
 inline constexpr std::array<uintptr_t, 2> VTABLE_C_CombatActorHorsePullDown{ 0x21CB328, 0x21CB360 };
 
+// ---- dialogmodule ----
+
+// C_DialogCameraManager: I_DialogCameraManager + IEntitySystemSink
+//   [0] primary  (I_DialogCameraManager)  vtable @ WHGame+0x26B3820
+//     [0] IsActive [1] _vf1(nop) [2] FillViewParams [3] Activate [4] Deactivate [5] _vf5 [6] _vf6
+//   [1] secondary (IEntitySystemSink)      vtable @ WHGame+0x26B3860
+inline constexpr std::array<uintptr_t, 2> VTABLE_C_DialogCameraManager{ 0x26B3820, 0x26B3860 };
+
 }  // namespace Offsets
