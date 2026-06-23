@@ -9,6 +9,7 @@ namespace wh::entitymodule { enum E_HandSlot : int32_t; }
 namespace wh::combatmodule {
 
 enum class E_CombatZoneId : int32_t;
+enum class E_CombatInputClass : int32_t;
 
 class I_CombatActor;
 class I_CombatTarget;
@@ -46,6 +47,12 @@ enum class E_CombatActorStateId : int32_t;
 //   C_Signal<I_CombatActor&, WUID, E_HandSlot>
 // ---------------------------------------------------------------------------
 struct S_CombatActorState {
+    // Writes m_committedAttackZone (+0xC00) via the engine change-notify setter (fires the
+    // +0x180 observers). sub_18045D1EC. This is the player's swing-direction lever: the
+    // selection resolver reads +0xC00 as src_zone. (Recovered name was "SetInputClassId";
+    // +0xC00 is a ZONE, not an input-class -- see m_committedAttackZone @+0xC00.)
+    void SetCommittedAttackZone(E_CombatZoneId zone);
+
     // 63 C_Signal instances. Types verified from sub_1804F20F8 vtable writes.
     // Key connections from C_CombatComboManager ctor (sub_1804F1300) noted inline.
 
@@ -184,13 +191,17 @@ struct S_CombatActorState {
     int32_t         m_combatMode;           // +0xBDC  combat mode ID
     int32_t         m_combatStateCategory;  // +0xBE0  state category (compared against dword_18359BEA0 in sub_1804605D0)
     int32_t         m_guardTypeId;          // +0xBE4  current guard type
-    E_CombatZoneId  m_attackZoneId;         // +0xBE8  current attack zone
-    int32_t         m_actionTypeId;         // +0xBEC  live current action type id (set on action init, signal @ +0xF0)
+    E_CombatZoneId  m_attackZoneId;         // +0xBE8  published "current aim" zone (MANY writers: SetAttackZone sub_18045D0E4, the aim/buffer path sub_18045DC88, etc.). Copied into the candidate ENUMERATION query at query+0x3C (sub_18021AB30/sub_18045E930). BUT NOT the live direction lever: the SELECTION predicate sub_18045F3AC reads m_committedAttackZone(+0xC00) + m_weaponAimConfigBySlot(+0xC80), never this; and a runtime write of +0xBE8 alone produced a GENERIC swing. Treat as a notify/feedback field, not the direction. [cross-verified: workflow wf_849b321a]
+    int32_t         m_actionTypeId;         // +0xBEC  live current action type id (set on action init, signal @ +0xF0). [SUSPECT: the CORREL runtime probe showed +0xBEC tracking the aimed ZONE (0..4, == +0xC00 at attack commit), which conflicts with "action type" -- its writer was NOT re-traced; verify by producer-trace before trusting this label]
     int32_t         m_weaponClassId;        // +0xBF0  weapon class
-    uint32_t        _padBF4;                // +0xBF4
+    E_CombatZoneId  m_executedAttackZone;   // +0xBF4  resolved zone of the EXECUTING action (written by OnEnter sub_180567F28 via the notify-setter); combo-advance sub_180603040 matches the step's zone against this
     int32_t         m_weaponGroupId;        // +0xBF8  weapon group
     E_CombatZoneId  m_defenseZoneId;        // +0xBFC  VERIFIED: used as zone param for PB/block dispatch
-    int32_t         m_inputClassId;         // +0xC00  input class
+    // +0xC00  THE player's committed attack/aim ZONE and the live swing-direction lever:
+    // selection resolver sub_18045F3AC reads *(+0xC00) as src_zone; the aim system writes the
+    // aimed zone here each frame; combo fire-gate m_comboFireGateZone(+0x220) is checked == this;
+    // CreateAndDispatch picks the candidate whose matchKey == this. PROVEN (set it -> the swing
+    E_CombatZoneId  m_committedAttackZone;  // +0xC00  writer sub_18045D1EC; reset -1 by sub_1806A35E4
     uint8_t         _padC04[0x10];          // +0xC04
 
     bool            m_isBlocking;           // +0xC14
@@ -221,7 +232,25 @@ struct S_CombatActorState {
     uint64_t        m_unknown_C60;          // +0xC60
     bool            m_riposteTriggerActive; // +0xC68  C_CombatTriggerRiposte flag (true = riposte window open)
     bool            m_comboTriggerActive;   // +0xC69  C_CombatTriggerCombo flag (true = combo slot open)
-    uint8_t         _padC6A[0x2E];          // +0xC6A
+    uint8_t         _padC6A[6];             // +0xC6A
+
+    // +0xC70..+0xC90: per-EQUIP-SLOT weapon attack-config. Written TOGETHER at weapon
+    // equip/change by the sibling setters sub_18054B2C0 (+0xC70 qword) / sub_18054B250
+    // (+0xC80) / sub_18054B230 (+0xC88), each firing a change signal (the +0x780/+0x7B0
+    // multicast). Index = equipment slot; only 0..1 are used (the for-loop in the
+    // combat-init sub_1806020E8): 0 = main hand, 1 = off-hand (= -1 when empty or a shield,
+    // since shields carry no attack moveset). These hold the equipped weapon's moveset /
+    // zone-mapping ids (source sub_180303B48: an item attribute, default 0xC, -1 if the item
+    // is not an attack weapon) — they are NOT a live per-attack direction. The selection
+    // predicate sub_18045F3AC reads m_weaponAimConfigBySlot[candidate+0xD0] to pick the
+    // candidate compatible with the equipped weapon's moveset (a weapon-compat test, not the
+    // aimed direction). The array is [2], NOT [6]: the three sibling arrays interlock
+    // (+0xC70 qword[2] -> +0xC80 dword[2] -> +0xC88 dword[2] -> +0xC90), so any larger size
+    // would overlap its neighbor.
+    uint64_t        m_weaponZoneMapBySlot[2];   // +0xC70  per-slot qword (moveset / C_CombatZoneMappingData handle)  [UNVERIFIED: pointer vs packed id]
+    int32_t         m_weaponAimConfigBySlot[2]; // +0xC80  per-slot weapon attack-zone-set id (default 0xC; -1 = non-weapon)
+    int32_t         m_weaponAux2BySlot[2];      // +0xC88  per-slot sibling config (sub_18045C02C signal @+0x7B0)
+    uint64_t        m_unknown_C90;              // +0xC90
 
     I_CombatTarget* m_pPrevTarget;          // +0xC98  previous target (compared by opponent manager)
     I_CombatTarget* m_pCurrentTarget;       // +0xCA0  current target (compared by opponent manager)

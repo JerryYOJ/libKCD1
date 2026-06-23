@@ -17,6 +17,16 @@ Offsets::I3DEngine* Offsets::Get3DEngine() {
     return *reinterpret_cast<I3DEngine**>(GetBase() + kC3DEngineOffset);
 }
 
+// CryEngine bucket allocator (the candidate std::vector's heap path). Matched pair.
+void* Offsets::CryMemAlloc(std::size_t size) {
+    using Fn = void* (__fastcall*)(uint64_t);
+    return reinterpret_cast<Fn>(GetBase() + kPoolMallocOffset)(size);
+}
+void Offsets::CryMemFree(void* p, std::size_t size) {
+    using Fn = void (__fastcall*)(void*, uint64_t);
+    reinterpret_cast<Fn>(GetBase() + kCryMemFreeOffset)(p, size);
+}
+
 // Central WUID->C_AIObject* map: the global qword_1837999E0 holds a pointer to the heap map.
 namespace wh { namespace framework {
 C_WuidObjectMap* GetWuidObjectMap() {

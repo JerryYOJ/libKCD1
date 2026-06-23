@@ -4,6 +4,7 @@
 #include <vector>
 #include <set>
 #include <utility>
+#include <boost/container/vector.hpp>
 
 #include "../framework/CryDeferrable.h"
 #include "../framework/C_Signal.h"
@@ -17,6 +18,7 @@
 #include "S_SoulProgression.h"
 #include "S_SoulArchetype.h"
 #include "E_CrimeSystemRole.h"
+#include "E_SoulAbility.h"
 #include "buff/S_ModifierNode.h"
 
 // -----------------------------------------------
@@ -199,6 +201,18 @@ struct S_SoulStatSource {
 };
 static_assert(sizeof(S_SoulStatSource) == 0x18);
 
+// -----------------------------------------------
+// Soul ability entry -- element of C_Soul::m_soulAbilities (+0x180).
+// -----------------------------------------------
+// The vector is kept SORTED by m_abilityId so HasSoulAbility binary-searches it
+// (lower_bound sub_18023B7D8). 0x10 bytes.
+struct S_SoulAbilityEntry {
+    E_SoulAbility m_abilityId;   // +0x00  the granted ability (sort key)
+    uint32_t      _unk04;        // +0x04
+    uint64_t      m_payload;     // +0x08  per-grant data (source/params); UNVERIFIED
+};
+static_assert(sizeof(S_SoulAbilityEntry) == 0x10);
+
 // ===========================================================================
 // C_Soul
 // ===========================================================================
@@ -221,6 +235,14 @@ public:
     // 7 sorted, non-owning intrusive list heads of S_ModifierNode (nodes chain via
     // S_ModifierNode::pNextSorted at +0x20). Buffs commit their staged modifiers here
     // via C_SoulBuffInstance::CommitModifiers. Index with E_ModifierCategory.
+    //
+    // [2] DerivedStat (soul+0xA8) is the per-actor MULTIPLIER hook the RPG combat weight calc
+    //     reads via AccumulatePerkStat_180229980 (sub_1802AE2F0): target id 8 scales
+    //     perfectBlock + masterStrike together (shared base v15), id 0x20 scales dodge, id 7 =
+    //     attacker skill-difference. A buff whose params use '*'/'%' (E_ModifierOp MulBase/
+    //     MulCurrent) on these ids multiplies that reaction's pick weight -- the data-driven way
+    //     to make an enemy perfect-block / master-strike / dodge less. (OVRD @ defense+0x78 is a
+    //     separate REPLACE layer; this list is the multiply layer.)
     S_ModifierNode*         m_modifierLists[7];      // +0x98 .. +0xC8
     bool                    m_modifiersDirty;        // +0xD0  participates in the activation gate (sub_180449568)
     char                    _padD1[7];               // +0xD1
@@ -235,7 +257,11 @@ public:
                                                      //        shared-soul-data lookup key
     void*                   m_unk178;                // +0x178 ptr to a 0x18-byte heap container owning a buffer
                                                      //        (referenced as owner+0x178 by the combat-buff path) [UNVERIFIED]
-    std::vector<void*>      m_unk180;                // +0x180 {begin,end,cap}; element type UNVERIFIED
+    // +0x180: abilities granted to this soul (Dodge/PerfectBlock/Riposte/Finticka/ChainStrike/...,
+    // see E_SoulAbility), added from perk_soul_ability.xml. Kept SORTED by ability id and queried
+    // by HasSoulAbility (I_Soul vtable +0x1A8). The combat defense automation gates each defensive
+    // reaction on the matching ability via sub_180432CF4: PerfectBlock(1), Riposte(2), Dodge(0).
+    boost::container::vector<S_SoulAbilityEntry> m_soulAbilities;  // +0x180
     C_Soul*                 m_self;                  // +0x198 self back-pointer (= this)
 
     // ----------------------------------------------------------- stat block
@@ -329,6 +355,7 @@ public:
     E_CrimeSystemRole GetCrimeRole() const;          // crime role from social class (m_pSocialClass+0x14); = game's GetCrimeSystemRole; sentinel-safe
     E_CrimeSystemRole GetEffectiveCrimeRole() const; // LIVE role: brain var b_soul.crimeSystemRole (override-aware); falls back to GetCrimeRole()
     bool              IsGuard() const;               // effective crime role is Soldier or Circator -- the crime "guard" test
+    bool              HasSoulAbility(E_SoulAbility ability) const; // sub_18023B6BC (I_Soul vtable +0x1A8): binary-search m_soulAbilities (+ the computed SteakTartare/TwoHanded cases). Reaction gates: Dodge(0)/PerfectBlock(1)/Riposte(2)
     float   GetPlayerOpinion() const;   // sub_1802287D0: opinion-of-player [-1,+1] (root soul +0x6F8)
     void    SetPlayerOpinion(float v);  // direct clamped write to root+0x6F8 (engine has no value-setter, only delta-apply)
     int32_t GetFactionId() const;       // sub_18064D750: faction id (root soul +0x294)

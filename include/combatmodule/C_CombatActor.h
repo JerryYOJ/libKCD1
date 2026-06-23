@@ -14,6 +14,7 @@
 #include "S_CombatActorState.h"
 #include "I_CombatTarget.h"
 #include "C_CombatActorHuntAttack.h"
+#include "E_CombatZoneId.h"
 
 namespace wh::entitymodule {
 enum E_HandSlot : int32_t;
@@ -26,6 +27,7 @@ class C_CombatScene;
 class I_CombatActorAction;
 class C_CombatActorActionManager;
 class C_CombatActorDirector;
+class C_CombatAutomation;
 class C_CombatActorHorsePullDown;
 class C_CombatActorMercyKill;
 class C_CombatActorHuntAttack;
@@ -41,22 +43,7 @@ struct S_MeleeHitDetails;
 // in binary. Only RTTI template parameter names confirm its existence.
 // Forward-declared; define values when a converter function is located.
 // ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// E_CombatZoneId -- directional combat zones.
-//
-// VERIFIED: from combat_zone.xml in Tables.pak.
-// Each zone corresponds to a guard/attack direction in the star combat system.
-// Zone 2 (upper_right) is the default zone (default_zone="True").
-// ---------------------------------------------------------------------------
-enum class E_CombatZoneId : int32_t {
-    Undefined  = -1,
-    Head       = 0,   // "head"        — top stab
-    UpperLeft  = 1,   // "upper_left"  — angles 135°-205°
-    UpperRight = 2,   // "upper_right" — angles 325°-45° (DEFAULT)
-    LowerLeft  = 3,   // "lower_left"  — angles 205°-270°
-    LowerRight = 4,   // "lower_right" — angles 270°-325°
-    Center     = 5,   // "center"      — radius 0 (thrust/stab)
-};
+// E_CombatZoneId is defined in E_CombatZoneId.h (included above).
 
 enum class E_CombatActorStateId : int32_t;
 
@@ -464,8 +451,13 @@ public:
     // VERIFIED RTTI: sub_1805FD5F4 writes C_CombatEnvironmentManager vftable.
     void*                   m_pEnvironmentManager;  // +0x4E8  C_CombatEnvironmentManager
 
-    // +0x4F0: (UNVERIFIED purpose, zeroed in constructor)
-    uint64_t                m_unknown4F0;           // +0x4F0
+    // +0x4F0: C_CombatAutomation aggregate (0x758 bytes), lazily built by
+    // sub_1806533B8 (GetOrCreateAutomation) -> sub_1804F44B0; null until first use.
+    // Holds the melee defense/offense/guard automation brains. The defense brain
+    // (C_CombatAutomationDefense @ aggregate+0x140) owns the reaction-weight
+    // override that controls whether this actor blocks / perfect-blocks /
+    // master-strikes / dodges -- reach it via m_pAutomation->Defense().
+    C_CombatAutomation*     m_pAutomation;          // +0x4F0
 
     // +0x4F8: C_CombatAlignmentManager (0x10 bytes)
     // VERIFIED RTTI: sub_1805FD2B4 writes C_CombatAlignmentManager vftable.

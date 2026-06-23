@@ -2,8 +2,12 @@
 
 #include <cstdint>
 #include "C_CombatActorObject.h"
+#include "I_CombatActorAction.h"   // I_CombatActorActionPtr (= _smart_ptr<I_CombatActorAction>)
 
 namespace wh::combatmodule {
+
+struct S_CombatActionAttackQueryData;
+enum class E_CombatInputClass : int32_t;
 
 // ---------------------------------------------------------------------------
 // C_CombatActionFactoryBase -- base class for combat action factories.
@@ -69,13 +73,17 @@ public:
     ~C_CombatActionAttackFactory() override = default;
     // CreateAction override at vtable[6] = sub_182447370 region
 
-    // Non-virtual: sub_180460934
-    // Creates an action from the given input class and dispatches it.
-    // ppOut: receives the created action smart_ptr (caller must Release after use).
-    // inputClassId: combat input class (e.g. Offsets::InputClassId::Block()).
-    // flags: action creation flags (usually 0).
-    // Returns ppOut.
-    void* CreateAndDispatch(void** ppOut, uint32_t inputClassId, int flags);
+    // Non-virtual: sub_180460934. Builds an action for inputClassId (using the actor's live
+    // combat state, incl. m_committedAttackZone +0xC00 as the swing direction) and dispatches
+    // it. pOut receives the created action (caller Releases after use). flags usually 0.
+    // Returns pOut.
+    I_CombatActorActionPtr* CreateAndDispatch(I_CombatActorActionPtr* pOut,
+                                              E_CombatInputClass inputClassId, int32_t flags);
+
+    // Non-virtual: sub_18045FF90. Fills the query from this factory's actor (and opponent)
+    // combat state and sets q->m_input = inputClassId; feed the built query to
+    // S_AttackCandidateResultHolder::Enumerate.
+    void BuildAttackQuery(E_CombatInputClass inputClassId, S_CombatActionAttackQueryData* q);
 };
 static_assert(sizeof(C_CombatActionAttackFactory) == 0x10);
 

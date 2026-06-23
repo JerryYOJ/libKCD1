@@ -114,6 +114,15 @@ bool C_Soul::IsGuard() const
     return r == E_CrimeSystemRole::Soldier || r == E_CrimeSystemRole::Circator;
 }
 
+bool C_Soul::HasSoulAbility(E_SoulAbility ability) const
+{
+    // sub_18023B6BC (I_Soul vtable +0x1A8): binary-search the sorted m_soulAbilities (+0x180)
+    // for the id; a few ids (SteakTartare/TwoHanded) are computed instead. Returns the bool.
+    using Fn = char (__fastcall*)(const C_Soul*, uint32_t);
+    return reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kSoulHasAbilityOffset)(
+               this, static_cast<uint32_t>(ability)) != 0;
+}
+
 void C_Soul::ResetInventory(bool resetEquipment)
 {
     // sub_18030E278(soul, force=1, resetEquip, presetMultiplier=0)

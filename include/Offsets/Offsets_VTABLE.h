@@ -56,5 +56,6 @@ inline constexpr std::array<uintptr_t, 2> VTABLE_C_CombatActorHorsePullDown{ 0x2
 //     [0] IsActive [1] _vf1(nop) [2] FillViewParams [3] Activate [4] Deactivate [5] _vf5 [6] _vf6
 //   [1] secondary (IEntitySystemSink)      vtable @ WHGame+0x26B3860
 inline constexpr std::array<uintptr_t, 2> VTABLE_C_DialogCameraManager{ 0x26B3820, 0x26B3860 };
+inline constexpr std::array<uintptr_t, 3> VTABLE_CViewSystem{ 0x2766CF8, 0x2766C70, 0x2766CA0 };  // IViewSystem / IMovieUser / ILevelSystemListener
 
 }  // namespace Offsets

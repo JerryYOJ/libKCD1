@@ -2,6 +2,9 @@
 
 #include <cstdint>
 #include <vector>
+#include "E_CombatInputClass.h"
+#include "E_CombatAttackType.h"
+#include "E_CombatZoneId.h"
 
 namespace wh::combatmodule {
 
@@ -57,11 +60,11 @@ public:
 class I_CombatComboStepData {
 public:
     inline static constexpr auto RTTI = Offsets::RTTI_I_CombatComboStepData;
-    virtual int32_t GetCombatComboId() const = 0;               // [0]
-    virtual int32_t GetStep() const = 0;                        // [1]
-    virtual int32_t GetAtkCombatZoneId() const = 0;             // [2]
-    virtual int32_t GetAttackTypeId() const = 0;                // [3]
-    virtual bool HasAttackType() const = 0;                     // [4]
+    virtual int32_t GetStep() const = 0;                        // [0] sub_1806F9D00 -> +0x0C
+    virtual E_CombatInputClass GetInputClassId() const = 0;     // [1] sub_1806F8B10 -> +0x10
+    virtual E_CombatZoneId GetAtkCombatZoneId() const = 0;      // [2] sub_1806F99E0 -> +0x18
+    virtual E_CombatAttackType GetAttackTypeId() const = 0;     // [3] sub_1806F91D0 -> +0x14
+    virtual bool HasAttackType() const = 0;                     // [4] sub_1804E36E8 -> +0x14 != -1
 };
 
 // ==========================================================================
@@ -75,12 +78,13 @@ public:
 // Created during C_CombatComboStepDatabase::OnPostLoad (sub_180F92DE4).
 // Each instance wraps one S_CombatComboStepTableRow with typed accessors.
 //
-// Virtual methods (at vtable 0x1822cb548):
-//   [0] 0x1806f9d00: GetCombatComboId() -> return *(uint32_t*)(this + 0x0C)
-//   [1] 0x1806f8b10: GetStep()          -> return *(uint32_t*)(this + 0x10)
-//   [2] 0x1806f99e0: GetAtkCombatZoneId()-> return *(uint32_t*)(this + 0x18)
-//   [3] 0x1806f91d0: GetAttackTypeId()  -> return *(uint32_t*)(this + 0x14)
-//   [4] 0x1804e36e8: HasAttackType()    -> return *(uint32_t*)(this + 0x14) != 0xFFFFFFFF
+// Virtual methods (vtable 0x1822cb548) — column->offset VERIFIED via the
+// combat_combo_step binder sub_1800D35B0 + ctor sub_180F92DE4:
+//   [0] 0x1806f9d00: GetStep()           -> *(int*)(this+0x0C)  (combat_combo_step.step)
+//   [1] 0x1806f8b10: GetInputClassId()   -> *(int*)(this+0x10)  (input_class_id)
+//   [2] 0x1806f99e0: GetAtkCombatZoneId()-> *(int*)(this+0x18)  (atk_combat_zone_id)
+//   [3] 0x1806f91d0: GetAttackTypeId()   -> *(int*)(this+0x14)  (attack_type_id, -1 = none)
+//   [4] 0x1804e36e8: HasAttackType()     -> *(int*)(this+0x14) != -1
 //
 // Inherits from I_CombatComboStepData (secondary vtable at offset 0x00
 // since it's the primary base).
@@ -91,19 +95,19 @@ class C_CombatComboStepData : public I_CombatComboStepData {
 public:
     inline static constexpr auto RTTI = Offsets::RTTI_C_CombatComboStepData;
     // --- Virtual method implementations ---
-    int32_t GetCombatComboId() const override { return m_combatComboId; }
     int32_t GetStep() const override { return m_step; }
-    int32_t GetAtkCombatZoneId() const override { return m_atkCombatZoneId; }
-    int32_t GetAttackTypeId() const override { return m_attackTypeId; }
-    bool HasAttackType() const override { return m_attackTypeId != -1; }
+    E_CombatInputClass GetInputClassId() const override { return m_inputClassId; }
+    E_CombatZoneId GetAtkCombatZoneId() const override { return m_atkCombatZoneId; }
+    E_CombatAttackType GetAttackTypeId() const override { return m_attackTypeId; }
+    bool HasAttackType() const override { return m_attackTypeId != E_CombatAttackType::None; }
 
     // +0x00: vtable (C_CombatComboStepData / I_CombatComboStepData)
-    int32_t     m_rowId;                // +0x08  row base value (from _rowbase)
-    int32_t     m_combatComboId;        // +0x0C  FK to combat_combo
-    int32_t     m_step;                 // +0x10  step number within the combo
-    int32_t     m_attackTypeId;         // +0x14  FK to combat_attack_type (-1 = none)
-    int32_t     m_atkCombatZoneId;      // +0x18  FK to combat zone
-    int32_t     _pad1C;                 // +0x1C  padding to 0x20
+    int32_t            m_combatComboId;   // +0x08  FK combat_combo (combat_combo_id; no enum — data table)
+    int32_t            m_step;            // +0x0C  step index within the combo (0-based)
+    E_CombatInputClass m_inputClassId;    // +0x10  matched against CreateAndDispatch a3 to advance the combo (None=-1 wildcard)
+    E_CombatAttackType m_attackTypeId;    // +0x14  None(-1) = directional step; the finisher dispatch uses this
+    E_CombatZoneId     m_atkCombatZoneId; // +0x18  directional steps (Undefined=-1 = none)
+    int32_t            _pad1C;            // +0x1C  padding to 0x20
 };
 static_assert(sizeof(C_CombatComboStepData) == 0x20, "C_CombatComboStepData must be 0x20 bytes");
 

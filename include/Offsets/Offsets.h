@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include <cstddef>
 #include "vtables/IGameFramework.h"
 #include "vtables/I3DEngine.h"
 
@@ -39,6 +40,24 @@ inline static constexpr uintptr_t kRPGParamDefsOffset       = 0x29C95D0;
 inline static constexpr uintptr_t kActionTypeDbOffset       = 0x359B1E0;
 inline static constexpr uintptr_t kBuffManagerOffset        = 0x3500F10;
 inline static constexpr uintptr_t kCreateAndDispatchOffset  = 0x460934;
+inline static constexpr uintptr_t kSetCommittedAttackZoneOffset = 0x45D1EC; // sub_18045D1EC: S_CombatActorState::SetCommittedAttackZone(zone) -> m_committedAttackZone(+0xC00, the PROVEN player swing-direction lever) via the change-notify setter
+inline static constexpr uintptr_t kComboAdvanceStepOffset   = 0x602C34; // sub_180602C34: C_CombatComboManager combo-advance handler (normally the state+0x420 "attack-target-is-opponent" signal target). Direct call(this, owner, 1) = CLEAN combo FSM advance: ++m_currentStep + re-filter candidates + fire m_signal_078, WITHOUT writing state+0xC19 or emitting the +0x420 hit event. Reads executed key state+0xBF4; advances only when m_comboFlags(+0x228)==0 (else RESETS).
+inline static constexpr uintptr_t kSetReactionWeightsOffset = 0x4F83C8; // sub_1804F83C8: C_CombatAutomationDefense::SetReactionWeights(this, const float w[5]). Frees the old +0x78 override, allocs 0x14, value-copies the 5 weights {noBlock,normalBlock,perfectBlock,specialPerfectBlock,dodge}; pass nullptr to clear. The picker (sub_1805F9408) overlays these over the RPG weights (REPLACE when >=0) -> per-NPC defense control.
+// Attack-candidate ENUMERATION infra (RE: workflow wf_05aec32f). Lets a plugin enumerate
+// candidates itself; the per-candidate DIRECTION is m_selectionKeyZone->m_matchKey (0..4),
+// and the engine selects the candidate whose matchKey == sub_18045F3AC(live state).
+inline static constexpr uintptr_t kQueryCtorOffset           = 0x4600BC; // sub_1804600BC: S_CombatActionAttackQueryData ctor (engine; 2nd arg ignored)
+inline static constexpr uintptr_t kAttackSelectionResolveOffset = 0x45F3AC; // sub_18045F3AC(factory, state.inputClassId, &record) -> resolved swing zone (== the matchKey CreateAndDispatch selects); read-only
+inline static constexpr uintptr_t kCombatAimConfigOffset      = 0x45F6E8; // sub_18045F6E8() -> the combat-aim config object; +0x9C (dword) = live directional aim-stance, the PLAYER's swing-direction lever (feeds sub_18045F66C -> src_zone)
+inline static constexpr uintptr_t kQueryGetTypeNameHashOffset = 0xF49280; // sub_180F49280: S_CombatQueryData vtable[0] GetTypeNameHash(out)
+inline static constexpr uintptr_t kQueryGetCacheKeyOffset    = 0x219730; // sub_180219730: S_CombatQueryData vtable[1] GetCacheKey (candidate-cache key)
+inline static constexpr uintptr_t kBuildAttackQueryOffset    = 0x45FF90; // sub_18045FF90: C_CombatActionAttackFactory::BuildAttackQuery(input, &q)
+inline static constexpr uintptr_t kEnumerateCandidatesOffset = 0x45FD18; // sub_18045FD18: fill candidate std::vector (arg1 ignored, &holder, &q)
+inline static constexpr uintptr_t kPoolMallocOffset          = 0x28C040; // sub_18028C040: CryEngine bucket pool malloc (the candidate vector's heap path; pairs with the sized CryEngine::MemFree)
+// (reserve + free are now real std::vector ops via C_InlinePoolAllocator's allocate/deallocate; the engine reserve sub_18045FB70 / free sub_18045FE70 offsets are no longer needed.)
+inline static constexpr uintptr_t kQuerySubListDtorOffset    = 0x2185C4; // sub_1802185C4: destroy the query's +0xA8 intrusive sub-list
+inline static constexpr uintptr_t kCryMemFreeOffset          = 0x5B72C0; // CryEngine::MemFree(ptr, size)
+
 inline static constexpr uintptr_t kDispatchCounterActionOffset = 0x69536C;
 inline static constexpr uintptr_t kTypeFactoryEntryInitOffset  = 0x712B68;
 inline static constexpr uintptr_t kActionTypeIdBase         = 0x359B330;
@@ -92,6 +111,7 @@ inline static constexpr uintptr_t kModifyPlayerReputationOffset     = 0x11C6950;
 inline static constexpr uintptr_t kSoulResetInventoryOffset         = 0x30E278;  // sub_18030E278: C_Soul inventory reset (clear + repopulate from preset; args: soul, force, resetEquip, presetMul)
 inline static constexpr uintptr_t kSoulListLookupByWuidOffset       = 0x284B04;  // sub_180284B04: C_SoulList::LookupByWUID(&slotmap@+0x48, &wuid)
 inline static constexpr uintptr_t kGetSoulByEntityIdOffset          = 0x33B518;  // sub_18033B518: entityId -> C_Soul* (0 if not an actor; doubles as NPC test)
+inline static constexpr uintptr_t kSoulHasAbilityOffset             = 0x23B6BC;  // sub_18023B6BC: C_Soul::HasSoulAbility(id) -- I_Soul vtable +0x1A8; binary-search m_soulAbilities(+0x180) + computed SteakTartare(17)/TwoHanded(61) cases
 
 // AI-registry accessors (impl: AIRegistries.cpp). EntityToAIMap is a real std::unordered_map
 // (indexed natively); the C_IntelligentObjectManager map is a custom T_WuidHashMap (uses engine Find).
@@ -118,6 +138,13 @@ IGameFramework* GetCCryAction();
 // I3DEngine: gEnv.p3DEngine (+0x08) is a DEAD SDK slot in KCD (always null) — read
 // the Cry3DEngineBase static C3DEngine* instead (set in the C3DEngine ctor).
 I3DEngine* Get3DEngine();
+
+// CryEngine bucket allocator forwarders (the candidate std::vector's heap path).
+// CryMemAlloc -> sub_18028C040 (bucket pool malloc); CryMemFree -> CryEngine::MemFree
+// (sub_1805B72C0, SIZED). Matched pair — do NOT free these with CryModuleFree (CRT free),
+// which would corrupt the bucket heap.
+void* CryMemAlloc(std::size_t size);
+void  CryMemFree(void* p, std::size_t size);
 
 // -----------------------------------------------
 // Combat action type IDs (runtime-assigned globals)
