@@ -134,6 +134,7 @@ namespace Offsets {
     inline constexpr std::uintptr_t RTTI_C_CombatActorHuntAttack                              = 0x29FDA48;  // .?AVC_CombatActorHuntAttack@combatmodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_CombatActorMercyKill                               = 0x29FDA08;  // .?AVC_CombatActorMercyKill@combatmodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_CombatActorObject                                  = 0x29F4EB8;  // .?AVC_CombatActorObject@combatmodule@wh@@
+    inline constexpr std::uintptr_t RTTI_C_CombatActorOpponentManager                         = 0x29FDA90;  // .?AVC_CombatActorOpponentManager@combatmodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_CombatActorUpdatedObject                           = 0x29FDFC0;  // .?AVC_CombatActorUpdatedObject@combatmodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_CombatAutomation                                   = 0x2A01C18;  // .?AVC_CombatAutomation@combatmodule@wh@@
     inline constexpr std::uintptr_t RTTI_C_CombatAutomationAction                             = 0x2A01C58;  // .?AVC_CombatAutomationAction@combatmodule@wh@@

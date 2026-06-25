@@ -4,7 +4,7 @@
 #include "E_BuffStat.h"                // E_SoulStat, E_MovementType, E_SoulLevel
 #include "../E_ModifierCategory.h"
 #include "../E_SoulSkill.h"
-#include "../E_CombatStat.h"
+#include "../E_PerkStat.h"
 #include "../E_DerivedStat.h"
 
 namespace wh::rpgmodule {
@@ -58,7 +58,7 @@ struct S_ModifierNode {
 // One concrete node type per modifier category (T = that category's target-id namespace).
 using S_StatModifierNode        = S_ModifierNode<E_ModifierCategory::Stat,        E_SoulStat>;
 using S_SkillModifierNode       = S_ModifierNode<E_ModifierCategory::Skill,       E_SoulSkill>;
-using S_CombatStatModifierNode  = S_ModifierNode<E_ModifierCategory::DerivedStat, E_CombatStat>;   // reaction-weight hook (Pbs=8, Dsl=0x20)
+using S_PerkStatModifierNode    = S_ModifierNode<E_ModifierCategory::DerivedStat, E_PerkStat>;     // cat2 perk-stat hook (Pbs=8, Dsl=0x20); category enum value is named DerivedStat
 using S_DerivedStatModifierNode = S_ModifierNode<E_ModifierCategory::Detail,      E_DerivedStat>;
 using S_MovementModifierNode    = S_ModifierNode<E_ModifierCategory::Movement,    E_MovementType>;
 using S_SpecialModifierNode     = S_ModifierNode<E_ModifierCategory::Special,     int32_t>;          // no code registry (ids set in C++)
@@ -66,7 +66,7 @@ using S_SoulLevelModifierNode   = S_ModifierNode<E_ModifierCategory::SoulLevel, 
 
 static_assert(sizeof(S_StatModifierNode)        == 0x40);
 static_assert(sizeof(S_SkillModifierNode)       == 0x40);
-static_assert(sizeof(S_CombatStatModifierNode)  == 0x40);
+static_assert(sizeof(S_PerkStatModifierNode)    == 0x40);
 static_assert(sizeof(S_DerivedStatModifierNode) == 0x40);
 static_assert(sizeof(S_MovementModifierNode)    == 0x40);
 static_assert(sizeof(S_SpecialModifierNode)     == 0x40);

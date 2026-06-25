@@ -14,6 +14,7 @@ public:
     const char* c_str() const { return m_str ? m_str : ""; }
     bool        empty() const { return !m_str || !m_str[0]; }
     bool operator==(const CCryName& o) const { return m_str == o.m_str; }
+    bool operator<(const CCryName& o) const { return m_str < o.m_str; }   // key order = interned-ptr compare (matches the binary's std::map)
 private:
     const char* m_str;   // 0x00 — into the interned INameTable buffer
 };

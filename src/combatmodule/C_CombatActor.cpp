@@ -8,3 +8,12 @@ void wh::combatmodule::C_CombatActor::DispatchCounterAction(
     auto fn = reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kDispatchCounterActionOffset);
     fn(this, pOutAction, static_cast<int>(type), scopeIndex);
 }
+
+// sub_18063A634 — engage `target` as this actor's 1v1 opponent (drives the opponent
+// manager's UpdateOpponent; no-op unless m_isActive).
+void wh::combatmodule::C_CombatActor::SetOpponent(C_CombatActor* target)
+{
+    using Fn = void(__fastcall*)(C_CombatActor*, C_CombatActor*);
+    auto fn = reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kSetOpponentOffset);
+    fn(this, target);
+}

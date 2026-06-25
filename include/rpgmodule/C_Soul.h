@@ -19,6 +19,7 @@
 #include "S_SoulArchetype.h"
 #include "E_CrimeSystemRole.h"
 #include "E_SoulAbility.h"
+#include "E_ModifierCategory.h"
 #include "buff/S_ModifierNode.h"
 
 // -----------------------------------------------
@@ -57,19 +58,8 @@ struct C_Faction;           // faction record (C_FactionManager::GetFactionById)
 // Total size: 0xC38.
 // ===========================================================================
 
-// Modifier-list category (index into C_Soul::m_modifierLists). Names cross-referenced
-// from the 7 staging lists of C_SoulBuffInstance (m_statMods..m_soulLevelMods), which
-// C_SoulBuffInstance::CommitModifiers moves into the soul's sorted lists at +0x98..+0xC8.
-enum class E_ModifierCategory : int32_t {
-    Stat       = 0,   // base stats        (walked by GetModifiedStatValue sub_180229880)
-    Skill      = 1,
-    DerivedStat= 2,   // (fed to C_RPGParams::AccumulatePerkStat_180229980)
-    Detail     = 3,
-    Movement   = 4,
-    Special    = 5,   // (walked with wildcard query 0xFFFFFFFF by sub_180AA0770)
-    SoulLevel  = 6,
-    Count      = 7,
-};
+// E_ModifierCategory is defined in E_ModifierCategory.h; the per-category node types
+// (S_StatModifierNode .. S_SoulLevelModifierNode) are in buff/S_ModifierNode.h.
 
 // -----------------------------------------------
 // C_CombatSoul -- combat-state sub-object embedded at C_Soul+0xD8 (size 0x88)
@@ -232,18 +222,25 @@ public:
     wh::shared::C_Signal<I_Soul&>  m_soulSignal;     // +0x68  (size 0x30) fires on soul property changes
 
     // ------------------------------------------------------- active modifiers
-    // 7 sorted, non-owning intrusive list heads of S_ModifierNode (nodes chain via
-    // S_ModifierNode::pNextSorted at +0x20). Buffs commit their staged modifiers here
-    // via C_SoulBuffInstance::CommitModifiers. Index with E_ModifierCategory.
+    // 7 sorted, non-owning intrusive list heads, one per E_ModifierCategory (nodes chain via
+    // S_ModifierNode::pNextSorted at +0x20). Buffs commit their staged modifiers here via
+    // C_SoulBuffInstance::CommitModifiers. Each list is a homogeneous chain of that category's
+    // node type (target-id typed accordingly).
     //
-    // [2] DerivedStat (soul+0xA8) is the per-actor MULTIPLIER hook the RPG combat weight calc
-    //     reads via AccumulatePerkStat_180229980 (sub_1802AE2F0): target id 8 scales
-    //     perfectBlock + masterStrike together (shared base v15), id 0x20 scales dodge, id 7 =
-    //     attacker skill-difference. A buff whose params use '*'/'%' (E_ModifierOp MulBase/
-    //     MulCurrent) on these ids multiplies that reaction's pick weight -- the data-driven way
-    //     to make an enemy perfect-block / master-strike / dodge less. (OVRD @ defense+0x78 is a
-    //     separate REPLACE layer; this list is the multiply layer.)
-    S_ModifierNode*         m_modifierLists[7];      // +0x98 .. +0xC8
+    // m_perkStatMods (cat 2 "DerivedStat", soul+0xA8) is the per-actor MULTIPLIER hook the RPG
+    // combat weight calc reads via AccumulatePerkStat_180229980 (sub_1802AE2F0): E_PerkStat::Pbs(8)
+    // scales perfectBlock + masterStrike together (shared base v15), Dsl(0x20) scales dodge,
+    // Asp(7) is the attacker skill-difference term. A buff whose params multiply ('*'/'%') these
+    // -- e.g. "pbs*0.5", "dsl*0.5" -- lowers that reaction's pick weight; the data-driven way to
+    // make an enemy perfect-block / master-strike / dodge less. (OVRD @ defense+0x78 is a
+    // separate REPLACE layer; this list is the multiply layer.)
+    S_StatModifierNode*        m_statMods;           // +0x98  [0] Stat        (E_SoulStat)
+    S_SkillModifierNode*       m_skillMods;          // +0xA0  [1] Skill       (E_SoulSkill)
+    S_PerkStatModifierNode*    m_perkStatMods;       // +0xA8  [2] DerivedStat-cat (E_PerkStat)  -- the perk-stat / reaction-weight hook
+    S_DerivedStatModifierNode* m_derivedStatMods;    // +0xB0  [3] Detail          (E_DerivedStat)
+    S_MovementModifierNode*    m_movementMods;       // +0xB8  [4] Movement    (E_MovementType)
+    S_SpecialModifierNode*     m_specialMods;        // +0xC0  [5] Special     (manual)
+    S_SoulLevelModifierNode*   m_soulLevelMods;      // +0xC8  [6] SoulLevel   (E_SoulLevel)
     bool                    m_modifiersDirty;        // +0xD0  participates in the activation gate (sub_180449568)
     char                    _padD1[7];               // +0xD1
 
@@ -277,21 +274,6 @@ public:
 
     // ---------------------------------------------------------- perk management
     S_SoulProgression        m_perkMgmt;              // +0x3D0  (size 0x670)
-    // Within m_perkMgmt (soul-relative offsets):
-    //   +0x480 = parent-soul pointer (compound entities; walked by GetFactionIDInternal)
-    //   +0x4A8 = m_activePerks (S_ProgressionSubsystem) — the LIVE subsystem; holds BOTH
-    //            stat levels (+0x4B4) AND skill levels (+0x540)
-    //   +0x690 = m_activePerks.m_perkList (C_PerkList; returned by GetActivePerkList)
-    //   +0x6E8 = m_activePerks' live S_PerkPointCounters* (stat + skill + main perk points)
-    //   +0x6F8 = m_activeStats.m_playerOpinion (S_ProgressionSubsystem+0x250): per-NPC opinion-of-the-PLAYER
-    //            float, domain [-1,+1]. Genuinely the active perk-subsystem's last dword (copied
-    //            base->active by sub_1805A3F34, serialized with active perks). Read sub_1802287D0
-    //            (master-walk +0x480); written sub_1811F3224; player-npc term of GetRelationship
-    //            sub_180228414. [VERIFIED -- was the perk side's unnamed m_unkDword250]
-    //   +0x750 = m_basePerks (S_ProgressionSubsystem) — the archetype-derived BASELINE: rebuilt from
-    //            base stats + perk/skill tables (sub_1811F7FB0), then copied wholesale into
-    //            m_activePerks (sub_1805A3F34) at soul create/reset/clone. Not serialized
-    //            (recomputed on load); never the queried subsystem.
 
     // ----------------------------------------- RPG movement / locomotion state
     // Constructed by sub_1805937AC(soul+0xA40) (+ sub_180593854). The movement

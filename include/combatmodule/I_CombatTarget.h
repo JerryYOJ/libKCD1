@@ -2,68 +2,65 @@
 
 #include <cstdint>
 
+namespace Offsets { struct IEntity; }
+
 namespace wh::combatmodule {
 
-class I_CombatActor;
+class C_CombatActor;
 
 // ---------------------------------------------------------------------------
 // I_CombatTarget — interface for a combat target reference.
 //
 // RTTI: .?AVI_CombatTarget@combatmodule@wh@@
-// vtable @ 0x182217AA8 (pure interface, all purecall except [0])
+// vtable @ 0x182217AA8 (pure interface: [0] is a scalar-deleting dtor,
+//          [1..7] are purecall)
 // Size: 0x08 (just a vtable pointer)
 //
-// Provides a uniform interface to query a target's position, entity,
-// and identity without knowing whether the target is a player, NPC, or
-// dummy object.
+// A uniform handle to a combat target. The sole concrete implementation,
+// C_CombatTarget (see C_CombatTarget.h), wraps a CryEngine IEntity* and
+// forwards every query to that entity's IEntity vtable.
 //
-// vtable layout (interfuscator-shuffled, 8 slots):
-//   [0] sub_180F505A0  scalar deleting destructor
-//   [1] purecall       GetActor / GetWrappedPtr
-//   [2] purecall       GetEntityId
-//   [3] purecall       GetPosition (via actor vtable[0x2B])
-//   [4] purecall       GetWeaponPosition (via actor vtable[0x2D])
-//   [5] purecall       LookupEntity (GetEntityId → actor system lookup)
-//   [6] purecall       GetWorldPosition (LookupEntity → result+0x1A0)
-//   [7] purecall       IsSameTarget (compares wrapped ptrs)
+// Slot semantics were re-verified against C_CombatTarget's implementations
+// and the wrapped IEntity vtable (CEntity @ 0x1821A54C8):
+//   IEntity::GetId           = vt[1]    (returns *(entity+0x0C))
+//   IEntity::GetPos          = vt[0x2B] (Vec3,  sub_18033C610)
+//   IEntity::GetWorldRotation= vt[0x2D] (Quat,  sub_18033E548)  <-- a rotation
+//
+// NOTE: slot [4] was previously mis-RE'd as "GetWeaponPosition". Its
+// implementation (C_CombatTarget::GetWorldRotation_180F52458) forwards to the
+// entity's vt[0x2D], which builds a quaternion from the world matrix — i.e. it
+// returns a rotation (Quat), not a weapon position. Renamed accordingly.
 // ---------------------------------------------------------------------------
 class I_CombatTarget {
 public:
     inline static constexpr auto RTTI = Offsets::RTTI_I_CombatTarget;
-    virtual ~I_CombatTarget() = default;                // [0]
-    virtual void* GetActor() const = 0;                 // [1] returns *(this+0x08)
-    virtual uint32_t GetEntityId() const = 0;           // [2] calls wrapped->vtable[1]
-    virtual void GetPosition(void* outVec) const = 0;   // [3] calls wrapped->vtable[0x2B]
-    virtual void GetWeaponPosition(void* outVec) const = 0; // [4] calls wrapped->vtable[0x2D]
-    virtual void* LookupEntity() const = 0;             // [5] entity system lookup by ID
-    virtual void* GetWorldPosition() const = 0;         // [6] LookupEntity()->+0x1A0
-    virtual bool IsSameTarget(const I_CombatTarget* other) const = 0; // [7] compares actors
-};
 
-// ---------------------------------------------------------------------------
-// C_CombatTarget — concrete target wrapper around a combat actor pointer.
-//
-// RTTI: .?AVC_CombatTarget@combatmodule@wh@@
-// vtable @ 0x1822075A0
-// Destructor: sub_1806EA35C (frees 0x10)
-// Size: 0x10 bytes
-//
-// All vtable methods delegate to the wrapped pointer at +0x08.
-// ---------------------------------------------------------------------------
-class C_CombatTarget : public I_CombatTarget {
-public:
-    inline static constexpr auto RTTI = Offsets::RTTI_C_CombatTarget;
-    ~C_CombatTarget() override = default;
-    void* GetActor() const override { return m_pActor; }
-    uint32_t GetEntityId() const override { return 0; }
-    void GetPosition(void* outVec) const override {}
-    void GetWeaponPosition(void* outVec) const override {}
-    void* LookupEntity() const override { return nullptr; }
-    void* GetWorldPosition() const override { return nullptr; }
-    bool IsSameTarget(const I_CombatTarget* other) const override { return false; }
+    virtual ~I_CombatTarget() = default;                            // [0]
 
-    void* m_pActor;     // +0x08  wrapped actor / entity pointer
+    // Returns the wrapped target entity (C_CombatTarget::m_pActor).
+    virtual Offsets::IEntity* GetActor() const = 0;                 // [1]
+
+    // Entity id of the wrapped entity (IEntity::GetId == *(entity+0x0C)).
+    virtual EntityId GetEntityId() const = 0;                       // [2]
+
+    // World position of the wrapped entity (IEntity::GetPos, vt[0x2B]).
+    virtual Vec3 GetPosition() const = 0;                           // [3]
+
+    // World rotation of the wrapped entity (IEntity::GetWorldRotation,
+    // vt[0x2D]). Was mis-RE'd as "GetWeaponPosition" — it returns a Quat.
+    virtual Quat GetWorldRotation() const = 0;                      // [4]
+
+    // Resolves the wrapped entity to its actor object via the actor system
+    // (S_GameContext+0x128, vtbl[3], keyed by GetEntityId()). Returns the
+    // actor/soul object (its world position lives at +0x1A0). Null if missing.
+    virtual void* LookupEntity() const = 0;                         // [5]
+
+    // The wrapped entity's combat actor: *(LookupEntity()+0x1A0), or null.
+    // (UpdateOpponent feeds this into S_CombatActorState::m_pOpponent.)
+    virtual C_CombatActor* GetCombatActor() const = 0;             // [6]
+
+    // True iff this and other wrap the same entity (GetActor() identity).
+    virtual bool IsSameTarget(const I_CombatTarget* other) const = 0; // [7]
 };
-static_assert(sizeof(C_CombatTarget) == 0x10);
 
 }  // namespace wh::combatmodule

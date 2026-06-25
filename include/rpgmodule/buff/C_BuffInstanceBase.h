@@ -26,7 +26,6 @@ namespace wh::rpgmodule {
 
 class C_Soul;
 class I_BuffInitParams;
-struct S_ModifierNode;
 
 class C_BuffInstanceBase {
 public:

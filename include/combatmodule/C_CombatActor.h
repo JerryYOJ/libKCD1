@@ -14,6 +14,7 @@
 #include "S_CombatActorState.h"
 #include "I_CombatTarget.h"
 #include "C_CombatActorHuntAttack.h"
+#include "C_CombatActorOpponentManager.h"
 #include "E_CombatZoneId.h"
 
 namespace wh::entitymodule {
@@ -282,6 +283,15 @@ public:
     // ppOutAction receives the created action (caller must Release).
     void DispatchCounterAction(I_CombatActorActionPtr* pOutAction, E_CounterActionType type, uint32_t scopeIndex = 0);
 
+    // Sets `target` as this actor's current combat opponent: extracts the
+    // target's entity handle (target->GetEntity()+0x38) and forwards it to
+    // m_pOpponentManager->UpdateOpponent(). No-op unless this actor is combat-
+    // active (m_isActive). This is the actor-level entry the hunt-attack path
+    // uses to establish the attacker<->victim opponent relationship (it calls
+    // this both ways). Non-virtual; first arg is the implicit this.
+    // sub_18063A634
+    void SetOpponent(C_CombatActor* target);
+
     // ---- I_ItemAttachmentListener overrides ----
     void OnItemAttached(uint64_t entityId, unsigned int handSlot) override {}  // sub_18054A9F4
     void OnItemDetached(uint64_t entityId, unsigned int handSlot) override {}  // sub_18054A904
@@ -520,7 +530,7 @@ public:
     //
     // Organized as 4 S_TargetSlot blocks (opponent tracking slots) plus a
     // trailing pair of vectors. Each slot has 2-3 target lists and an active flag.
-    // The opponent manager (C_CombatActorOpponentManager at +0x750) reads/writes
+    // The opponent manager (C_CombatActorOpponentManager at +0x730) reads/writes
     // the current target from S_CombatActorState (+0xC98/+0xCA0/+0xCA8) and
     // likely populates these slot vectors during target evaluation.
     //
@@ -594,7 +604,8 @@ public:
 
     // +0x730: C_CombatActorOpponentManager (0x40 bytes)
     // VERIFIED RTTI: sub_1805FD660 writes C_CombatActorOpponentManager vftable.
-    void*                   m_pOpponentManager;     // +0x730  C_CombatActorOpponentManager
+    // Tracks the current opponent/target and the exclusive-lock handshake.
+    C_CombatActorOpponentManager* m_pOpponentManager; // +0x730
 
     // +0x738: C_CombatActorTimeCop (0x78 bytes)
     // VERIFIED RTTI: sub_1805FD6D4 writes C_CombatActorTimeCop vftable.

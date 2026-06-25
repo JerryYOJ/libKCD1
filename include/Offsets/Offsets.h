@@ -59,6 +59,7 @@ inline static constexpr uintptr_t kQuerySubListDtorOffset    = 0x2185C4; // sub_
 inline static constexpr uintptr_t kCryMemFreeOffset          = 0x5B72C0; // CryEngine::MemFree(ptr, size)
 
 inline static constexpr uintptr_t kDispatchCounterActionOffset = 0x69536C;
+inline static constexpr uintptr_t kSetOpponentOffset           = 0x63A634; // sub_18063A634: C_CombatActor::SetOpponent(target) -> opponent mgr UpdateOpponent (engage opponent; no-op unless m_isActive)
 inline static constexpr uintptr_t kTypeFactoryEntryInitOffset  = 0x712B68;
 inline static constexpr uintptr_t kActionTypeIdBase         = 0x359B330;
 inline static constexpr uintptr_t kInputClassIdBase         = 0x359C2F0;

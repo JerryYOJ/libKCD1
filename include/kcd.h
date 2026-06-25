@@ -36,7 +36,7 @@ struct CStrLess { bool operator()(const char* a, const char* b) const { return s
 
 // ---- proven PCH order (CryEngine platform set-up) ----
 
-// ---- every remaining RE header (1332) ----
+// ---- every remaining RE header (1335) ----
 #include "Offsets/vtables/I3DEngine.h"
 #include "Offsets/vtables/IActionListener.h"
 #include "Offsets/vtables/IActionMapManager.h"
@@ -127,6 +127,7 @@ struct CStrLess { bool operator()(const char* a, const char* b) const { return s
 #include "combatmodule/C_CombatActorHuntAttack.h"
 #include "combatmodule/C_CombatActorMercyKill.h"
 #include "combatmodule/C_CombatActorObject.h"
+#include "combatmodule/C_CombatActorOpponentManager.h"
 #include "combatmodule/C_CombatActorUpdatedObject.h"
 #include "combatmodule/C_CombatAttackTypeData.h"
 #include "combatmodule/C_CombatAutomation.h"
@@ -151,6 +152,7 @@ struct CStrLess { bool operator()(const char* a, const char* b) const { return s
 #include "combatmodule/C_CombatScene.h"
 #include "combatmodule/C_CombatSideData.h"
 #include "combatmodule/C_CombatSlotTrigger.h"
+#include "combatmodule/C_CombatTarget.h"
 #include "combatmodule/C_CombatTrigger.h"
 #include "combatmodule/C_CombatTriggerCombo.h"
 #include "combatmodule/C_CombatTriggerPerfectBlock.h"
@@ -727,14 +729,16 @@ struct CStrLess { bool operator()(const char* a, const char* b) const { return s
 #include "rpgmodule/C_Soul.h"
 #include "rpgmodule/C_SoulList.h"
 #include "rpgmodule/C_SoulPropertyNotifier.h"
-#include "rpgmodule/E_CombatReactionStat.h"
 #include "rpgmodule/E_CrimeIconLevel.h"
 #include "rpgmodule/E_CrimeSystemRole.h"
 #include "rpgmodule/E_DerivedStat.h"
+#include "rpgmodule/E_ModifierCategory.h"
+#include "rpgmodule/E_PerkStat.h"
 #include "rpgmodule/E_RPGSkill.h"
 #include "rpgmodule/E_RPGStat.h"
 #include "rpgmodule/E_ReputationChangeTarget.h"
 #include "rpgmodule/E_SoulAbility.h"
+#include "rpgmodule/E_SoulSkill.h"
 #include "rpgmodule/I_CombatSoul.h"
 #include "rpgmodule/I_Location.h"
 #include "rpgmodule/I_POI.h"

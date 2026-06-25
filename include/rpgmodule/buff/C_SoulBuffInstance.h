@@ -123,13 +123,13 @@ public:
     // 7 modifier staging linked lists, one per category.
     // During Init, modifier nodes are parsed from the buff params string
     // and placed here. CommitModifiers moves them to the soul's main lists.
-    S_ModifierNode*     m_statMods;             // +0x90  category 0: base stats (E_SoulStat, 10 entries)
-    S_ModifierNode*     m_skillMods;            // +0x98  category 1: skills (33 entries)
-    S_ModifierNode*     m_derivedStatMods;      // +0xA0  category 2: derived stats (39 entries)
-    S_ModifierNode*     m_detailMods;           // +0xA8  category 3: detail/extended (110 entries)
-    S_ModifierNode*     m_movementMods;         // +0xB0  category 4: perk/movement (E_MovementType, 6 entries)
-    S_ModifierNode*     m_specialMods;          // +0xB8  category 5: special/manual
-    S_ModifierNode*     m_soulLevelMods;        // +0xC0  category 6: soul-level (E_SoulLevel, 6 entries)
+    S_StatModifierNode*        m_statMods;       // +0x90  category 0: base stats        (E_SoulStat, 10)
+    S_SkillModifierNode*       m_skillMods;      // +0x98  category 1: skills            (E_SoulSkill, 33)
+    S_PerkStatModifierNode*    m_perkStatMods;   // +0xA0  category 2: perk-modifiable stats (E_PerkStat, 39)
+    S_DerivedStatModifierNode* m_derivedStatMods;// +0xA8  category 3: character derived stats (E_DerivedStat, 110)
+    S_MovementModifierNode*    m_movementMods;   // +0xB0  category 4: perk/movement     (E_MovementType, 6)
+    S_SpecialModifierNode*     m_specialMods;    // +0xB8  category 5: special/manual
+    S_SoulLevelModifierNode*   m_soulLevelMods;  // +0xC0  category 6: soul-level        (E_SoulLevel, 6)
 
     uint16_t            m_materialEffectHandle; // +0xC8  flowgraph effect handle from ApplyMaterialEffect
     uint8_t             _padCA[6];              // +0xCA
