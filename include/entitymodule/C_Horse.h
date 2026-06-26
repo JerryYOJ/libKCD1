@@ -1,8 +1,8 @@
 #pragma once
 
-#include <boost/shared_ptr.hpp>
 #include <cstddef>
 #include <cstdint>
+#include <memory>
 
 #include "CryEngine/CryCommon/CryThread.h"
 #include "C_Animal.h"
@@ -128,7 +128,7 @@ public:
 
     CryCriticalSection m_lock;       // +0xA70
 
-    boost::shared_ptr<IAnimationPoseModifier> m_pBridlePoseModifier; // +0xA98
+    std::shared_ptr<IAnimationPoseModifier> m_pBridlePoseModifier; // +0xA98
     ICVar*    m_pUseBridleParamsFromLua; // +0xAA8 "wh_horse_UseBridleParamsFromLua"
 
     S_BridleParams m_bridleParams;   // +0xAB0
@@ -147,7 +147,7 @@ static_assert(sizeof(C_Horse::S_MountedStateCallback) == 0x38);
 static_assert(sizeof(C_Horse::S_BridleParams) == 0x100);
 static_assert(sizeof(C_Horse::S_RopeParams) == 0x4C);
 static_assert(sizeof(CryCriticalSection) == 0x28);
-static_assert(sizeof(boost::shared_ptr<IAnimationPoseModifier>) == 0x10);
+static_assert(sizeof(std::shared_ptr<IAnimationPoseModifier>) == 0x10);
 static_assert(offsetof(C_Horse, m_desiredGaitSpeed) == 0x95C);
 static_assert(offsetof(C_Horse, m_pRider) == 0x990);
 static_assert(offsetof(C_Horse, m_mountedStateCallback) == 0xA00);
