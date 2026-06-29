@@ -10,7 +10,8 @@ namespace wh { namespace rpgmodule {
 C_FactionManager* C_FactionManager::GetInstance()
 {
     using Fn = C_FactionManager* (__fastcall*)();
-    return reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kFactionManagerAccessorOffset)();
+    static REL::Relocation<Fn> fn{ REL::ID(3) };  // sub_18022877C -> &C_FactionManager
+    return fn();
 }
 
 }}  // namespace wh::rpgmodule

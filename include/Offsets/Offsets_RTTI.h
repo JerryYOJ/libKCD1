@@ -1,5 +1,5 @@
 #pragma once
-#include <cstdint>
+#include "REL/ID.h"  // REL::ID -- each RTTI TypeDescriptor RVA is a Steam-RVA id
 
 // -----------------------------------------------
 // RTTI TypeDescriptor RVAs (offsets from WHGame.dll base)
@@ -15,810 +15,810 @@ namespace Offsets {
     // --- Manually added (RE'd this session; not yet in analysis/rtti_map.json -- fold in on next regen).
     //     Brain-variable subsystem + AI brain. TD RVAs VERIFIED (type_info vtable 0x18227F750 @TD+0,
     //     mangled name @TD+0x10).
-    inline constexpr std::uintptr_t RTTI_C_Variable                     = 0x2B37F08;  // .?AVC_Variable@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SingleVariable               = 0x2B37F78;  // .?AVC_SingleVariable@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AssociativeArrayTreeVariable = 0x2B37EC0;  // .?AVC_AssociativeArrayTreeVariable@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IndexedArrayTreeVariable     = 0x2B37E70;  // .?AVC_IndexedArrayTreeVariable@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_VariableIndex               = 0x2B16288;  // .?AVI_VariableIndex@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_VariableIndex               = 0x2B16250;  // .?AVC_VariableIndex@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_Intellect                  = 0x2B162C0;  // .?AVI_Intellect@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AIBrain                    = 0x2B162F8;  // .?AVC_AIBrain@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Variable                                           { 867 };  // 0x2B37F08 .?AVC_Variable@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SingleVariable                                     { 868 };  // 0x2B37F78 .?AVC_SingleVariable@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AssociativeArrayTreeVariable                       { 866 };  // 0x2B37EC0 .?AVC_AssociativeArrayTreeVariable@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IndexedArrayTreeVariable                           { 865 };  // 0x2B37E70 .?AVC_IndexedArrayTreeVariable@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_VariableIndex                                      { 848 };  // 0x2B16288 .?AVI_VariableIndex@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_VariableIndex                                      { 847 };  // 0x2B16250 .?AVC_VariableIndex@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_Intellect                                          { 849 };  // 0x2B162C0 .?AVI_Intellect@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AIBrain                                            { 850 };  // 0x2B162F8 .?AVC_AIBrain@xgenaimodule@wh@@
 
-    inline constexpr std::uintptr_t RTTI_C_AIObject                                           = 0x2B179C0;  // .?AVC_AIObject@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AIPuppet                                           = 0x2B367F8;  // .?AVC_AIPuppet@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AbortAllAnimations                                 = 0x2A8CA90;  // .?AVC_AbortAllAnimations@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ActionDirector                                     = 0x29E84D8;  // .?AVC_ActionDirector@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ActionHelperMapper                                 = 0x2A8C480;  // .?AVC_ActionHelperMapper@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ActivateSubbrain                                   = 0x2B0EB60;  // .?AVC_ActivateSubbrain@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ActiveBarrier                                      = 0x2AC52C0;  // .?AVC_ActiveBarrier@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Actor                                              = 0x2A2B220;  // .?AVC_Actor@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AddAngryness                                       = 0x2B07690;  // .?AVC_AddAngryness@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AddAreaLabel                                       = 0x2B12FC0;  // .?AVC_AddAreaLabel@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AddBuff                                            = 0x2B098D0;  // .?AVC_AddBuff@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AddGameContext                                     = 0x2A91160;  // .?AVC_AddGameContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AddLink                                            = 0x2AE5028;  // .?AVC_AddLink@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AddOpponent                                        = 0x2ACC3D0;  // .?AVC_AddOpponent@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AddPatch                                           = 0x2B0A208;  // .?AVC_AddPatch@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AddPerceivableState                                = 0x2AFC6E0;  // .?AVC_AddPerceivableState@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AddRecognitionThreshold                            = 0x2AFC350;  // .?AVC_AddRecognitionThreshold@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AimAtTarget                                        = 0x2ACA0D0;  // .?AVC_AimAtTarget@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AlignmentWrapper                                   = 0x2AC9B00;  // .?AVC_AlignmentWrapper@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AllowSituations                                    = 0x2AC8540;  // .?AVC_AllowSituations@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AnchorFormation                                    = 0x2AD47C0;  // .?AVC_AnchorFormation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AngrynessNodeBase                                  = 0x2B06DD0;  // .?AVC_AngrynessNodeBase@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AnimationEndWait                                   = 0x2A8B6B0;  // .?AVC_AnimationEndWait@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AnimationEventCatch                                = 0x2B0F1E0;  // .?AVC_AnimationEventCatch@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AnimationEventWait                                 = 0x2A8C100;  // .?AVC_AnimationEventWait@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AnyLinkFilter                                      = 0x2AE4B70;  // .?AVC_AnyLinkFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AreaContainsFilter                                 = 0x2AF4240;  // .?AVC_AreaContainsFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AreaPresence                                       = 0x2AC81F0;  // .?AVC_AreaPresence@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ArmorRuntimeData                                   = 0x2A45AD8;  // .?AVC_ArmorRuntimeData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AssertCondition                                    = 0x2A8BD70;  // .?AVC_AssertCondition@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AssertNode                                         = 0x2A8BA20;  // .?AVC_AssertNode@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AssignClothingPreset                               = 0x2A9CA90;  // .?AVC_AssignClothingPreset@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AssignWeaponPreset                                 = 0x2A9C700;  // .?AVC_AssignWeaponPreset@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AtomicDecorator                                    = 0x2AC8EB0;  // .?AVC_AtomicDecorator@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_AttachObject                                       = 0x2A8AC60;  // .?AVC_AttachObject@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_BaseModule                                         = 0x29ECBC0;  // .?AVC_BaseModule@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ParallelModuleUpdater                              = 0x29EA0B0;  // .?AVC_ParallelModuleUpdater@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_C_BehaviorAdopter                                    = 0x2AA1D20;  // .?AVC_BehaviorAdopter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_BehaviorTag                                        = 0x2AA2110;  // .?AVC_BehaviorTag@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_BehaviorTagCatch                                   = 0x2B0DB20;  // .?AVC_BehaviorTagCatch@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Block                                              = 0x2AB7898;  // .?AVC_Block@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Boid                                               = 0x2A8B240;  // .?AVC_Boid@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_BowAim                                             = 0x2AB8338;  // .?AVC_BowAim@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_BowCheckBase                                       = 0x2AB8100;  // .?AVC_BowCheckBase@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_BowCheckRange                                      = 0x2AB8060;  // .?AVC_BowCheckRange@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_BowCheckTrajectory                                 = 0x2AB6A00;  // .?AVC_BowCheckTrajectory@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_BowLoad                                            = 0x2AB6688;  // .?AVC_BowLoad@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_BowShoot                                           = 0x2AB6378;  // .?AVC_BowShoot@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_BranchTypeCondition                                = 0x2AC8D20;  // .?AVC_BranchTypeCondition@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_BuffDecoratorBase                                  = 0x2AC77F0;  // .?AVC_BuffDecoratorBase@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_BuffInitParamsDefault                              = 0x2A47A20;  // .?AVC_BuffInitParamsDefault@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_BuffInstanceBase                                   = 0x2A544A8;  // .?AVC_BuffInstanceBase@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_BuffManager                                        = 0x2A543E0;  // .?AVC_BuffManager@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_BuffTagCheck                                       = 0x2B095E0;  // .?AVC_BuffTagCheck@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CachedPuppet                                       = 0x2B36278;  // .?AVC_CachedPuppet@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CallBehavior                                       = 0x2AC8080;  // .?AVC_CallBehavior@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CallBehaviorPatch                                  = 0x2AC7F80;  // .?AVC_CallBehaviorPatch@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CanAssignClothingPresetFromInventory               = 0x2A9C230;  // .?AVC_CanAssignClothingPresetFromInventory@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CanAssignWeaponPresetFromInventory                 = 0x2A9AB50;  // .?AVC_CanAssignWeaponPresetFromInventory@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CancelPerceptionIgnore                             = 0x2AFCD20;  // .?AVC_CancelPerceptionIgnore@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CatchAndPrintDebugEvent                            = 0x2B0D960;  // .?AVC_CatchAndPrintDebugEvent@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CategoryFilter                                     = 0x2AF9560;  // .?AVC_CategoryFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ChangeAreaLabel                                    = 0x2B130B0;  // .?AVC_ChangeAreaLabel@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ChangeFormation                                    = 0x2AD5470;  // .?AVC_ChangeFormation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CheckGlobalTagState                                = 0x2A89ED0;  // .?AVC_CheckGlobalTagState@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CheckIfPlayerCanSleep                              = 0x2B07D20;  // .?AVC_CheckIfPlayerCanSleep@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CheckInformationKnowledge                          = 0x2AEA4A0;  // .?AVC_CheckInformationKnowledge@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CheckWuidValid                                     = 0x2A89970;  // .?AVC_CheckWuidValid@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CircularSpatialQuery                               = 0x2A8A570;  // .?AVC_CircularSpatialQuery@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ClearContextRelatedMessages                        = 0x2A8A230;  // .?AVC_ClearContextRelatedMessages@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ClearDynamicInformationValue                       = 0x2AE9CE0;  // .?AVC_ClearDynamicInformationValue@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ClearInbox                                         = 0x2A89350;  // .?AVC_ClearInbox@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ClearOpponents                                     = 0x2ACC150;  // .?AVC_ClearOpponents@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ClearTarget                                        = 0x2ACCBA0;  // .?AVC_ClearTarget@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ClearTemporarySuperfaction                         = 0x2ABC670;  // .?AVC_ClearTemporarySuperfaction@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ClimbLadder                                        = 0x2AA6180;  // .?AVC_ClimbLadder@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ClosestEnemy                                       = 0x2ACC670;  // .?AVC_ClosestEnemy@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ColumnDescriptor                                   = 0x29E98F8;  // .?AVC_ColumnDescriptor@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ColumnDescriptorBase                               = 0x29E9AD0;  // .?AVC_ColumnDescriptorBase@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActionAttackFactory                          = 0x29F06F0;  // .?AVC_CombatActionAttackFactory@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActionFactoryBase                            = 0x29F07B0;  // .?AVC_CombatActionFactoryBase@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActionHelperAttack                           = 0x29F3340;  // .?AVC_CombatActionHelperAttack@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActionHelperBlock                            = 0x29F05B0;  // .?AVC_CombatActionHelperBlock@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActionPerfectBlockFactory                    = 0x29F07F0;  // .?AVC_CombatActionPerfectBlockFactory@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActionSyncAttackData                         = 0x2A108D0;  // .?AVC_CombatActionSyncAttackData@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActor                                        = 0x29F5218;  // .?AVC_CombatActor@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionAttack                            = 0x29F2E20;  // .?AVC_CombatActorActionAttack@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionBlock                             = 0x29F2DA0;  // .?AVC_CombatActorActionBlock@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionBlockTrigger                      = 0x29F2140;  // .?AVC_CombatActorActionBlockTrigger@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionComposedRipostePerfectBlock       = 0x29EFEA0;  // .?AVC_CombatActorActionComposedRipostePerfectBlock@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionFreeBlock                         = 0x29EFB30;  // .?AVC_CombatActorActionFreeBlock@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionGuard                             = 0x29F4A60;  // .?AVC_CombatActorActionGuard@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionGuardMovement                     = 0x29F2400;  // .?AVC_CombatActorActionGuardMovement@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionGuardSyncMovement                 = 0x29F1A20;  // .?AVC_CombatActorActionGuardSyncMovement@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionHit                               = 0x29F1620;  // .?AVC_CombatActorActionHit@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionManager                           = 0x29F4F00;  // .?AVC_CombatActorActionManager@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionPerfectBlock                      = 0x29F1980;  // .?AVC_CombatActorActionPerfectBlock@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionPoseModifier                      = 0x29EFE50;  // .?AVC_CombatActorActionPoseModifier@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionRiderMovement                     = 0x29F19D0;  // .?AVC_CombatActorActionRiderMovement@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionStaticAttack                      = 0x29F3070;  // .?AVC_CombatActorActionStaticAttack@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionSyncAttack                        = 0x29F1000;  // .?AVC_CombatActorActionSyncAttack@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionSyncHit                           = 0x29F2880;  // .?AVC_CombatActorActionSyncHit@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionSyncPerfectBlock                  = 0x29F0D80;  // .?AVC_CombatActorActionSyncPerfectBlock@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionSyncPerfectBlockHit               = 0x29F0DD0;  // .?AVC_CombatActorActionSyncPerfectBlockHit@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorActionSyncTransition                    = 0x29F0840;  // .?AVC_CombatActorActionSyncTransition@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorDirector                                = 0x29F4E28;  // .?AVC_CombatActorDirector@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorHorsePullDown                           = 0x29F4D90;  // .?AVC_CombatActorHorsePullDown@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorHuntAttack                              = 0x29FDA48;  // .?AVC_CombatActorHuntAttack@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorMercyKill                               = 0x29FDA08;  // .?AVC_CombatActorMercyKill@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorObject                                  = 0x29F4EB8;  // .?AVC_CombatActorObject@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorOpponentManager                         = 0x29FDA90;  // .?AVC_CombatActorOpponentManager@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatActorUpdatedObject                           = 0x29FDFC0;  // .?AVC_CombatActorUpdatedObject@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatAutomation                                   = 0x2A01C18;  // .?AVC_CombatAutomation@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatAutomationAction                             = 0x2A01C58;  // .?AVC_CombatAutomationAction@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatAutomationAttack                             = 0x2A01A80;  // .?AVC_CombatAutomationAttack@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatAutomationCombo                              = 0x2A01A00;  // .?AVC_CombatAutomationCombo@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatAutomationDefense                            = 0x2A019C0;  // .?AVC_CombatAutomationDefense@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatAutomationDirector                           = 0x2A01260;  // .?AVC_CombatAutomationDirector@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatAutomationGuard                              = 0x2A01A40;  // .?AVC_CombatAutomationGuard@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatAutomationMissile                            = 0x2A01980;  // .?AVC_CombatAutomationMissile@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatAutomationRiposte                            = 0x2A01AC0;  // .?AVC_CombatAutomationRiposte@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatAutomationShout                              = 0x2A01BD8;  // .?AVC_CombatAutomationShout@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatAutomationWeapons                            = 0x2A01B50;  // .?AVC_CombatAutomationWeapons@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatAutomationZoneChange                         = 0x2A01B90;  // .?AVC_CombatAutomationZoneChange@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_CombatAutomation                                   = 0x2A025B0;  // .?AVI_CombatAutomation@combatmodule@wh@@ (MI secondary base of C_CombatAutomation)
-    inline constexpr std::uintptr_t RTTI_C_CombatComboDatabase                                = 0x2A0D000;  // .?AVC_CombatComboDatabase@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatComboManager                                 = 0x29FDF00;  // .?AVC_CombatComboManager@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatComboStepData                                = 0x2A0CF60;  // .?AVC_CombatComboStepData@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatComboStepDatabase                            = 0x2A0CC40;  // .?AVC_CombatComboStepDatabase@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatModule                                       = 0x2A08C18;  // .?AVC_CombatModule@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatMoveSwitch                                   = 0x2AD4EE0;  // .?AVC_CombatMoveSwitch@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatScene                                        = 0x2A1D130;  // .?AVC_CombatScene@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatSlotTrigger                                  = 0x2A1C8D8;  // .?AVC_CombatSlotTrigger@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatSoul                                         = 0x2A66A58;  // .?AVC_CombatSoul@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatTarget                                       = 0x29FC640;  // .?AVC_CombatTarget@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatTrigger                                      = 0x2A1D168;  // .?AVC_CombatTrigger@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatTriggerCombo                                 = 0x2A1CAA0;  // .?AVC_CombatTriggerCombo@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatTriggerPerfectBlock                          = 0x2A1C560;  // .?AVC_CombatTriggerPerfectBlock@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatTriggerRiposte                               = 0x2A1C200;  // .?AVC_CombatTriggerRiposte@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatTriggerSyncDodge                             = 0x2A1C2D0;  // .?AVC_CombatTriggerSyncDodge@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatTriggerSyncPerfectBlock                      = 0x2A1C480;  // .?AVC_CombatTriggerSyncPerfectBlock@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CombatTriggerSyncRiposte                           = 0x2A1BF20;  // .?AVC_CombatTriggerSyncRiposte@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ComboEndWait                                       = 0x2AC5FF0;  // .?AVC_ComboEndWait@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CompanionModeGate                                  = 0x2A896B0;  // .?AVC_CompanionModeGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CompanionObjectiveCondition                        = 0x2A88C90;  // .?AVC_CompanionObjectiveCondition@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CompanionObjectiveGate                             = 0x2A888D0;  // .?AVC_CompanionObjectiveGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CompareMorale                                      = 0x2B07920;  // .?AVC_CompareMorale@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CompassMark                                        = 0x2A4E958;  // .?AVC_CompassMark@guimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CompiledExpressionWrapper                          = 0x2A85E80;  // .?AVC_CompiledExpressionWrapper@Expressions@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Composite                                          = 0x2ACA118;  // .?AVC_Composite@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Concatenation                                      = 0x2A94D20;  // .?AVC_Concatenation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ConstantSoulBuffInstance                           = 0x2A54598;  // .?AVC_ConstantSoulBuffInstance@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ConsumableRuntimeData                              = 0x2A459D8;  // .?AVC_ConsumableRuntimeData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ContinuousSwitch                                   = 0x2ACB360;  // .?AVC_ContinuousSwitch@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CreateInformation                                  = 0x2AE9660;  // .?AVC_CreateInformation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CreateItem                                         = 0x2A9A840;  // .?AVC_CreateItem@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CryLoadGameHelper                                  = 0x29EA998;  // .?AVC_CryLoadGameHelper@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_C_CrySaveGameHelper                                  = 0x29EA9D0;  // .?AVC_CrySaveGameHelper@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DLCInstallGate                                     = 0x2ADFD90;  // .?AVC_DLCInstallGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DatabaseDynamicEnum                                = 0x29EC958;  // .?AVC_DatabaseDynamicEnum@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DatabaseModule                                     = 0x29ECAC0;  // .?AVC_DatabaseModule@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DeSpawnPerceptibleVolume                           = 0x2AFCC70;  // .?AVC_DeSpawnPerceptibleVolume@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DeadUnconsciousGate                                = 0x2B084F0;  // .?AVC_DeadUnconsciousGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Decorator                                          = 0x2A87CB8;  // .?AVC_Decorator@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DecoratorBuff                                      = 0x2AC7670;  // .?AVC_DecoratorBuff@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DeferredExecution                                  = 0x2AC3BD0;  // .?AVC_DeferredExecution@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DefferedStateChange                                = 0x2A8B800;  // .?AVC_DefferedStateChange@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Despawn                                            = 0x2ABA7F8;  // .?AVC_Despawn@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DestroyInformationCompletely                       = 0x2AE8490;  // .?AVC_DestroyInformationCompletely@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DestroyInformationFromHolder                       = 0x2AE8370;  // .?AVC_DestroyInformationFromHolder@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DetachObject                                       = 0x2A949D0;  // .?AVC_DetachObject@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DialogFaderBarrier                                 = 0x2AD3CF0;  // .?AVC_DialogFaderBarrier@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DialogGate                                         = 0x2ADE880;  // .?AVC_DialogGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DisableCollisionAvoidance                          = 0x2AD3720;  // .?AVC_DisableCollisionAvoidance@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DisableLOD                                         = 0x2AD3470;  // .?AVC_DisableLOD@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DisableLink                                        = 0x2AE4700;  // .?AVC_DisableLink@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DisableMoveTransitions                             = 0x2AD3420;  // .?AVC_DisableMoveTransitions@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DisablePerception                                  = 0x2AFC020;  // .?AVC_DisablePerception@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DisableStartSituations                             = 0x2AD2DA0;  // .?AVC_DisableStartSituations@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DismissSearchCandidate                             = 0x2AFBB00;  // .?AVC_DismissSearchCandidate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DistanceCondition                                  = 0x2AD3160;  // .?AVC_DistanceCondition@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DistanceGate                                       = 0x2ADE790;  // .?AVC_DistanceGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DoDialog                                           = 0x2A953A0;  // .?AVC_DoDialog@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DoMonologue                                        = 0x2A95070;  // .?AVC_DoMonologue@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DoPickUp                                           = 0x2A94150;  // .?AVC_DoPickUp@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DoPlace                                            = 0x2A929D8;  // .?AVC_DoPlace@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DrawWeapon                                         = 0x2A996E0;  // .?AVC_DrawWeapon@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DropOpponent                                       = 0x2ACC420;  // .?AVC_DropOpponent@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DynamicEnumManager                                 = 0x29ECB40;  // .?AVC_DynamicEnumManager@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Effect                                             = 0x2A545D8;  // .?AVC_Effect@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_EnableLink                                         = 0x2AE4210;  // .?AVC_EnableLink@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_EnablePerception                                   = 0x2B0CA40;  // .?AVC_EnablePerception@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_EnableProfile                                      = 0x2A92530;  // .?AVC_EnableProfile@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_EndFormation                                       = 0x2AE3900;  // .?AVC_EndFormation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_EnsureWuidValid                                    = 0x2AD2270;  // .?AVC_EnsureWuidValid@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_EntityClassFilter                                  = 0x2AF87C0;  // .?AVC_EntityClassFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_EntityPropertiesFilter                             = 0x2AF5F80;  // .?AVC_EntityPropertiesFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_EquipItem                                          = 0x2A991F8;  // .?AVC_EquipItem@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_EquipmentManager                                   = 0x2A431C0;  // .?AVC_EquipmentManager@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_EquippableItemRuntimeData                          = 0x2A45C30;  // .?AVC_EquippableItemRuntimeData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ErrorNode                                          = 0x2A93428;  // .?AVC_ErrorNode@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_EvaLLyzer                                          = 0x2AEED20;  // .?AVC_EvaLLyzer@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ExactMove                                          = 0x2A92DF0;  // .?AVC_ExactMove@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ExecuteLua                                         = 0x2A92240;  // .?AVC_ExecuteLua@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ExecuteSoundTrigger                                = 0x2A91F00;  // .?AVC_ExecuteSoundTrigger@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ExecutionBarrier                                   = 0x2A88E40;  // .?AVC_ExecutionBarrier@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ExistPath                                          = 0x2AEFFE8;  // .?AVC_ExistPath@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Expression                                         = 0x2A910D0;  // .?AVC_Expression@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ExternalLock                                       = 0x2B00540;  // .?AVC_ExternalLock@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FactionManager                                     = 0x2A61AD0;  // .?AVC_FactionManager@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FactionScriptBind                                  = 0x2A64A60;  // .?AVC_FactionScriptBind@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FaderBarrier                                       = 0x2AD1D90;  // .?AVC_FaderBarrier@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Fail                                               = 0x2A90DF0;  // .?AVC_Fail@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FastTravel                                         = 0x2A6EA60;  // .?AVC_FastTravel@playermodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FastTravelScriptBind                               = 0x2A7C758;  // .?AVC_FastTravelScriptBind@playermodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FinishHim                                          = 0x2A90BF8;  // .?AVC_FinishHim@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FinishInitialization                               = 0x2A909F0;  // .?AVC_FinishInitialization@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FinishPatch                                        = 0x2B09DF0;  // .?AVC_FinishPatch@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FireArrow                                          = 0x2AC6828;  // .?AVC_FireArrow@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FireDebugEvent                                     = 0x2B0D850;  // .?AVC_FireDebugEvent@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FixedPositionLODBarrier                            = 0x2ADE1B0;  // .?AVC_FixedPositionLODBarrier@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FollowFormation                                    = 0x2AE3500;  // .?AVC_FollowFormation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FollowTarget                                       = 0x2AE3190;  // .?AVC_FollowTarget@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_For                                                = 0x2AD28B0;  // .?AVC_For@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ForBase                                            = 0x2AD29C8;  // .?AVC_ForBase@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ForEach                                            = 0x2AD23A8;  // .?AVC_ForEach@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ForceIdleState                                     = 0x2A915A0;  // .?AVC_ForceIdleState@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ForceLook                                          = 0x2AD1480;  // .?AVC_ForceLook@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FormationInSpotsGate                               = 0x2AE3060;  // .?AVC_FormationInSpotsGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FormationSize                                      = 0x2AE2BD0;  // .?AVC_FormationSize@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FreeLadderDecorator                                = 0x2AD0EF0;  // .?AVC_FreeLadderDecorator@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_FuseBox                                            = 0x2AD1CA0;  // .?AVC_FuseBox@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GameModeCondition                                  = 0x2A8FB00;  // .?AVC_GameModeCondition@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GameOver                                           = 0x2B08188;  // .?AVC_GameOver@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Gate                                               = 0x2A89930;  // .?AVC_Gate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Gen2CategoryFilter                                 = 0x2AF1110;  // .?AVC_Gen2CategoryFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Gen2EntityClassFilter                              = 0x2AF0BE0;  // .?AVC_Gen2EntityClassFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Gen2HasBehaviorFilter                              = 0x2AF0540;  // .?AVC_Gen2HasBehaviorFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Gen2RangeFilter                                    = 0x2AF1B90;  // .?AVC_Gen2RangeFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Gen2SoulFactionFilter                              = 0x2AF1610;  // .?AVC_Gen2SoulFactionFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Gen2SoulIsAliveFilter                              = 0x2AEF8E0;  // .?AVC_Gen2SoulIsAliveFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Gen2WUIDFilter                                     = 0x2AEF310;  // .?AVC_Gen2WUIDFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetActivity                                        = 0x2B0A7F0;  // .?AVC_GetActivity@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetAngryness                                       = 0x2B06D30;  // .?AVC_GetAngryness@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetAnimationHelperData                             = 0x2A908A0;  // .?AVC_GetAnimationHelperData@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetAreaInhabitants                                 = 0x2B12C30;  // .?AVC_GetAreaInhabitants@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetBehaviorHolders                                 = 0x2B11DD0;  // .?AVC_GetBehaviorHolders@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetCiviliansForLocation                            = 0x2B07790;  // .?AVC_GetCiviliansForLocation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetCompanionMaster                                 = 0x2A96570;  // .?AVC_GetCompanionMaster@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetCompanions                                      = 0x2A96EB0;  // .?AVC_GetCompanions@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetCurrentActivity                                 = 0x2B0A890;  // .?AVC_GetCurrentActivity@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetCurrentPerceptionFocus                          = 0x2B0C220;  // .?AVC_GetCurrentPerceptionFocus@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetDogCompanionMode                                = 0x2A96B10;  // .?AVC_GetDogCompanionMode@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetDynamicInformationValue                         = 0x2AE90D0;  // .?AVC_GetDynamicInformationValue@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetEmittingInformations                            = 0x2AE8FD0;  // .?AVC_GetEmittingInformations@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetFormationLeader                                 = 0x2AE2B30;  // .?AVC_GetFormationLeader@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetFormationParticipants                           = 0x2AE1A00;  // .?AVC_GetFormationParticipants@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetGlobalVar                                       = 0x2A90510;  // .?AVC_GetGlobalVar@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetHelper                                          = 0x2A90158;  // .?AVC_GetHelper@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetHelperData                                      = 0x2A8EED0;  // .?AVC_GetHelperData@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetHelperUserData                                  = 0x2A8EB80;  // .?AVC_GetHelperUserData@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetHelpers                                         = 0x2A8F7F0;  // .?AVC_GetHelpers@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetHerbsInArea                                     = 0x2A8F460;  // .?AVC_GetHerbsInArea@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetIndulgencePrice                                 = 0x2AAD9F0;  // .?AVC_GetIndulgencePrice@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetInformationUserInfo                             = 0x2AE8980;  // .?AVC_GetInformationUserInfo@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetItem                                            = 0x2A9A278;  // .?AVC_GetItem@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetItemProperty                                    = 0x2A99DE0;  // .?AVC_GetItemProperty@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetItemType                                        = 0x2A8DFC0;  // .?AVC_GetItemType@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetKnownInformations                               = 0x2AE7480;  // .?AVC_GetKnownInformations@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetKnownInformationsFromGroup                      = 0x2AE6E20;  // .?AVC_GetKnownInformationsFromGroup@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetLadder                                          = 0x2AA55A0;  // .?AVC_GetLadder@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetLastNavmeshPosition                             = 0x2A8DBF0;  // .?AVC_GetLastNavmeshPosition@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetLevelTransferData                               = 0x2AA0A20;  // .?AVC_GetLevelTransferData@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetLockParticipants                                = 0x2AA03B0;  // .?AVC_GetLockParticipants@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetMaxInstances                                    = 0x2A9FFF0;  // .?AVC_GetMaxInstances@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetMemberFormation                                 = 0x2AE15F0;  // .?AVC_GetMemberFormation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetNearestAreaPos                                  = 0x2B11A60;  // .?AVC_GetNearestAreaPos@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetOnLadder                                        = 0x2AA5270;  // .?AVC_GetOnLadder@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetOwner                                           = 0x2AA0228;  // .?AVC_GetOwner@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetPatches                                         = 0x2B0A670;  // .?AVC_GetPatches@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetPlayerHorse                                     = 0x2A9F7F0;  // .?AVC_GetPlayerHorse@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetPredefPathTraverseInfo                          = 0x2A9F4A0;  // .?AVC_GetPredefPathTraverseInfo@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetQuest                                           = 0x2A9FB28;  // .?AVC_GetQuest@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetRandomNavmeshPosDebug                           = 0x2A9F8A0;  // .?AVC_GetRandomNavmeshPosDebug@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetRandomPos                                       = 0x2A9E670;  // .?AVC_GetRandomPos@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetSpatialInfo                                     = 0x2A9F050;  // .?AVC_GetSpatialInfo@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetTime                                            = 0x2A9ED18;  // .?AVC_GetTime@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GetType                                            = 0x2A9EAE8;  // .?AVC_GetType@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Graph                                              = 0x29ECA90;  // .?AVC_Graph@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_C_GraphSearch                                        = 0x2AFA320;  // .?AVC_GraphSearch@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Guard                                              = 0x2AC58C8;  // .?AVC_Guard@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_HandCheck                                          = 0x2A9E0B8;  // .?AVC_HandCheck@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_HasActiveQuestMarker                               = 0x2AD16F0;  // .?AVC_HasActiveQuestMarker@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_HasActiveThreats                                   = 0x2B05820;  // .?AVC_HasActiveThreats@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_HasActiveThreatsGate                               = 0x2B07370;  // .?AVC_HasActiveThreatsGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_HasBehaviorFilter                                  = 0x2AF6D10;  // .?AVC_HasBehaviorFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_HasGenderCheck                                     = 0x2B06730;  // .?AVC_HasGenderCheck@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_HasHelpers                                         = 0x2AD15B0;  // .?AVC_HasHelpers@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_HasMoraleForCombatGate                             = 0x2B05F90;  // .?AVC_HasMoraleForCombatGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_HasPerceivableState                                = 0x2B0BEF0;  // .?AVC_HasPerceivableState@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_HasPerceptionEnabled                               = 0x2B0BF40;  // .?AVC_HasPerceptionEnabled@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_HasPerk                                            = 0x2B05368;  // .?AVC_HasPerk@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_HasTimeRespawnEnabled                              = 0x2AD02B0;  // .?AVC_HasTimeRespawnEnabled@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_HelperValidator                                    = 0x2A9DD90;  // .?AVC_HelperValidator@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_HitReactionOverride                                = 0x2ACFD80;  // .?AVC_HitReactionOverride@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_HolsterWeapon                                      = 0x2A98150;  // .?AVC_HolsterWeapon@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_HorsePullDownAction                                = 0x2AC57B0;  // .?AVC_HorsePullDownAction@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Human                                              = 0x2A43460;  // .?AVC_Human@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IfCondition                                        = 0x2AD0A20;  // .?AVC_IfCondition@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IfElseCondition                                    = 0x2AD0640;  // .?AVC_IfElseCondition@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IfGate                                             = 0x2ADF188;  // .?AVC_IfGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IgnoreEmittedInformations                          = 0x2AE6D10;  // .?AVC_IgnoreEmittedInformations@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IgnorePerception                                   = 0x2B0B3B0;  // .?AVC_IgnorePerception@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InAreaFilter                                       = 0x2AF7820;  // .?AVC_InAreaFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IncludeTree                                        = 0x2ACF330;  // .?AVC_IncludeTree@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InformationEmittingEnd                             = 0x2AE7A70;  // .?AVC_InformationEmittingEnd@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InformationEmittingStart                           = 0x2AE7960;  // .?AVC_InformationEmittingStart@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InjuredBuffInitParams                              = 0x2A5F840;  // .?AVC_InjuredBuffInitParams@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InstantExternalLock                                = 0x2AFED00;  // .?AVC_InstantExternalLock@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InstantMakeMeIdle                                  = 0x2A9D7F0;  // .?AVC_InstantMakeMeIdle@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InstantMoveItemToSlot                              = 0x2AA9F50;  // .?AVC_InstantMoveItemToSlot@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InstantMultiSendMessageToNPC                       = 0x2AAC960;  // .?AVC_InstantMultiSendMessageToNPC@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InstantPickUpBody                                  = 0x2A9D330;  // .?AVC_InstantPickUpBody@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InstantPlaceBody                                   = 0x2A9C0A0;  // .?AVC_InstantPlaceBody@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InstantProcessMessage                              = 0x2ACEE30;  // .?AVC_InstantProcessMessage@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InstantReadMessage                                 = 0x2A9BC90;  // .?AVC_InstantReadMessage@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InstantSemaphore                                   = 0x2AFE8E0;  // .?AVC_InstantSemaphore@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InstantSendMessageByBehavior                       = 0x2B11000;  // .?AVC_InstantSendMessageByBehavior@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InstantSendMessageToInhabitants                    = 0x2B10BD0;  // .?AVC_InstantSendMessageToInhabitants@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InstantSendMessageToLockParticipants               = 0x2AAD110;  // .?AVC_InstantSendMessageToLockParticipants@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InstantSendMessageToNPC                            = 0x2AACA10;  // .?AVC_InstantSendMessageToNPC@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InstantSetTarget                                   = 0x2ACC8D0;  // .?AVC_InstantSetTarget@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InstantSynchronize                                 = 0x2AFF5E0;  // .?AVC_InstantSynchronize@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IntelligentObject                                  = 0x2B179F8;  // .?AVC_IntelligentObject@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IntelligentObjectManager                           = 0x2B17940;  // .?AVC_IntelligentObjectManager@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Intermission                                       = 0x2ADEC20;  // .?AVC_Intermission@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IntermissionGate                                   = 0x2ADD710;  // .?AVC_IntermissionGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InterruptFastTravel                                = 0x2AB2580;  // .?AVC_InterruptFastTravel@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InterruptSkipTime                                  = 0x2AB21F0;  // .?AVC_InterruptSkipTime@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InterruptSleepSkiptimeAndFaint                     = 0x2B06250;  // .?AVC_InterruptSleepSkiptimeAndFaint@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InventoryBarrier_NonDivisible                      = 0x2ACF820;  // .?AVC_InventoryBarrier_NonDivisible@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_InventoryManager                                   = 0x2A43C48;  // .?AVC_InventoryManager@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Invertor                                           = 0x2ACF7D8;  // .?AVC_Invertor@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsDeadCheck                                        = 0x2B055B0;  // .?AVC_IsDeadCheck@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsEnemy                                            = 0x2AAEE88;  // .?AVC_IsEnemy@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsHiddenFilter                                     = 0x2AF5150;  // .?AVC_IsHiddenFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsInSweetSpotRange                                 = 0x2AC5310;  // .?AVC_IsInSweetSpotRange@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsInsideArea                                       = 0x2ACF4A0;  // .?AVC_IsInsideArea@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsInsideAreaWithLabel                              = 0x2B125E0;  // .?AVC_IsInsideAreaWithLabel@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsInsideAreaWithLabelBarrier                       = 0x2AD48E0;  // .?AVC_IsInsideAreaWithLabelBarrier@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsItemInStashFilter                                = 0x2AF3FC0;  // .?AVC_IsItemInStashFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsLevelLoadVideoPlaying                            = 0x2ADD610;  // .?AVC_IsLevelLoadVideoPlaying@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsLoadedGate                                       = 0x2ACDD70;  // .?AVC_IsLoadedGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsNightTimeOfDay                                   = 0x2ACDAB0;  // .?AVC_IsNightTimeOfDay@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsPointOnNavMesh                                   = 0x2ACDA60;  // .?AVC_IsPointOnNavMesh@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsPublicEnemy                                      = 0x2ACE640;  // .?AVC_IsPublicEnemy@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsShownFilter                                      = 0x2AF68D0;  // .?AVC_IsShownFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsTimeSkipping                                     = 0x2ACE380;  // .?AVC_IsTimeSkipping@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsUnconsciousCheck                                 = 0x2B05D80;  // .?AVC_IsUnconsciousCheck@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_IsWeaponDrawn                                      = 0x2AA9B70;  // .?AVC_IsWeaponDrawn@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Item                                               = 0x2A46AE0;  // .?AVC_Item@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ItemClassFilter                                    = 0x2AF78C0;  // .?AVC_ItemClassFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ItemHealthCheckingBuffInitParams                   = 0x2A650B0;  // .?AVC_ItemHealthCheckingBuffInitParams@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ItemManager                                        = 0x2A46978;  // .?AVC_ItemManager@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ItemParamFilter                                    = 0x2AF5D70;  // .?AVC_ItemParamFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Jail                                               = 0x2AB2D50;  // .?AVC_Jail@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_JoinedAnimationSemaphore                           = 0x2AFDC50;  // .?AVC_JoinedAnimationSemaphore@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_JoinedAnimationSynchronize                         = 0x2AFE580;  // .?AVC_JoinedAnimationSynchronize@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_KillNPC                                            = 0x2AA7220;  // .?AVC_KillNPC@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LODCheck                                           = 0x2ACE338;  // .?AVC_LODCheck@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LODCombat                                          = 0x2AC4700;  // .?AVC_LODCombat@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LODGuardian                                        = 0x2ADD110;  // .?AVC_LODGuardian@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LODLock                                            = 0x2ACD0E0;  // .?AVC_LODLock@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LambdaRoot                                         = 0x2ADAE90;  // .?AVC_LambdaRoot@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LearnPerkEffect                                    = 0x2A67058;  // .?AVC_LearnPerkEffect@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LedgeGrab                                          = 0x2AA6010;  // .?AVC_LedgeGrab@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LinkDataExpression                                 = 0x2AED8F0;  // .?AVC_LinkDataExpression@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LinkDataFilter                                     = 0x2AF7B90;  // .?AVC_LinkDataFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LinkOperationBarrier                               = 0x2B03CE0;  // .?AVC_LinkOperationBarrier@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LinkSorterDataSource                               = 0x2AFFDA0;  // .?AVC_LinkSorterDataSource@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LinkTagFilter                                      = 0x2AF8410;  // .?AVC_LinkTagFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_DynamicLinkableObject                              = 0x2B207B8;  // .?AVC_DynamicLinkableObject@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LinkableObject                                     = 0x2B176E8;  // .?AVC_LinkableObject@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LinkablesManager                                   = 0x2B35978;  // .?AVC_LinkablesManager@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LocalTagWrapper                                    = 0x2ADAC20;  // .?AVC_LocalTagWrapper@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LocationScriptBind                                 = 0x2A64A28;  // .?AVC_LocationScriptBind@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LockDynamicInformationValues                       = 0x2AE9C20;  // .?AVC_LockDynamicInformationValues@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LockOrientation                                    = 0x2ADAB80;  // .?AVC_LockOrientation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LogToConsole                                       = 0x2AA5D80;  // .?AVC_LogToConsole@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LogToLabel                                         = 0x2ADB5D0;  // .?AVC_LogToLabel@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LogToTimedLabel                                    = 0x2AA5A20;  // .?AVC_LogToTimedLabel@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Look                                               = 0x2AA4A68;  // .?AVC_Look@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Loop                                               = 0x2ADB300;  // .?AVC_Loop@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LoopUntil                                          = 0x2AD9BD8;  // .?AVC_LoopUntil@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LuaGate                                            = 0x2ADA578;  // .?AVC_LuaGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_LuaWrapper                                         = 0x2ADA4F0;  // .?AVC_LuaWrapper@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MakeFormation                                      = 0x2AE2770;  // .?AVC_MakeFormation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MakeIdleBase                                       = 0x2A9D6A0;  // .?AVC_MakeIdleBase@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MakeMeIdle                                         = 0x2AA4710;  // .?AVC_MakeMeIdle@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ManualSweetSpotBias                                = 0x2AE21A0;  // .?AVC_ManualSweetSpotBias@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MeleeDefenseAutomation                             = 0x2AC5050;  // .?AVC_MeleeDefenseAutomation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MeleeDefenseAutomationControls                     = 0x2AC4A20;  // .?AVC_MeleeDefenseAutomationControls@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MeleeGuardAutomation                               = 0x2AC3700;  // .?AVC_MeleeGuardAutomation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MeleeOffenseAutomation                             = 0x2AC35C0;  // .?AVC_MeleeOffenseAutomation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MeleeOffenseAutomationControls                     = 0x2AC2F20;  // .?AVC_MeleeOffenseAutomationControls@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MeleeScreamBypass                                  = 0x2AC3F60;  // .?AVC_MeleeScreamBypass@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MeleeShoutAutomation                               = 0x2AC3F10;  // .?AVC_MeleeShoutAutomation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MeleeTutorialSlotAction                            = 0x2AC1FD0;  // .?AVC_MeleeTutorialSlotAction@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MessageCapableObject                               = 0x2B176A8;  // .?AVC_MessageCapableObject@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MockNode                                           = 0x2B0F578;  // .?AVC_MockNode@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ModifyMorale                                       = 0x2B04E10;  // .?AVC_ModifyMorale@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ModifyMoraleContextBase                            = 0x2B04F10;  // .?AVC_ModifyMoraleContextBase@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ModuleMessage                                      = 0x29E9C60;  // .?AVC_ModuleMessage@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MoraleCheck                                        = 0x2B052D0;  // .?AVC_MoraleCheck@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MoraleContextBuffInitParams                        = 0x2A55670;  // .?AVC_MoraleContextBuffInitParams@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MoraleGate                                         = 0x2ADD8A0;  // .?AVC_MoraleGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Move                                               = 0x2AA4E50;  // .?AVC_Move@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MoveAndAct                                         = 0x2AA3F70;  // .?AVC_MoveAndAct@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MoveBase                                           = 0x2A92DB0;  // .?AVC_MoveBase@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MoveItem                                           = 0x2AA9828;  // .?AVC_MoveItem@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MovementAutomation                                 = 0x2AC1F30;  // .?AVC_MovementAutomation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MultiSendMessageToNPC                              = 0x2AAC860;  // .?AVC_MultiSendMessageToNPC@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_MultiSendToNPC_Time                                = 0x2AAC9C0;  // .?AVC_MultiSendToNPC_Time@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_NPCPassiveBarrier                                  = 0x2A88CF0;  // .?AVC_NPCPassiveBarrier@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_NPCStatGateBase                                    = 0x2ADDD90;  // .?AVC_NPCStatGateBase@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_NPCStateCheckBase                                  = 0x2B05E80;  // .?AVC_NPCStateCheckBase@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_NPCStateGate                                       = 0x2ADDB70;  // .?AVC_NPCStateGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_NamedEventCatch                                    = 0x2B0D0E0;  // .?AVC_NamedEventCatch@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_NegationOp                                         = 0x2B01EA0;  // .?AVC_NegationOp@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_NoMove                                             = 0x2AD9F48;  // .?AVC_NoMove@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Node                                               = 0x2A87CF8;  // .?AVC_Node@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_NodeFactory_GetItemProperty                        = 0x2A99CA0;  // .?AVC_NodeFactory_GetItemProperty@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_NotNearPlayer                                      = 0x2AA3600;  // .?AVC_NotNearPlayer@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_NotPatchedColumnDescriptor                         = 0x2A08B50;  // .?AVC_NotPatchedColumnDescriptor@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_NotSeenByPlayer                                    = 0x2AA42C0;  // .?AVC_NotSeenByPlayer@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_NpcStateGateBase                                   = 0x2B07470;  // .?AVC_NpcStateGateBase@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_NumericalOperation                                 = 0x2AA3350;  // .?AVC_NumericalOperation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ObjectDatabaseBase                                 = 0x29EC9D0;  // .?AVC_ObjectDatabaseBase@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ObjectDatabaseManager                              = 0x29ECB00;  // .?AVC_ObjectDatabaseManager@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Observer                                           = 0x2AA2F68;  // .?AVC_Observer@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnActionBase                                       = 0x2AC0CF0;  // .?AVC_OnActionBase@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnAnyCombo                                         = 0x2AC2C60;  // .?AVC_OnAnyCombo@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnCombatActionStateChange                          = 0x2AB6BA0;  // .?AVC_OnCombatActionStateChange@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnCombatEvent                                      = 0x2AC2870;  // .?AVC_OnCombatEvent@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnCombatGuardTypeChange                            = 0x2AB5520;  // .?AVC_OnCombatGuardTypeChange@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnCombatModeChange                                 = 0x2AB5DD0;  // .?AVC_OnCombatModeChange@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnCombatMoveEvent                                  = 0x2AC26E0;  // .?AVC_OnCombatMoveEvent@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnCombatStateChange                                = 0x2AC6D00;  // .?AVC_OnCombatStateChange@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnCombatZoneChange                                 = 0x2AC62F0;  // .?AVC_OnCombatZoneChange@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnInventoryEvent                                   = 0x2AD97D0;  // .?AVC_OnInventoryEvent@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnMeleeCombatAction                                = 0x2AC0B10;  // .?AVC_OnMeleeCombatAction@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnMeleeHit                                         = 0x2AC19B0;  // .?AVC_OnMeleeHit@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnMeleeInactivity                                  = 0x2AC12E0;  // .?AVC_OnMeleeInactivity@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnNaturalCombo                                     = 0x2ABFB50;  // .?AVC_OnNaturalCombo@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnPathFilter                                       = 0x2AF5E90;  // .?AVC_OnPathFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnTargetChange                                     = 0x2ACB950;  // .?AVC_OnTargetChange@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_OnWeaponChange                                     = 0x2ABF740;  // .?AVC_OnWeaponChange@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PKColumnDescriptor                                 = 0x29E98B8;  // .?AVC_PKColumnDescriptor@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_POI                                                = 0x2A62098;  // .?AVC_POI@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_POIDiscoveryBarrier                                = 0x2AD9250;  // .?AVC_POIDiscoveryBarrier@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Parallel                                           = 0x2ACAF28;  // .?AVC_Parallel@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Parentizer                                         = 0x2B01990;  // .?AVC_Parentizer@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ParticleEffectControl                              = 0x2AA3930;  // .?AVC_ParticleEffectControl@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PassiveBarrier                                     = 0x2A88E90;  // .?AVC_PassiveBarrier@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PerceptionSearch                                   = 0x2B0AF70;  // .?AVC_PerceptionSearch@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PerkList                                           = 0x2A61BE8;  // .?AVC_PerkList@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PickUpBehavior                                     = 0x2AA1E70;  // .?AVC_PickUpBehavior@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PickUpBody                                         = 0x2AB4280;  // .?AVC_PickUpBody@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PlaceBehavior                                      = 0x2AB3A90;  // .?AVC_PlaceBehavior@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PlaceBody                                          = 0x2AB3838;  // .?AVC_PlaceBody@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PlayAnimation                                      = 0x2AB3F70;  // .?AVC_PlayAnimation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PlaySequence                                       = 0x2AB35D0;  // .?AVC_PlaySequence@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PlayVideo                                          = 0x2AB3190;  // .?AVC_PlayVideo@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Player                                             = 0x2A48890;  // .?AVC_Player@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PlayerAnimationGlobalTag                           = 0x2AB2A00;  // .?AVC_PlayerAnimationGlobalTag@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PlayerCombatControls                               = 0x2AC0840;  // .?AVC_PlayerCombatControls@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PlayerModule                                       = 0x2A7D078;  // .?AVC_PlayerModule@playermodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PlayerMove                                         = 0x2AB2680;  // .?AVC_PlayerMove@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PlayerOnBed                                        = 0x2AB1830;  // .?AVC_PlayerOnBed@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PlayerOnBedState                                   = 0x2AB1370;  // .?AVC_PlayerOnBedState@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PlayerProfileWHManager                             = 0x29EA1C0;  // .?AVC_PlayerProfileWHManager@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PlayerSleep                                        = 0x2AB1E90;  // .?AVC_PlayerSleep@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ProbablisticDrivenSweetSpot                        = 0x2AE2090;  // .?AVC_ProbablisticDrivenSweetSpot@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ProceedTutorial                                    = 0x2AB8460;  // .?AVC_ProceedTutorial@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ProcessMessage                                     = 0x2AD87B0;  // .?AVC_ProcessMessage@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ProcessMessageBase                                 = 0x2ACEB60;  // .?AVC_ProcessMessageBase@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ProduceSound                                       = 0x2AB0C90;  // .?AVC_ProduceSound@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ProfileCanBeLoaded                                 = 0x2AB0940;  // .?AVC_ProfileCanBeLoaded@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ProfileLoadedGate                                  = 0x2ADC640;  // .?AVC_ProfileLoadedGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PutItemInHand                                      = 0x2AA9470;  // .?AVC_PutItemInHand@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_PutItemInInventory                                 = 0x2AA7700;  // .?AVC_PutItemInInventory@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_QuestCondition                                     = 0x2AD9100;  // .?AVC_QuestCondition@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_QuestObjectiveCondition                            = 0x2AD8AE0;  // .?AVC_QuestObjectiveCondition@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_QuestObjectiveGate                                 = 0x2ADC410;  // .?AVC_QuestObjectiveGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RPGModule                                          = 0x2A672E0;  // .?AVC_RPGModule@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RPGSleep                                           = 0x2AC7580;  // .?AVC_RPGSleep@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RPGSweetSpotArcDriver                              = 0x2AE0C40;  // .?AVC_RPGSweetSpotArcDriver@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RainGate                                           = 0x2ADCC10;  // .?AVC_RainGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RandDistribution                                   = 0x2AAF8B0;  // .?AVC_RandDistribution@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RandomGate                                         = 0x2AD8A50;  // .?AVC_RandomGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RandomItem                                         = 0x2AAF560;  // .?AVC_RandomItem@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RangeFilter                                        = 0x2AF9830;  // .?AVC_RangeFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RangeSorter                                        = 0x2AFFAC0;  // .?AVC_RangeSorter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ReachTargetCheck                                   = 0x2AB0050;  // .?AVC_ReachTargetCheck@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ReadMessage                                        = 0x2AAE920;  // .?AVC_ReadMessage@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ReadinessObserver                                  = 0x29E9B88;  // .?AVC_ReadinessObserver@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ReadinessWait                                      = 0x2AAE2A0;  // .?AVC_ReadinessWait@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RegisterProximityTrigger                           = 0x2AAF110;  // .?AVC_RegisterProximityTrigger@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RemoveAreaLabel                                    = 0x2B12440;  // .?AVC_RemoveAreaLabel@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RemoveBuffs                                        = 0x2B097F0;  // .?AVC_RemoveBuffs@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RemoveGameContext                                  = 0x2A8FDE0;  // .?AVC_RemoveGameContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RemoveItem                                         = 0x2AA85C0;  // .?AVC_RemoveItem@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RemoveLink                                         = 0x2B018B0;  // .?AVC_RemoveLink@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RemovePatch                                        = 0x2B08CF0;  // .?AVC_RemovePatch@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RenamedColumnDescriptor                            = 0x29ECDA0;  // .?AVC_RenamedColumnDescriptor@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RepushTest                                         = 0x2B0E610;  // .?AVC_RepushTest@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RepushTestKeepThreads                              = 0x2B0DF50;  // .?AVC_RepushTestKeepThreads@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RequestDialog                                      = 0x2A940B0;  // .?AVC_RequestDialog@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RequestDogObjective                                = 0x2A959E0;  // .?AVC_RequestDogObjective@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RequestTarget                                      = 0x2ACB820;  // .?AVC_RequestTarget@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ReserveBehavior                                    = 0x2AD7A40;  // .?AVC_ReserveBehavior@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ReserveBehaviorSearch                              = 0x2AD82A0;  // .?AVC_ReserveBehaviorSearch@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ResetPublicFriendsReputation                       = 0x2AAEAB0;  // .?AVC_ResetPublicFriendsReputation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RestrictCamera                                     = 0x2AD8050;  // .?AVC_RestrictCamera@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_RetrieveInformation                                = 0x2AE5FF0;  // .?AVC_RetrieveInformation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Revive                                             = 0x2AAD678;  // .?AVC_Revive@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Root                                               = 0x2ADBB60;  // .?AVC_Root@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SaveGameManager                                    = 0x29EABB0;  // .?AVC_SaveGameManager@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindActor                                    = 0x2A4A570;  // .?AVC_ScriptBindActor@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindBackgammon                               = 0x2A7CF40;  // .?AVC_ScriptBindBackgammon@playermodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindCalendar                                 = 0x2A66F08;  // .?AVC_ScriptBindCalendar@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindDatabase                                 = 0x29ECC30;  // .?AVC_ScriptBindDatabase@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindDialog                                   = 0x2A269B0;  // .?AVC_ScriptBindDialog@dialogmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindEntityModule                             = 0x2A4A690;  // .?AVC_ScriptBindEntityModule@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindEnvironment                              = 0x2A4C4B0;  // .?AVC_ScriptBindEnvironment@environmentmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindFramework                                = 0x29EAF78;  // .?AVC_ScriptBindFramework@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindGameRules                                = 0x2A4A740;  // .?AVC_ScriptBindGameRules@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindHorse                                    = 0x2A4A6D0;  // .?AVC_ScriptBindHorse@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindHuman                                    = 0x2A4A708;  // .?AVC_ScriptBindHuman@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindInteractiveObject                        = 0x2A439F0;  // .?AVC_ScriptBindInteractiveObject@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindInventory                                = 0x2A4A5D0;  // .?AVC_ScriptBindInventory@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindItemManager                              = 0x2A4A650;  // .?AVC_ScriptBindItemManager@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindMap                                      = 0x2A4EB30;  // .?AVC_ScriptBindMap@guimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindMinigame                                 = 0x2A7CFF8;  // .?AVC_ScriptBindMinigame@playermodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindPickableItem                             = 0x2A4A610;  // .?AVC_ScriptBindPickableItem@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindPlayer                                   = 0x2A4A780;  // .?AVC_ScriptBindPlayer@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindQuest                                    = 0x2A813B8;  // .?AVC_ScriptBindQuest@questmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindRPGModule                                = 0x2A66828;  // .?AVC_ScriptBindRPGModule@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindShop                                     = 0x2A81DE0;  // .?AVC_ScriptBindShop@shopmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindSmartObject                              = 0x2B33E30;  // .?AVC_ScriptBindSmartObject@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindSoul                                     = 0x2A66FB8;  // .?AVC_ScriptBindSoul@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindStatistics                               = 0x2A66F40;  // .?AVC_ScriptBindStatistics@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindTrace                                    = 0x29EC7E8;  // .?AVC_ScriptBindTrace@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindTutorial                                 = 0x2A7D038;  // .?AVC_ScriptBindTutorial@playermodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindVariables                                = 0x29EC7A8;  // .?AVC_ScriptBindVariables@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBindXGenAIModule                             = 0x2B33DF0;  // .?AVC_ScriptBindXGenAIModule@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBind_Alchemy                                 = 0x2A7CF00;  // .?AVC_ScriptBind_Alchemy@playermodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBind_Dice                                    = 0x2A7CF80;  // .?AVC_ScriptBind_Dice@playermodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptBind_Sharpening                              = 0x2A7CFB8;  // .?AVC_ScriptBind_Sharpening@playermodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ScriptbindBarber                                   = 0x2A64AF0;  // .?AVC_ScriptbindBarber@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Selector                                           = 0x2AC9998;  // .?AVC_Selector@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Semaphore                                          = 0x2AFF310;  // .?AVC_Semaphore@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SendMessageBase                                    = 0x2AADE70;  // .?AVC_SendMessageBase@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SendMessageByBehavior                              = 0x2B10B80;  // .?AVC_SendMessageByBehavior@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SendMessageToInhabitants                           = 0x2B117B0;  // .?AVC_SendMessageToInhabitants@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SendMessageToNPC                                   = 0x2AAC910;  // .?AVC_SendMessageToNPC@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SendToNPC_Data                                     = 0x2AADD10;  // .?AVC_SendToNPC_Data@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SendToNPC_MultiData                                = 0x2AADC20;  // .?AVC_SendToNPC_MultiData@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SendToNPC_TimeBase                                 = 0x2AADB80;  // .?AVC_SendToNPC_TimeBase@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Sequence                                           = 0x2AC98B8;  // .?AVC_Sequence@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetAngryness                                       = 0x2B068A0;  // .?AVC_SetAngryness@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetBehaviorMaxInstances                            = 0x2B11380;  // .?AVC_SetBehaviorMaxInstances@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetBehaviorState                                   = 0x2B113D0;  // .?AVC_SetBehaviorState@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetCombatMoraleContext                             = 0x2B04640;  // .?AVC_SetCombatMoraleContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetCompanion                                       = 0x2A955E0;  // .?AVC_SetCompanion@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetDogCompanionMode                                = 0x2A95E50;  // .?AVC_SetDogCompanionMode@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetDynamicInformationValue                         = 0x2AE5EE0;  // .?AVC_SetDynamicInformationValue@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetEstimatedFollow                                 = 0x2AE0740;  // .?AVC_SetEstimatedFollow@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetExternalLock                                    = 0x2AFE070;  // .?AVC_SetExternalLock@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetFacialExpression                                = 0x2AACF20;  // .?AVC_SetFacialExpression@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetFollowTarget                                    = 0x2AE0640;  // .?AVC_SetFollowTarget@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetGlobalVar                                       = 0x2AACBA0;  // .?AVC_SetGlobalVar@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetIsAimed                                         = 0x2AC0270;  // .?AVC_SetIsAimed@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetItemProperty                                    = 0x2AA6F80;  // .?AVC_SetItemProperty@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetOwner                                           = 0x2AAB828;  // .?AVC_SetOwner@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetPerceivability                                  = 0x2B0B960;  // .?AVC_SetPerceivability@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetPlayerHorseSpeed                                = 0x2AAC200;  // .?AVC_SetPlayerHorseSpeed@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetQuest                                           = 0x2ABE178;  // .?AVC_SetQuest@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetQuestObjective                                  = 0x2ABDE40;  // .?AVC_SetQuestObjective@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetRandomEventVariant                              = 0x2ABD5D0;  // .?AVC_SetRandomEventVariant@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetRandomEventsMode                                = 0x2ABE640;  // .?AVC_SetRandomEventsMode@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetReputationFaction                               = 0x2ABDBD0;  // .?AVC_SetReputationFaction@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetReputationNPC                                   = 0x2ABC260;  // .?AVC_SetReputationNPC@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetSituationMaxInstances                           = 0x2B10030;  // .?AVC_SetSituationMaxInstances@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetSituationState                                  = 0x2B10600;  // .?AVC_SetSituationState@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetSpatialInfo                                     = 0x2ABCF10;  // .?AVC_SetSpatialInfo@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetSweetSpot                                       = 0x2ABCBC0;  // .?AVC_SetSweetSpot@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetTemporarySuperfaction                           = 0x2ABD840;  // .?AVC_SetTemporarySuperfaction@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetVariable                                        = 0x2ABB9D0;  // .?AVC_SetVariable@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetVisibility                                      = 0x2ABB690;  // .?AVC_SetVisibility@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetWhistling                                       = 0x2ABB340;  // .?AVC_SetWhistling@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SetZone                                            = 0x2AC0108;  // .?AVC_SetZone@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ShapePosition                                      = 0x2ABBC40;  // .?AVC_ShapePosition@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_ShouldHorseThrowOffAnyone                          = 0x2B042D0;  // .?AVC_ShouldHorseThrowOffAnyone@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SkipActivity                                       = 0x2B08A50;  // .?AVC_SkipActivity@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SkipTime                                           = 0x2AB1AF0;  // .?AVC_SkipTime@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SleepBuffInitParams                                = 0x2A64EE0;  // .?AVC_SleepBuffInitParams@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SleepQualitySorter                                 = 0x2B00B10;  // .?AVC_SleepQualitySorter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SlotClassFilter                                    = 0x2AF5360;  // .?AVC_SlotClassFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SmartAreaBehaviorTag                               = 0x2AD77D0;  // .?AVC_SmartAreaBehaviorTag@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SmartEntityBehaviorTag                             = 0x2AA1F80;  // .?AVC_SmartEntityBehaviorTag@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SmartObjInstantSendByBehavior                      = 0x2B10720;  // .?AVC_SmartObjInstantSendByBehavior@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SmartObjSendByBehavior                             = 0x2B102D0;  // .?AVC_SmartObjSendByBehavior@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SmartObjSetBehaviorMaxInstances                    = 0x2B0EE50;  // .?AVC_SmartObjSetBehaviorMaxInstances@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SmartObjSetBehaviorState                           = 0x2B0EF70;  // .?AVC_SmartObjSetBehaviorState@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SmartObjectBehaviorTag                             = 0x2AD6A80;  // .?AVC_SmartObjectBehaviorTag@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Soul                                               = 0x2A6D280;  // .?AVC_Soul@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SoulBuffInstance                                   = 0x2A54470;  // .?AVC_SoulBuffInstance@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SoulEffect                                         = 0x2A543B0;  // .?AVC_SoulEffect@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SoulFactionFilter                                  = 0x2AF8B40;  // .?AVC_SoulFactionFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SoulIsAliveFilter                                  = 0x2AF8860;  // .?AVC_SoulIsAliveFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SoulLevelsChangeGate                               = 0x2B13150;  // .?AVC_SoulLevelsChangeGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SoulList                                           = 0x2A6D080;  // .?AVC_SoulList@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SoulPropertyNotifier                               = 0x2A6D0F0;  // .?AVC_SoulPropertyNotifier@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Spawn                                              = 0x2ABAB08;  // .?AVC_Spawn@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SpawnExpiringPerceptibleVolume                     = 0x2B0B610;  // .?AVC_SpawnExpiringPerceptibleVolume@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SpawnPerceptibleVolume                             = 0x2B0B560;  // .?AVC_SpawnPerceptibleVolume@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SpreadInformation                                  = 0x2AE58B0;  // .?AVC_SpreadInformation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_StartFastTravel                                    = 0x2AB0530;  // .?AVC_StartFastTravel@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_StatXPEffect                                       = 0x2A62208;  // .?AVC_StatXPEffect@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_StateMachineCheck                                  = 0x2AD7440;  // .?AVC_StateMachineCheck@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_StateMachineGate                                   = 0x2AEB0D0;  // .?AVC_StateMachineGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_StealthAccept                                      = 0x2ABF0A0;  // .?AVC_StealthAccept@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_StealthAction                                      = 0x2ABF000;  // .?AVC_StealthAction@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_StealthCrouch                                      = 0x2AD6EB0;  // .?AVC_StealthCrouch@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_StopAim                                            = 0x2ACCDD0;  // .?AVC_StopAim@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_StopAllEmitting                                    = 0x2AE6AC0;  // .?AVC_StopAllEmitting@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_StopAnimation                                      = 0x2ABB1F0;  // .?AVC_StopAnimation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_StopFastTravel                                     = 0x2AB01D0;  // .?AVC_StopFastTravel@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_StopIgnoringEmittedInformations                    = 0x2AE6480;  // .?AVC_StopIgnoringEmittedInformations@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_StopMinigame                                       = 0x2ABAE30;  // .?AVC_StopMinigame@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_StopMovement                                       = 0x2AB9BD0;  // .?AVC_StopMovement@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_StreamingInstallGate                               = 0x2AEA2D0;  // .?AVC_StreamingInstallGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Success                                            = 0x2AB97F8;  // .?AVC_Success@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SuppressFailure                                    = 0x2AEA1E0;  // .?AVC_SuppressFailure@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SurrenderActionHint                                = 0x2AB1000;  // .?AVC_SurrenderActionHint@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SuspendDecorator                                   = 0x2AD6E60;  // .?AVC_SuspendDecorator@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SuspendDecoratorPassive                            = 0x2AD5EF0;  // .?AVC_SuspendDecoratorPassive@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SuspendRandomEvents                                = 0x2ABE4B0;  // .?AVC_SuspendRandomEvents@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SweetSpotDorsalBounce                              = 0x2AE12D0;  // .?AVC_SweetSpotDorsalBounce@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SweetSpotFollower                                  = 0x2ADF940;  // .?AVC_SweetSpotFollower@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SweetSpotLateralBounce                             = 0x2ADF8C0;  // .?AVC_SweetSpotLateralBounce@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SweetSpotLockPolicy                                = 0x2ADF280;  // .?AVC_SweetSpotLockPolicy@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Switch                                             = 0x2AC95F0;  // .?AVC_Switch@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SwitchBase                                         = 0x2ACA160;  // .?AVC_SwitchBase@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_SwitchLevel                                        = 0x2AB9550;  // .?AVC_SwitchLevel@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Synchronize                                        = 0x2AFD180;  // .?AVC_Synchronize@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_TBLTableSerializer                                 = 0x29ECD20;  // .?AVC_TBLTableSerializer@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_TagIt                                              = 0x2AD5A98;  // .?AVC_TagIt@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Teleport                                           = 0x2ABA288;  // .?AVC_Teleport@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_TeleportFormationToSpots                           = 0x2AE0410;  // .?AVC_TeleportFormationToSpots@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_TeleportHorseToPlayer                              = 0x2ABA050;  // .?AVC_TeleportHorseToPlayer@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_TerminateSituation                                 = 0x2AB8BA0;  // .?AVC_TerminateSituation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_TimedLoop                                          = 0x2ADB340;  // .?AVC_TimedLoop@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_TimedSoulBuffInstance                              = 0x2A53898;  // .?AVC_TimedSoulBuffInstance@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Timeout                                            = 0x2AEAAF8;  // .?AVC_Timeout@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_TimerBox                                           = 0x2AD5A08;  // .?AVC_TimerBox@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_TransferInformation                                = 0x2AE6380;  // .?AVC_TransferInformation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_TryCatch                                           = 0x2B0DBF8;  // .?AVC_TryCatch@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_TurnBody                                           = 0x2AB8828;  // .?AVC_TurnBody@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_TutorialNode                                       = 0x2AB84B0;  // .?AVC_TutorialNode@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_UIMap                                              = 0x2A50AA8;  // .?AVC_UIMap@guimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_UIMapCloudAtlas                                    = 0x2A529B8;  // .?AVC_UIMapCloudAtlas@guimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_UnEquipItem                                        = 0x2AA6BE0;  // .?AVC_UnEquipItem@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_UnregisterProximityTrigger                         = 0x2AB8F20;  // .?AVC_UnregisterProximityTrigger@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_UseItem                                            = 0x2AA68A8;  // .?AVC_UseItem@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_VarOperation                                       = 0x2AB7C20;  // .?AVC_VarOperation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_VariableExistsGate                                 = 0x2AD66E0;  // .?AVC_VariableExistsGate@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_WUIDFilter                                         = 0x2AF9310;  // .?AVC_WUIDFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_Wait                                               = 0x2AEAA70;  // .?AVC_Wait@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_WeaponAutomation                                   = 0x2ACA890;  // .?AVC_WeaponAutomation@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_WeaponRuntimeData                                  = 0x2A45A18;  // .?AVC_WeaponRuntimeData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_WeatherCondition                                   = 0x2AD6130;  // .?AVC_WeatherCondition@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_While                                              = 0x2AD4EA0;  // .?AVC_While@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_WrapperDecorator                                   = 0x2AB4930;  // .?AVC_WrapperDecorator@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_C_XMLTableSerializer                                 = 0x29ECDE8;  // .?AVC_XMLTableSerializer@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_AIPuppet                                           = 0x2B1BAC0;  // .?AVI_AIPuppet@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_Action                                             = 0x29F6718;  // .?AVI_Action@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_I_ActionImpl                                         = 0x29F5298;  // .?AVI_ActionImpl@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_I_BuffInitParams                                     = 0x2A477D0;  // .?AVI_BuffInitParams@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_CastableIface                                      = 0x2A8D580;  // .?AVI_CastableIface@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_ColumnDescriptor                                   = 0x29E9B10;  // .?AVI_ColumnDescriptor@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_CombatActionHelperAttackOwner                      = 0x29F5250;  // .?AVI_CombatActionHelperAttackOwner@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_CombatActionHelperBlockOwner                       = 0x29F24F0;  // .?AVI_CombatActionHelperBlockOwner@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_CombatActor                                        = 0x29F82B0;  // .?AVI_CombatActor@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_CombatActorAction                                  = 0x29F5348;  // .?AVI_CombatActorAction@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_CombatActorActionBlock                             = 0x29F2DE0;  // .?AVI_CombatActorActionBlock@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_CombatActorActionPrivate                           = 0x29F4E70;  // .?AVI_CombatActorActionPrivate@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_CombatActorHorsePullDown                           = 0x29F4DE0;  // .?AVI_CombatActorHorsePullDown@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_CombatActorHuntAttack                              = 0x29FDEC0;  // .?AVI_CombatActorHuntAttack@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_CombatActorMercyKill                               = 0x29FDE80;  // .?AVI_CombatActorMercyKill@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_CombatComboData                                    = 0x29FE0F8;  // .?AVI_CombatComboData@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_CombatComboStepData                                = 0x2A11CA8;  // .?AVI_CombatComboStepData@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_CombatScene                                        = 0x2A1D0F8;  // .?AVI_CombatScene@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_CombatSoul                                         = 0x2A66A28;  // .?AVI_CombatSoul@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_CombatTarget                                       = 0x29FDF80;  // .?AVI_CombatTarget@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_DatabaseListener                                   = 0x29ECB80;  // .?AVI_DatabaseListener@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_DatabaseModule                                     = 0x29ECBF0;  // .?AVI_DatabaseModule@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_DebugDraw                                          = 0x2B16590;  // .?AVI_DebugDraw@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_DebugNode                                          = 0x2A8D5F0;  // .?AVI_DebugNode@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_EquipmentManagerListener                           = 0x2A01B00;  // .?AVI_EquipmentManagerListener@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_ExactPosHelperListener                             = 0x2A44C08;  // .?AVI_ExactPosHelperListener@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_Expression                                         = 0x2A85570;  // .?AVI_Expression@Expressions@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_FactionManager                                     = 0x2A61C48;  // .?AVI_FactionManager@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_InventoryListener                                  = 0x2A1BA58;  // .?AVI_InventoryListener@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_ItemAttachmentListener                             = 0x29F8270;  // .?AVI_ItemAttachmentListener@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_ItemRuntimeData                                    = 0x2A45C78;  // .?AVI_ItemRuntimeData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_LinkFilter                                         = 0x2AEA1A0;  // .?AVI_LinkFilter@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_ModuleMessageListener                              = 0x29ECA50;  // .?AVI_ModuleMessageListener@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_I_NoRTTITypeInfo                                     = 0x2A8D5B8;  // .?AVI_NoRTTITypeInfo@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_Node                                               = 0x2A8D540;  // .?AVI_Node@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_NodeFactory                                        = 0x2A8D680;  // .?AVI_NodeFactory@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_ObjectDatabase                                     = 0x29ECA10;  // .?AVI_ObjectDatabase@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_POI                                                = 0x2A62068;  // .?AVI_POI@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_RWLocked                                           = 0x2B17988;  // .?AVI_RWLocked@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_RandomEventListener                                = 0x2A6EBF0;  // .?AVI_RandomEventListener@playermodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_ReadinessDebuggable                                = 0x29E6988;  // .?AVI_ReadinessDebuggable@wh@@
-    inline constexpr std::uintptr_t RTTI_I_ReadinessTask                                      = 0x29E6958;  // .?AVI_ReadinessTask@wh@@
-    inline constexpr std::uintptr_t RTTI_I_SceneListener                                      = 0x2A08CD8;  // .?AVI_SceneListener@animationmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_Soul                                               = 0x2A6D250;  // .?AVI_Soul@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_SoulResolver                                       = 0x2A6D218;  // .?AVI_SoulResolver@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_TableSerializer                                    = 0x29ECC70;  // .?AVI_TableSerializer@databasemodule@wh@@
-    inline constexpr std::uintptr_t RTTI_I_WUIDMappingProvider                                = 0x2A43C88;  // .?AVI_WUIDMappingProvider@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_S_AddBuffContext                                     = 0x2B09910;  // .?AUS_AddBuffContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_AlchemyBaseData                                    = 0x2A46808;  // .?AUS_AlchemyBaseData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_AlchemyMaterialData                                = 0x2A467C8;  // .?AUS_AlchemyMaterialData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_AmmoData                                           = 0x2A46720;  // .?AUS_AmmoData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_ArmorData                                          = 0x2A46758;  // .?AUS_ArmorData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_BaseNodeContext                                    = 0x2A8D1B0;  // .?AUS_BaseNodeContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_CombatActorActionAttackParams                      = 0x29F2F80;  // .?AUS_CombatActorActionAttackParams@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_CombatActorActionBlockParams                       = 0x29F0490;  // .?AUS_CombatActorActionBlockParams@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_CombatActorActionComposedRipostePerfectBlockParams = 0x29F0020;  // .?AUS_CombatActorActionComposedRipostePerfectBlockParams@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_CombatActorActionPerfectBlockParams                = 0x29EFFD0;  // .?AUS_CombatActorActionPerfectBlockParams@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_CombatActorActionStaticAttackParams                = 0x29EF640;  // .?AUS_CombatActorActionStaticAttackParams@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_CombatActorActionSyncAttackParams                  = 0x29EF690;  // .?AUS_CombatActorActionSyncAttackParams@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_ComboInstance                                      = 0x29FBD18;  // .?AUS_ComboInstance@combatmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_ConsumableData                                     = 0x2A468B0;  // .?AUS_ConsumableData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_CookingData                                        = 0x2A46010;  // .?AUS_CookingData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_DialogParams                                       = 0x2A669F0;  // .?AUS_DialogParams@rpgmodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_DieData                                            = 0x2A46080;  // .?AUS_DieData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_DivisibleItemData                                  = 0x2A46A68;  // .?AUS_DivisibleItemData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_DocumentData                                       = 0x2A46790;  // .?AUS_DocumentData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_EquippableItemData                                 = 0x2A469B0;  // .?AUS_EquippableItemData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_ExecuteLuaContext                                  = 0x2A91780;  // .?AUS_ExecuteLuaContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_ExecutionBarrierContext                            = 0x2A88FE0;  // .?AUS_ExecutionBarrierContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_ExpressionContext                                  = 0x2A91110;  // .?AUS_ExpressionContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_FoodData                                           = 0x2A46878;  // .?AUS_FoodData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_FuseBoxContext                                     = 0x2AD0DE0;  // .?AUS_FuseBoxContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_GateContext                                        = 0x2A89BA0;  // .?AUS_GateContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_GetItemPropertyContext                             = 0x2A99ED0;  // .?AUS_GetItemPropertyContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_GetItemTypeContext                                 = 0x2A8F160;  // .?AUS_GetItemTypeContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_Graph                                              = 0x29EADB0;  // .?AUS_Graph@internal@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_S_HelmetData                                         = 0x2A46048;  // .?AUS_HelmetData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_HerbData                                           = 0x2A468E8;  // .?AUS_HerbData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_IfConditionContext                                 = 0x2AD0A70;  // .?AUS_IfConditionContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_IfElseConditionContext                             = 0x2AD0980;  // .?AUS_IfElseConditionContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_InstantSendMessageToNPCContext                     = 0x2AADF80;  // .?AUS_InstantSendMessageToNPCContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_ItemData                                           = 0x2A46B10;  // .?AUS_ItemData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_Job                                                = 0x29EADE8;  // .?AUS_Job@internal@framework@wh@@
-    inline constexpr std::uintptr_t RTTI_S_KeyData                                            = 0x2A460E8;  // .?AUS_KeyData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_KeyRingData                                        = 0x2A460B0;  // .?AUS_KeyRingData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_LoopContext                                        = 0x2ADB580;  // .?AUS_LoopContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_MeleeWeaponData                                    = 0x2A46638;  // .?AUS_MeleeWeaponData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_MiscData                                           = 0x2A45F98;  // .?AUS_MiscData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_MissileWeaponData                                  = 0x2A46670;  // .?AUS_MissileWeaponData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_MoneyData                                          = 0x2A45F60;  // .?AUS_MoneyData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_NPCPassiveBarrierContext                           = 0x2A88D40;  // .?AUS_NPCPassiveBarrierContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_NPCToolData                                        = 0x2A466E8;  // .?AUS_NPCToolData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_OintmentData                                       = 0x2A46840;  // .?AUS_OintmentData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_ParallelContext                                    = 0x2ACAE40;  // .?AUS_ParallelContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_PassiveBarrierContext                              = 0x2A88EE0;  // .?AUS_PassiveBarrierContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_PickableItemData                                   = 0x2A46B48;  // .?AUS_PickableItemData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_PlayerItemData                                     = 0x2A469F0;  // .?AUS_PlayerItemData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_PotionData                                         = 0x2A46920;  // .?AUS_PotionData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_ProcessMessageBaseContext                          = 0x2ACF030;  // .?AUS_ProcessMessageBaseContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_ProcessMessageContext                              = 0x2AD8760;  // .?AUS_ProcessMessageContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_QuestibleItemData                                  = 0x2A46A28;  // .?AUS_QuestibleItemData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_RemoveItemContext                                  = 0x2AA8740;  // .?AUS_RemoveItemContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_SelectorContext                                    = 0x2ACAC90;  // .?AUS_SelectorContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_SendMessageBaseContext                             = 0x2AAD360;  // .?AUS_SendMessageBaseContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_SequenceContext                                    = 0x2AC9700;  // .?AUS_SequenceContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_StopFastTravelContext                              = 0x2AB03A0;  // .?AUS_StopFastTravelContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_SwitchBaseContext                                  = 0x2ACA1A0;  // .?AUS_SwitchBaseContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_VarOperationContext                                = 0x2AB8BF0;  // .?AUS_VarOperationContext@BehaviorTree@xgenaimodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_WeaponData                                         = 0x2A465C8;  // .?AUS_WeaponData@entitymodule@wh@@
-    inline constexpr std::uintptr_t RTTI_S_WeaponEquipData                                    = 0x2A46600;  // .?AUS_WeaponEquipData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AIObject                                           { 856 };  // 0x2B179C0 .?AVC_AIObject@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AIPuppet                                           { 864 };  // 0x2B367F8 .?AVC_AIPuppet@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AbortAllAnimations                                 { 322 };  // 0x2A8CA90 .?AVC_AbortAllAnimations@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ActionDirector                                     { 67 };  // 0x29E84D8 .?AVC_ActionDirector@framework@wh@@
+    inline constexpr ::REL::ID RTTI_C_ActionHelperMapper                                 { 321 };  // 0x2A8C480 .?AVC_ActionHelperMapper@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ActivateSubbrain                                   { 824 };  // 0x2B0EB60 .?AVC_ActivateSubbrain@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ActiveBarrier                                      { 543 };  // 0x2AC52C0 .?AVC_ActiveBarrier@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Actor                                              { 189 };  // 0x2A2B220 .?AVC_Actor@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AddAngryness                                       { 791 };  // 0x2B07690 .?AVC_AddAngryness@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AddAreaLabel                                       { 844 };  // 0x2B12FC0 .?AVC_AddAreaLabel@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AddBuff                                            { 801 };  // 0x2B098D0 .?AVC_AddBuff@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AddGameContext                                     { 346 };  // 0x2A91160 .?AVC_AddGameContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AddLink                                            { 694 };  // 0x2AE5028 .?AVC_AddLink@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AddOpponent                                        { 577 };  // 0x2ACC3D0 .?AVC_AddOpponent@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AddPatch                                           { 804 };  // 0x2B0A208 .?AVC_AddPatch@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AddPerceivableState                                { 754 };  // 0x2AFC6E0 .?AVC_AddPerceivableState@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AddRecognitionThreshold                            { 753 };  // 0x2AFC350 .?AVC_AddRecognitionThreshold@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AimAtTarget                                        { 565 };  // 0x2ACA0D0 .?AVC_AimAtTarget@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AlignmentWrapper                                   { 564 };  // 0x2AC9B00 .?AVC_AlignmentWrapper@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AllowSituations                                    { 557 };  // 0x2AC8540 .?AVC_AllowSituations@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AnchorFormation                                    { 620 };  // 0x2AD47C0 .?AVC_AnchorFormation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AngrynessNodeBase                                  { 788 };  // 0x2B06DD0 .?AVC_AngrynessNodeBase@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AnimationEndWait                                   { 316 };  // 0x2A8B6B0 .?AVC_AnimationEndWait@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AnimationEventCatch                                { 827 };  // 0x2B0F1E0 .?AVC_AnimationEventCatch@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AnimationEventWait                                 { 320 };  // 0x2A8C100 .?AVC_AnimationEventWait@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AnyLinkFilter                                      { 693 };  // 0x2AE4B70 .?AVC_AnyLinkFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AreaContainsFilter                                 { 732 };  // 0x2AF4240 .?AVC_AreaContainsFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AreaPresence                                       { 556 };  // 0x2AC81F0 .?AVC_AreaPresence@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ArmorRuntimeData                                   { 198 };  // 0x2A45AD8 .?AVC_ArmorRuntimeData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AssertCondition                                    { 319 };  // 0x2A8BD70 .?AVC_AssertCondition@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AssertNode                                         { 318 };  // 0x2A8BA20 .?AVC_AssertNode@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AssignClothingPreset                               { 381 };  // 0x2A9CA90 .?AVC_AssignClothingPreset@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AssignWeaponPreset                                 { 380 };  // 0x2A9C700 .?AVC_AssignWeaponPreset@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AtomicDecorator                                    { 559 };  // 0x2AC8EB0 .?AVC_AtomicDecorator@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_AttachObject                                       { 314 };  // 0x2A8AC60 .?AVC_AttachObject@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_BaseModule                                         { 93 };  // 0x29ECBC0 .?AVC_BaseModule@framework@wh@@
+    inline constexpr ::REL::ID RTTI_C_ParallelModuleUpdater                              { 74 };  // 0x29EA0B0 .?AVC_ParallelModuleUpdater@framework@wh@@
+    inline constexpr ::REL::ID RTTI_C_BehaviorAdopter                                    { 399 };  // 0x2AA1D20 .?AVC_BehaviorAdopter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_BehaviorTag                                        { 402 };  // 0x2AA2110 .?AVC_BehaviorTag@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_BehaviorTagCatch                                   { 820 };  // 0x2B0DB20 .?AVC_BehaviorTagCatch@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Block                                              { 483 };  // 0x2AB7898 .?AVC_Block@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Boid                                               { 315 };  // 0x2A8B240 .?AVC_Boid@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_BowAim                                             { 487 };  // 0x2AB8338 .?AVC_BowAim@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_BowCheckBase                                       { 486 };  // 0x2AB8100 .?AVC_BowCheckBase@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_BowCheckRange                                      { 485 };  // 0x2AB8060 .?AVC_BowCheckRange@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_BowCheckTrajectory                                 { 481 };  // 0x2AB6A00 .?AVC_BowCheckTrajectory@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_BowLoad                                            { 480 };  // 0x2AB6688 .?AVC_BowLoad@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_BowShoot                                           { 479 };  // 0x2AB6378 .?AVC_BowShoot@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_BranchTypeCondition                                { 558 };  // 0x2AC8D20 .?AVC_BranchTypeCondition@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_BuffDecoratorBase                                  { 553 };  // 0x2AC77F0 .?AVC_BuffDecoratorBase@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_BuffInitParamsDefault                              { 232 };  // 0x2A47A20 .?AVC_BuffInitParamsDefault@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_BuffInstanceBase                                   { 252 };  // 0x2A544A8 .?AVC_BuffInstanceBase@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_BuffManager                                        { 250 };  // 0x2A543E0 .?AVC_BuffManager@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_BuffTagCheck                                       { 799 };  // 0x2B095E0 .?AVC_BuffTagCheck@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CachedPuppet                                       { 863 };  // 0x2B36278 .?AVC_CachedPuppet@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CallBehavior                                       { 555 };  // 0x2AC8080 .?AVC_CallBehavior@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CallBehaviorPatch                                  { 554 };  // 0x2AC7F80 .?AVC_CallBehaviorPatch@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CanAssignClothingPresetFromInventory               { 379 };  // 0x2A9C230 .?AVC_CanAssignClothingPresetFromInventory@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CanAssignWeaponPresetFromInventory                 { 376 };  // 0x2A9AB50 .?AVC_CanAssignWeaponPresetFromInventory@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CancelPerceptionIgnore                             { 756 };  // 0x2AFCD20 .?AVC_CancelPerceptionIgnore@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CatchAndPrintDebugEvent                            { 819 };  // 0x2B0D960 .?AVC_CatchAndPrintDebugEvent@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CategoryFilter                                     { 748 };  // 0x2AF9560 .?AVC_CategoryFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ChangeAreaLabel                                    { 845 };  // 0x2B130B0 .?AVC_ChangeAreaLabel@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ChangeFormation                                    { 624 };  // 0x2AD5470 .?AVC_ChangeFormation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CheckGlobalTagState                                { 311 };  // 0x2A89ED0 .?AVC_CheckGlobalTagState@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CheckIfPlayerCanSleep                              { 794 };  // 0x2B07D20 .?AVC_CheckIfPlayerCanSleep@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CheckInformationKnowledge                          { 717 };  // 0x2AEA4A0 .?AVC_CheckInformationKnowledge@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CheckWuidValid                                     { 309 };  // 0x2A89970 .?AVC_CheckWuidValid@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CircularSpatialQuery                               { 313 };  // 0x2A8A570 .?AVC_CircularSpatialQuery@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ClearContextRelatedMessages                        { 312 };  // 0x2A8A230 .?AVC_ClearContextRelatedMessages@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ClearDynamicInformationValue                       { 713 };  // 0x2AE9CE0 .?AVC_ClearDynamicInformationValue@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ClearInbox                                         { 306 };  // 0x2A89350 .?AVC_ClearInbox@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ClearOpponents                                     { 576 };  // 0x2ACC150 .?AVC_ClearOpponents@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ClearTarget                                        { 581 };  // 0x2ACCBA0 .?AVC_ClearTarget@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ClearTemporarySuperfaction                         { 508 };  // 0x2ABC670 .?AVC_ClearTemporarySuperfaction@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ClimbLadder                                        { 417 };  // 0x2AA6180 .?AVC_ClimbLadder@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ClosestEnemy                                       { 579 };  // 0x2ACC670 .?AVC_ClosestEnemy@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ColumnDescriptor                                   { 69 };  // 0x29E98F8 .?AVC_ColumnDescriptor@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ColumnDescriptorBase                               { 70 };  // 0x29E9AD0 .?AVC_ColumnDescriptorBase@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActionAttackFactory                          { 109 };  // 0x29F06F0 .?AVC_CombatActionAttackFactory@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActionFactoryBase                            { 110 };  // 0x29F07B0 .?AVC_CombatActionFactoryBase@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActionHelperAttack                           { 129 };  // 0x29F3340 .?AVC_CombatActionHelperAttack@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActionHelperBlock                            { 108 };  // 0x29F05B0 .?AVC_CombatActionHelperBlock@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActionPerfectBlockFactory                    { 111 };  // 0x29F07F0 .?AVC_CombatActionPerfectBlockFactory@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActionSyncAttackData                         { 175 };  // 0x2A108D0 .?AVC_CombatActionSyncAttackData@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActor                                        { 137 };  // 0x29F5218 .?AVC_CombatActor@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionAttack                            { 126 };  // 0x29F2E20 .?AVC_CombatActorActionAttack@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionBlock                             { 124 };  // 0x29F2DA0 .?AVC_CombatActorActionBlock@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionBlockTrigger                      { 120 };  // 0x29F2140 .?AVC_CombatActorActionBlockTrigger@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionComposedRipostePerfectBlock       { 104 };  // 0x29EFEA0 .?AVC_CombatActorActionComposedRipostePerfectBlock@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionFreeBlock                         { 102 };  // 0x29EFB30 .?AVC_CombatActorActionFreeBlock@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionGuard                             { 130 };  // 0x29F4A60 .?AVC_CombatActorActionGuard@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionGuardMovement                     { 121 };  // 0x29F2400 .?AVC_CombatActorActionGuardMovement@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionGuardSyncMovement                 { 119 };  // 0x29F1A20 .?AVC_CombatActorActionGuardSyncMovement@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionHit                               { 116 };  // 0x29F1620 .?AVC_CombatActorActionHit@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionManager                           { 136 };  // 0x29F4F00 .?AVC_CombatActorActionManager@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionPerfectBlock                      { 117 };  // 0x29F1980 .?AVC_CombatActorActionPerfectBlock@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionPoseModifier                      { 103 };  // 0x29EFE50 .?AVC_CombatActorActionPoseModifier@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionRiderMovement                     { 118 };  // 0x29F19D0 .?AVC_CombatActorActionRiderMovement@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionStaticAttack                      { 128 };  // 0x29F3070 .?AVC_CombatActorActionStaticAttack@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionSyncAttack                        { 115 };  // 0x29F1000 .?AVC_CombatActorActionSyncAttack@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionSyncHit                           { 123 };  // 0x29F2880 .?AVC_CombatActorActionSyncHit@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionSyncPerfectBlock                  { 113 };  // 0x29F0D80 .?AVC_CombatActorActionSyncPerfectBlock@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionSyncPerfectBlockHit               { 114 };  // 0x29F0DD0 .?AVC_CombatActorActionSyncPerfectBlockHit@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorActionSyncTransition                    { 112 };  // 0x29F0840 .?AVC_CombatActorActionSyncTransition@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorDirector                                { 133 };  // 0x29F4E28 .?AVC_CombatActorDirector@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorHorsePullDown                           { 131 };  // 0x29F4D90 .?AVC_CombatActorHorsePullDown@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorHuntAttack                              { 147 };  // 0x29FDA48 .?AVC_CombatActorHuntAttack@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorMercyKill                               { 146 };  // 0x29FDA08 .?AVC_CombatActorMercyKill@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorObject                                  { 135 };  // 0x29F4EB8 .?AVC_CombatActorObject@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorOpponentManager                         { 148 };  // 0x29FDA90 .?AVC_CombatActorOpponentManager@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatActorUpdatedObject                           { 153 };  // 0x29FDFC0 .?AVC_CombatActorUpdatedObject@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatAutomation                                   { 166 };  // 0x2A01C18 .?AVC_CombatAutomation@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatAutomationAction                             { 167 };  // 0x2A01C58 .?AVC_CombatAutomationAction@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatAutomationAttack                             { 160 };  // 0x2A01A80 .?AVC_CombatAutomationAttack@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatAutomationCombo                              { 158 };  // 0x2A01A00 .?AVC_CombatAutomationCombo@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatAutomationDefense                            { 157 };  // 0x2A019C0 .?AVC_CombatAutomationDefense@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatAutomationDirector                           { 155 };  // 0x2A01260 .?AVC_CombatAutomationDirector@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatAutomationGuard                              { 159 };  // 0x2A01A40 .?AVC_CombatAutomationGuard@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatAutomationMissile                            { 156 };  // 0x2A01980 .?AVC_CombatAutomationMissile@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatAutomationRiposte                            { 161 };  // 0x2A01AC0 .?AVC_CombatAutomationRiposte@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatAutomationShout                              { 165 };  // 0x2A01BD8 .?AVC_CombatAutomationShout@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatAutomationWeapons                            { 163 };  // 0x2A01B50 .?AVC_CombatAutomationWeapons@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatAutomationZoneChange                         { 164 };  // 0x2A01B90 .?AVC_CombatAutomationZoneChange@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_CombatAutomation                                   { 168 };  // 0x2A025B0 .?AVI_CombatAutomation@combatmodule@wh@@ (MI secondary base of C_CombatAutomation)
+    inline constexpr ::REL::ID RTTI_C_CombatComboDatabase                                { 174 };  // 0x2A0D000 .?AVC_CombatComboDatabase@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatComboManager                                 { 151 };  // 0x29FDF00 .?AVC_CombatComboManager@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatComboStepData                                { 173 };  // 0x2A0CF60 .?AVC_CombatComboStepData@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatComboStepDatabase                            { 172 };  // 0x2A0CC40 .?AVC_CombatComboStepDatabase@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatModule                                       { 170 };  // 0x2A08C18 .?AVC_CombatModule@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatMoveSwitch                                   { 623 };  // 0x2AD4EE0 .?AVC_CombatMoveSwitch@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatScene                                        { 186 };  // 0x2A1D130 .?AVC_CombatScene@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatSlotTrigger                                  { 183 };  // 0x2A1C8D8 .?AVC_CombatSlotTrigger@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatSoul                                         { 271 };  // 0x2A66A58 .?AVC_CombatSoul@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatTarget                                       { 145 };  // 0x29FC640 .?AVC_CombatTarget@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatTrigger                                      { 187 };  // 0x2A1D168 .?AVC_CombatTrigger@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatTriggerCombo                                 { 184 };  // 0x2A1CAA0 .?AVC_CombatTriggerCombo@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatTriggerPerfectBlock                          { 182 };  // 0x2A1C560 .?AVC_CombatTriggerPerfectBlock@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatTriggerRiposte                               { 179 };  // 0x2A1C200 .?AVC_CombatTriggerRiposte@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatTriggerSyncDodge                             { 180 };  // 0x2A1C2D0 .?AVC_CombatTriggerSyncDodge@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatTriggerSyncPerfectBlock                      { 181 };  // 0x2A1C480 .?AVC_CombatTriggerSyncPerfectBlock@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CombatTriggerSyncRiposte                           { 178 };  // 0x2A1BF20 .?AVC_CombatTriggerSyncRiposte@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ComboEndWait                                       { 547 };  // 0x2AC5FF0 .?AVC_ComboEndWait@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CompanionModeGate                                  { 307 };  // 0x2A896B0 .?AVC_CompanionModeGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CompanionObjectiveCondition                        { 299 };  // 0x2A88C90 .?AVC_CompanionObjectiveCondition@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CompanionObjectiveGate                             { 298 };  // 0x2A888D0 .?AVC_CompanionObjectiveGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CompareMorale                                      { 793 };  // 0x2B07920 .?AVC_CompareMorale@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CompassMark                                        { 244 };  // 0x2A4E958 .?AVC_CompassMark@guimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CompiledExpressionWrapper                          { 295 };  // 0x2A85E80 .?AVC_CompiledExpressionWrapper@Expressions@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Composite                                          { 566 };  // 0x2ACA118 .?AVC_Composite@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Concatenation                                      { 359 };  // 0x2A94D20 .?AVC_Concatenation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ConstantSoulBuffInstance                           { 253 };  // 0x2A54598 .?AVC_ConstantSoulBuffInstance@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ConsumableRuntimeData                              { 196 };  // 0x2A459D8 .?AVC_ConsumableRuntimeData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ContinuousSwitch                                   { 573 };  // 0x2ACB360 .?AVC_ContinuousSwitch@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CreateInformation                                  { 711 };  // 0x2AE9660 .?AVC_CreateInformation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CreateItem                                         { 375 };  // 0x2A9A840 .?AVC_CreateItem@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_CryLoadGameHelper                                  { 76 };  // 0x29EA998 .?AVC_CryLoadGameHelper@framework@wh@@
+    inline constexpr ::REL::ID RTTI_C_CrySaveGameHelper                                  { 77 };  // 0x29EA9D0 .?AVC_CrySaveGameHelper@framework@wh@@
+    inline constexpr ::REL::ID RTTI_C_DLCInstallGate                                     { 674 };  // 0x2ADFD90 .?AVC_DLCInstallGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DatabaseDynamicEnum                                { 84 };  // 0x29EC958 .?AVC_DatabaseDynamicEnum@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DatabaseModule                                     { 89 };  // 0x29ECAC0 .?AVC_DatabaseModule@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DeSpawnPerceptibleVolume                           { 755 };  // 0x2AFCC70 .?AVC_DeSpawnPerceptibleVolume@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DeadUnconsciousGate                                { 796 };  // 0x2B084F0 .?AVC_DeadUnconsciousGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Decorator                                          { 296 };  // 0x2A87CB8 .?AVC_Decorator@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DecoratorBuff                                      { 552 };  // 0x2AC7670 .?AVC_DecoratorBuff@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DeferredExecution                                  { 537 };  // 0x2AC3BD0 .?AVC_DeferredExecution@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DefferedStateChange                                { 317 };  // 0x2A8B800 .?AVC_DefferedStateChange@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Despawn                                            { 499 };  // 0x2ABA7F8 .?AVC_Despawn@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DestroyInformationCompletely                       { 707 };  // 0x2AE8490 .?AVC_DestroyInformationCompletely@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DestroyInformationFromHolder                       { 706 };  // 0x2AE8370 .?AVC_DestroyInformationFromHolder@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DetachObject                                       { 358 };  // 0x2A949D0 .?AVC_DetachObject@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DialogFaderBarrier                                 { 619 };  // 0x2AD3CF0 .?AVC_DialogFaderBarrier@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DialogGate                                         { 668 };  // 0x2ADE880 .?AVC_DialogGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DisableCollisionAvoidance                          { 618 };  // 0x2AD3720 .?AVC_DisableCollisionAvoidance@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DisableLOD                                         { 617 };  // 0x2AD3470 .?AVC_DisableLOD@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DisableLink                                        { 692 };  // 0x2AE4700 .?AVC_DisableLink@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DisableMoveTransitions                             { 616 };  // 0x2AD3420 .?AVC_DisableMoveTransitions@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DisablePerception                                  { 752 };  // 0x2AFC020 .?AVC_DisablePerception@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DisableStartSituations                             { 614 };  // 0x2AD2DA0 .?AVC_DisableStartSituations@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DismissSearchCandidate                             { 751 };  // 0x2AFBB00 .?AVC_DismissSearchCandidate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DistanceCondition                                  { 615 };  // 0x2AD3160 .?AVC_DistanceCondition@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DistanceGate                                       { 667 };  // 0x2ADE790 .?AVC_DistanceGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DoDialog                                           { 361 };  // 0x2A953A0 .?AVC_DoDialog@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DoMonologue                                        { 360 };  // 0x2A95070 .?AVC_DoMonologue@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DoPickUp                                           { 357 };  // 0x2A94150 .?AVC_DoPickUp@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DoPlace                                            { 352 };  // 0x2A929D8 .?AVC_DoPlace@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DrawWeapon                                         { 370 };  // 0x2A996E0 .?AVC_DrawWeapon@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DropOpponent                                       { 578 };  // 0x2ACC420 .?AVC_DropOpponent@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DynamicEnumManager                                 { 91 };  // 0x29ECB40 .?AVC_DynamicEnumManager@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Effect                                             { 254 };  // 0x2A545D8 .?AVC_Effect@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_EnableLink                                         { 691 };  // 0x2AE4210 .?AVC_EnableLink@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_EnablePerception                                   { 816 };  // 0x2B0CA40 .?AVC_EnablePerception@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_EnableProfile                                      { 351 };  // 0x2A92530 .?AVC_EnableProfile@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_EndFormation                                       { 690 };  // 0x2AE3900 .?AVC_EndFormation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_EnsureWuidValid                                    { 610 };  // 0x2AD2270 .?AVC_EnsureWuidValid@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_EntityClassFilter                                  { 744 };  // 0x2AF87C0 .?AVC_EntityClassFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_EntityPropertiesFilter                             { 737 };  // 0x2AF5F80 .?AVC_EntityPropertiesFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_EquipItem                                          { 369 };  // 0x2A991F8 .?AVC_EquipItem@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_EquipmentManager                                   { 190 };  // 0x2A431C0 .?AVC_EquipmentManager@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_EquippableItemRuntimeData                          { 199 };  // 0x2A45C30 .?AVC_EquippableItemRuntimeData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ErrorNode                                          { 355 };  // 0x2A93428 .?AVC_ErrorNode@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_EvaLLyzer                                          { 722 };  // 0x2AEED20 .?AVC_EvaLLyzer@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ExactMove                                          { 354 };  // 0x2A92DF0 .?AVC_ExactMove@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ExecuteLua                                         { 350 };  // 0x2A92240 .?AVC_ExecuteLua@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ExecuteSoundTrigger                                { 349 };  // 0x2A91F00 .?AVC_ExecuteSoundTrigger@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ExecutionBarrier                                   { 302 };  // 0x2A88E40 .?AVC_ExecutionBarrier@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ExistPath                                          { 725 };  // 0x2AEFFE8 .?AVC_ExistPath@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Expression                                         { 344 };  // 0x2A910D0 .?AVC_Expression@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ExternalLock                                       { 767 };  // 0x2B00540 .?AVC_ExternalLock@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FactionManager                                     { 257 };  // 0x2A61AD0 .?AVC_FactionManager@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FactionScriptBind                                  { 264 };  // 0x2A64A60 .?AVC_FactionScriptBind@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FaderBarrier                                       { 609 };  // 0x2AD1D90 .?AVC_FaderBarrier@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Fail                                               { 343 };  // 0x2A90DF0 .?AVC_Fail@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FastTravel                                         { 282 };  // 0x2A6EA60 .?AVC_FastTravel@playermodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FastTravelScriptBind                               { 284 };  // 0x2A7C758 .?AVC_FastTravelScriptBind@playermodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FinishHim                                          { 342 };  // 0x2A90BF8 .?AVC_FinishHim@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FinishInitialization                               { 341 };  // 0x2A909F0 .?AVC_FinishInitialization@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FinishPatch                                        { 803 };  // 0x2B09DF0 .?AVC_FinishPatch@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FireArrow                                          { 549 };  // 0x2AC6828 .?AVC_FireArrow@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FireDebugEvent                                     { 818 };  // 0x2B0D850 .?AVC_FireDebugEvent@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FixedPositionLODBarrier                            { 666 };  // 0x2ADE1B0 .?AVC_FixedPositionLODBarrier@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FollowFormation                                    { 689 };  // 0x2AE3500 .?AVC_FollowFormation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FollowTarget                                       { 688 };  // 0x2AE3190 .?AVC_FollowTarget@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_For                                                { 612 };  // 0x2AD28B0 .?AVC_For@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ForBase                                            { 613 };  // 0x2AD29C8 .?AVC_ForBase@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ForEach                                            { 611 };  // 0x2AD23A8 .?AVC_ForEach@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ForceIdleState                                     { 347 };  // 0x2A915A0 .?AVC_ForceIdleState@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ForceLook                                          { 605 };  // 0x2AD1480 .?AVC_ForceLook@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FormationInSpotsGate                               { 687 };  // 0x2AE3060 .?AVC_FormationInSpotsGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FormationSize                                      { 686 };  // 0x2AE2BD0 .?AVC_FormationSize@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FreeLadderDecorator                                { 604 };  // 0x2AD0EF0 .?AVC_FreeLadderDecorator@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_FuseBox                                            { 608 };  // 0x2AD1CA0 .?AVC_FuseBox@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GameModeCondition                                  { 336 };  // 0x2A8FB00 .?AVC_GameModeCondition@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GameOver                                           { 795 };  // 0x2B08188 .?AVC_GameOver@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Gate                                               { 308 };  // 0x2A89930 .?AVC_Gate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Gen2CategoryFilter                                 { 728 };  // 0x2AF1110 .?AVC_Gen2CategoryFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Gen2EntityClassFilter                              { 727 };  // 0x2AF0BE0 .?AVC_Gen2EntityClassFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Gen2HasBehaviorFilter                              { 726 };  // 0x2AF0540 .?AVC_Gen2HasBehaviorFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Gen2RangeFilter                                    { 730 };  // 0x2AF1B90 .?AVC_Gen2RangeFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Gen2SoulFactionFilter                              { 729 };  // 0x2AF1610 .?AVC_Gen2SoulFactionFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Gen2SoulIsAliveFilter                              { 724 };  // 0x2AEF8E0 .?AVC_Gen2SoulIsAliveFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Gen2WUIDFilter                                     { 723 };  // 0x2AEF310 .?AVC_Gen2WUIDFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetActivity                                        { 806 };  // 0x2B0A7F0 .?AVC_GetActivity@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetAngryness                                       { 787 };  // 0x2B06D30 .?AVC_GetAngryness@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetAnimationHelperData                             { 340 };  // 0x2A908A0 .?AVC_GetAnimationHelperData@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetAreaInhabitants                                 { 843 };  // 0x2B12C30 .?AVC_GetAreaInhabitants@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetBehaviorHolders                                 { 840 };  // 0x2B11DD0 .?AVC_GetBehaviorHolders@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetCiviliansForLocation                            { 792 };  // 0x2B07790 .?AVC_GetCiviliansForLocation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetCompanionMaster                                 { 365 };  // 0x2A96570 .?AVC_GetCompanionMaster@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetCompanions                                      { 367 };  // 0x2A96EB0 .?AVC_GetCompanions@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetCurrentActivity                                 { 807 };  // 0x2B0A890 .?AVC_GetCurrentActivity@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetCurrentPerceptionFocus                          { 815 };  // 0x2B0C220 .?AVC_GetCurrentPerceptionFocus@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetDogCompanionMode                                { 366 };  // 0x2A96B10 .?AVC_GetDogCompanionMode@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetDynamicInformationValue                         { 710 };  // 0x2AE90D0 .?AVC_GetDynamicInformationValue@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetEmittingInformations                            { 709 };  // 0x2AE8FD0 .?AVC_GetEmittingInformations@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetFormationLeader                                 { 685 };  // 0x2AE2B30 .?AVC_GetFormationLeader@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetFormationParticipants                           { 681 };  // 0x2AE1A00 .?AVC_GetFormationParticipants@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetGlobalVar                                       { 339 };  // 0x2A90510 .?AVC_GetGlobalVar@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetHelper                                          { 338 };  // 0x2A90158 .?AVC_GetHelper@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetHelperData                                      { 332 };  // 0x2A8EED0 .?AVC_GetHelperData@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetHelperUserData                                  { 331 };  // 0x2A8EB80 .?AVC_GetHelperUserData@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetHelpers                                         { 335 };  // 0x2A8F7F0 .?AVC_GetHelpers@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetHerbsInArea                                     { 334 };  // 0x2A8F460 .?AVC_GetHerbsInArea@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetIndulgencePrice                                 { 441 };  // 0x2AAD9F0 .?AVC_GetIndulgencePrice@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetInformationUserInfo                             { 708 };  // 0x2AE8980 .?AVC_GetInformationUserInfo@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetItem                                            { 374 };  // 0x2A9A278 .?AVC_GetItem@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetItemProperty                                    { 372 };  // 0x2A99DE0 .?AVC_GetItemProperty@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetItemType                                        { 330 };  // 0x2A8DFC0 .?AVC_GetItemType@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetKnownInformations                               { 703 };  // 0x2AE7480 .?AVC_GetKnownInformations@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetKnownInformationsFromGroup                      { 702 };  // 0x2AE6E20 .?AVC_GetKnownInformationsFromGroup@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetLadder                                          { 413 };  // 0x2AA55A0 .?AVC_GetLadder@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetLastNavmeshPosition                             { 329 };  // 0x2A8DBF0 .?AVC_GetLastNavmeshPosition@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetLevelTransferData                               { 398 };  // 0x2AA0A20 .?AVC_GetLevelTransferData@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetLockParticipants                                { 397 };  // 0x2AA03B0 .?AVC_GetLockParticipants@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetMaxInstances                                    { 395 };  // 0x2A9FFF0 .?AVC_GetMaxInstances@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetMemberFormation                                 { 680 };  // 0x2AE15F0 .?AVC_GetMemberFormation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetNearestAreaPos                                  { 839 };  // 0x2B11A60 .?AVC_GetNearestAreaPos@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetOnLadder                                        { 412 };  // 0x2AA5270 .?AVC_GetOnLadder@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetOwner                                           { 396 };  // 0x2AA0228 .?AVC_GetOwner@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetPatches                                         { 805 };  // 0x2B0A670 .?AVC_GetPatches@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetPlayerHorse                                     { 392 };  // 0x2A9F7F0 .?AVC_GetPlayerHorse@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetPredefPathTraverseInfo                          { 391 };  // 0x2A9F4A0 .?AVC_GetPredefPathTraverseInfo@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetQuest                                           { 394 };  // 0x2A9FB28 .?AVC_GetQuest@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetRandomNavmeshPosDebug                           { 393 };  // 0x2A9F8A0 .?AVC_GetRandomNavmeshPosDebug@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetRandomPos                                       { 387 };  // 0x2A9E670 .?AVC_GetRandomPos@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetSpatialInfo                                     { 390 };  // 0x2A9F050 .?AVC_GetSpatialInfo@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetTime                                            { 389 };  // 0x2A9ED18 .?AVC_GetTime@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_GetType                                            { 388 };  // 0x2A9EAE8 .?AVC_GetType@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Graph                                              { 88 };  // 0x29ECA90 .?AVC_Graph@framework@wh@@
+    inline constexpr ::REL::ID RTTI_C_GraphSearch                                        { 750 };  // 0x2AFA320 .?AVC_GraphSearch@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Guard                                              { 546 };  // 0x2AC58C8 .?AVC_Guard@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_HandCheck                                          { 386 };  // 0x2A9E0B8 .?AVC_HandCheck@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_HasActiveQuestMarker                               { 607 };  // 0x2AD16F0 .?AVC_HasActiveQuestMarker@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_HasActiveThreats                                   { 780 };  // 0x2B05820 .?AVC_HasActiveThreats@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_HasActiveThreatsGate                               { 789 };  // 0x2B07370 .?AVC_HasActiveThreatsGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_HasBehaviorFilter                                  { 739 };  // 0x2AF6D10 .?AVC_HasBehaviorFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_HasGenderCheck                                     { 785 };  // 0x2B06730 .?AVC_HasGenderCheck@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_HasHelpers                                         { 606 };  // 0x2AD15B0 .?AVC_HasHelpers@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_HasMoraleForCombatGate                             { 783 };  // 0x2B05F90 .?AVC_HasMoraleForCombatGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_HasPerceivableState                                { 813 };  // 0x2B0BEF0 .?AVC_HasPerceivableState@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_HasPerceptionEnabled                               { 814 };  // 0x2B0BF40 .?AVC_HasPerceptionEnabled@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_HasPerk                                            { 778 };  // 0x2B05368 .?AVC_HasPerk@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_HasTimeRespawnEnabled                              { 598 };  // 0x2AD02B0 .?AVC_HasTimeRespawnEnabled@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_HelperValidator                                    { 385 };  // 0x2A9DD90 .?AVC_HelperValidator@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_HitReactionOverride                                { 597 };  // 0x2ACFD80 .?AVC_HitReactionOverride@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_HolsterWeapon                                      { 368 };  // 0x2A98150 .?AVC_HolsterWeapon@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_HorsePullDownAction                                { 545 };  // 0x2AC57B0 .?AVC_HorsePullDownAction@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Human                                              { 191 };  // 0x2A43460 .?AVC_Human@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IfCondition                                        { 601 };  // 0x2AD0A20 .?AVC_IfCondition@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IfElseCondition                                    { 599 };  // 0x2AD0640 .?AVC_IfElseCondition@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IfGate                                             { 670 };  // 0x2ADF188 .?AVC_IfGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IgnoreEmittedInformations                          { 701 };  // 0x2AE6D10 .?AVC_IgnoreEmittedInformations@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IgnorePerception                                   { 809 };  // 0x2B0B3B0 .?AVC_IgnorePerception@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InAreaFilter                                       { 740 };  // 0x2AF7820 .?AVC_InAreaFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IncludeTree                                        { 593 };  // 0x2ACF330 .?AVC_IncludeTree@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InformationEmittingEnd                             { 705 };  // 0x2AE7A70 .?AVC_InformationEmittingEnd@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InformationEmittingStart                           { 704 };  // 0x2AE7960 .?AVC_InformationEmittingStart@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InjuredBuffInitParams                              { 256 };  // 0x2A5F840 .?AVC_InjuredBuffInitParams@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InstantExternalLock                                { 762 };  // 0x2AFED00 .?AVC_InstantExternalLock@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InstantMakeMeIdle                                  { 384 };  // 0x2A9D7F0 .?AVC_InstantMakeMeIdle@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InstantMoveItemToSlot                              { 428 };  // 0x2AA9F50 .?AVC_InstantMoveItemToSlot@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InstantMultiSendMessageToNPC                       { 433 };  // 0x2AAC960 .?AVC_InstantMultiSendMessageToNPC@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InstantPickUpBody                                  { 382 };  // 0x2A9D330 .?AVC_InstantPickUpBody@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InstantPlaceBody                                   { 378 };  // 0x2A9C0A0 .?AVC_InstantPlaceBody@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InstantProcessMessage                              { 591 };  // 0x2ACEE30 .?AVC_InstantProcessMessage@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InstantReadMessage                                 { 377 };  // 0x2A9BC90 .?AVC_InstantReadMessage@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InstantSemaphore                                   { 761 };  // 0x2AFE8E0 .?AVC_InstantSemaphore@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InstantSendMessageByBehavior                       { 835 };  // 0x2B11000 .?AVC_InstantSendMessageByBehavior@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InstantSendMessageToInhabitants                    { 834 };  // 0x2B10BD0 .?AVC_InstantSendMessageToInhabitants@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InstantSendMessageToLockParticipants               { 438 };  // 0x2AAD110 .?AVC_InstantSendMessageToLockParticipants@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InstantSendMessageToNPC                            { 435 };  // 0x2AACA10 .?AVC_InstantSendMessageToNPC@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InstantSetTarget                                   { 580 };  // 0x2ACC8D0 .?AVC_InstantSetTarget@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InstantSynchronize                                 { 764 };  // 0x2AFF5E0 .?AVC_InstantSynchronize@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IntelligentObject                                  { 857 };  // 0x2B179F8 .?AVC_IntelligentObject@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IntelligentObjectManager                           { 854 };  // 0x2B17940 .?AVC_IntelligentObjectManager@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Intermission                                       { 669 };  // 0x2ADEC20 .?AVC_Intermission@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IntermissionGate                                   { 662 };  // 0x2ADD710 .?AVC_IntermissionGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InterruptFastTravel                                { 466 };  // 0x2AB2580 .?AVC_InterruptFastTravel@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InterruptSkipTime                                  { 465 };  // 0x2AB21F0 .?AVC_InterruptSkipTime@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InterruptSleepSkiptimeAndFaint                     { 784 };  // 0x2B06250 .?AVC_InterruptSleepSkiptimeAndFaint@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InventoryBarrier_NonDivisible                      { 596 };  // 0x2ACF820 .?AVC_InventoryBarrier_NonDivisible@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_InventoryManager                                   { 193 };  // 0x2A43C48 .?AVC_InventoryManager@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Invertor                                           { 595 };  // 0x2ACF7D8 .?AVC_Invertor@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsDeadCheck                                        { 779 };  // 0x2B055B0 .?AVC_IsDeadCheck@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsEnemy                                            { 450 };  // 0x2AAEE88 .?AVC_IsEnemy@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsHiddenFilter                                     { 733 };  // 0x2AF5150 .?AVC_IsHiddenFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsInSweetSpotRange                                 { 544 };  // 0x2AC5310 .?AVC_IsInSweetSpotRange@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsInsideArea                                       { 594 };  // 0x2ACF4A0 .?AVC_IsInsideArea@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsInsideAreaWithLabel                              { 842 };  // 0x2B125E0 .?AVC_IsInsideAreaWithLabel@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsInsideAreaWithLabelBarrier                       { 621 };  // 0x2AD48E0 .?AVC_IsInsideAreaWithLabelBarrier@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsItemInStashFilter                                { 731 };  // 0x2AF3FC0 .?AVC_IsItemInStashFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsLevelLoadVideoPlaying                            { 661 };  // 0x2ADD610 .?AVC_IsLevelLoadVideoPlaying@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsLoadedGate                                       { 586 };  // 0x2ACDD70 .?AVC_IsLoadedGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsNightTimeOfDay                                   { 585 };  // 0x2ACDAB0 .?AVC_IsNightTimeOfDay@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsPointOnNavMesh                                   { 584 };  // 0x2ACDA60 .?AVC_IsPointOnNavMesh@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsPublicEnemy                                      { 589 };  // 0x2ACE640 .?AVC_IsPublicEnemy@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsShownFilter                                      { 738 };  // 0x2AF68D0 .?AVC_IsShownFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsTimeSkipping                                     { 588 };  // 0x2ACE380 .?AVC_IsTimeSkipping@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsUnconsciousCheck                                 { 781 };  // 0x2B05D80 .?AVC_IsUnconsciousCheck@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_IsWeaponDrawn                                      { 427 };  // 0x2AA9B70 .?AVC_IsWeaponDrawn@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Item                                               { 228 };  // 0x2A46AE0 .?AVC_Item@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ItemClassFilter                                    { 741 };  // 0x2AF78C0 .?AVC_ItemClassFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ItemHealthCheckingBuffInitParams                   { 267 };  // 0x2A650B0 .?AVC_ItemHealthCheckingBuffInitParams@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ItemManager                                        { 223 };  // 0x2A46978 .?AVC_ItemManager@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ItemParamFilter                                    { 735 };  // 0x2AF5D70 .?AVC_ItemParamFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Jail                                               { 469 };  // 0x2AB2D50 .?AVC_Jail@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_JoinedAnimationSemaphore                           { 758 };  // 0x2AFDC50 .?AVC_JoinedAnimationSemaphore@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_JoinedAnimationSynchronize                         { 760 };  // 0x2AFE580 .?AVC_JoinedAnimationSynchronize@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_KillNPC                                            { 421 };  // 0x2AA7220 .?AVC_KillNPC@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LODCheck                                           { 587 };  // 0x2ACE338 .?AVC_LODCheck@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LODCombat                                          { 540 };  // 0x2AC4700 .?AVC_LODCombat@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LODGuardian                                        { 660 };  // 0x2ADD110 .?AVC_LODGuardian@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LODLock                                            { 583 };  // 0x2ACD0E0 .?AVC_LODLock@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LambdaRoot                                         { 651 };  // 0x2ADAE90 .?AVC_LambdaRoot@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LearnPerkEffect                                    { 275 };  // 0x2A67058 .?AVC_LearnPerkEffect@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LedgeGrab                                          { 416 };  // 0x2AA6010 .?AVC_LedgeGrab@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LinkDataExpression                                 { 721 };  // 0x2AED8F0 .?AVC_LinkDataExpression@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LinkDataFilter                                     { 742 };  // 0x2AF7B90 .?AVC_LinkDataFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LinkOperationBarrier                               { 772 };  // 0x2B03CE0 .?AVC_LinkOperationBarrier@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LinkSorterDataSource                               { 766 };  // 0x2AFFDA0 .?AVC_LinkSorterDataSource@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LinkTagFilter                                      { 743 };  // 0x2AF8410 .?AVC_LinkTagFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_DynamicLinkableObject                              { 859 };  // 0x2B207B8 .?AVC_DynamicLinkableObject@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LinkableObject                                     { 853 };  // 0x2B176E8 .?AVC_LinkableObject@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LinkablesManager                                   { 862 };  // 0x2B35978 .?AVC_LinkablesManager@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LocalTagWrapper                                    { 650 };  // 0x2ADAC20 .?AVC_LocalTagWrapper@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LocationScriptBind                                 { 263 };  // 0x2A64A28 .?AVC_LocationScriptBind@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LockDynamicInformationValues                       { 712 };  // 0x2AE9C20 .?AVC_LockDynamicInformationValues@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LockOrientation                                    { 649 };  // 0x2ADAB80 .?AVC_LockOrientation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LogToConsole                                       { 415 };  // 0x2AA5D80 .?AVC_LogToConsole@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LogToLabel                                         { 655 };  // 0x2ADB5D0 .?AVC_LogToLabel@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LogToTimedLabel                                    { 414 };  // 0x2AA5A20 .?AVC_LogToTimedLabel@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Look                                               { 410 };  // 0x2AA4A68 .?AVC_Look@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Loop                                               { 652 };  // 0x2ADB300 .?AVC_Loop@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LoopUntil                                          { 645 };  // 0x2AD9BD8 .?AVC_LoopUntil@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LuaGate                                            { 648 };  // 0x2ADA578 .?AVC_LuaGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_LuaWrapper                                         { 647 };  // 0x2ADA4F0 .?AVC_LuaWrapper@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MakeFormation                                      { 684 };  // 0x2AE2770 .?AVC_MakeFormation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MakeIdleBase                                       { 383 };  // 0x2A9D6A0 .?AVC_MakeIdleBase@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MakeMeIdle                                         { 409 };  // 0x2AA4710 .?AVC_MakeMeIdle@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ManualSweetSpotBias                                { 683 };  // 0x2AE21A0 .?AVC_ManualSweetSpotBias@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MeleeDefenseAutomation                             { 542 };  // 0x2AC5050 .?AVC_MeleeDefenseAutomation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MeleeDefenseAutomationControls                     { 541 };  // 0x2AC4A20 .?AVC_MeleeDefenseAutomationControls@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MeleeGuardAutomation                               { 536 };  // 0x2AC3700 .?AVC_MeleeGuardAutomation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MeleeOffenseAutomation                             { 535 };  // 0x2AC35C0 .?AVC_MeleeOffenseAutomation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MeleeOffenseAutomationControls                     { 534 };  // 0x2AC2F20 .?AVC_MeleeOffenseAutomationControls@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MeleeScreamBypass                                  { 539 };  // 0x2AC3F60 .?AVC_MeleeScreamBypass@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MeleeShoutAutomation                               { 538 };  // 0x2AC3F10 .?AVC_MeleeShoutAutomation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MeleeTutorialSlotAction                            { 530 };  // 0x2AC1FD0 .?AVC_MeleeTutorialSlotAction@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MessageCapableObject                               { 852 };  // 0x2B176A8 .?AVC_MessageCapableObject@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MockNode                                           { 828 };  // 0x2B0F578 .?AVC_MockNode@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ModifyMorale                                       { 775 };  // 0x2B04E10 .?AVC_ModifyMorale@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ModifyMoraleContextBase                            { 776 };  // 0x2B04F10 .?AVC_ModifyMoraleContextBase@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ModuleMessage                                      { 73 };  // 0x29E9C60 .?AVC_ModuleMessage@framework@wh@@
+    inline constexpr ::REL::ID RTTI_C_MoraleCheck                                        { 777 };  // 0x2B052D0 .?AVC_MoraleCheck@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MoraleContextBuffInitParams                        { 255 };  // 0x2A55670 .?AVC_MoraleContextBuffInitParams@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MoraleGate                                         { 663 };  // 0x2ADD8A0 .?AVC_MoraleGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Move                                               { 411 };  // 0x2AA4E50 .?AVC_Move@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MoveAndAct                                         { 407 };  // 0x2AA3F70 .?AVC_MoveAndAct@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MoveBase                                           { 353 };  // 0x2A92DB0 .?AVC_MoveBase@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MoveItem                                           { 426 };  // 0x2AA9828 .?AVC_MoveItem@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MovementAutomation                                 { 529 };  // 0x2AC1F30 .?AVC_MovementAutomation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MultiSendMessageToNPC                              { 431 };  // 0x2AAC860 .?AVC_MultiSendMessageToNPC@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_MultiSendToNPC_Time                                { 434 };  // 0x2AAC9C0 .?AVC_MultiSendToNPC_Time@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_NPCPassiveBarrier                                  { 300 };  // 0x2A88CF0 .?AVC_NPCPassiveBarrier@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_NPCStatGateBase                                    { 665 };  // 0x2ADDD90 .?AVC_NPCStatGateBase@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_NPCStateCheckBase                                  { 782 };  // 0x2B05E80 .?AVC_NPCStateCheckBase@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_NPCStateGate                                       { 664 };  // 0x2ADDB70 .?AVC_NPCStateGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_NamedEventCatch                                    { 817 };  // 0x2B0D0E0 .?AVC_NamedEventCatch@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_NegationOp                                         { 771 };  // 0x2B01EA0 .?AVC_NegationOp@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_NoMove                                             { 646 };  // 0x2AD9F48 .?AVC_NoMove@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Node                                               { 297 };  // 0x2A87CF8 .?AVC_Node@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_NodeFactory_GetItemProperty                        { 371 };  // 0x2A99CA0 .?AVC_NodeFactory_GetItemProperty@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_NotNearPlayer                                      { 405 };  // 0x2AA3600 .?AVC_NotNearPlayer@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_NotPatchedColumnDescriptor                         { 169 };  // 0x2A08B50 .?AVC_NotPatchedColumnDescriptor@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_NotSeenByPlayer                                    { 408 };  // 0x2AA42C0 .?AVC_NotSeenByPlayer@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_NpcStateGateBase                                   { 790 };  // 0x2B07470 .?AVC_NpcStateGateBase@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_NumericalOperation                                 { 404 };  // 0x2AA3350 .?AVC_NumericalOperation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ObjectDatabaseBase                                 { 85 };  // 0x29EC9D0 .?AVC_ObjectDatabaseBase@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ObjectDatabaseManager                              { 90 };  // 0x29ECB00 .?AVC_ObjectDatabaseManager@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Observer                                           { 403 };  // 0x2AA2F68 .?AVC_Observer@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnActionBase                                       { 526 };  // 0x2AC0CF0 .?AVC_OnActionBase@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnAnyCombo                                         { 533 };  // 0x2AC2C60 .?AVC_OnAnyCombo@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnCombatActionStateChange                          { 482 };  // 0x2AB6BA0 .?AVC_OnCombatActionStateChange@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnCombatEvent                                      { 532 };  // 0x2AC2870 .?AVC_OnCombatEvent@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnCombatGuardTypeChange                            { 477 };  // 0x2AB5520 .?AVC_OnCombatGuardTypeChange@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnCombatModeChange                                 { 478 };  // 0x2AB5DD0 .?AVC_OnCombatModeChange@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnCombatMoveEvent                                  { 531 };  // 0x2AC26E0 .?AVC_OnCombatMoveEvent@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnCombatStateChange                                { 550 };  // 0x2AC6D00 .?AVC_OnCombatStateChange@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnCombatZoneChange                                 { 548 };  // 0x2AC62F0 .?AVC_OnCombatZoneChange@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnInventoryEvent                                   { 644 };  // 0x2AD97D0 .?AVC_OnInventoryEvent@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnMeleeCombatAction                                { 525 };  // 0x2AC0B10 .?AVC_OnMeleeCombatAction@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnMeleeHit                                         { 528 };  // 0x2AC19B0 .?AVC_OnMeleeHit@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnMeleeInactivity                                  { 527 };  // 0x2AC12E0 .?AVC_OnMeleeInactivity@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnNaturalCombo                                     { 521 };  // 0x2ABFB50 .?AVC_OnNaturalCombo@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnPathFilter                                       { 736 };  // 0x2AF5E90 .?AVC_OnPathFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnTargetChange                                     { 575 };  // 0x2ACB950 .?AVC_OnTargetChange@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_OnWeaponChange                                     { 520 };  // 0x2ABF740 .?AVC_OnWeaponChange@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PKColumnDescriptor                                 { 68 };  // 0x29E98B8 .?AVC_PKColumnDescriptor@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_POI                                                { 261 };  // 0x2A62098 .?AVC_POI@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_POIDiscoveryBarrier                                { 643 };  // 0x2AD9250 .?AVC_POIDiscoveryBarrier@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Parallel                                           { 572 };  // 0x2ACAF28 .?AVC_Parallel@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Parentizer                                         { 770 };  // 0x2B01990 .?AVC_Parentizer@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ParticleEffectControl                              { 406 };  // 0x2AA3930 .?AVC_ParticleEffectControl@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PassiveBarrier                                     { 303 };  // 0x2A88E90 .?AVC_PassiveBarrier@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PerceptionSearch                                   { 808 };  // 0x2B0AF70 .?AVC_PerceptionSearch@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PerkList                                           { 258 };  // 0x2A61BE8 .?AVC_PerkList@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PickUpBehavior                                     { 400 };  // 0x2AA1E70 .?AVC_PickUpBehavior@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PickUpBody                                         { 475 };  // 0x2AB4280 .?AVC_PickUpBody@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PlaceBehavior                                      { 473 };  // 0x2AB3A90 .?AVC_PlaceBehavior@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PlaceBody                                          { 472 };  // 0x2AB3838 .?AVC_PlaceBody@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PlayAnimation                                      { 474 };  // 0x2AB3F70 .?AVC_PlayAnimation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PlaySequence                                       { 471 };  // 0x2AB35D0 .?AVC_PlaySequence@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PlayVideo                                          { 470 };  // 0x2AB3190 .?AVC_PlayVideo@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Player                                             { 233 };  // 0x2A48890 .?AVC_Player@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PlayerAnimationGlobalTag                           { 468 };  // 0x2AB2A00 .?AVC_PlayerAnimationGlobalTag@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PlayerCombatControls                               { 524 };  // 0x2AC0840 .?AVC_PlayerCombatControls@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PlayerModule                                       { 291 };  // 0x2A7D078 .?AVC_PlayerModule@playermodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PlayerMove                                         { 467 };  // 0x2AB2680 .?AVC_PlayerMove@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PlayerOnBed                                        { 462 };  // 0x2AB1830 .?AVC_PlayerOnBed@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PlayerOnBedState                                   { 461 };  // 0x2AB1370 .?AVC_PlayerOnBedState@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PlayerProfileWHManager                             { 75 };  // 0x29EA1C0 .?AVC_PlayerProfileWHManager@framework@wh@@
+    inline constexpr ::REL::ID RTTI_C_PlayerSleep                                        { 464 };  // 0x2AB1E90 .?AVC_PlayerSleep@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ProbablisticDrivenSweetSpot                        { 682 };  // 0x2AE2090 .?AVC_ProbablisticDrivenSweetSpot@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ProceedTutorial                                    { 488 };  // 0x2AB8460 .?AVC_ProceedTutorial@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ProcessMessage                                     { 639 };  // 0x2AD87B0 .?AVC_ProcessMessage@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ProcessMessageBase                                 { 590 };  // 0x2ACEB60 .?AVC_ProcessMessageBase@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ProduceSound                                       { 459 };  // 0x2AB0C90 .?AVC_ProduceSound@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ProfileCanBeLoaded                                 { 458 };  // 0x2AB0940 .?AVC_ProfileCanBeLoaded@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ProfileLoadedGate                                  { 658 };  // 0x2ADC640 .?AVC_ProfileLoadedGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PutItemInHand                                      { 425 };  // 0x2AA9470 .?AVC_PutItemInHand@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_PutItemInInventory                                 { 422 };  // 0x2AA7700 .?AVC_PutItemInInventory@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_QuestCondition                                     { 642 };  // 0x2AD9100 .?AVC_QuestCondition@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_QuestObjectiveCondition                            { 641 };  // 0x2AD8AE0 .?AVC_QuestObjectiveCondition@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_QuestObjectiveGate                                 { 657 };  // 0x2ADC410 .?AVC_QuestObjectiveGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RPGModule                                          { 276 };  // 0x2A672E0 .?AVC_RPGModule@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RPGSleep                                           { 551 };  // 0x2AC7580 .?AVC_RPGSleep@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RPGSweetSpotArcDriver                              { 678 };  // 0x2AE0C40 .?AVC_RPGSweetSpotArcDriver@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RainGate                                           { 659 };  // 0x2ADCC10 .?AVC_RainGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RandDistribution                                   { 453 };  // 0x2AAF8B0 .?AVC_RandDistribution@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RandomGate                                         { 640 };  // 0x2AD8A50 .?AVC_RandomGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RandomItem                                         { 452 };  // 0x2AAF560 .?AVC_RandomItem@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RangeFilter                                        { 749 };  // 0x2AF9830 .?AVC_RangeFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RangeSorter                                        { 765 };  // 0x2AFFAC0 .?AVC_RangeSorter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ReachTargetCheck                                   { 454 };  // 0x2AB0050 .?AVC_ReachTargetCheck@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ReadMessage                                        { 448 };  // 0x2AAE920 .?AVC_ReadMessage@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ReadinessObserver                                  { 72 };  // 0x29E9B88 .?AVC_ReadinessObserver@wh@@
+    inline constexpr ::REL::ID RTTI_C_ReadinessWait                                      { 447 };  // 0x2AAE2A0 .?AVC_ReadinessWait@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RegisterProximityTrigger                           { 451 };  // 0x2AAF110 .?AVC_RegisterProximityTrigger@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RemoveAreaLabel                                    { 841 };  // 0x2B12440 .?AVC_RemoveAreaLabel@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RemoveBuffs                                        { 800 };  // 0x2B097F0 .?AVC_RemoveBuffs@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RemoveGameContext                                  { 337 };  // 0x2A8FDE0 .?AVC_RemoveGameContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RemoveItem                                         { 423 };  // 0x2AA85C0 .?AVC_RemoveItem@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RemoveLink                                         { 769 };  // 0x2B018B0 .?AVC_RemoveLink@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RemovePatch                                        { 798 };  // 0x2B08CF0 .?AVC_RemovePatch@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RenamedColumnDescriptor                            { 98 };  // 0x29ECDA0 .?AVC_RenamedColumnDescriptor@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RepushTest                                         { 823 };  // 0x2B0E610 .?AVC_RepushTest@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RepushTestKeepThreads                              { 822 };  // 0x2B0DF50 .?AVC_RepushTestKeepThreads@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RequestDialog                                      { 356 };  // 0x2A940B0 .?AVC_RequestDialog@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RequestDogObjective                                { 363 };  // 0x2A959E0 .?AVC_RequestDogObjective@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RequestTarget                                      { 574 };  // 0x2ACB820 .?AVC_RequestTarget@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ReserveBehavior                                    { 635 };  // 0x2AD7A40 .?AVC_ReserveBehavior@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ReserveBehaviorSearch                              { 637 };  // 0x2AD82A0 .?AVC_ReserveBehaviorSearch@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ResetPublicFriendsReputation                       { 449 };  // 0x2AAEAB0 .?AVC_ResetPublicFriendsReputation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RestrictCamera                                     { 636 };  // 0x2AD8050 .?AVC_RestrictCamera@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_RetrieveInformation                                { 697 };  // 0x2AE5FF0 .?AVC_RetrieveInformation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Revive                                             { 440 };  // 0x2AAD678 .?AVC_Revive@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Root                                               { 656 };  // 0x2ADBB60 .?AVC_Root@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SaveGameManager                                    { 78 };  // 0x29EABB0 .?AVC_SaveGameManager@framework@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindActor                                    { 234 };  // 0x2A4A570 .?AVC_ScriptBindActor@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindBackgammon                               { 286 };  // 0x2A7CF40 .?AVC_ScriptBindBackgammon@playermodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindCalendar                                 { 272 };  // 0x2A66F08 .?AVC_ScriptBindCalendar@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindDatabase                                 { 95 };  // 0x29ECC30 .?AVC_ScriptBindDatabase@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindDialog                                   { 188 };  // 0x2A269B0 .?AVC_ScriptBindDialog@dialogmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindEntityModule                             { 238 };  // 0x2A4A690 .?AVC_ScriptBindEntityModule@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindEnvironment                              { 243 };  // 0x2A4C4B0 .?AVC_ScriptBindEnvironment@environmentmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindFramework                                { 81 };  // 0x29EAF78 .?AVC_ScriptBindFramework@framework@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindGameRules                                { 241 };  // 0x2A4A740 .?AVC_ScriptBindGameRules@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindHorse                                    { 239 };  // 0x2A4A6D0 .?AVC_ScriptBindHorse@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindHuman                                    { 240 };  // 0x2A4A708 .?AVC_ScriptBindHuman@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindInteractiveObject                        { 192 };  // 0x2A439F0 .?AVC_ScriptBindInteractiveObject@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindInventory                                { 235 };  // 0x2A4A5D0 .?AVC_ScriptBindInventory@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindItemManager                              { 237 };  // 0x2A4A650 .?AVC_ScriptBindItemManager@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindMap                                      { 245 };  // 0x2A4EB30 .?AVC_ScriptBindMap@guimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindMinigame                                 { 289 };  // 0x2A7CFF8 .?AVC_ScriptBindMinigame@playermodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindPickableItem                             { 236 };  // 0x2A4A610 .?AVC_ScriptBindPickableItem@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindPlayer                                   { 242 };  // 0x2A4A780 .?AVC_ScriptBindPlayer@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindQuest                                    { 292 };  // 0x2A813B8 .?AVC_ScriptBindQuest@questmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindRPGModule                                { 268 };  // 0x2A66828 .?AVC_ScriptBindRPGModule@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindShop                                     { 293 };  // 0x2A81DE0 .?AVC_ScriptBindShop@shopmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindSmartObject                              { 861 };  // 0x2B33E30 .?AVC_ScriptBindSmartObject@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindSoul                                     { 274 };  // 0x2A66FB8 .?AVC_ScriptBindSoul@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindStatistics                               { 273 };  // 0x2A66F40 .?AVC_ScriptBindStatistics@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindTrace                                    { 83 };  // 0x29EC7E8 .?AVC_ScriptBindTrace@framework@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindTutorial                                 { 290 };  // 0x2A7D038 .?AVC_ScriptBindTutorial@playermodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindVariables                                { 82 };  // 0x29EC7A8 .?AVC_ScriptBindVariables@framework@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBindXGenAIModule                             { 860 };  // 0x2B33DF0 .?AVC_ScriptBindXGenAIModule@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBind_Alchemy                                 { 285 };  // 0x2A7CF00 .?AVC_ScriptBind_Alchemy@playermodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBind_Dice                                    { 287 };  // 0x2A7CF80 .?AVC_ScriptBind_Dice@playermodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptBind_Sharpening                              { 288 };  // 0x2A7CFB8 .?AVC_ScriptBind_Sharpening@playermodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ScriptbindBarber                                   { 265 };  // 0x2A64AF0 .?AVC_ScriptbindBarber@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Selector                                           { 563 };  // 0x2AC9998 .?AVC_Selector@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Semaphore                                          { 763 };  // 0x2AFF310 .?AVC_Semaphore@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SendMessageBase                                    { 445 };  // 0x2AADE70 .?AVC_SendMessageBase@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SendMessageByBehavior                              { 833 };  // 0x2B10B80 .?AVC_SendMessageByBehavior@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SendMessageToInhabitants                           { 838 };  // 0x2B117B0 .?AVC_SendMessageToInhabitants@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SendMessageToNPC                                   { 432 };  // 0x2AAC910 .?AVC_SendMessageToNPC@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SendToNPC_Data                                     { 444 };  // 0x2AADD10 .?AVC_SendToNPC_Data@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SendToNPC_MultiData                                { 443 };  // 0x2AADC20 .?AVC_SendToNPC_MultiData@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SendToNPC_TimeBase                                 { 442 };  // 0x2AADB80 .?AVC_SendToNPC_TimeBase@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Sequence                                           { 562 };  // 0x2AC98B8 .?AVC_Sequence@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetAngryness                                       { 786 };  // 0x2B068A0 .?AVC_SetAngryness@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetBehaviorMaxInstances                            { 836 };  // 0x2B11380 .?AVC_SetBehaviorMaxInstances@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetBehaviorState                                   { 837 };  // 0x2B113D0 .?AVC_SetBehaviorState@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetCombatMoraleContext                             { 774 };  // 0x2B04640 .?AVC_SetCombatMoraleContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetCompanion                                       { 362 };  // 0x2A955E0 .?AVC_SetCompanion@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetDogCompanionMode                                { 364 };  // 0x2A95E50 .?AVC_SetDogCompanionMode@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetDynamicInformationValue                         { 696 };  // 0x2AE5EE0 .?AVC_SetDynamicInformationValue@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetEstimatedFollow                                 { 677 };  // 0x2AE0740 .?AVC_SetEstimatedFollow@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetExternalLock                                    { 759 };  // 0x2AFE070 .?AVC_SetExternalLock@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetFacialExpression                                { 437 };  // 0x2AACF20 .?AVC_SetFacialExpression@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetFollowTarget                                    { 676 };  // 0x2AE0640 .?AVC_SetFollowTarget@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetGlobalVar                                       { 436 };  // 0x2AACBA0 .?AVC_SetGlobalVar@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetIsAimed                                         { 523 };  // 0x2AC0270 .?AVC_SetIsAimed@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetItemProperty                                    { 420 };  // 0x2AA6F80 .?AVC_SetItemProperty@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetOwner                                           { 429 };  // 0x2AAB828 .?AVC_SetOwner@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetPerceivability                                  { 812 };  // 0x2B0B960 .?AVC_SetPerceivability@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetPlayerHorseSpeed                                { 430 };  // 0x2AAC200 .?AVC_SetPlayerHorseSpeed@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetQuest                                           { 515 };  // 0x2ABE178 .?AVC_SetQuest@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetQuestObjective                                  { 514 };  // 0x2ABDE40 .?AVC_SetQuestObjective@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetRandomEventVariant                              { 511 };  // 0x2ABD5D0 .?AVC_SetRandomEventVariant@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetRandomEventsMode                                { 517 };  // 0x2ABE640 .?AVC_SetRandomEventsMode@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetReputationFaction                               { 513 };  // 0x2ABDBD0 .?AVC_SetReputationFaction@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetReputationNPC                                   { 507 };  // 0x2ABC260 .?AVC_SetReputationNPC@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetSituationMaxInstances                           { 829 };  // 0x2B10030 .?AVC_SetSituationMaxInstances@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetSituationState                                  { 831 };  // 0x2B10600 .?AVC_SetSituationState@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetSpatialInfo                                     { 510 };  // 0x2ABCF10 .?AVC_SetSpatialInfo@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetSweetSpot                                       { 509 };  // 0x2ABCBC0 .?AVC_SetSweetSpot@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetTemporarySuperfaction                           { 512 };  // 0x2ABD840 .?AVC_SetTemporarySuperfaction@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetVariable                                        { 505 };  // 0x2ABB9D0 .?AVC_SetVariable@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetVisibility                                      { 504 };  // 0x2ABB690 .?AVC_SetVisibility@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetWhistling                                       { 503 };  // 0x2ABB340 .?AVC_SetWhistling@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SetZone                                            { 522 };  // 0x2AC0108 .?AVC_SetZone@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ShapePosition                                      { 506 };  // 0x2ABBC40 .?AVC_ShapePosition@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_ShouldHorseThrowOffAnyone                          { 773 };  // 0x2B042D0 .?AVC_ShouldHorseThrowOffAnyone@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SkipActivity                                       { 797 };  // 0x2B08A50 .?AVC_SkipActivity@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SkipTime                                           { 463 };  // 0x2AB1AF0 .?AVC_SkipTime@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SleepBuffInitParams                                { 266 };  // 0x2A64EE0 .?AVC_SleepBuffInitParams@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SleepQualitySorter                                 { 768 };  // 0x2B00B10 .?AVC_SleepQualitySorter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SlotClassFilter                                    { 734 };  // 0x2AF5360 .?AVC_SlotClassFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SmartAreaBehaviorTag                               { 634 };  // 0x2AD77D0 .?AVC_SmartAreaBehaviorTag@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SmartEntityBehaviorTag                             { 401 };  // 0x2AA1F80 .?AVC_SmartEntityBehaviorTag@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SmartObjInstantSendByBehavior                      { 832 };  // 0x2B10720 .?AVC_SmartObjInstantSendByBehavior@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SmartObjSendByBehavior                             { 830 };  // 0x2B102D0 .?AVC_SmartObjSendByBehavior@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SmartObjSetBehaviorMaxInstances                    { 825 };  // 0x2B0EE50 .?AVC_SmartObjSetBehaviorMaxInstances@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SmartObjSetBehaviorState                           { 826 };  // 0x2B0EF70 .?AVC_SmartObjSetBehaviorState@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SmartObjectBehaviorTag                             { 630 };  // 0x2AD6A80 .?AVC_SmartObjectBehaviorTag@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Soul                                               { 281 };  // 0x2A6D280 .?AVC_Soul@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SoulBuffInstance                                   { 251 };  // 0x2A54470 .?AVC_SoulBuffInstance@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SoulEffect                                         { 249 };  // 0x2A543B0 .?AVC_SoulEffect@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SoulFactionFilter                                  { 746 };  // 0x2AF8B40 .?AVC_SoulFactionFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SoulIsAliveFilter                                  { 745 };  // 0x2AF8860 .?AVC_SoulIsAliveFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SoulLevelsChangeGate                               { 846 };  // 0x2B13150 .?AVC_SoulLevelsChangeGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SoulList                                           { 277 };  // 0x2A6D080 .?AVC_SoulList@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SoulPropertyNotifier                               { 278 };  // 0x2A6D0F0 .?AVC_SoulPropertyNotifier@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Spawn                                              { 500 };  // 0x2ABAB08 .?AVC_Spawn@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SpawnExpiringPerceptibleVolume                     { 811 };  // 0x2B0B610 .?AVC_SpawnExpiringPerceptibleVolume@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SpawnPerceptibleVolume                             { 810 };  // 0x2B0B560 .?AVC_SpawnPerceptibleVolume@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SpreadInformation                                  { 695 };  // 0x2AE58B0 .?AVC_SpreadInformation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_StartFastTravel                                    { 457 };  // 0x2AB0530 .?AVC_StartFastTravel@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_StatXPEffect                                       { 262 };  // 0x2A62208 .?AVC_StatXPEffect@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_StateMachineCheck                                  { 633 };  // 0x2AD7440 .?AVC_StateMachineCheck@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_StateMachineGate                                   { 720 };  // 0x2AEB0D0 .?AVC_StateMachineGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_StealthAccept                                      { 519 };  // 0x2ABF0A0 .?AVC_StealthAccept@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_StealthAction                                      { 518 };  // 0x2ABF000 .?AVC_StealthAction@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_StealthCrouch                                      { 632 };  // 0x2AD6EB0 .?AVC_StealthCrouch@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_StopAim                                            { 582 };  // 0x2ACCDD0 .?AVC_StopAim@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_StopAllEmitting                                    { 700 };  // 0x2AE6AC0 .?AVC_StopAllEmitting@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_StopAnimation                                      { 502 };  // 0x2ABB1F0 .?AVC_StopAnimation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_StopFastTravel                                     { 455 };  // 0x2AB01D0 .?AVC_StopFastTravel@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_StopIgnoringEmittedInformations                    { 699 };  // 0x2AE6480 .?AVC_StopIgnoringEmittedInformations@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_StopMinigame                                       { 501 };  // 0x2ABAE30 .?AVC_StopMinigame@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_StopMovement                                       { 496 };  // 0x2AB9BD0 .?AVC_StopMovement@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_StreamingInstallGate                               { 716 };  // 0x2AEA2D0 .?AVC_StreamingInstallGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Success                                            { 495 };  // 0x2AB97F8 .?AVC_Success@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SuppressFailure                                    { 715 };  // 0x2AEA1E0 .?AVC_SuppressFailure@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SurrenderActionHint                                { 460 };  // 0x2AB1000 .?AVC_SurrenderActionHint@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SuspendDecorator                                   { 631 };  // 0x2AD6E60 .?AVC_SuspendDecorator@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SuspendDecoratorPassive                            { 627 };  // 0x2AD5EF0 .?AVC_SuspendDecoratorPassive@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SuspendRandomEvents                                { 516 };  // 0x2ABE4B0 .?AVC_SuspendRandomEvents@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SweetSpotDorsalBounce                              { 679 };  // 0x2AE12D0 .?AVC_SweetSpotDorsalBounce@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SweetSpotFollower                                  { 673 };  // 0x2ADF940 .?AVC_SweetSpotFollower@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SweetSpotLateralBounce                             { 672 };  // 0x2ADF8C0 .?AVC_SweetSpotLateralBounce@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SweetSpotLockPolicy                                { 671 };  // 0x2ADF280 .?AVC_SweetSpotLockPolicy@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Switch                                             { 560 };  // 0x2AC95F0 .?AVC_Switch@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SwitchBase                                         { 567 };  // 0x2ACA160 .?AVC_SwitchBase@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_SwitchLevel                                        { 494 };  // 0x2AB9550 .?AVC_SwitchLevel@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Synchronize                                        { 757 };  // 0x2AFD180 .?AVC_Synchronize@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_TBLTableSerializer                                 { 97 };  // 0x29ECD20 .?AVC_TBLTableSerializer@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_TagIt                                              { 626 };  // 0x2AD5A98 .?AVC_TagIt@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Teleport                                           { 498 };  // 0x2ABA288 .?AVC_Teleport@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_TeleportFormationToSpots                           { 675 };  // 0x2AE0410 .?AVC_TeleportFormationToSpots@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_TeleportHorseToPlayer                              { 497 };  // 0x2ABA050 .?AVC_TeleportHorseToPlayer@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_TerminateSituation                                 { 491 };  // 0x2AB8BA0 .?AVC_TerminateSituation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_TimedLoop                                          { 653 };  // 0x2ADB340 .?AVC_TimedLoop@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_TimedSoulBuffInstance                              { 248 };  // 0x2A53898 .?AVC_TimedSoulBuffInstance@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Timeout                                            { 719 };  // 0x2AEAAF8 .?AVC_Timeout@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_TimerBox                                           { 625 };  // 0x2AD5A08 .?AVC_TimerBox@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_TransferInformation                                { 698 };  // 0x2AE6380 .?AVC_TransferInformation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_TryCatch                                           { 821 };  // 0x2B0DBF8 .?AVC_TryCatch@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_TurnBody                                           { 490 };  // 0x2AB8828 .?AVC_TurnBody@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_TutorialNode                                       { 489 };  // 0x2AB84B0 .?AVC_TutorialNode@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_UIMap                                              { 246 };  // 0x2A50AA8 .?AVC_UIMap@guimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_UIMapCloudAtlas                                    { 247 };  // 0x2A529B8 .?AVC_UIMapCloudAtlas@guimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_UnEquipItem                                        { 419 };  // 0x2AA6BE0 .?AVC_UnEquipItem@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_UnregisterProximityTrigger                         { 493 };  // 0x2AB8F20 .?AVC_UnregisterProximityTrigger@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_UseItem                                            { 418 };  // 0x2AA68A8 .?AVC_UseItem@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_VarOperation                                       { 484 };  // 0x2AB7C20 .?AVC_VarOperation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_VariableExistsGate                                 { 629 };  // 0x2AD66E0 .?AVC_VariableExistsGate@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_WUIDFilter                                         { 747 };  // 0x2AF9310 .?AVC_WUIDFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_Wait                                               { 718 };  // 0x2AEAA70 .?AVC_Wait@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_WeaponAutomation                                   { 569 };  // 0x2ACA890 .?AVC_WeaponAutomation@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_WeaponRuntimeData                                  { 197 };  // 0x2A45A18 .?AVC_WeaponRuntimeData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_WeatherCondition                                   { 628 };  // 0x2AD6130 .?AVC_WeatherCondition@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_While                                              { 622 };  // 0x2AD4EA0 .?AVC_While@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_WrapperDecorator                                   { 476 };  // 0x2AB4930 .?AVC_WrapperDecorator@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_C_XMLTableSerializer                                 { 99 };  // 0x29ECDE8 .?AVC_XMLTableSerializer@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_AIPuppet                                           { 858 };  // 0x2B1BAC0 .?AVI_AIPuppet@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_Action                                             { 141 };  // 0x29F6718 .?AVI_Action@framework@wh@@
+    inline constexpr ::REL::ID RTTI_I_ActionImpl                                         { 139 };  // 0x29F5298 .?AVI_ActionImpl@framework@wh@@
+    inline constexpr ::REL::ID RTTI_I_BuffInitParams                                     { 231 };  // 0x2A477D0 .?AVI_BuffInitParams@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_CastableIface                                      { 325 };  // 0x2A8D580 .?AVI_CastableIface@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_ColumnDescriptor                                   { 71 };  // 0x29E9B10 .?AVI_ColumnDescriptor@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_CombatActionHelperAttackOwner                      { 138 };  // 0x29F5250 .?AVI_CombatActionHelperAttackOwner@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_CombatActionHelperBlockOwner                       { 122 };  // 0x29F24F0 .?AVI_CombatActionHelperBlockOwner@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_CombatActor                                        { 143 };  // 0x29F82B0 .?AVI_CombatActor@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_CombatActorAction                                  { 140 };  // 0x29F5348 .?AVI_CombatActorAction@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_CombatActorActionBlock                             { 125 };  // 0x29F2DE0 .?AVI_CombatActorActionBlock@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_CombatActorActionPrivate                           { 134 };  // 0x29F4E70 .?AVI_CombatActorActionPrivate@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_CombatActorHorsePullDown                           { 132 };  // 0x29F4DE0 .?AVI_CombatActorHorsePullDown@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_CombatActorHuntAttack                              { 150 };  // 0x29FDEC0 .?AVI_CombatActorHuntAttack@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_CombatActorMercyKill                               { 149 };  // 0x29FDE80 .?AVI_CombatActorMercyKill@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_CombatComboData                                    { 154 };  // 0x29FE0F8 .?AVI_CombatComboData@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_CombatComboStepData                                { 176 };  // 0x2A11CA8 .?AVI_CombatComboStepData@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_CombatScene                                        { 185 };  // 0x2A1D0F8 .?AVI_CombatScene@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_CombatSoul                                         { 270 };  // 0x2A66A28 .?AVI_CombatSoul@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_CombatTarget                                       { 152 };  // 0x29FDF80 .?AVI_CombatTarget@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_DatabaseListener                                   { 92 };  // 0x29ECB80 .?AVI_DatabaseListener@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_DatabaseModule                                     { 94 };  // 0x29ECBF0 .?AVI_DatabaseModule@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_DebugDraw                                          { 851 };  // 0x2B16590 .?AVI_DebugDraw@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_DebugNode                                          { 327 };  // 0x2A8D5F0 .?AVI_DebugNode@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_EquipmentManagerListener                           { 162 };  // 0x2A01B00 .?AVI_EquipmentManagerListener@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_ExactPosHelperListener                             { 195 };  // 0x2A44C08 .?AVI_ExactPosHelperListener@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_Expression                                         { 294 };  // 0x2A85570 .?AVI_Expression@Expressions@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_FactionManager                                     { 259 };  // 0x2A61C48 .?AVI_FactionManager@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_InventoryListener                                  { 177 };  // 0x2A1BA58 .?AVI_InventoryListener@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_ItemAttachmentListener                             { 142 };  // 0x29F8270 .?AVI_ItemAttachmentListener@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_ItemRuntimeData                                    { 200 };  // 0x2A45C78 .?AVI_ItemRuntimeData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_LinkFilter                                         { 714 };  // 0x2AEA1A0 .?AVI_LinkFilter@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_ModuleMessageListener                              { 87 };  // 0x29ECA50 .?AVI_ModuleMessageListener@framework@wh@@
+    inline constexpr ::REL::ID RTTI_I_NoRTTITypeInfo                                     { 326 };  // 0x2A8D5B8 .?AVI_NoRTTITypeInfo@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_Node                                               { 324 };  // 0x2A8D540 .?AVI_Node@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_NodeFactory                                        { 328 };  // 0x2A8D680 .?AVI_NodeFactory@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_ObjectDatabase                                     { 86 };  // 0x29ECA10 .?AVI_ObjectDatabase@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_POI                                                { 260 };  // 0x2A62068 .?AVI_POI@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_RWLocked                                           { 855 };  // 0x2B17988 .?AVI_RWLocked@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_RandomEventListener                                { 283 };  // 0x2A6EBF0 .?AVI_RandomEventListener@playermodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_ReadinessDebuggable                                { 66 };  // 0x29E6988 .?AVI_ReadinessDebuggable@wh@@
+    inline constexpr ::REL::ID RTTI_I_ReadinessTask                                      { 65 };  // 0x29E6958 .?AVI_ReadinessTask@wh@@
+    inline constexpr ::REL::ID RTTI_I_SceneListener                                      { 171 };  // 0x2A08CD8 .?AVI_SceneListener@animationmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_Soul                                               { 280 };  // 0x2A6D250 .?AVI_Soul@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_SoulResolver                                       { 279 };  // 0x2A6D218 .?AVI_SoulResolver@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_TableSerializer                                    { 96 };  // 0x29ECC70 .?AVI_TableSerializer@databasemodule@wh@@
+    inline constexpr ::REL::ID RTTI_I_WUIDMappingProvider                                { 194 };  // 0x2A43C88 .?AVI_WUIDMappingProvider@framework@wh@@
+    inline constexpr ::REL::ID RTTI_S_AddBuffContext                                     { 802 };  // 0x2B09910 .?AUS_AddBuffContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_AlchemyBaseData                                    { 217 };  // 0x2A46808 .?AUS_AlchemyBaseData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_AlchemyMaterialData                                { 216 };  // 0x2A467C8 .?AUS_AlchemyMaterialData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_AmmoData                                           { 213 };  // 0x2A46720 .?AUS_AmmoData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_ArmorData                                          { 214 };  // 0x2A46758 .?AUS_ArmorData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_BaseNodeContext                                    { 323 };  // 0x2A8D1B0 .?AUS_BaseNodeContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_CombatActorActionAttackParams                      { 127 };  // 0x29F2F80 .?AUS_CombatActorActionAttackParams@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_CombatActorActionBlockParams                       { 107 };  // 0x29F0490 .?AUS_CombatActorActionBlockParams@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_CombatActorActionComposedRipostePerfectBlockParams { 106 };  // 0x29F0020 .?AUS_CombatActorActionComposedRipostePerfectBlockParams@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_CombatActorActionPerfectBlockParams                { 105 };  // 0x29EFFD0 .?AUS_CombatActorActionPerfectBlockParams@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_CombatActorActionStaticAttackParams                { 100 };  // 0x29EF640 .?AUS_CombatActorActionStaticAttackParams@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_CombatActorActionSyncAttackParams                  { 101 };  // 0x29EF690 .?AUS_CombatActorActionSyncAttackParams@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_ComboInstance                                      { 144 };  // 0x29FBD18 .?AUS_ComboInstance@combatmodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_ConsumableData                                     { 220 };  // 0x2A468B0 .?AUS_ConsumableData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_CookingData                                        { 203 };  // 0x2A46010 .?AUS_CookingData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_DialogParams                                       { 269 };  // 0x2A669F0 .?AUS_DialogParams@rpgmodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_DieData                                            { 205 };  // 0x2A46080 .?AUS_DieData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_DivisibleItemData                                  { 227 };  // 0x2A46A68 .?AUS_DivisibleItemData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_DocumentData                                       { 215 };  // 0x2A46790 .?AUS_DocumentData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_EquippableItemData                                 { 224 };  // 0x2A469B0 .?AUS_EquippableItemData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_ExecuteLuaContext                                  { 348 };  // 0x2A91780 .?AUS_ExecuteLuaContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_ExecutionBarrierContext                            { 305 };  // 0x2A88FE0 .?AUS_ExecutionBarrierContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_ExpressionContext                                  { 345 };  // 0x2A91110 .?AUS_ExpressionContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_FoodData                                           { 219 };  // 0x2A46878 .?AUS_FoodData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_FuseBoxContext                                     { 603 };  // 0x2AD0DE0 .?AUS_FuseBoxContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_GateContext                                        { 310 };  // 0x2A89BA0 .?AUS_GateContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_GetItemPropertyContext                             { 373 };  // 0x2A99ED0 .?AUS_GetItemPropertyContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_GetItemTypeContext                                 { 333 };  // 0x2A8F160 .?AUS_GetItemTypeContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_Graph                                              { 79 };  // 0x29EADB0 .?AUS_Graph@internal@framework@wh@@
+    inline constexpr ::REL::ID RTTI_S_HelmetData                                         { 204 };  // 0x2A46048 .?AUS_HelmetData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_HerbData                                           { 221 };  // 0x2A468E8 .?AUS_HerbData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_IfConditionContext                                 { 602 };  // 0x2AD0A70 .?AUS_IfConditionContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_IfElseConditionContext                             { 600 };  // 0x2AD0980 .?AUS_IfElseConditionContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_InstantSendMessageToNPCContext                     { 446 };  // 0x2AADF80 .?AUS_InstantSendMessageToNPCContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_ItemData                                           { 229 };  // 0x2A46B10 .?AUS_ItemData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_Job                                                { 80 };  // 0x29EADE8 .?AUS_Job@internal@framework@wh@@
+    inline constexpr ::REL::ID RTTI_S_KeyData                                            { 207 };  // 0x2A460E8 .?AUS_KeyData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_KeyRingData                                        { 206 };  // 0x2A460B0 .?AUS_KeyRingData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_LoopContext                                        { 654 };  // 0x2ADB580 .?AUS_LoopContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_MeleeWeaponData                                    { 210 };  // 0x2A46638 .?AUS_MeleeWeaponData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_MiscData                                           { 202 };  // 0x2A45F98 .?AUS_MiscData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_MissileWeaponData                                  { 211 };  // 0x2A46670 .?AUS_MissileWeaponData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_MoneyData                                          { 201 };  // 0x2A45F60 .?AUS_MoneyData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_NPCPassiveBarrierContext                           { 301 };  // 0x2A88D40 .?AUS_NPCPassiveBarrierContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_NPCToolData                                        { 212 };  // 0x2A466E8 .?AUS_NPCToolData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_OintmentData                                       { 218 };  // 0x2A46840 .?AUS_OintmentData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_ParallelContext                                    { 571 };  // 0x2ACAE40 .?AUS_ParallelContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_PassiveBarrierContext                              { 304 };  // 0x2A88EE0 .?AUS_PassiveBarrierContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_PickableItemData                                   { 230 };  // 0x2A46B48 .?AUS_PickableItemData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_PlayerItemData                                     { 225 };  // 0x2A469F0 .?AUS_PlayerItemData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_PotionData                                         { 222 };  // 0x2A46920 .?AUS_PotionData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_ProcessMessageBaseContext                          { 592 };  // 0x2ACF030 .?AUS_ProcessMessageBaseContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_ProcessMessageContext                              { 638 };  // 0x2AD8760 .?AUS_ProcessMessageContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_QuestibleItemData                                  { 226 };  // 0x2A46A28 .?AUS_QuestibleItemData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_RemoveItemContext                                  { 424 };  // 0x2AA8740 .?AUS_RemoveItemContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_SelectorContext                                    { 570 };  // 0x2ACAC90 .?AUS_SelectorContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_SendMessageBaseContext                             { 439 };  // 0x2AAD360 .?AUS_SendMessageBaseContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_SequenceContext                                    { 561 };  // 0x2AC9700 .?AUS_SequenceContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_StopFastTravelContext                              { 456 };  // 0x2AB03A0 .?AUS_StopFastTravelContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_SwitchBaseContext                                  { 568 };  // 0x2ACA1A0 .?AUS_SwitchBaseContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_VarOperationContext                                { 492 };  // 0x2AB8BF0 .?AUS_VarOperationContext@BehaviorTree@xgenaimodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_WeaponData                                         { 208 };  // 0x2A465C8 .?AUS_WeaponData@entitymodule@wh@@
+    inline constexpr ::REL::ID RTTI_S_WeaponEquipData                                    { 209 };  // 0x2A46600 .?AUS_WeaponEquipData@entitymodule@wh@@
 
 }  // namespace Offsets

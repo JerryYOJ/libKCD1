@@ -9,7 +9,7 @@
 #include "KCSE/KCSEAPI.h"
 #include "crysystem/CMovieSystem.h"
 #include "crysystem/SSystemGlobalEnvironment.h"
-#include "vtable_hook.h"
+#include "REL.h"
 
 #include <Windows.h>
 #include <cstdint>
@@ -68,8 +68,8 @@ int64_t __fastcall Hook_FillViewParams(dlg::C_DialogCameraManager* self, dlg::S_
 
 void InstallBaseBarHook()
 {
-    g_origFillView = VtableHook::SwapByOffset(
-        Offsets::GetBase(), dlg::C_DialogCameraManager::VTABLE[0], 2, &Hook_FillViewParams);
+    g_origFillView = reinterpret_cast<FillViewFn>(
+        REL::Relocation<>{ dlg::C_DialogCameraManager::VTABLE[0] }.write_vfunc(2, &Hook_FillViewParams));
 }
 
 // --- Render-side CUTSCENE letterbox (in-engine `sequence` cutscenes) --------
@@ -97,8 +97,8 @@ void __fastcall Hook_SetCameraParams(CMovieSystem* self, SCameraParams* params)
 
 void InstallCutsceneHook()
 {
-    g_origSetCameraParams = VtableHook::SwapByOffset(
-        Offsets::GetBase(), CMovieSystem::VTABLE[0], 58, &Hook_SetCameraParams);
+    g_origSetCameraParams = reinterpret_cast<SetCamParamsFn>(
+        REL::Relocation<>{ CMovieSystem::VTABLE[0] }.write_vfunc(58, &Hook_SetCameraParams));
 }
 
 // --- HUD "RatioStrips" letterbox -------------------------------------------

@@ -23,13 +23,15 @@ C_Soul* C_Soul::FromEntityId(uint32_t entityId)
     // The engine fn ignores its first (rcx/"this") arg -- the id arrives in the 2nd integer
     // register -- so the signature keeps a leading dummy that we pass as null.
     using Fn = C_Soul* (__fastcall*)(void* /*ignored*/, uint32_t);
-    return reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kGetSoulByEntityIdOffset)(nullptr, entityId);
+    static REL::Relocation<Fn> fn{ REL::ID(12) };  // sub_18033B518
+    return fn(nullptr, entityId);
 }
 
 float C_Soul::GetPlayerOpinion() const
 {
     using Fn = float (__fastcall*)(const C_Soul*);
-    return reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kSoulGetPlayerOpinionOffset)(this);
+    static REL::Relocation<Fn> fn{ REL::ID(4) };  // sub_1802287D0
+    return fn(this);
 }
 
 void C_Soul::SetPlayerOpinion(float v)
@@ -49,7 +51,8 @@ void C_Soul::SetPlayerOpinion(float v)
 int32_t C_Soul::GetFactionId() const
 {
     using Fn = int32_t (__fastcall*)(const C_Soul*);
-    return reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kSoulGetFactionIdOffset)(this);
+    static REL::Relocation<Fn> fn{ REL::ID(28) };  // sub_18064D750
+    return fn(this);
 }
 
 E_CrimeSystemRole C_Soul::GetCrimeRole() const
@@ -119,8 +122,8 @@ bool C_Soul::HasSoulAbility(E_SoulAbility ability) const
     // sub_18023B6BC (I_Soul vtable +0x1A8): binary-search the sorted m_soulAbilities (+0x180)
     // for the id; a few ids (SteakTartare/TwoHanded) are computed instead. Returns the bool.
     using Fn = char (__fastcall*)(const C_Soul*, uint32_t);
-    return reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kSoulHasAbilityOffset)(
-               this, static_cast<uint32_t>(ability)) != 0;
+    static REL::Relocation<Fn> fn{ REL::ID(5) };  // sub_18023B6BC (I_Soul vtable +0x1A8)
+    return fn(this, static_cast<uint32_t>(ability)) != 0;
 }
 
 void C_Soul::ResetInventory(bool resetEquipment)
@@ -128,13 +131,13 @@ void C_Soul::ResetInventory(bool resetEquipment)
     // sub_18030E278(soul, force=1, resetEquip, presetMultiplier=0)
     // force=1 bypasses the "already initialized" check at +0xBF8.
     using Fn = void (__fastcall*)(C_Soul*, char, char, uint8_t);
-    reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kSoulResetInventoryOffset)(
-        this, 1, resetEquipment ? 1 : 0, 0);
+    static REL::Relocation<Fn> fn{ REL::ID(11) };  // sub_18030E278
+    fn(this, 1, resetEquipment ? 1 : 0, 0);
 }
 
 C_SoulList* C_SoulList::GetInstance()
 {
-    uintptr_t rpgSys = *reinterpret_cast<uintptr_t*>(Offsets::GetBase() + Offsets::kRPGModuleOffset);
+    uintptr_t rpgSys = *reinterpret_cast<uintptr_t*>(REL::ID(877).address());
     return rpgSys ? *reinterpret_cast<C_SoulList**>(rpgSys + 0x548) : nullptr;
 }
 
@@ -142,8 +145,8 @@ C_Soul* C_SoulList::LookupByWUID(const wh::framework::WUID& wuid)
 {
     // Engine lookup takes the embedded slot-map header (this+0x48) + the WUID.
     using Fn = C_Soul* (__fastcall*)(void*, const wh::framework::WUID*);
-    return reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kSoulListLookupByWuidOffset)(
-        &m_slotMapHeader, &wuid);
+    static REL::Relocation<Fn> fn{ REL::ID(8) };  // C_SoulList::LookupByWUID (sub_180284B04)
+    return fn(&m_slotMapHeader, &wuid);
 }
 
 }}  // namespace wh::rpgmodule

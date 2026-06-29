@@ -4,17 +4,19 @@
 #include "Offsets/Offsets.h"
 
 wh::rpgmodule::C_RPGModule* wh::rpgmodule::C_RPGModule::GetInstance() {
-    return *reinterpret_cast<C_RPGModule**>(Offsets::GetBase() + Offsets::kRPGModuleOffset);
+    static REL::Relocation<C_RPGModule**> p{ REL::ID(877) };
+    return *p;
 }
 
 wh::rpgmodule::C_BuffManager* wh::rpgmodule::C_BuffManager::GetInstance() {
-    return *reinterpret_cast<C_BuffManager**>(Offsets::GetBase() + Offsets::kBuffManagerOffset);
+    static REL::Relocation<C_BuffManager**> p{ REL::ID(872) };
+    return *p;
 }
 
 wh::rpgmodule::S_RpgParamValues* wh::rpgmodule::S_RpgParamValues::Get() {
-    return reinterpret_cast<S_RpgParamValues*>(Offsets::GetBase() + Offsets::kRPGParamsOffset);
+    return reinterpret_cast<S_RpgParamValues*>(REL::ID(871).address());
 }
 
 wh::rpgmodule::S_RpgParamDefs* wh::rpgmodule::S_RpgParamDefs::Get() {
-    return reinterpret_cast<S_RpgParamDefs*>(Offsets::GetBase() + Offsets::kRPGParamDefsOffset);
+    return reinterpret_cast<S_RpgParamDefs*>(REL::ID(63).address());
 }

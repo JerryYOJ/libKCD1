@@ -7,6 +7,6 @@
 void wh::combatmodule::C_CombatComboManager::ForceAdvanceStep()
 {
     using Fn = void(__fastcall*)(C_CombatComboManager*, void*, char);
-    auto fn = reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kComboAdvanceStepOffset);
+    static REL::Relocation<Fn> fn{ REL::ID(26) };  // sub_180602C34 combo-advance handler
     fn(this, m_pOwner, 1);
 }

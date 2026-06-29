@@ -10,7 +10,8 @@ C_Inventory* C_InventoryManager::LookupByWUID(wh::framework::WUID w) const
 {
     using Fn = C_Inventory* (__fastcall*)(const void*, const wh::framework::WUID*);
     const void* slotTable = reinterpret_cast<const uint8_t*>(this) + 0x10;
-    return reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kInventoryLookupByWUIDOffset)(slotTable, &w);
+    static REL::Relocation<Fn> fn{ REL::ID(24) };  // C_InventoryManager::LookupByWUID
+    return fn(slotTable, &w);
 }
 
 }} // namespace wh::entitymodule

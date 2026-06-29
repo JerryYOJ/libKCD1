@@ -5,7 +5,7 @@ void wh::combatmodule::C_CombatActor::DispatchCounterAction(
     I_CombatActorActionPtr* pOutAction, E_CounterActionType type, uint32_t scopeIndex)
 {
     using Fn = void*(__fastcall*)(C_CombatActor*, I_CombatActorActionPtr*, int, uint32_t);
-    auto fn = reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kDispatchCounterActionOffset);
+    static REL::Relocation<Fn> fn{ REL::ID(31) };
     fn(this, pOutAction, static_cast<int>(type), scopeIndex);
 }
 
@@ -14,6 +14,6 @@ void wh::combatmodule::C_CombatActor::DispatchCounterAction(
 void wh::combatmodule::C_CombatActor::SetOpponent(C_CombatActor* target)
 {
     using Fn = void(__fastcall*)(C_CombatActor*, C_CombatActor*);
-    auto fn = reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kSetOpponentOffset);
+    static REL::Relocation<Fn> fn{ REL::ID(27) };
     fn(this, target);
 }

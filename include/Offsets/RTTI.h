@@ -54,11 +54,11 @@ To kcd_cast(From* from) {
                   "kcd_cast: target type has no static RTTI member");
 
     if (!from) return nullptr;
-    const auto base = Offsets::GetBase();
+    // TypeDescriptor RVAs resolve per-distribution via the address library.
     return static_cast<To>(__RTDynamicCast(
         const_cast<void*>(static_cast<const volatile void*>(from)),
         0,
-        reinterpret_cast<void*>(base + From::RTTI),
-        reinterpret_cast<void*>(base + ToClass::RTTI),
+        reinterpret_cast<void*>(From::RTTI.address()),
+        reinterpret_cast<void*>(ToClass::RTTI.address()),
         0));
 }

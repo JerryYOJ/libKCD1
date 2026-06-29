@@ -10,7 +10,8 @@ C_Item* C_ItemManager::LookupByWUID(wh::framework::WUID w) const
 {
     using Fn = C_Item* (__fastcall*)(const void*, const wh::framework::WUID*);
     const void* slotTable = reinterpret_cast<const uint8_t*>(this) + 0x18;
-    return reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kItemLookupByWUIDOffset)(slotTable, &w);
+    static REL::Relocation<Fn> fn{ REL::ID(16) };  // C_ItemManager::LookupByWUID
+    return fn(slotTable, &w);
 }
 
 }} // namespace wh::entitymodule

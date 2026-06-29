@@ -2,5 +2,6 @@
 #include "Offsets/Offsets.h"
 
 wh::guimodule::CUIManager* wh::guimodule::CUIManager::GetInstance() {
-    return *reinterpret_cast<CUIManager**>(Offsets::GetBase() + Offsets::kCUIManagerOffset);
+    static REL::Relocation<CUIManager**> p{ REL::ID(869) };
+    return *p;
 }

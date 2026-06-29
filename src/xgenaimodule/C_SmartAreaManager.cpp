@@ -9,8 +9,8 @@ namespace wh { namespace xgenaimodule {
 
 C_SmartAreaManager* C_SmartAreaManager::GetInstance()
 {
-    return *reinterpret_cast<C_SmartAreaManager**>(
-        Offsets::GetBase() + Offsets::kSmartAreaManagerPtr);
+    static REL::Relocation<C_SmartAreaManager**> p{ REL::ID(880) };
+    return *p;
 }
 
 }}  // namespace wh::xgenaimodule

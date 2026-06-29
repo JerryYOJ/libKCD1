@@ -10,8 +10,8 @@ namespace wh { namespace xgenaimodule {
 
 C_DynamicInformationStore* C_DynamicInformationStore::GetInstance()
 {
-    return *reinterpret_cast<C_DynamicInformationStore**>(
-        Offsets::GetBase() + Offsets::kDynInfoStoreOffset);
+    static REL::Relocation<C_DynamicInformationStore**> p{ REL::ID(873) };
+    return *p;
 }
 
 }}  // namespace wh::xgenaimodule

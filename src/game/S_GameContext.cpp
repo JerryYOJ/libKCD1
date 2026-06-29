@@ -3,7 +3,8 @@
 #include "entitymodule/C_Actor.h"
 
 wh::game::S_GameContext* wh::game::S_GameContext::GetInstance() {
-    return *reinterpret_cast<S_GameContext**>(Offsets::GetBase() + Offsets::kGameContextOffset);
+    static REL::Relocation<S_GameContext**> p{ REL::ID(870) };
+    return *p;
 }
 
 wh::entitymodule::C_Actor* wh::game::S_GameContext::GetActorById(EntityId entityId) {

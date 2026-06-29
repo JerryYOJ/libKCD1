@@ -48,7 +48,7 @@ class C_UIEHud
 {
 public:
     // Singleton accessor — the live instance pointer is the global qword_183785948.
-    static C_UIEHud* GetInstance();        // impl in guimodule/C_UIEHud.cpp (Offsets::kUIEHudOffset)
+    static C_UIEHud* GetInstance();        // impl in guimodule/C_UIEHud.cpp (REL::ID 0x3785948)
 
     void*    _unk38;                       // +0x38  (not touched by the ctor)
     void*    _unk40;                       // +0x40  (not touched by the ctor)

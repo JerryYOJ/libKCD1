@@ -13,7 +13,8 @@ namespace wh::xgenaimodule {
 // the AI module's lazy init runs.
 C_EntityToAIMap* GetEntityToAIMap()
 {
-    return *reinterpret_cast<C_EntityToAIMap**>(Offsets::GetBase() + Offsets::kEntityGuidWuidMapPtr);
+    static REL::Relocation<C_EntityToAIMap**> p{ REL::ID(883) };
+    return *p;
 }
 
 // sub_18023BDCC: engine find by entity GUID -> &value.m_wuid (or the all-FF invalid-WUID sentinel on
@@ -22,20 +23,23 @@ C_EntityToAIMap* GetEntityToAIMap()
 const wh::framework::WUID* FindWuidByEntity(C_EntityToAIMap* map, EntityGUID guid)
 {
     using Fn = const wh::framework::WUID* (__fastcall*)(C_EntityToAIMap*, EntityGUID);
-    return reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kEntityGuidToWuidOffset)(map, guid);
+    static REL::Relocation<Fn> fn{ REL::ID(6) };
+    return fn(map, guid);
 }
 
 // *qword_183799950 -- the WUID -> C_IntelligentObject* registry singleton.
 C_IntelligentObjectManager* C_IntelligentObjectManager::GetInstance()
 {
-    return *reinterpret_cast<C_IntelligentObjectManager**>(Offsets::GetBase() + Offsets::kIntelligentObjMgrPtr);
+    static REL::Relocation<C_IntelligentObjectManager**> p{ REL::ID(884) };
+    return *p;
 }
 
 // sub_1802B620C: hash the WUID, walk the T_WuidHashMap bucket chain; value@node+0x18, null on miss.
 C_IntelligentObject* C_IntelligentObjectManager::Find(wh::framework::WUID w) const
 {
     using Fn = C_IntelligentObject* (__fastcall*)(const C_IntelligentObjectManager*, const wh::framework::WUID*);
-    return reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kWuidToAIObjectOffset)(this, &w);
+    static REL::Relocation<Fn> fn{ REL::ID(10) };
+    return fn(this, &w);
 }
 
 }  // namespace wh::xgenaimodule

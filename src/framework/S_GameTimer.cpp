@@ -6,14 +6,14 @@ namespace wh::framework {
 bool S_GameTimer::IsExpired() const
 {
     using Fn = bool(__fastcall*)(const S_GameTimer*);
-    auto fn = reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kGameTimerIsExpiredOffset);
+    static REL::Relocation<Fn> fn{ REL::ID(29) };  // sub_180652DB4
     return fn(this);
 }
 
 void S_GameTimer::Arm(int64_t durationMs)
 {
     using Fn = void(__fastcall*)(S_GameTimer*, int64_t);
-    auto fn = reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kGameTimerArmOffset);
+    static REL::Relocation<Fn> fn{ REL::ID(30) };  // sub_180652DEC
     fn(this, durationMs);
 }
 

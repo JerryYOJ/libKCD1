@@ -20,7 +20,7 @@ namespace em = wh::entitymodule;
 
 namespace {
 
-constexpr uintptr_t kHorseSprintRVA = 0x10A2AB4;   // sub_1810A2AB4
+constexpr std::uint64_t kHorseSprintId = 145556;   // sub_1810A2AB4 (steam rva 0x10A2AB4)
 bool __fastcall Hook_HorseSprint(em::C_PlayerInput* self, EntityId,
                                  const Offsets::ActionId&, Offsets::EActionActivationMode activationMode, float)
 {
@@ -48,7 +48,7 @@ KCSE_PLUGIN_LOAD(kcse)
     if (MH_Initialize() != MH_OK)
         return false;
 
-    void* target = reinterpret_cast<void*>(Offsets::GetBase() + kHorseSprintRVA);
+    void* target = reinterpret_cast<void*>(REL::ID(kHorseSprintId).address());
     if (MH_CreateHook(target, reinterpret_cast<void*>(&Hook_HorseSprint),
                       nullptr) != MH_OK)
         return false;

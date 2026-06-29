@@ -9,23 +9,29 @@ struct IMemoryManager;
 IMemoryManager* CryGetIMemoryManager() { return nullptr; }
 void CryGetIMemoryManagerInterface(void** p) { if (p) *p = nullptr; }
 
-namespace {
-inline uintptr_t game_fn(uintptr_t rva) { return Offsets::GetBase() + rva; }
-}
-
+// Game CRT allocator thunks (WHGame.dll, all jmp -> __imp_*). Plugin allocations
+// live on the GAME's heap (matched malloc/free).
 __declspec(dllexport) void* CryModuleMalloc(size_t size) throw()
 {
-    return reinterpret_cast<void* (__cdecl*)(size_t)>(game_fn(Offsets::kGameMallocOffset))(size);
+    // 0x28D0A8: malloc thunk (-> __imp_malloc)
+    static REL::Relocation<void* (__cdecl*)(size_t)> f{ REL::ID(887) };
+    return f(size);
 }
 __declspec(dllexport) void* CryModuleCalloc(size_t count, size_t size)
 {
-    return reinterpret_cast<void* (__cdecl*)(size_t, size_t)>(game_fn(Offsets::kGameCallocOffset))(count, size);
+    // 0xA2CB13: calloc thunk
+    static REL::Relocation<void* (__cdecl*)(size_t, size_t)> f{ REL::ID(888) };
+    return f(count, size);
 }
 __declspec(dllexport) void* CryModuleRealloc(void* p, size_t size) throw()
 {
-    return reinterpret_cast<void* (__cdecl*)(void*, size_t)>(game_fn(Offsets::kGameReallocOffset))(p, size);
+    // 0xA2CB31: realloc thunk
+    static REL::Relocation<void* (__cdecl*)(void*, size_t)> f{ REL::ID(890) };
+    return f(p, size);
 }
 __declspec(dllexport) void CryModuleFree(void* p) throw()
 {
-    reinterpret_cast<void (__cdecl*)(void*)>(game_fn(Offsets::kGameFreeOffset))(p);
+    // 0xA2CB19: free thunk
+    static REL::Relocation<void (__cdecl*)(void*)> f{ REL::ID(889) };
+    f(p);
 }

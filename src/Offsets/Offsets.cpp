@@ -1,50 +1,60 @@
-#include <Windows.h>
 #include "Offsets/Offsets.h"
 #include "framework/WuidRegistries.h"
 
 uintptr_t Offsets::GetBase() {
-    static uintptr_t base = reinterpret_cast<uintptr_t>(GetModuleHandleA("WHGame.DLL"));
-    return base;
+    return REL::Module::get().base();
 }
 
 Offsets::IGameFramework* Offsets::GetCCryAction() {
-    return *reinterpret_cast<IGameFramework**>(GetBase() + kCCryActionOffset);
+    // 0x3785D88: global holding the IGameFramework* (CCryAction)
+    static REL::Relocation<IGameFramework**> p{ REL::ID(882) };
+    return *p;
 }
 
 // gEnv.p3DEngine (+0x08) is null in KCD; the live engine is the Cry3DEngineBase
 // static C3DEngine* (qword_183785BC0), set in the C3DEngine ctor.
 Offsets::I3DEngine* Offsets::Get3DEngine() {
-    return *reinterpret_cast<I3DEngine**>(GetBase() + kC3DEngineOffset);
+    // 0x3785BC0: Cry3DEngineBase static C3DEngine*
+    static REL::Relocation<I3DEngine**> p{ REL::ID(881) };
+    return *p;
 }
 
 // CryEngine bucket allocator (the candidate std::vector's heap path). Matched pair.
 void* Offsets::CryMemAlloc(std::size_t size) {
-    using Fn = void* (__fastcall*)(uint64_t);
-    return reinterpret_cast<Fn>(GetBase() + kPoolMallocOffset)(size);
+    // 0x28C040: sub_18028C040 CryEngine bucket pool malloc
+    static REL::Relocation<void* (__fastcall*)(uint64_t)> f{ REL::ID(9) };
+    return f(size);
 }
 void Offsets::CryMemFree(void* p, std::size_t size) {
-    using Fn = void (__fastcall*)(void*, uint64_t);
-    reinterpret_cast<Fn>(GetBase() + kCryMemFreeOffset)(p, size);
+    // 0x5B72C0: CryEngine::MemFree(ptr, size) (SIZED)
+    static REL::Relocation<void (__fastcall*)(void*, uint64_t)> f{ REL::ID(25) };
+    f(p, size);
 }
 
 // Central WUID->C_AIObject* map: the global qword_1837999E0 holds a pointer to the heap map.
 namespace wh { namespace framework {
 C_WuidObjectMap* GetWuidObjectMap() {
-    return *reinterpret_cast<C_WuidObjectMap**>(Offsets::GetBase() + Offsets::kWuidObjectMapOffset);
+    // 0x37999E0: qword holds a POINTER to the heap std::unordered_map
+    static REL::Relocation<C_WuidObjectMap**> p{ REL::ID(886) };
+    return *p;
 }
 
 // container WUID -> its single C_Inventory (engine sub_1815F457C; its first arg is unused).
 entitymodule::C_Inventory* GetInventoryForWuid(WUID w) {
+    // 0x15F457C: sub_1815F457C(unused, &out, &wuid)
     void* out = nullptr;
-    using Fn = void* (__fastcall*)(const void*, void**, const WUID*);
-    reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kGetInventoryForWuidOffset)(nullptr, &out, &w);
+    static REL::Relocation<void (__fastcall*)(const void*, void**, const WUID*)> f{ REL::ID(48) };
+    f(nullptr, &out, &w);
     return reinterpret_cast<entitymodule::C_Inventory*>(out);
 }
 }}  // namespace wh::framework
 
+// Combat action-type IDs: contiguous int32 array at RVA 0x359B330 (resolve the array
+// object via REL::ID, then index — the per-element addresses are not object starts).
 #define ACTION_TYPE_GETTER(Name, Index) \
     int32_t Offsets::ActionTypeId::Name() { \
-        return *reinterpret_cast<int32_t*>(GetBase() + kActionTypeIdBase + (Index) * sizeof(int32_t)); \
+        static REL::Relocation<int32_t*> arr{ REL::ID(875) }; \
+        return arr.get()[Index]; \
     }
 
 ACTION_TYPE_GETTER(Attack,                      0)
@@ -93,9 +103,11 @@ ACTION_TYPE_GETTER(HuntAttackSlave,              42)
 
 #undef ACTION_TYPE_GETTER
 
+// Combat input-class IDs: contiguous int32 array at RVA 0x359C2F0.
 #define INPUT_CLASS_GETTER(Name, Index) \
     int32_t Offsets::InputClassId::Name() { \
-        return *reinterpret_cast<int32_t*>(GetBase() + kInputClassIdBase + (Index) * sizeof(int32_t)); \
+        static REL::Relocation<int32_t*> arr{ REL::ID(876) }; \
+        return arr.get()[Index]; \
     }
 
 INPUT_CLASS_GETTER(AttackLight,     0)

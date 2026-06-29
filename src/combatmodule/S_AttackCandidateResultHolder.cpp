@@ -18,7 +18,8 @@ void S_AttackCandidateResultHolder::Enumerate(S_CombatActionAttackQueryData* que
     // sub_18045FD18(ignored, &holder, &query): clears the vector, walks the global moveset,
     // std::vector-appends each matching candidate (growing via the pool allocator), introsorts.
     using Fn = void(__fastcall*)(void*, S_AttackCandidateResultHolder*, S_CombatActionAttackQueryData*);
-    reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kEnumerateCandidatesOffset)(nullptr, this, query);
+    static REL::Relocation<Fn> fn{ REL::ID(18) };  // sub_18045FD18 enumerate candidates
+    fn(nullptr, this, query);
 }
 
 }  // namespace wh::combatmodule

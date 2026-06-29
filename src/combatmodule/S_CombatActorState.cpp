@@ -6,6 +6,6 @@
 void wh::combatmodule::S_CombatActorState::SetCommittedAttackZone(E_CombatZoneId zone)
 {
     using Fn = void(__fastcall*)(S_CombatActorState*, int);
-    auto fn = reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kSetCommittedAttackZoneOffset);
+    static REL::Relocation<Fn> fn{ REL::ID(17) };  // SetCommittedAttackZone (sub_18045D1EC)
     fn(this, static_cast<int>(zone));
 }

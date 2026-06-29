@@ -5,14 +5,14 @@
 // C_InformationManager engine-function forwarders. Singleton = *qword_183501790.
 // The crime-erase chain: FindInformationId({wuid,label}) -> DestroyInformationById.
 // Some engine fns take a SUBOBJECT pointer (m_holders @+0x08 / m_records @+0x88),
-// not `this` -- passed explicitly below. See Offsets.h for the RVAs.
+// not `this` -- passed explicitly below.
 
 namespace wh { namespace xgenaimodule {
 
 C_InformationManager* C_InformationManager::GetInstance()
 {
-    return *reinterpret_cast<C_InformationManager**>(
-        Offsets::GetBase() + Offsets::kInformationManagerOffset);
+    static REL::Relocation<C_InformationManager**> p{ REL::ID(874) };
+    return *p;
 }
 
 const std::vector<S_InformationRecord*>*
@@ -34,15 +34,16 @@ bool C_InformationManager::FindInformationId(const wh::framework::WUID& perceive
     // sub_1815D3FEC(&m_records, &wuid, &label, &outId) -> bool found.
     using Fn = char (__fastcall*)(const void*, const wh::framework::WUID*,
                                   const CryStringT<char>*, uint32_t*);
-    return reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kInfoFindInformationIdOffset)(
-        &m_records, &perceivedEntity, &label, outId) != 0;
+    static REL::Relocation<Fn> fn{ REL::ID(45) };
+    return fn(&m_records, &perceivedEntity, &label, outId) != 0;
 }
 
 void C_InformationManager::DestroyInformationById(uint32_t informationId)
 {
     // sub_1815DB7C0(this, id): remove from every holder + global finalize.
     using Fn = void (__fastcall*)(C_InformationManager*, uint32_t);
-    reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kInfoDestroyByIdOffset)(this, informationId);
+    static REL::Relocation<Fn> fn{ REL::ID(46) };
+    fn(this, informationId);
 }
 
 bool C_InformationManager::RemoveInformationFromHolder(uint32_t informationId, C_IntelligentObject* holder,
@@ -50,15 +51,16 @@ bool C_InformationManager::RemoveInformationFromHolder(uint32_t informationId, C
 {
     // sub_1815DB81C(this, id, holder, createResolution, finalizeIfLast) -> true iff it finalized.
     using Fn = char (__fastcall*)(C_InformationManager*, uint32_t, C_IntelligentObject*, char, int);
-    return reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kInfoRemoveFromHolderOffset)(
-        this, informationId, holder, createResolution, finalizeIfLast) != 0;
+    static REL::Relocation<Fn> fn{ REL::ID(47) };
+    return fn(this, informationId, holder, createResolution, finalizeIfLast) != 0;
 }
 
 void C_InformationManager::RemoveHolder(C_IntelligentObject* holder)
 {
     // sub_180513938(this, holder): wipe ALL of one holder's records.
     using Fn = void (__fastcall*)(C_InformationManager*, C_IntelligentObject*);
-    reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kInfoRemoveHolderOffset)(this, holder);
+    static REL::Relocation<Fn> fn{ REL::ID(23) };
+    fn(this, holder);
 }
 
 }} // namespace wh::xgenaimodule

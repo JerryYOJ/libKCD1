@@ -4,6 +4,6 @@
 wh::combatmodule::C_CombatActor* wh::entitymodule::C_Actor::GetOrCreateCombatActor()
 {
     using Fn = wh::combatmodule::C_CombatActor*(__fastcall*)(C_Actor*);
-    auto fn = reinterpret_cast<Fn>(Offsets::GetBase() + Offsets::kGetOrCreateCombatActorOffset);
+    static REL::Relocation<Fn> fn{ REL::ID(13) };  // C_Actor::GetOrCreateCombatActor
     return fn(this);
 }
